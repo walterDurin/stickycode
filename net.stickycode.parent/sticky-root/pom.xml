@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>net.stickycode.parent</groupId>
+	<artifactId>sticky-root</artifactId>
+	<version>1.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>Sticky Root</name>
+
+	<distributionManagement>
+		<repository>
+			<uniqueVersion>false</uniqueVersion>
+			<name>Sticky Releases</name>
+			<id>sticky-releases</id>
+			<url>https://nexus.stickycode.net/content/repositories/releases/</url>
+		</repository>
+		<snapshotRepository>
+			<uniqueVersion>true</uniqueVersion>
+			<name>Sticky Snapshots</name>
+			<id>sticky-snapshots</id>
+			<url>https://nexus.stickycode.net/content/repositories/snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<scm>
+		<connection>scm:svn:https://null</connection>
+		<developerConnection>scm:svn:https://null</developerConnection>
+	</scm>
+
+	<build>
+		<directory>${basedir}/${target.dir}</directory>
+		<outputDirectory>${basedir}/${target.dir}/classes</outputDirectory>
+		<testOutputDirectory>${basedir}/${target.dir}/test-classes</testOutputDirectory>
+
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-eclipse-plugin</artifactId>
+					<version>2.7</version>
+					<configuration>
+						<additionalConfig>
+							<file>
+								<name>.settings/org.maven.ide.eclipse.prefs</name>
+								<content><![CDATA[
+activeProfiles=running-in-eclipse
+eclipse.preferences.version=1
+fullBuildGoals=validate
+includeModules=false
+resolveWorkspaceProjects=true
+resourceFilterGoals=validate
+skipCompilerPlugin=true
+version=1
+]]>
+								</content>
+							</file>
+						</additionalConfig>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>2.0-beta-8</version>
+					<configuration>
+						<tagBase>https://stickycode.googlecode.com/svn/tags/${project.groupId}</tagBase>
+						<goals>deploy</goals>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>2.0.2</version>
+					<configuration>
+						<encoding>UTF-8</encoding>
+						<source>1.6</source>
+						<target>1.6</target>
+						<testSource>1.6</testSource>
+						<testTarget>1.6</testTarget>
+					</configuration>
+				</plugin>
+			</plugins>
+
+		</pluginManagement>
+	</build>
+
+	<properties>
+		<target.dir>target</target.dir>
+	</properties>
+
+	<profiles>
+		<profile>
+			<id>running-in-eclipse</id>
+			<properties>
+				<target.dir>target-eclipse</target.dir>
+			</properties>
+		</profile>
+	</profiles>
+
+</project>
