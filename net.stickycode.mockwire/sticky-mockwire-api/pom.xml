@@ -22,12 +22,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>net.stickycode.mockwire</groupId>
-	<artifactId>sticky-mockwire</artifactId>
-	<version>1.2-SNAPSHOT</version>
+	<artifactId>sticky-mockwire-api</artifactId>
+	<version>1.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>Unittest Context Isolation</name>
-	<description>Isolation and definition of test contexts</description>
+	<name>Unittest Context Isolation Api</name>
+	<description>Interfaces and Annotations for Test Context Isolation and Specification</description>
 
 	<dependencies>
 		<dependency>
@@ -37,25 +37,9 @@
 			<type>jar</type>
 		</dependency>
 		<dependency>
-			<groupId>net.stickycode.composite</groupId>
-			<artifactId>sticky-composite-logging-deploy</artifactId>
-			<version>[1,2)</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>net.stickycode.mockwire</groupId>
-			<artifactId>sticky-mockwire-spring25</artifactId>
-			<version>[1,2)</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>net.stickycode.mockwire</groupId>
-			<artifactId>sticky-mockwire-api</artifactId>
-			<version>[1,2)</version>
-			<type>jar</type>
-			<scope>compile</scope>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>1</version>
 		</dependency>
 	</dependencies>
 </project>
