@@ -10,15 +10,14 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
  */
-package net.stickycode.mockwire.spring25;
-
-import net.stickycode.mockwire.CodingException;
+package net.stickycode.mockwire;
 
 
-public class ExpectedUniqueBeanException
+
+public class NonUniqueBeanException
     extends CodingException {
 
-  public ExpectedUniqueBeanException(String message, Object... parameters) {
+  public NonUniqueBeanException(String message, Object... parameters) {
     super(message, parameters);
   }
 

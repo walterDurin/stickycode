@@ -27,6 +27,7 @@ import org.springframework.context.support.GenericApplicationContext;
 
 import net.stickycode.mockwire.IsolatedTestManifest;
 import net.stickycode.mockwire.MissingBeanException;
+import net.stickycode.mockwire.NonUniqueBeanException;
 
 public class SpringIsolatedTestManifest
     extends GenericApplicationContext
@@ -111,7 +112,7 @@ public class SpringIsolatedTestManifest
     if (beans.size() == 0)
       throw new MissingBeanException("Missing bean of type {}", type.getName());
 
-    throw new ExpectedUniqueBeanException("Found {} beans {} of type {}, expected 1", beans.size(), beans.keySet(), type.getName());
+    throw new NonUniqueBeanException("Found {} beans {} of type {}, expected 1", beans.size(), beans.keySet(), type.getName());
   }
 
 }
