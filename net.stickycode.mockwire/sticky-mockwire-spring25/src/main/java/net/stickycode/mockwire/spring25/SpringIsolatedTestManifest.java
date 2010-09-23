@@ -35,8 +35,6 @@ public class SpringIsolatedTestManifest
 
   private Logger log = LoggerFactory.getLogger(getClass());
 
-
-
   public SpringIsolatedTestManifest() {
     super();
 
@@ -85,8 +83,8 @@ public class SpringIsolatedTestManifest
   }
 
   @Override
-  public void registerBean(String beanName, Object bean) {
-    log.info("registering bean {} of type {}", beanName, bean.getClass().getName());
+  public void registerBean(String beanName, Object bean, Class<?> type) {
+    log.info("registering bean '{}' of type '{}'", beanName, type.getName());
     getBeanFactory().initializeBean(bean, beanName);
     getBeanFactory().registerSingleton(beanName, bean);
     // beans that get pushed straight into the context need to be attached to destructive bean post processors
@@ -96,7 +94,7 @@ public class SpringIsolatedTestManifest
 
   @Override
   public void registerType(String beanName, Class<?> type) {
-    log.info("registering {}  as type {}", beanName, type.getName());
+    log.info("registering definition '{}' for type '{}'", beanName, type.getName());
     GenericBeanDefinition bd = new GenericBeanDefinition();
     bd.setBeanClass(type);
     getDefaultListableBeanFactory().registerBeanDefinition(beanName, bd);
