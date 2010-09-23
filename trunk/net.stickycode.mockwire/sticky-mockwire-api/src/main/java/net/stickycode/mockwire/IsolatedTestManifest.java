@@ -12,17 +12,37 @@
  */
 package net.stickycode.mockwire;
 
-
-
-
 public interface IsolatedTestManifest extends ParameterSource {
 
-  boolean hasRegisteredType(Class<?> klass);
+  /**
+   * Return true if a <code>type</code> is registered in this manifest
+   *
+   * @param type The type to check the manifest for
+   */
+  boolean hasRegisteredType(Class<?> type);
 
-  void registerBean(String beanName, Object bean);
+  /**
+   * Register <code>bean</code> as a fully fledged object with name <code>beanName</code> ins the manifest.
+   *
+   * The type is passed as well in case deriving the type correctly
+   *
+   * @param beanName The name of the provided bean
+   * @param bean The bean to add to the manifest
+   * @param type The type of the bean being added, this is useful when the beans type is not clear think cglib.
+   */
+  void registerBean(String beanName, Object bean, Class<?> type);
 
+  /**
+   * Register factory in the manifest to create a bean nameed <code>beanName</code> of <code>type</code>
+   * @param beanName The name of the bean that will be created
+   * @param type The type of the bean to be created
+   */
   void registerType(String beanName, Class<?> type);
 
+  /**
+   * Wire up the given testInstance by type using this manifest.
+   * @param testInstance The test instance to wire
+   */
   void autowire(Object testInstance);
 
 }
