@@ -23,7 +23,7 @@
 
 	<groupId>net.stickycode.mockwire</groupId>
 	<artifactId>sticky-mockwire-api</artifactId>
-	<version>1.3-SNAPSHOT</version>
+	<version>1.3</version>
 	<packaging>jar</packaging>
 
 	<name>Unittest Context Isolation Api</name>
@@ -42,4 +42,9 @@
 			<version>1</version>
 		</dependency>
 	</dependencies>
+
+  <scm>
+    <connection>scm:svn:https://stickycode.googlecode.com/svn/tags/net.stickycode.mockwire/sticky-mockwire-api-1.3</connection>
+    <developerConnection>scm:svn:https://stickycode.googlecode.com/svn/tags/net.stickycode.mockwire/sticky-mockwire-api-1.3</developerConnection>
+  </scm>
 </project>
