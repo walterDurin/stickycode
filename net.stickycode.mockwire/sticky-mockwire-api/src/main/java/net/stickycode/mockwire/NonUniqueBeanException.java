@@ -14,6 +14,7 @@ package net.stickycode.mockwire;
 
 
 
+@SuppressWarnings("serial")
 public class NonUniqueBeanException
     extends CodingException {
 

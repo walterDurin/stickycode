@@ -13,6 +13,7 @@
 package net.stickycode.mockwire;
 
 
+@SuppressWarnings("serial")
 public class MissingBeanException
     extends CodingException {
 
