@@ -33,12 +33,12 @@ import java.lang.annotation.Target;
  *  &#064;Inject
  *  IsolateTestContext context;
  *
- *  @Before
+ *  &#064;Before
  *  public void setup() {
  *  	Mockwire.isolate(this);
  *  }
  *
- *  @Test
+ *  &#064;Test
  *  public void testBless() {
  *    assertThat(context.getBeanNamesForType(ConcreteClass.class)).hasSize(1);
  *  }
