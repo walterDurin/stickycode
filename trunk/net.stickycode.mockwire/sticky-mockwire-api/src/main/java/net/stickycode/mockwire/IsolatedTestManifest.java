@@ -33,7 +33,7 @@ public interface IsolatedTestManifest extends ParameterSource {
   void registerBean(String beanName, Object bean, Class<?> type);
 
   /**
-   * Register factory in the manifest to create a bean nameed <code>beanName</code> of <code>type</code>
+   * Register factory in the manifest to create a bean named <code>beanName</code> of <code>type</code>
    * @param beanName The name of the bean that will be created
    * @param type The type of the bean to be created
    */
