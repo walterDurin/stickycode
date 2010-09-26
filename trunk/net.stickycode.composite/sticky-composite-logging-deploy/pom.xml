@@ -26,9 +26,14 @@
 	<version>1.2-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>Logging Implementation</name>
-	<description>Composition of artifacts required for to log</description>
+	<name>sticky-composite-logging-deploy</name>
+	<description>Composition of artifacts used to actually log, uses logback as a native implementation of slf4j</description>
 
+	<inceptionYear>2007</inceptionYear>
+	<organization>
+		<name>RedEngine Ltd</name>
+		<url>http://www.RedEngine.co.nz/</url>
+	</organization>
 	<dependencies>
 		<dependency>
 			<groupId>net.stickycode.composite</groupId>

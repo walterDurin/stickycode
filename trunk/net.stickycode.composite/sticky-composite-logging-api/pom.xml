@@ -26,9 +26,10 @@
 	<version>1.2-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>Logging Api Composition</name>
-	<description>Composition of artifacts required for using the logging api</description>
+	<name>sticky-composite-logging-api</name>
+	<description>Composition of artifacts required for logging</description>
 
+	<inceptionYear>2007</inceptionYear>
 	<dependencies>
 		<dependency>
 			<groupId>org.slf4j</groupId>
