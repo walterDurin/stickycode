@@ -28,7 +28,7 @@ import java.lang.annotation.Target;
  * to make quality assurance testing suitable it should run far more regularly to be useful to testers and acceptors. In order to ensure consistency across environments
  * the schedule should always be defined by the environment.</p>
  */
-@Target(ElementType.FIELD)
+@Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface Schedule {
