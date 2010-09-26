@@ -26,8 +26,10 @@
 	<version>1.6-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>Spring 2.5 Context implementation for unit test isolation and specification</name>
+	<name>sticky-mockwire-spring25</name>
 
+	<description>Implementation of mockwire context management using Spring 2.5 as the di container</description>
+	<inceptionYear>2009</inceptionYear>
 	<dependencies>
 		<dependency>
 			<groupId>net.stickycode.composite</groupId>

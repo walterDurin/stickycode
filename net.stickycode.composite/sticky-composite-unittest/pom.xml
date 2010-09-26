@@ -29,6 +29,7 @@
 	<name>Unittesting Composite</name>
 	<description>Composition of artifacts required for unittesting</description>
 
+	<inceptionYear>2007</inceptionYear>
 	<dependencies>
 		<dependency>
 			<groupId>org.mockito</groupId>

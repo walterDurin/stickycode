@@ -26,9 +26,10 @@
 	<version>1.2-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>Spring 2.5 Composition</name>
-	<description>Composition of artifacts required for using the spring 2.5 Contexts</description>
+	<name>sticky-composite-spring25</name>
+	<description>Composition of artifacts required for using the spring 2.5 Contexts. </description>
 
+	<inceptionYear>2007</inceptionYear>
 	<dependencies>
 		<dependency>
 			<groupId>net.stickycode.composite</groupId>

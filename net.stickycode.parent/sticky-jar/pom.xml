@@ -21,9 +21,10 @@
 	<version>1.2-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>Sticky Jar Parent</name>
+	<name>sticky-jar</name>
   <description>The plugin definitions for jar projects</description>
-	<build>
+  <inceptionYear>2010</inceptionYear>
+  <build>
 		<pluginManagement>
 			<plugins>
 				<plugin>
