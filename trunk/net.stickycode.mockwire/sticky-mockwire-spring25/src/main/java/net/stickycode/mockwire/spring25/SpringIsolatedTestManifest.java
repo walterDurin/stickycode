@@ -15,6 +15,11 @@ package net.stickycode.mockwire.spring25;
 import java.beans.Introspector;
 import java.util.Map;
 
+import net.stickycode.mockwire.IsolatedTestManifest;
+import net.stickycode.mockwire.MissingBeanException;
+import net.stickycode.mockwire.NonUniqueBeanException;
+import net.stickycode.stereotype.StickyComponent;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -23,11 +28,9 @@ import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostP
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
 import org.springframework.context.support.GenericApplicationContext;
-
-import net.stickycode.mockwire.IsolatedTestManifest;
-import net.stickycode.mockwire.MissingBeanException;
-import net.stickycode.mockwire.NonUniqueBeanException;
+import org.springframework.core.type.filter.AnnotationTypeFilter;
 
 public class SpringIsolatedTestManifest
     extends GenericApplicationContext
@@ -114,6 +117,15 @@ public class SpringIsolatedTestManifest
       throw new MissingBeanException("Missing bean of type {}", type.getName());
 
     throw new NonUniqueBeanException("Found {} beans {} of type {}, expected 1", beans.size(), beans.keySet(), type.getName());
+  }
+
+  @Override
+  public void scanPackages(String[] scanRoots) {
+    ClassPathBeanDefinitionScanner scanner = new ClassPathBeanDefinitionScanner(this);
+    scanner.setIncludeAnnotationConfig(true);
+    scanner.addIncludeFilter(new AnnotationTypeFilter(StickyComponent.class));
+    log.info("scanning roots {}", scanRoots);
+    scanner.scan(scanRoots);
   }
 
 }
