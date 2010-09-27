@@ -12,12 +12,12 @@
  */
 package net.stickycode.mockwire;
 
+
 public interface IsolatedTestManifest extends ParameterSource {
 
   /**
-   * Return true if a <code>type</code> is registered in this manifest
-   *
-   * @param type The type to check the manifest for
+   * Return true if a <code>type</code> is registered in this manifest,
+   * essentially that includes any bean that could be assigned to this type.
    */
   boolean hasRegisteredType(Class<?> type);
 
@@ -41,8 +41,12 @@ public interface IsolatedTestManifest extends ParameterSource {
 
   /**
    * Wire up the given testInstance by type using this manifest.
-   * @param testInstance The test instance to wire
    */
   void autowire(Object testInstance);
+
+  /**
+   * Scan for components in from the given package roots
+   */
+  void scanPackages(String[] scanRoots);
 
 }
