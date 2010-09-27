@@ -40,6 +40,9 @@ public class SpringIsolatedTestManifest
 
     registerPostProcessor(new InjectAnnotationBeanPostProcessor());
     registerPostProcessor(new MockInjectionAnnotationBeanPostProcessor());
+    BlessInjectionAnnotationBeanPostProcessor blessInjector = new BlessInjectionAnnotationBeanPostProcessor();
+    blessInjector.setBeanFactory(getDefaultListableBeanFactory());
+    getBeanFactory().addBeanPostProcessor(blessInjector);
 
     getBeanFactory().registerSingleton(
         Introspector.decapitalize(getClass().getSimpleName()),
