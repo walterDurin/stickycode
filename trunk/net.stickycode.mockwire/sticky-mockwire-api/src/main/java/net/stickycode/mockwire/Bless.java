@@ -19,10 +19,10 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Mark a field as defining a bean in an isolated test context.
+ * Mark a field as defining a bean in an isolated test context and for injection of the value created in the isolated test context.
  *
- * In the following example <code>ConcreteClass</code> will be blessed into a singleton in the isolate test context created
- * by <code>Mockwire.isolate()</code>.
+ * In the following example <code>ConcreteClass</code> will be blessed into a singleton in the isolated test context created
+ * by <code>Mockwire.isolate()</code> or using <code>&#064;RunWith(MockwireRunner.class)</code>
  *
  * <pre>
  *  public class MockwireTest {
@@ -41,6 +41,25 @@ import java.lang.annotation.Target;
  *  &#064;Test
  *  public void testBless() {
  *    assertThat(context.getBeanNamesForType(ConcreteClass.class)).hasSize(1);
+ *    assertThat(field).isNotNull();
+ *  }
+ *
+ * </pre>
+ *
+ * <pre>
+ *  &#064;RunWith(MockwireRunner.class)
+ *  public class MockwireTest {
+ *
+ *  &#064;Bless
+ *  ConcreteClass field;
+ *
+ *  &#064;Inject
+ *  IsolateTestContext context;
+ *
+ *  &#064;Test
+ *  public void testBless() {
+ *    assertThat(context.getBeanNamesForType(ConcreteClass.class)).hasSize(1);
+ *    assertThat(field).isNotNull();
  *  }
  *
  * </pre>

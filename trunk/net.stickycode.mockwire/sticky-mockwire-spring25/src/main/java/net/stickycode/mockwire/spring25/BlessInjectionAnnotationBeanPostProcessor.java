@@ -298,22 +298,6 @@ public class BlessInjectionAnnotationBeanPostProcessor extends InstantiationAwar
 							}
 						}
 					});
-					ReflectionUtils.doWithMethods(clazz, new ReflectionUtils.MethodCallback() {
-						public void doWith(Method method) {
-							Annotation annotation = method.getAnnotation(getAutowiredAnnotationType());
-							if (annotation != null && method.equals(ClassUtils.getMostSpecificMethod(method, clazz))) {
-								if (Modifier.isStatic(method.getModifiers())) {
-									throw new IllegalStateException("Autowired annotation is not supported on static methods");
-								}
-								if (method.getParameterTypes().length == 0) {
-									throw new IllegalStateException("Autowired annotation requires at least one argument: " + method);
-								}
-								boolean required = determineRequiredStatus(annotation);
-								PropertyDescriptor pd = BeanUtils.findPropertyForMethod(method);
-								newMetadata.addInjectedMethod(new AutowiredMethodElement(method, required, pd));
-							}
-						}
-					});
 					metadata = newMetadata;
 					this.injectionMetadataCache.put(clazz, metadata);
 				}
