@@ -21,7 +21,7 @@
 
 	<groupId>net.stickycode.examples</groupId>
 	<artifactId>sticky-example-mockwire</artifactId>
-	<version>1.2</version>
+	<version>1.3-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>sticky-example-mockwire</name>
@@ -53,7 +53,7 @@
 	</repositories>
 
   <scm>
-    <connection>scm:svn:https://stickycode.googlecode.com/svn/tags/net.stickycode.examples/sticky-example-mockwire-1.2</connection>
-    <developerConnection>scm:svn:https://stickycode.googlecode.com/svn/tags/net.stickycode.examples/sticky-example-mockwire-1.2</developerConnection>
+    <connection>scm:svn:https://stickycode.googlecode.com/svn/tags/net.stickycode.examples/sticky-example-mockwire-1.1</connection>
+    <developerConnection>scm:svn:https://stickycode.googlecode.com/svn/tags/net.stickycode.examples/sticky-example-mockwire-1.1</developerConnection>
   </scm>
 </project>
