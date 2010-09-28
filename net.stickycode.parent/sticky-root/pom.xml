@@ -96,12 +96,41 @@ version=1
 						<testTarget>1.6</testTarget>
 					</configuration>
 				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<version>2.1</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-install-plugin</artifactId>
+					<version>2.3.1</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>2.5</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-clean-plugin</artifactId>
+					<version>2.4.1</version>
+				</plugin>
 			</plugins>
 
 		</pluginManagement>
 	</build>
 
 	<properties>
+		<!--
+			Because UTF-8 is nice but not everywhere, it causes problems with different editors and windows editors in particular wanting to
+			put BOM's in when UTF-8 should NOT have them.
+		-->
+		<!--
+			Appropriate encodings for other characters can be used that will be rendered properly at the UI layer. e.g. #&x123; for the
+			dagger character in an html source file will be rendered fine in the browser.
+		-->
+		<project.build.sourceEncoding>US-ASCII</project.build.sourceEncoding>
 		<target.dir>target</target.dir>
 	</properties>
 
