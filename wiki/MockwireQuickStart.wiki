@@ -14,11 +14,30 @@ If you have used MockitoAnnotations.initMocks then Mockwire will make perfect se
 
 = To use Mockwire with Junit =
 
-Just use the [http://code.google.com/p/stickycode/source/browse/trunk/net.stickycode.mockwire/sticky-mockwire/src/main/java/net/stickycode/mockwire/junit4/MockwireRunner.java MockwireRunner]
+Just use the junit4 [http://code.google.com/p/stickycode/source/browse/trunk/net.stickycode.mockwire/sticky-mockwire/src/main/java/net/stickycode/mockwire/junit4/MockwireRunner.java MockwireRunner] to execute the test in a Mockwire context.
+
 {{{
 @RunWith(MockwireRunner.class)
 public class UnitTest {
 }}}
+
+= Blessing and Mocking (or perhaps Mocking and Wiring) =
+
+Essentially Mockwire turns a test class into the manifest for a bean context aka Spring ApplicationContext or a Guice injector.
+
+It does this with two annotations @Bless and @Mock.
+
+Mockwire scans the test classes and identitifies the code you wish to test, e.g.
+{{{
+@Bless
+SomeConcreteClass codeToTest;
+}}}
+And controlled dependencies of the code to test, e.g.
+{{{
+@Mock
+SomeInterface thatSomeConcreteClassNeeds;
+}}}
+
 = Example unit test =
 
 {{{
@@ -44,5 +63,3 @@ public class UnitTest {
     assertThat(unit.echo(false)).isFalse();
   }
 }}}
-
-
