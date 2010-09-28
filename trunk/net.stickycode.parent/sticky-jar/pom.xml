@@ -18,7 +18,7 @@
 
 	<groupId>net.stickycode.parent</groupId>
 	<artifactId>sticky-jar</artifactId>
-	<version>1.3-SNAPSHOT</version>
+	<version>1.3</version>
 	<packaging>pom</packaging>
 
 	<name>sticky-jar</name>
@@ -207,4 +207,9 @@
 		</plugins>
 
 	</build>
+
+  <scm>
+    <connection>scm:svn:https://stickycode.googlecode.com/svn/tags/net.stickycode.parent/sticky-jar-1.3</connection>
+    <developerConnection>scm:svn:https://stickycode.googlecode.com/svn/tags/net.stickycode.parent/sticky-jar-1.3</developerConnection>
+  </scm>
 </project>
