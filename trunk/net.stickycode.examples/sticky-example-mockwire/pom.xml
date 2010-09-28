@@ -42,7 +42,6 @@
 	<repositories>
 		<repository>
 			<id>stickycode</id>
-			<layout>maven2</layout>
 			<name>Sticky Code</name>
 			<url>https://nexus.stickycode.net/content/repositories/releases</url>
 			<releases>
