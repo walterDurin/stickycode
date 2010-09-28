@@ -12,34 +12,48 @@
  */
 package net.stickycode.example.mockwire;
 
+import javax.inject.Inject;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import net.stickycode.mockwire.Bless;
+import net.stickycode.mockwire.Mock;
 import net.stickycode.mockwire.junit4.MockwireRunner;
 
 import static org.fest.assertions.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
 
 @RunWith(MockwireRunner.class)
-public class UnitTest {
+public class UnitDependenciesTest {
 
-  /**
-   * A unit of code to be tested
-   */
+  public interface Dependency {
+
+    void call();
+  }
+
   static class Unit {
 
-    public boolean echo(boolean echo) {
-      return echo;
+    @Inject
+    Dependency dependency;
+
+    public void call() {
+      dependency.call();
     }
   }
 
   @Bless
   Unit unit;
 
+  @Mock
+  Dependency mocked;
+
   @Test
   public void simple() {
     assertThat(unit).isNotNull();
-    assertThat(unit.echo(true)).isTrue();
-    assertThat(unit.echo(false)).isFalse();
+    assertThat(unit.dependency).isNotNull();
+
+    unit.call();
+    verify(mocked).call();
   }
 }
