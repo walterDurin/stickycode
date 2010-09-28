@@ -1,0 +1,17 @@
+#summary A short guide to get you started with Mockwire
+
+= Introduction =
+
+Mockwire is a tool to provide isolated test contexts. 
+
+Ideally we would always test our code just as it gets wired in production, if we write boiler plate code in our tests and use dependency injection in production environments we are really testing out code correctly.
+
+One possible solution is to use di contexts for integration and functional testing, however it soon becomes unwieldy to maintain, 1000s of lines of xml for spring quickly becomes more complicated that the software you are building.
+
+Using classpath scanning for components and jsr330 you can run you tests environments just like the production wiring would.
+
+If you have used MockitoAnnotations.initMocks then Mockwire will make perfect sense to you.
+
+= Example unit test =
+
+
