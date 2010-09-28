@@ -2,7 +2,7 @@
 
 = Introduction =
 
-Mockwire is a tool to provide isolated test contexts. 
+Mockwire is a tool to provide isolated test contexts.
 
 Ideally we would always test our code just as it gets wired in production, if we write boiler plate code in our tests and use dependency injection in production environments we are really testing out code correctly.
 
@@ -12,6 +12,37 @@ Using classpath scanning for components and jsr330 you can run you tests environ
 
 If you have used MockitoAnnotations.initMocks then Mockwire will make perfect sense to you.
 
+= To use Mockwire with Junit =
+
+Just use the [http://code.google.com/p/stickycode/source/browse/trunk/net.stickycode.mockwire/sticky-mockwire/src/main/java/net/stickycode/mockwire/junit4/MockwireRunner.java MockwireRunner]
+{{{
+@RunWith(MockwireRunner.class)
+public class UnitTest {
+}}}
 = Example unit test =
+
+{{{
+@RunWith(MockwireRunner.class)
+public class UnitTest {
+
+  /**
+   * A unit of code to be tested
+   */
+  static class Unit {
+    public boolean echo(boolean echo) {
+      return echo;
+    }
+  }
+
+  @Bless
+  Unit unit;
+
+  @Test
+  public void simple() {
+    assertThat(unit).isNotNull();
+    assertThat(unit.echo(true)).isTrue();
+    assertThat(unit.echo(false)).isFalse();
+  }
+}}}
 
 
