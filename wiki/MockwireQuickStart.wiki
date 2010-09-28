@@ -2,7 +2,7 @@
 
 = Introduction =
 
-Mockwire is a tool to provide isolated test contexts.
+Mockwire is a tool to provide isolated test contexts, where the test class is the manifest for the context.
 
 Ideally we would always test our code just as it gets wired in production, if we write boiler plate code in our tests and use dependency injection in production environments we are really testing out code correctly.
 
