@@ -37,8 +37,12 @@ public class UnitTest {
   Unit unit;
 
   @Test
-  public void simple() {
+  public void checkThatBlessedFieldIsInjected() {
     assertThat(unit).isNotNull();
+  }
+
+  @Test
+  public void checkThatBlessedFieldIsCallable() {
     assertThat(unit.echo(true)).isTrue();
     assertThat(unit.echo(false)).isFalse();
   }
