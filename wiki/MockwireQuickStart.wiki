@@ -1,4 +1,5 @@
 #summary A short guide to get you started with Mockwire
+#labels Phase-Deploy
 
 = Introduction =
 
@@ -62,4 +63,39 @@ public class UnitTest {
     assertThat(unit.echo(true)).isTrue();
     assertThat(unit.echo(false)).isFalse();
   }
+}}}
+
+= Example unit test with interdependencies =
+
+{{{
+@RunWith(MockwireRunner.class)
+public class UnitDependenciesTest {
+
+  public interface Dependency {
+    void call();
+  }
+
+  static class Unit {
+    @Inject
+    Dependency dependency;
+    public void call() {
+      dependency.call();
+    }
+  }
+
+  @Bless
+  Unit unit;
+
+  @Mock
+  Dependency mocked;
+
+  @Test
+  public void simple() {
+    assertThat(unit).isNotNull();
+    assertThat(unit.dependency).isNotNull();
+    
+    unit.call();
+    verify(mocked).call();
+  }
+}
 }}}
