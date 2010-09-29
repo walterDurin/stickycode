@@ -36,6 +36,8 @@ sticky-composite-spring25-1.5 -> spring-context [2.5.6]
 
 The square brackets define the range from 2.5.6 to 2.5.6 i.e. only that version is allowed. Now update everything that needs spring25 to depend on the composite. 
 
+http://stickycode.googlecode.com/files/sticky-composite-spring25-graph.png
+
 == Non breaking upstream updates ==
 If 2.5.7 comes out and testing shows its fully compatible then sticky-composite-spring25 can be released again
 {{{
