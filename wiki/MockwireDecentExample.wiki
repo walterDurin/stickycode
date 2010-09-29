@@ -1,0 +1,33 @@
+#summary Example with some wiring
+
+== Test a cumulator server wrapping a data repository ==
+
+{{{
+@RunWith(MockwireRunner.class)
+public class DecentTest {
+
+  @Bless
+  CumulativeService service;
+
+  @Mock
+  Repository repository;
+
+  @Test
+  public void cumulateNothingIsNothing() {
+    assertThat(service.getDataSummary()).isEqualTo(0);
+    verify(repository).getDatas();
+  }
+
+  @Test
+  public void cumulate1is1() {
+    when(repository.getDatas())
+      .thenReturn(Collections.singletonList(new Data(1)));
+    assertThat(service.getDataSummary()).isEqualTo(1);
+  }
+  
+  @Test
+  public void cumulativeLots() {
+    
+  }
+}
+}}}
