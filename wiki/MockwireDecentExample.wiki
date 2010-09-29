@@ -34,16 +34,8 @@ public class DecentTest {
 }
 }}}
 
-Here are the other class/interface definitions, note the @Inject on the Repository field of the CumulativeService
-
+Here is the class under test
 {{{
-
-interface Service {
-
-  int getDataSummary();
-
-}
-
 class CumulativeService
     implements Service {
 
@@ -58,6 +50,17 @@ class CumulativeService
     }
     return i;
   }
+
+}
+}}}
+
+Here are the interface and model classes that controlled in the test, by controlled i mean we mock the Repository and control is behaviour in order to test the service.
+
+{{{
+
+interface Service {
+
+  int getDataSummary();
 
 }
 
