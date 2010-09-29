@@ -66,6 +66,9 @@ In Eclipse is scans all the projects you have open and runs alls the tests in th
 
 Once you try TDD with it you will never want to go back.
 
+== Eclipse favourites for autocompletion ==
+
+http://stickycode.googlecode.com/files/eclipse-favourites.png
 
 == Links ==
 
