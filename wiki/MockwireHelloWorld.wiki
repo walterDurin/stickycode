@@ -67,14 +67,3 @@ public class UnitDependenciesTest {
 }}}
 
 [http://code.google.com/p/stickycode/source/browse/trunk/net.stickycode.examples/sticky-example-mockwire/src/test/java/net/stickycode/example/mockwire/UnitDependenciesTest.java Code sample]
-= Introduction =
-
-Add your content here.
-
-
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
