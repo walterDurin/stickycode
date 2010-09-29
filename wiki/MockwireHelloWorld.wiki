@@ -1,4 +1,4 @@
-#summary One-sentence summary of this page.
+#summary Some simple hello world examples
 #labels Phase-Deploy
 
 = Simple unit test =
