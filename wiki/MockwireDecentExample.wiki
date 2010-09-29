@@ -54,7 +54,7 @@ class CumulativeService
 }
 }}}
 
-Here are the interface and model classes that controlled in the test, by controlled i mean we mock the Repository and control is behaviour in order to test the service.
+Here are the interface and model classes that are controlled in the test, by controlled I mean we mock the Repository and control its behaviour in order to test the service.
 
 {{{
 
