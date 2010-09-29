@@ -14,4 +14,4 @@ The defaults include mockito, junit4, spring 2.5, fest assertions and logback fo
 </dependency>
 }}}
 
-You will need to add the StickyCodeRepository to you environment first. Hopefully i'll get around to pushing things into central soon.
+You will need to add the StickyMavenRepository to you environment first. Hopefully i'll get around to pushing things into central soon.
