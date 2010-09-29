@@ -23,7 +23,7 @@
 
 	<groupId>net.stickycode.component</groupId>
 	<artifactId>sticky-component-cxf</artifactId>
-	<version>1.2-SNAPSHOT</version>
+	<version>1.2</version>
 	<packaging>jar</packaging>
 
 	<name>sticky-component-cxf</name>
@@ -57,4 +57,9 @@ monitoring, management and more</description>
 			<scope>compile</scope>
 		</dependency>
 	</dependencies>
+
+  <scm>
+    <connection>scm:svn:https://stickycode.googlecode.com/svn/tags/net.stickycode.component/sticky-component-cxf-1.2</connection>
+    <developerConnection>scm:svn:https://stickycode.googlecode.com/svn/tags/net.stickycode.component/sticky-component-cxf-1.2</developerConnection>
+  </scm>
 </project>
