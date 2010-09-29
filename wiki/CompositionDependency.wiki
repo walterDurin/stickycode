@@ -46,8 +46,7 @@ See StickyMavenRepository for repository instructions
 {{{
 <dependency>
   <groupId>net.stickycode.composite</groupId>
-  <artifactId>stick-composite-cxf-soap</artifactId>
+  <artifactId>sticky-composite-cxf-soap</artifactId>
   <version>[1,2)</version>
 </dependency>
 }}}
-
