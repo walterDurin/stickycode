@@ -1,0 +1,61 @@
+#summary Compositions have a local version lifecycle
+
+= Introduction =
+
+When using third party libraries is is useful to have control, esp in a world of weakly defined dependencies as seen in maven central.
+
+== Weak dependencies ==
+They are weak because they don't use ranges. When you say i want version 2.4 in maven that means something like 2.4 if a project closer defines a version 3.2 then that wins.
+
+{{{
+A -> B -> C 
+C -> D 2.4
+A -> D 3.2
+}}}
+
+Because A's dependency on D is closer that D's it wins conflict resolution.
+
+== Ranges ==
+In my world 2.4 and 3.2 are not compatible, so I always use ranges.
+
+{{{
+A -> B -> C
+C -> D [2,3)
+A -> D [3,4)
+}}}
+
+This results in a conflict and maven will refuse to resolve the tree for A because 2 and 3 versions of D cannot exist together.
+
+I use compositions to hold fixed ranges for third party projects and provide a new version lifecycle to use in closer projects.
+
+For example 
+
+{{{
+sticky-composite-spring25-1.5 -> spring-context [2.5.6]
+}}}
+
+The square brackets define the range from 2.5.6 to 2.5.6 i.e. only that version is allowed. Now everything that needs spring25 depends on the composite.
+
+== Non breaking upstream updates ==
+If 2.5.7 comes out and testing shows its fully compatible then sticky-composite-spring25 can be released again
+{{{
+sticky-composite-spring25-1.6 -> spring-context [2.5.7]
+}}}
+
+Now of course all your projects used 
+{{{
+<dependency>
+  <groupId>net.stickycode.composite</groupId>
+  <artifactId>sticky-composite-spring25</artifactId>
+  <version>[1,2)</version>
+</dependency>
+}}}
+So as soon as the new spring25 composite is released your project picks it up.
+
+== Breaking upstream updates ==
+
+If 2.5.7 was found to break things then the major version of the composite-spring25 is released...
+{{{
+sticky-composite-spring25-2.1 -> spring-context [2.5.7]
+}}}
+And any projects that wanted to move up would need to change the range, this will of course conflict. It might be a hassle to change but at least you know that you are not accidentally mixing spring jars that are not compatible.
