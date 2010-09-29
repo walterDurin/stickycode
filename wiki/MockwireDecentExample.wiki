@@ -2,7 +2,7 @@
 
 == Test a cumulative service wrapping a data repository ==
 
-The key thing to take away from this is that there is very little boiler plate (if any) to wire up the CumulatorService with a Repository. The tests are very clean an obvious in there intent and execution.
+The key thing to take away from this is that there is very little boilerplate (if any) to wire up the CumulatorService with a Repository. The tests are very clean and obvious in their intent and execution.
 
 {{{
 @RunWith(MockwireRunner.class)
