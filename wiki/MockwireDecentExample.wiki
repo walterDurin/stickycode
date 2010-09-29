@@ -2,6 +2,8 @@
 
 == Test a cumulator server wrapping a data repository ==
 
+The key thing to take away from this is that there is very little boiler plate (if any) to wire up the CumulatorService with a Repository. The tests are very clean an obvious in there intent and execution.
+
 {{{
 @RunWith(MockwireRunner.class)
 public class DecentTest {
@@ -28,6 +30,47 @@ public class DecentTest {
   @Test
   public void cumulativeLots() {
     
+  }
+}
+}}}
+
+Here are the other class/interface definitions
+{{{
+
+interface Service {
+
+  int getDataSummary();
+
+}
+
+class CumulativeService
+    implements Service {
+
+  @Inject
+  Repository repository;
+
+  @Override
+  public int getDataSummary() {
+    int i = 0;
+    for (Data data : repository.getDatas()) {
+      i += data.value;
+    }
+    return i;
+  }
+
+}
+
+interface Repository {
+
+  List<Data> getDatas();
+}
+
+class Data {
+
+  int value;
+
+  Data(int v) {
+    this.value = v;
   }
 }
 }}}
