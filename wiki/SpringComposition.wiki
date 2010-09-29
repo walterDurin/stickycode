@@ -1,0 +1,14 @@
+#summary Clean Spring Dependencies
+
+= Spring 2.5 =
+
+The spring 2.5 composition
+  # pulls in spring-context
+  # excludes commons-logging
+  # maps commons-logging api to slf4j
+
+It fixes the spring version with [2.5.6] so mixing libraries with other versions of spring gives deterministic results.
+
+As needed units tests will be added to enforce assumptions made about libraries working together.
+
+Read about CompositionVersioning to better understand why wrapping third party libraries in this way is a good idea.
