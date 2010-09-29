@@ -3,15 +3,13 @@
 
 = Introduction =
 
-Mockwire is a tool to provide isolated test contexts, where the test class is the manifest for the context.
+Mockwire is a tool allow the simple definition of a unit test environment, the test class itself defines all the beans used to build a DependencyInjectionRegistry and wires them together.
 
 Ideally we would always test our code just as it gets wired in production, if we write boiler plate code in our tests and use dependency injection in production environments we are really testing out code correctly.
 
 One possible solution is to use di contexts for integration and functional testing, however it soon becomes unwieldy to maintain, 1000s of lines of xml for spring quickly becomes more complicated that the software you are building.
 
 Using classpath scanning for components and jsr330 you can run you tests environments just like the production wiring would.
-
-If you have used MockitoAnnotations.initMocks then Mockwire will make perfect sense to you.
 
 = To use Mockwire with Junit =
 
@@ -22,26 +20,31 @@ Just use the junit4 [http://code.google.com/p/stickycode/source/browse/trunk/net
 public class UnitTest {
 }}}
 
-= Blessing and Mocking (or perhaps Mocking and Wiring) =
+If you don't use junit See UsingMockwireWithoutJunit
 
-Essentially Mockwire turns a test class into the manifest for a bean context aka Spring ApplicationContext or a Guice injector.
+= Blessing and Mocking =
 
-It does this with two annotations @Bless and @Mock.
+@Bless and @Mock and mock are used to define the types that end up in the wire test environment.
 
-Mockwire scans the test classes and identitifies the code you wish to test, e.g.
+Mockwire scans the test class and identitifies the code you wish to test, 
+
+e.g. SomeConcreteClass in being tested so we need to bless a real instance of it
 {{{
 @Bless
 SomeConcreteClass codeToTest;
 }}}
-And controlled dependencies of the code to test, e.g.
+
+And controlled dependencies of the code to test, 
+
+e.g. SomeConcreteClass requires a SomeInterface, this requirement is defined by @Inject
 {{{
 @Mock
 SomeInterface thatSomeConcreteClassNeeds;
 }}}
 
-= Fest Assertions =
+= For assertions and mocking =
 
-If you are unfamiliar with [http://code.google.com/p/fest/ Fest Assertions] you should rectify that soon. Its a fluent api for assertions in tests and makes writing tests obvious.
+See UnitTestingComposition which defines the libraries used and what they do.
 
 = Example unit test =
 
@@ -141,3 +144,7 @@ Results :
 
 Tests run: 3, Failures: 0, Errors: 0, Skipped: 0
 }}}
+
+== Containment ==
+
+It can be very useful
