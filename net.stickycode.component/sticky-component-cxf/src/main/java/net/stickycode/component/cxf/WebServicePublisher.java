@@ -1,28 +1,22 @@
-package net.stickycode.component;
+package net.stickycode.component.cxf;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.Set;
 import java.util.logging.LogManager;
 
 import javax.inject.Inject;
 import javax.jws.WebService;
+
+import net.stickycode.stereotype.StickyComponent;
 
 import org.apache.cxf.Bus;
 import org.apache.cxf.binding.soap.SoapBindingConstants;
 import org.apache.cxf.jaxws.EndpointImpl;
 import org.apache.cxf.jaxws.JaxWsServerFactoryBean;
 import org.apache.cxf.jaxws.support.JaxWsServiceFactoryBean;
-import org.apache.cxf.service.model.EndpointInfo;
-import org.apache.cxf.transport.Destination;
-import org.apache.cxf.transport.DestinationFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.bridge.SLF4JBridgeHandler;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
-
-import net.stickycode.stereotype.StickyComponent;
 
 @StickyComponent
 public class WebServicePublisher

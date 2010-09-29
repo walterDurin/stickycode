@@ -1,4 +1,4 @@
-package net.stickycode.component;
+package net.stickycode.component.cxf;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -21,6 +21,7 @@ import org.apache.cxf.ws.addressing.EndpointReferenceType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import net.stickycode.component.cxf.WebServicePublisher;
 import net.stickycode.mockwire.Bless;
 import net.stickycode.mockwire.junit4.MockwireRunner;
 
