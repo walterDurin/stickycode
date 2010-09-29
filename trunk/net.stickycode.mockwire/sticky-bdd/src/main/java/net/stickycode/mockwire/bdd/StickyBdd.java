@@ -99,6 +99,15 @@ public class StickyBdd {
   }
 
   /**
+   * Creates a new instance of <code>{@link StringAssert}</code>.
+   * @param actual the value to be the target of the assertions methods.
+   * @return the created assertion object.
+   */
+  public static StringAssert then(String actual) {
+    return Assertions.assertThat(actual);
+  }
+
+  /**
    * Creates a new instance of <code>{@link BigDecimalAssert}</code>.
    * @param actual the value to be the target of the assertions methods.
    * @return the created assertion object.
@@ -396,14 +405,6 @@ public class StickyBdd {
     return Assertions.assertThat(actual);
   }
 
-  /**
-   * Creates a new instance of <code>{@link StringAssert}</code>.
-   * @param actual the value to be the target of the assertions methods.
-   * @return the created assertion object.
-   */
-  public static StringAssert then(String actual) {
-    return Assertions.assertThat(actual);
-  }
 
   /**
    * Returns the given assertion. This method improves code readability by surrounding the given assertion with "<code>then</code>".
@@ -419,9 +420,9 @@ public class StickyBdd {
    *   }
    *
    *   public ServerSocketAssert isConnectedTo(int port) {
-   *     then(socket.isBound()).isTrue();
-   *     then(socket.getLocalPort()).isEqualTo(port);
-   *     then(socket.isClosed()).isFalse();
+   *     assume(socket.isBound()).isTrue();
+   *     assume(socket.getLocalPort()).isEqualTo(port);
+   *     assume(socket.isClosed()).isFalse();
    *     return this;
    *   }
    * }
@@ -431,7 +432,7 @@ public class StickyBdd {
    * We can wrap that assertion with "<code>then</code>" to improve test code readability.
    * <pre>
    *   ServerSocketAssertion socket = new ServerSocketAssertion(server.getSocket());
-   *   then(socket).isConnectedTo(2000);
+   *   assume(socket).isConnectedTo(2000);
    * </pre>
    * </p>
    *
@@ -449,6 +450,361 @@ public class StickyBdd {
    * @return the created assertion object.
    */
   public static ThrowableAssert then(Throwable actual) {
+    return Assertions.assertThat(actual);
+  }
+
+  /**
+   * Creates a new instance of <code>{@link StringAssert}</code>.
+   * @param actual the value to be the target of the assertions methods.
+   * @return the created assertion object.
+   */
+  public static StringAssert assume(String actual) {
+    return Assertions.assertThat(actual);
+  }
+
+  /**
+   * Creates a new instance of <code>{@link BigDecimalAssert}</code>.
+   * @param actual the value to be the target of the assertions methods.
+   * @return the created assertion object.
+   */
+  public static BigDecimalAssert assume(BigDecimal actual) {
+    return Assertions.assertThat(actual);
+  }
+
+  /**
+   * Creates a new instance of <code>{@link BooleanAssert}</code>.
+   * @param actual the value to be the target of the assertions methods.
+   * @return the created assertion object.
+   */
+  public static BooleanAssert assume(boolean actual) {
+    return Assertions.assertThat(actual);
+  }
+
+  /**
+   * Creates a new instance of <code>{@link BooleanAssert}</code>.
+   * @param actual the value to be the target of the assertions methods.
+   * @return the created assertion object.
+   */
+  public static BooleanAssert assume(Boolean actual) {
+    return Assertions.assertThat(actual);
+  }
+
+  /**
+   * Creates a new instance of <code>{@link BooleanArrayAssert}</code>.
+   * @param actual the value to be the target of the assertions methods.
+   * @return the created assertion object.
+   */
+  public static BooleanArrayAssert assume(boolean[] actual) {
+    return Assertions.assertThat(actual);
+  }
+
+  /**
+   * Creates a new instance of <code>{@link ImageAssert}</code>.
+   * @param actual the value to be the target of the assertions methods.
+   * @return the created assertion object.
+   */
+  public static ImageAssert assume(BufferedImage actual) {
+    return Assertions.assertThat(actual);
+  }
+
+  /**
+   * Creates a new instance of <code>{@link ByteAssert}</code>.
+   * @param actual the value to be the target of the assertions methods.
+   * @return the created assertion object.
+   */
+  public static ByteAssert assume(byte actual) {
+    return Assertions.assertThat(actual);
+  }
+
+  /**
+   * Creates a new instance of <code>{@link ByteAssert}</code>.
+   * @param actual the value to be the target of the assertions methods.
+   * @return the created assertion object.
+   */
+  public static ByteAssert assume(Byte actual) {
+    return Assertions.assertThat(actual);
+  }
+
+  /**
+   * Creates a new instance of <code>{@link ByteArrayAssert}</code>.
+   * @param actual the value to be the target of the assertions methods.
+   * @return the created assertion object.
+   */
+  public static ByteArrayAssert assume(byte[] actual) {
+    return Assertions.assertThat(actual);
+  }
+
+  /**
+   * Creates a new instance of <code>{@link CharAssert}</code>.
+   * @param actual the value to be the target of the assertions methods.
+   * @return the created assertion object.
+   */
+  public static CharAssert assume(char actual) {
+    return Assertions.assertThat(actual);
+  }
+
+  /**
+   * Creates a new instance of <code>{@link CharAssert}</code>.
+   * @param actual the value to be the target of the assertions methods.
+   * @return the created assertion object.
+   */
+  public static CharAssert assume(Character actual) {
+    return Assertions.assertThat(actual);
+  }
+
+  /**
+   * Creates a new instance of <code>{@link CharArrayAssert}</code>.
+   * @param actual the value to be the target of the assertions methods.
+   * @return the created assertion object.
+   */
+  public static CharArrayAssert assume(char[] actual) {
+    return Assertions.assertThat(actual);
+  }
+
+  /**
+   * Creates a new instance of <code>{@link CollectionAssert}</code>.
+   * @param actual the value to be the target of the assertions methods.
+   * @return the created assertion object.
+   */
+  public static CollectionAssert assume(Collection<?> actual) {
+    return Assertions.assertThat(actual);
+  }
+
+  /**
+   * Creates a new instance of <code>{@link ListAssert}</code>.
+   * @param actual the value to be the target of the assertions methods.
+   * @return the created assertion object.
+   * @since 1.1
+   */
+  public static ListAssert assume(List<?> actual) {
+    return Assertions.assertThat(actual);
+  }
+
+  /**
+   * Creates a new instance of <code>{@link DoubleAssert}</code>.
+   * @param actual the value to be the target of the assertions methods.
+   * @return the created assertion object.
+   */
+  public static DoubleAssert assume(double actual) {
+    return Assertions.assertThat(actual);
+  }
+
+  /**
+   * Creates a new instance of <code>{@link DoubleAssert}</code>.
+   * @param actual the value to be the target of the assertions methods.
+   * @return the created assertion object.
+   */
+  public static DoubleAssert assume(Double actual) {
+    return Assertions.assertThat(actual);
+  }
+
+  /**
+   * Creates a new instance of <code>{@link DoubleArrayAssert}</code>.
+   * @param actual the value to be the target of the assertions methods.
+   * @return the created assertion object.
+   */
+  public static DoubleArrayAssert assume(double[] actual) {
+    return Assertions.assertThat(actual);
+  }
+
+  /**
+   * Creates a new instance of <code>{@link FileAssert}</code>.
+   * @param actual the value to be the target of the assertions methods.
+   * @return the created assertion object.
+   */
+  public static FileAssert assume(File actual) {
+    return Assertions.assertThat(actual);
+  }
+
+  /**
+   * Creates a new instance of <code>{@link FloatAssert}</code>.
+   * @param actual the value to be the target of the assertions methods.
+   * @return the created assertion object.
+   */
+  public static FloatAssert assume(float actual) {
+    return Assertions.assertThat(actual);
+  }
+
+  /**
+   * Creates a new instance of <code>{@link FloatAssert}</code>.
+   * @param actual the value to be the target of the assertions methods.
+   * @return the created assertion object.
+   */
+  public static FloatAssert assume(Float actual) {
+    return Assertions.assertThat(actual);
+  }
+
+  /**
+   * Creates a new instance of <code>{@link FloatArrayAssert}</code>.
+   * @param actual the value to be the target of the assertions methods.
+   * @return the created assertion object.
+   */
+  public static FloatArrayAssert assume(float[] actual) {
+    return Assertions.assertThat(actual);
+  }
+
+  /**
+   * Creates a new instance of <code>{@link IntAssert}</code>.
+   * @param actual the value to be the target of the assertions methods.
+   * @return the created assertion object.
+   */
+  public static IntAssert assume(int actual) {
+    return Assertions.assertThat(actual);
+  }
+
+  /**
+   * Creates a new instance of <code>{@link IntAssert}</code>.
+   * @param actual the value to be the target of the assertions methods.
+   * @return the created assertion object.
+   */
+  public static IntAssert assume(Integer actual) {
+    return Assertions.assertThat(actual);
+  }
+
+  /**
+   * Creates a new instance of <code>{@link IntArrayAssert}</code>.
+   * @param actual the value to be the target of the assertions methods.
+   * @return the created assertion object.
+   */
+  public static IntArrayAssert assume(int[] actual) {
+    return Assertions.assertThat(actual);
+  }
+
+  /**
+   * Creates a new instance of <code>{@link CollectionAssert}</code>.
+   * @param actual the value an <code>Iterator</code> that which contents will be added to a new <code>Collection</code>.
+   * @return the created assertion object.
+   */
+  public static CollectionAssert assume(Iterator<?> actual) {
+    return assume(asCollection(actual));
+  }
+
+  /**
+   * Creates a new instance of <code>{@link LongAssert}</code>.
+   * @param actual the value to be the target of the assertions methods.
+   * @return the created assertion object.
+   */
+  public static LongAssert assume(long actual) {
+    return Assertions.assertThat(actual);
+  }
+
+  /**
+   * Creates a new instance of <code>{@link LongAssert}</code>.
+   * @param actual the value to be the target of the assertions methods.
+   * @return the created assertion object.
+   */
+  public static LongAssert assume(Long actual) {
+    return Assertions.assertThat(actual);
+  }
+
+  /**
+   * Creates a new instance of <code>{@link LongArrayAssert}</code>.
+   * @param actual the value to be the target of the assertions methods.
+   * @return the created assertion object.
+   */
+  public static LongArrayAssert assume(long[] actual) {
+    return Assertions.assertThat(actual);
+  }
+
+  /**
+   * Creates a new instance of <code>{@link MapAssert}</code>.
+   * @param actual the value to be the target of the assertions methods.
+   * @return the created assertion object.
+   */
+  public static MapAssert assume(Map<?, ?> actual) {
+    return Assertions.assertThat(actual);
+  }
+
+  /**
+   * Creates a new instance of <code>{@link ObjectAssert}</code>.
+   * @param actual the value to be the target of the assertions methods.
+   * @return the created assertion object.
+   */
+  public static ObjectAssert assume(Object actual) {
+    return Assertions.assertThat(actual);
+  }
+
+  /**
+   * Creates a new instance of <code>{@link ObjectArrayAssert}</code>.
+   * @param actual the value to be the target of the assertions methods.
+   * @return the created assertion object.
+   */
+  public static ObjectArrayAssert assume(Object[] actual) {
+    return Assertions.assertThat(actual);
+  }
+
+  /**
+   * Creates a new instance of <code>{@link ShortAssert}</code>.
+   * @param actual the value to be the target of the assertions methods.
+   * @return the created assertion object.
+   */
+  public static ShortAssert assume(short actual) {
+    return Assertions.assertThat(actual);
+  }
+
+  /**
+   * Creates a new instance of <code>{@link ShortAssert}</code>.
+   * @param actual the value to be the target of the assertions methods.
+   * @return the created assertion object.
+   */
+  public static ShortAssert assume(Short actual) {
+    return Assertions.assertThat(actual);
+  }
+
+  /**
+   * Creates a new instance of <code>{@link ShortArrayAssert}</code>.
+   * @param actual the value to be the target of the assertions methods.
+   * @return the created assertion object.
+   */
+  public static ShortArrayAssert assume(short[] actual) {
+    return Assertions.assertThat(actual);
+  }
+
+
+  /**
+   * Returns the given assertion. This method improves code readability by surrounding the given assertion with "<code>then</code>".
+   * <p>
+   * For example, let's assume we have the following custom assertion class:
+   *
+   * <pre>
+   * public class ServerSocketAssertion implements AssertExtension {
+   *   private final ServerSocket socket;
+   *
+   *   public ServerSocketAssertion(ServerSocket socket) {
+   *     this.socket = socket;
+   *   }
+   *
+   *   public ServerSocketAssert isConnectedTo(int port) {
+   *     assume(socket.isBound()).isTrue();
+   *     assume(socket.getLocalPort()).isEqualTo(port);
+   *     assume(socket.isClosed()).isFalse();
+   *     return this;
+   *   }
+   * }
+   * </pre>
+   * </p>
+   * <p>
+   * We can wrap that assertion with "<code>then</code>" to improve test code readability.
+   * <pre>
+   *   ServerSocketAssertion socket = new ServerSocketAssertion(server.getSocket());
+   *   assume(socket).isConnectedTo(2000);
+   * </pre>
+   * </p>
+   *
+   * @param <T> the generic type of the user-defined assertion.
+   * @param assertion the assertion to return.
+   * @return the given assertion.
+   */
+  public static <T extends AssertExtension> T assume(T assertion) {
+    return assertion;
+  }
+
+  /**
+   * Creates a new instance of <code>{@link ThrowableAssert}</code>.
+   * @param actual the value to be the target of the assertions methods.
+   * @return the created assertion object.
+   */
+  public static ThrowableAssert assume(Throwable actual) {
     return Assertions.assertThat(actual);
   }
 
