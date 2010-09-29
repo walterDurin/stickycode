@@ -10,40 +10,50 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
  */
-package net.stickycode.example.mockwire;
+package net.stickycode.example.mockwire.helloworld;
+
+import javax.inject.Inject;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import net.stickycode.mockwire.Bless;
+import net.stickycode.mockwire.Mock;
 import net.stickycode.mockwire.junit4.MockwireRunner;
 
 import static org.fest.assertions.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
 
 @RunWith(MockwireRunner.class)
-public class UnitTest {
+public class UnitDependenciesTest {
 
-  /**
-   * A unit of code to be tested
-   */
+  public interface Dependency {
+
+    void call();
+  }
+
   static class Unit {
 
-    public boolean echo(boolean echo) {
-      return echo;
+    @Inject
+    Dependency dependency;
+
+    public void call() {
+      dependency.call();
     }
   }
 
   @Bless
   Unit unit;
 
-  @Test
-  public void checkThatBlessedFieldIsInjected() {
-    assertThat(unit).isNotNull();
-  }
+  @Mock
+  Dependency mocked;
 
   @Test
-  public void checkThatBlessedFieldIsCallable() {
-    assertThat(unit.echo(true)).isTrue();
-    assertThat(unit.echo(false)).isFalse();
+  public void simple() {
+    assertThat(unit).isNotNull();
+    assertThat(unit.dependency).isNotNull();
+
+    unit.call();
+    verify(mocked).call();
   }
 }
