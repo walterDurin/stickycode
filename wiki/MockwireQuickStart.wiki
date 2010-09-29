@@ -11,9 +11,15 @@ One possible solution is to use di contexts for integration and functional testi
 
 Using classpath scanning for components and jsr330 you can run you tests environments just like the production wiring would.
 
+= Including Mockwire in you project =
+
+Add the appropriate MockwireDependency to your project to get started
+
 = To use Mockwire with Junit =
 
 Just use the junit4 [http://code.google.com/p/stickycode/source/browse/trunk/net.stickycode.mockwire/sticky-mockwire/src/main/java/net/stickycode/mockwire/junit4/MockwireRunner.java MockwireRunner] to execute the test in a Mockwire context.
+
+
 
 {{{
 @RunWith(MockwireRunner.class)
