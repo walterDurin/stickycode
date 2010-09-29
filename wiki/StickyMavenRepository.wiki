@@ -18,4 +18,4 @@ Add this repository to you repository manager, settings.xml or if you have a ver
 </repository>
 }}}
 
-See CompositionExamples for details
+See CompositionDependency for details
