@@ -58,7 +58,7 @@ public class WebServicePublisher
     String address = "/" + i.getSimpleName() + getLeaf(bean.getClass().getPackage());
     JaxWsServerFactoryBean factory = createServerFactory();
     factory.setServiceClass(i);
-    new EndpointImpl(bus, bean).publish(address);
+    new EndpointImpl(bus, bean, factory).publish(address);
   }
 
   protected JaxWsServerFactoryBean createServerFactory() {
@@ -81,7 +81,7 @@ public class WebServicePublisher
     if (version.matches("^v[0-9]+$"))
       return "/" + version;
 
-    return "/";
+    return "";
   }
 
 }
