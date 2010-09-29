@@ -34,7 +34,8 @@ public class DecentTest {
 }
 }}}
 
-Here are the other class/interface definitions
+Here are the other class/interface definitions, note the @Inject on the Repository field of the CumulativeService
+
 {{{
 
 interface Service {
