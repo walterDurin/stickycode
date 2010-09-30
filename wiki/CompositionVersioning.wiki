@@ -31,7 +31,25 @@ I use compositions to hold fixed ranges for third party projects and provide a n
 For example 
 
 {{{
-sticky-composite-spring25-1.5 -> spring-context [2.5.6]
+<dependencies>
+  <dependency>
+    <groupId>net.stickycode.composite</groupId>
+    <artifactId>sticky-composite-logging-api</artifactId>
+    <version>[1,2)</version>
+  </dependency>
+  <dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-context</artifactId>
+    <version>[2.5.6.SEC02]</version>
+    <exclusions>
+      <exclusion>
+	<artifactId>commons-logging</artifactId>
+	<groupId>commons-logging</groupId>
+      </exclusion>
+    </exclusions>
+  </dependency>
+</dependencies>
+<dependencies>
 }}}
 
 The square brackets define the range from 2.5.6 to 2.5.6 i.e. only that version is allowed. Now update everything that needs spring25 to depend on the composite. 
