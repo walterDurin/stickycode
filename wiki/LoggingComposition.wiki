@@ -30,17 +30,4 @@ This logging implementation uses logback. Its used by Mockwire and UnittestingCo
 </dependency>
 }}}
 
-== Actual Logging ==
-
-You are free to choose any of the implementations of logging which have slf4j binders.
-
-e.g.
-{{{
-<dependency>
-  <groupId>org.slf4j</groupId>
-  <artifactId>slf4j-log4j</artifactId>
-  <version>1.6.0</version>
-</dependency>
-}}}
-
 See StickyMavenRepository for the repository details
