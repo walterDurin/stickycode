@@ -7,7 +7,7 @@
 
 StickyCode defines two compositions one for anything that needs to log which essentially just pulls in slf4j-api and because jcl still seems very common it pulls in the jcl to slf4j adapter.
 
-It is safe to use the range as if a breaking change is made the version will be bumped.
+It is safe to use the range as if a breaking change is made the major version will be bumped.
 
 == Logging Api ==
 {{{
