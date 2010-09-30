@@ -40,7 +40,7 @@ For example
   <dependency>
     <groupId>org.springframework</groupId>
     <artifactId>spring-context</artifactId>
-    <version>[2.5.6.SEC02]</version>
+    <version>[2.5.6]</version>
     <exclusions>
       <exclusion>
 	<artifactId>commons-logging</artifactId>
@@ -57,9 +57,27 @@ The square brackets define the range from 2.5.6 to 2.5.6 i.e. only that version 
 http://stickycode.googlecode.com/files/sticky-composite-spring25-graph.png
 
 == Non breaking upstream updates ==
-If 2.5.7 comes out and testing shows its fully compatible then sticky-composite-spring25 can be released again
+If 2.5.6.SEC02 comes out and testing shows its fully compatible then sticky-composite-spring25 can be released again
 {{{
-sticky-composite-spring25-1.6 -> spring-context [2.5.7]
+<dependencies>
+  <dependency>
+    <groupId>net.stickycode.composite</groupId>
+    <artifactId>sticky-composite-logging-api</artifactId>
+    <version>[1,2)</version>
+  </dependency>
+  <dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-context</artifactId>
+    <version>[2.5.6.SEC02]</version>
+    <exclusions>
+      <exclusion>
+	<artifactId>commons-logging</artifactId>
+	<groupId>commons-logging</groupId>
+      </exclusion>
+    </exclusions>
+  </dependency>
+</dependencies>
+<dependencies>
 }}}
 
 Now of course all your projects used 
@@ -70,12 +88,39 @@ Now of course all your projects used
   <version>[1,2)</version>
 </dependency>
 }}}
-So as soon as the new spring25 composite is released your project picks it up.
+So as soon as the new spring25 composite is released (aka tagged, built and pushed to a public repository) your project picks it up.
 
 == Breaking upstream updates ==
 
-If 2.5.7 was found to break things then the major version of the composite-spring25 is released...
+If 2.5.6.SEC02 was found to break things then the major version of the composite-spring25 is updated ... I this case it would be from 1 to 2
 {{{
-sticky-composite-spring25-2.1 -> spring-context [2.5.7]
+<groupId>net.stickycode.composite</groupId>
+<artifactId>sticky-composite-spring25</artifactId>
+<packaging>jar</packaging>
+<version>2.1-SNAPSHOT</version>
+<dependencies>
+  <dependency>
+    <groupId>net.stickycode.composite</groupId>
+    <artifactId>sticky-composite-logging-api</artifactId>
+    <version>[1,2)</version>
+  </dependency>
+  <dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-context</artifactId>
+    <version>[2.5.6.SEC02]</version>
+    <exclusions>
+      <exclusion>
+	<artifactId>commons-logging</artifactId>
+	<groupId>commons-logging</groupId>
+      </exclusion>
+    </exclusions>
+  </dependency>
+</dependencies>
+<dependencies>
 }}}
-And any projects that wanted to move up would need to change the range, this will of course conflict. It might be a hassle to change but at least you know that you are not accidentally mixing spring jars that are not compatible.
+
+You can now have a controlled migration from the old version to the new version, ensuring that every project that needs to update takes account of the breaking change.
+
+Generally you start with one project that needs to update, and then as you assemble larger applications you get conflicts, which you have to resolve.
+
+p.s. Spring is generally very reliable in terms of binary compatibility, I just use them as a reference because I often use spring.
