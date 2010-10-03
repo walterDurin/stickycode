@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>net.stickycode.parent</groupId>
+		<artifactId>sticky-jar</artifactId>
+		<version>1.3</version>
+	</parent>
+
+	<artifactId>sticky-war</artifactId>
+	<version>1.2</version>
+	<packaging>pom</packaging>
+
+	<properties>
+		<jetty.daemon>true</jetty.daemon>
+	</properties>
+
+	<profiles>
+		<profile>
+			<id>webapp-interactive</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>net.stickycode.plugins</groupId>
+						<artifactId>sticky-wait-plugin</artifactId>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+	<name>sticky-war</name>
+	<description>Definition of plugins used for war projects</description>
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>2.1</version>
+					<configuration>
+						<archiveClasses>true</archiveClasses>
+						<classifier>application</classifier>
+					</configuration>
+					<executions>
+						<execution>
+							<id>package-war</id>
+							<goals>
+								<goal>war</goal>
+							</goals>
+						</execution>
+					</executions>
+
+				</plugin>
+				<plugin>
+					<groupId>org.mortbay.jetty</groupId>
+					<artifactId>maven-jetty-plugin</artifactId>
+					<version>6.1.25</version>
+					<configuration>
+						<stopPort>${jetty.stopport}</stopPort>
+						<stopKey>STOP-${project.artifactId}</stopKey>
+						<webApp>${project.build.directory}/${project.artifactId}-${project.version}-application.war</webApp>
+					</configuration>
+					<executions>
+						<execution>
+							<id>start-jetty</id>
+							<phase>pre-integration-test</phase>
+							<goals>
+								<goal>run-war</goal>
+							</goals>
+							<configuration>
+								<scanIntervalSeconds>0</scanIntervalSeconds>
+								<daemon>${jetty.daemon}</daemon>
+							</configuration>
+						</execution>
+						<execution>
+							<id>stop-jetty</id>
+							<phase>post-integration-test</phase>
+							<goals>
+								<goal>stop</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>net.stickycode.plugins</groupId>
+					<artifactId>sticky-wait-plugin</artifactId>
+					<version>1.1</version>
+					<executions>
+						<execution>
+							<phase>integration-test</phase>
+							<goals>
+								<goal>wait</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+
+			</plugins>
+		</pluginManagement>
+	</build>
+
+  <scm>
+    <connection>scm:svn:https://stickycode.googlecode.com/svn/tags/net.stickycode.parent/sticky-war-1.2</connection>
+    <developerConnection>scm:svn:https://stickycode.googlecode.com/svn/tags/net.stickycode.parent/sticky-war-1.2</developerConnection>
+  </scm>
+</project>
