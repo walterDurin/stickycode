@@ -1,6 +1,6 @@
 <projectDescription>
-  <name>sticky-example-war</name>
-  <comment></comment>
+  <name>sticky-helloworld-war</name>
+  <comment>A very simple webapp for testing things that need webapps</comment>
   <projects/>
   <buildSpec>
     <buildCommand>
