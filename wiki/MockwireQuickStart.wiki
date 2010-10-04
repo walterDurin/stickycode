@@ -68,4 +68,59 @@ See UnitTestingComposition which defines the libraries used and what they do.
 
 == Containment ==
 
-It can be very useful
+Once you have confirmed that a fully isolated chunk of code is tested you want to integrated it. Thats where @MockwireContainment comes in. In the simplest case it defines the containment of a test as not just the manifest from the Test class but also the result of scanning the package that the Test class exists in for components.
+
+See [http://www.c2.com/cgi/wiki?ComponentOrientedProgramming Component Oriented Programming]
+
+Any class you want to be defined in scanned context gets marked with a @StickyComponent (or some other Component annotation).
+
+Given some interfaces and implementations
+{{{
+public interface Service {
+  boolean doIt();
+}
+
+public interface Other {
+  boolean it();
+}
+
+@StickyComponent
+public class AlwaysTrueOther {
+  public boolean it() {
+   return true;
+ }
+}
+
+@StickyComponent
+public class ServiceImpl {
+
+  @Inject
+  private Other anOther; 
+
+  public boolean doIt() {
+    anOther.it();
+  }
+}
+}}}
+
+For containment we 
+{{{
+@RunWith(MockwireRunner.class)
+@MockwireContainment
+public class ServiceImplTest {
+
+  @Inject
+  Service impl;
+
+  @Test
+  public void coherency() {
+    assertThat(impl.doIt()).isTrue();
+  }
+}
+}}}
+
+=== Additional paths to scan ===
+
+{{{
+
+}}}
