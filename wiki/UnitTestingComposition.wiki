@@ -6,6 +6,20 @@ I've spent a long time trying to figure out the best tools to use for unit testi
 
 Here is a brief introduction to them but please check out their websites they do much better sales pitches than I do.
 
+== Dependency ==
+
+For the repository of sticky code see StickyMavenRepository
+
+{{{
+<dependency>
+  <groupId>net.stickycode.composite</groupId>
+  <artifactId>sticky-composite-unittest</artifactId>
+  <version>[1,2)</version>
+</dependency>
+}}}
+
+http://stickycode.googlecode.com/files/unittest-graph.png
+
 == Junit4 for running ==
 
 I use Junit4 because its supported by Infinitest, and could not live without Infinitest.
