@@ -18,7 +18,7 @@ It is safe to use the range as if a breaking change is made the major version wi
 </dependency>
 }}}
 
-http://stickycode.googlecode.com/files/logging-api.png
+http://stickycode.googlecode.com/files/logging-api-graph.png
 
 == Logging Implementation ==
 
