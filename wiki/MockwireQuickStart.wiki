@@ -20,11 +20,11 @@ Ideally we would always test our code just as it gets wired in production, if we
 
 Mockwire just leverages the standard DI containers to build that assembly just as if the code under test was wire up properly. I call the assemblies isolated because its a well defined subset of the final application.
 
-== Including Mockwire in you project ==
+=== Including Mockwire in you project ===
 
 Add the appropriate MockwireDependency to your project to get started
 
-== To use Mockwire with Junit ==
+=== To use Mockwire with Junit ===
 
 I primarily use Junit because I use Infinitest and Junit support in eclipse is a tad better than Testng. If you don't use junit See UsingMockwireWithoutJunit
 
@@ -56,11 +56,11 @@ SomeInterface thatSomeConcreteClassNeeds;
 }}}
 How the class actually gets mocked is left up to the Mocking implementation, I would highly recommend Mockito, but will supply bindings to other mocking libraries on request.
 
-= For assertions and mocking =
+=== For assertions and mocking ===
 
 See UnitTestingComposition which defines the libraries used and what they do.
 
-= Examples =
+== Examples ==
 
   * MockwireHelloWorld
   * MockwireDecentExample
@@ -119,7 +119,7 @@ public class ServiceImplIntegrationTest {
 }
 }}}
 
-=== Additional paths to scan ===
+=== Specifying the package(s) to scan ===
 {{{
 package net.stickycode.example.containment.main;
 public interface Service {
