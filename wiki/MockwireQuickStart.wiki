@@ -35,7 +35,7 @@ Mockwire provides a junit4 runner: [http://code.google.com/p/stickycode/source/b
 public class UnitTest {
 }}}
 
-== Blessing and Mocking ==
+=== Blessing and Mocking ===
 
 @Bless and @Mock and mock are used to define the types that end up in the wire test environment.
 
