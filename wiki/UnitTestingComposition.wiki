@@ -76,11 +76,13 @@ public void test() {
 
 This is a commercial product for $29US, and money you will make back in less than a day.
 
-In Eclipse is scans all the projects you have open and runs alls the tests in the background as you change code that affects them. In runs in IntelliJ but is not so useful without an incremental compiler.
+In Eclipse it scans all the projects you have open and runs all the tests in the background as you change code that affects them. In runs in IntelliJ but is not so useful without an incremental compiler.
 
 Once you try TDD with it you will never want to go back.
 
 == Eclipse favourites for autocompletion ==
+
+This lets you autocomplete static imports which are a hassle to type all the time otherwise.
 
 http://stickycode.googlecode.com/files/eclipse-favourites.png
 
