@@ -74,7 +74,7 @@ See [http://www.c2.com/cgi/wiki?ComponentOrientedProgramming Component Oriented 
 
 Any class you want to be defined in scanned context gets marked with a @StickyComponent (or some other Component annotation).
 
-Given some interfaces and implementations
+Given some interfaces and implementations all in the same package *net.stikcycode.example.containment*
 {{{
 public interface Service {
   boolean doIt();
@@ -103,11 +103,11 @@ public class ServiceImpl {
 }
 }}}
 
-For containment we 
+For containment we define an integration test and Inject the code we wish to test
 {{{
 @RunWith(MockwireRunner.class)
 @MockwireContainment
-public class ServiceImplTest {
+public class ServiceImplIntegrationTest {
 
   @Inject
   Service impl;
@@ -120,7 +120,57 @@ public class ServiceImplTest {
 }}}
 
 === Additional paths to scan ===
-
 {{{
+package net.stickycode.example.containment.main;
+public interface Service {
+  boolean doIt();
+}
 
+package net.stickycode.example.containment.other;
+public interface Other {
+  boolean it();
+}
+
+package net.stickycode.example.containment.other;
+@StickyComponent
+public class AlwaysTrueOther {
+  public boolean it() {
+   return true;
+ }
+}
+
+package net.stickycode.example.containment.main;
+@StickyComponent
+public class ServiceImpl {
+
+  @Inject
+  private Other anOther; 
+
+  public boolean doIt() {
+    anOther.it();
+  }
+}
+}}}
+
+The package(s) can be defined as a parameter to the MockwireContainment annotation
+{{{
+package net.stickycode.example.containment.main;
+
+@RunWith(MockwireRunner.class)
+@MockwireContainment("/net/stickycode/example/containment/main")
+public class ServiceImplIntegrationTest {
+
+  @Bless
+  ServiceImpl impl;
+
+  @Test
+  public void coherency() {
+    assertThat(impl.doIt()).isTrue();
+  }
+}
+}}}
+
+More than one package can be scanned with 
+{{{
+@MockwireContainment("/net/stickycode/example/containment/main", "/some/other/package)
 }}}
