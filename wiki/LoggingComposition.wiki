@@ -18,6 +18,8 @@ It is safe to use the range as if a breaking change is made the major version wi
 </dependency>
 }}}
 
+http://stickycode.googlecode.com/files/logging-api.png
+
 == Logging Implementation ==
 
 This logging implementation uses logback. Its used by Mockwire and UnittestingComposition to provide logging for tests.
@@ -29,5 +31,7 @@ This logging implementation uses logback. Its used by Mockwire and UnittestingCo
   <version>[1,2)</version>
 </dependency>
 }}}
+
+http://stickycode.googlecode.com/files/logging-deploy.png
 
 See StickyMavenRepository for the repository details
