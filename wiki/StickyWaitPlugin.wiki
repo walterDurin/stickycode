@@ -1,0 +1,5 @@
+#summary Plugin to wait on user keypress
+
+= Introduction =
+
+When using jetty to run a built war for integration testing it is often useful to run the war and then look at it interactively. Using the daemon mode works but you get errors.
