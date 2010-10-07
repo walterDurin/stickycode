@@ -6,11 +6,11 @@ import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import net.stickycode.mockwire.Bless;
 import net.stickycode.mockwire.Mock;
 import net.stickycode.mockwire.junit4.MockwireRunner;
 
 import static net.stickycode.mockwire.bdd.StickyBdd.assume;
-
 import static net.stickycode.mockwire.bdd.StickyBdd.given;
 import static net.stickycode.mockwire.bdd.StickyBdd.then;
 import static net.stickycode.mockwire.bdd.StickyBdd.when;
@@ -39,5 +39,6 @@ public class BddTest {
 
     then(values).contains("Value");
   }
+
 
 }
