@@ -9,7 +9,7 @@
 	</parent>
 
 	<artifactId>sticky-war</artifactId>
-	<version>1.4</version>
+	<version>1.5-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<properties>
@@ -100,9 +100,4 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-
-  <scm>
-    <connection>scm:svn:https://stickycode.googlecode.com/svn/tags/net.stickycode.parent/sticky-war-1.4</connection>
-    <developerConnection>scm:svn:https://stickycode.googlecode.com/svn/tags/net.stickycode.parent/sticky-war-1.4</developerConnection>
-  </scm>
 </project>
