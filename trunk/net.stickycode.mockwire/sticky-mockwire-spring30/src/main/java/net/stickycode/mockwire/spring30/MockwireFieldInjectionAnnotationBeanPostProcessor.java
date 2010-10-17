@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package net.stickycode.mockwire.spring25;
+package net.stickycode.mockwire.spring30;
 
 import java.beans.PropertyDescriptor;
 import java.lang.annotation.Annotation;
