@@ -43,7 +43,7 @@ public class SpringIsolatedTestManifest
   public SpringIsolatedTestManifest() {
     super();
 
-    MockwireInjectionAnnotationBeanPostProcessor blessInjector = new MockwireInjectionAnnotationBeanPostProcessor();
+    MockwireFieldInjectionAnnotationBeanPostProcessor blessInjector = new MockwireFieldInjectionAnnotationBeanPostProcessor();
     blessInjector.setBeanFactory(getDefaultListableBeanFactory());
     getBeanFactory().addBeanPostProcessor(blessInjector);
 

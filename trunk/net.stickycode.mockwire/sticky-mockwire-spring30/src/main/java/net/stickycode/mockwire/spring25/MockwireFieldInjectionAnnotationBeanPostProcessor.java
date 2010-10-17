@@ -105,7 +105,7 @@ import net.stickycode.mockwire.Mock;
  * @see #setAutowiredAnnotationType
  * @see Autowired
  */
-public class MockwireInjectionAnnotationBeanPostProcessor extends InstantiationAwareBeanPostProcessorAdapter
+public class MockwireFieldInjectionAnnotationBeanPostProcessor extends InstantiationAwareBeanPostProcessorAdapter
 		implements MergedBeanDefinitionPostProcessor, PriorityOrdered, BeanFactoryAware {
 
 	protected final Log logger = LogFactory.getLog(getClass());
@@ -134,7 +134,7 @@ public class MockwireInjectionAnnotationBeanPostProcessor extends InstantiationA
 	 * <p>Also supports JSR-330's {@link javax.inject.Inject} annotation, if available.
 	 */
 	@SuppressWarnings("unchecked")
-	public MockwireInjectionAnnotationBeanPostProcessor() {
+	public MockwireFieldInjectionAnnotationBeanPostProcessor() {
 		this.autowiredAnnotationTypes.add(Bless.class);
 		this.autowiredAnnotationTypes.add(Mock.class);
 		this.autowiredAnnotationTypes.add(Inject.class);
