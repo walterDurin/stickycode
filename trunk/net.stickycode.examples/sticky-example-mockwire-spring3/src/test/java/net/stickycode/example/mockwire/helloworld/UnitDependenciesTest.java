@@ -32,15 +32,19 @@ public class UnitDependenciesTest {
     void call();
   }
 
-  static class Unit {
+  public static class Unit {
 
     @Inject
-    Dependency dependency;
+    private Dependency dependency;
 
     public void call() {
       dependency.call();
     }
   }
+
+  @Inject
+  Dependency dip;
+
 
   @Bless
   Unit unit;
@@ -51,6 +55,8 @@ public class UnitDependenciesTest {
   @Test
   public void simple() {
     assertThat(unit).isNotNull();
+    assertThat(mocked).isNotNull();
+    assertThat(dip).isNotNull();
     assertThat(unit.dependency).isNotNull();
 
     unit.call();

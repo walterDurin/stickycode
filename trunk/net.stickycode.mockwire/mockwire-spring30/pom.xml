@@ -22,14 +22,14 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>net.stickycode.mockwire</groupId>
-	<artifactId>mockwire-spring25</artifactId>
-	<version>1.3-SNAPSHOT</version>
+	<artifactId>mockwire-spring30</artifactId>
+	<version>1.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>mockwire-spring25</name>
-	<description>Isolation and definition of test contexts using Spring25 and Mockito</description>
+	<name>mockwire-spring30</name>
+	<description>Isolation and definition of test contexts using Spring 3.0 and Mockito</description>
 
-	<inceptionYear>2009</inceptionYear>
+	<inceptionYear>2010</inceptionYear>
 	<dependencies>
 		<dependency>
 			<groupId>net.stickycode.composite</groupId>
@@ -46,7 +46,7 @@
 		</dependency>
 		<dependency>
 			<groupId>net.stickycode.mockwire</groupId>
-			<artifactId>sticky-mockwire-spring25</artifactId>
+			<artifactId>sticky-mockwire-spring30</artifactId>
 			<version>[1,2)</version>
 			<type>jar</type>
 			<scope>compile</scope>

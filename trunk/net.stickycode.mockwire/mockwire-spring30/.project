@@ -1,6 +1,6 @@
 <projectDescription>
-  <name>mockwire-spring25</name>
-  <comment>Isolation and definition of test contexts</comment>
+  <name>mockwire-spring30</name>
+  <comment>Isolation and definition of test contexts using Spring 3.0 and Mockito</comment>
   <projects/>
   <buildSpec>
     <buildCommand>

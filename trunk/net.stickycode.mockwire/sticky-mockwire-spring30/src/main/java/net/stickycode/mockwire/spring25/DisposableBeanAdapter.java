@@ -36,7 +36,6 @@ public class DisposableBeanAdapter
 
   @Override
   public void destroy() throws Exception {
-    @SuppressWarnings("unchecked")
     List<BeanPostProcessor> beanPostProcessors = context.getDefaultListableBeanFactory().getBeanPostProcessors();
     for (BeanPostProcessor p : beanPostProcessors) {
       if (p instanceof DestructionAwareBeanPostProcessor)

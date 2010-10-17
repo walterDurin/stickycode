@@ -20,18 +20,18 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>net.stickycode.examples</groupId>
-	<artifactId>sticky-example-mockwire</artifactId>
-	<version>1.4-SNAPSHOT</version>
+	<artifactId>sticky-example-mockwire-spring3</artifactId>
+	<version>1.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>sticky-example-mockwire</name>
+	<name>sticky-example-mockwire-spring3</name>
 	<description>Examples of using mockwire for unit testing, concern isolation and integration testing</description>
 
 	<inceptionYear>2010</inceptionYear>
 	<dependencies>
 		<dependency>
 			<groupId>net.stickycode.mockwire</groupId>
-			<artifactId>mockwire-spring25</artifactId>
+			<artifactId>mockwire-spring30</artifactId>
 			<version>[1,2)</version>
 			<type>jar</type>
 			<scope>test</scope>

@@ -1,5 +1,5 @@
 <projectDescription>
-  <name>sticky-example-mockwire</name>
+  <name>sticky-example-mockwire-spring3</name>
   <comment>Examples of using mockwire for unit testing, concern isolation and integration testing</comment>
   <projects/>
   <buildSpec>

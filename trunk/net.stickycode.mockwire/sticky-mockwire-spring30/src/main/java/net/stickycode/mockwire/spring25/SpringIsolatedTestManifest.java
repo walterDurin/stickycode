@@ -15,22 +15,24 @@ package net.stickycode.mockwire.spring25;
 import java.beans.Introspector;
 import java.util.Map;
 
-import net.stickycode.mockwire.IsolatedTestManifest;
-import net.stickycode.mockwire.MissingBeanException;
-import net.stickycode.mockwire.NonUniqueBeanException;
-import net.stickycode.stereotype.StickyComponent;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
-import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
+import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
+import org.springframework.beans.factory.xml.ResourceEntityResolver;
+import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
 import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.core.type.filter.AnnotationTypeFilter;
+
+import net.stickycode.mockwire.IsolatedTestManifest;
+import net.stickycode.mockwire.MissingBeanException;
+import net.stickycode.mockwire.NonUniqueBeanException;
+import net.stickycode.stereotype.StickyComponent;
 
 public class SpringIsolatedTestManifest
     extends GenericApplicationContext
@@ -41,20 +43,13 @@ public class SpringIsolatedTestManifest
   public SpringIsolatedTestManifest() {
     super();
 
-    registerPostProcessor(new InjectAnnotationBeanPostProcessor());
-    registerPostProcessor(new MockInjectionAnnotationBeanPostProcessor());
-    BlessInjectionAnnotationBeanPostProcessor blessInjector = new BlessInjectionAnnotationBeanPostProcessor();
+    MockwireInjectionAnnotationBeanPostProcessor blessInjector = new MockwireInjectionAnnotationBeanPostProcessor();
     blessInjector.setBeanFactory(getDefaultListableBeanFactory());
     getBeanFactory().addBeanPostProcessor(blessInjector);
 
     getBeanFactory().registerSingleton(
         Introspector.decapitalize(getClass().getSimpleName()),
         this);
-  }
-
-  private void registerPostProcessor(AutowiredAnnotationBeanPostProcessor autowiredProcessor) {
-    autowiredProcessor.setBeanFactory(getDefaultListableBeanFactory());
-    getBeanFactory().addBeanPostProcessor(autowiredProcessor);
   }
 
   public SpringIsolatedTestManifest(ApplicationContext parent) {
@@ -76,6 +71,7 @@ public class SpringIsolatedTestManifest
 
   @Override
   public void autowire(Object testInstance) {
+    refresh();
     try {
       getAutowireCapableBeanFactory().autowireBean(testInstance);
     }
@@ -103,13 +99,13 @@ public class SpringIsolatedTestManifest
     log.info("registering definition '{}' for type '{}'", beanName, type.getName());
     GenericBeanDefinition bd = new GenericBeanDefinition();
     bd.setBeanClass(type);
+    bd.setAutowireMode(AbstractBeanDefinition.AUTOWIRE_BY_TYPE);
     getDefaultListableBeanFactory().registerBeanDefinition(beanName, bd);
   }
 
-  @SuppressWarnings("unchecked")
   @Override
   public Object getBeanOfType(Class<?> type) {
-    Map<String, Object> beans = getBeansOfType(type);
+    Map<String, ?> beans = getBeansOfType(type);
     if (beans.size() == 1)
       return beans.values().iterator().next();
 
@@ -121,11 +117,27 @@ public class SpringIsolatedTestManifest
 
   @Override
   public void scanPackages(String[] scanRoots) {
+    log.info("scanning roots {}", scanRoots);
+    ClassPathBeanDefinitionScanner scanner = createScanner();
+    XmlBeanDefinitionReader beanDefinitionReader = createXmlLoader();
+    for (String s : scanRoots)
+      if (s.endsWith(".xml"))
+        beanDefinitionReader.loadBeanDefinitions(s);
+      else
+        scanner.scan(scanRoots);
+  }
+
+  private ClassPathBeanDefinitionScanner createScanner() {
     ClassPathBeanDefinitionScanner scanner = new ClassPathBeanDefinitionScanner(this);
     scanner.setIncludeAnnotationConfig(true);
     scanner.addIncludeFilter(new AnnotationTypeFilter(StickyComponent.class));
-    log.info("scanning roots {}", scanRoots);
-    scanner.scan(scanRoots);
+    return scanner;
   }
 
+  private XmlBeanDefinitionReader createXmlLoader() {
+    XmlBeanDefinitionReader beanDefinitionReader = new XmlBeanDefinitionReader(this);
+    beanDefinitionReader.setResourceLoader(this);
+    beanDefinitionReader.setEntityResolver(new ResourceEntityResolver(this));
+    return beanDefinitionReader;
+  }
 }
