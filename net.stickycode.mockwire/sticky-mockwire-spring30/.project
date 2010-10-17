@@ -1,6 +1,6 @@
 <projectDescription>
-  <name>sticky-mockwire-spring25</name>
-  <comment>The plugin definitions for jar projects</comment>
+  <name>sticky-mockwire-spring30</name>
+  <comment>Implementation of mockwire context management using Spring 3.0 as the di container</comment>
   <projects/>
   <buildSpec>
     <buildCommand>

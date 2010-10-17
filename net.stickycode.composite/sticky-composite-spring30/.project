@@ -1,6 +1,6 @@
 <projectDescription>
-  <name>sticky-composite-spring25</name>
-  <comment>Composition of artifacts required for using the spring 2.5 Contexts</comment>
+  <name>sticky-composite-spring30</name>
+  <comment>Composition of artifacts required for using the spring 3.0 Contexts.</comment>
   <projects/>
   <buildSpec>
     <buildCommand>

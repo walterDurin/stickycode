@@ -22,14 +22,14 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>net.stickycode.composite</groupId>
-	<artifactId>sticky-composite-spring25</artifactId>
-	<version>1.2-SNAPSHOT</version>
+	<artifactId>sticky-composite-spring30</artifactId>
+	<version>1.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>sticky-composite-spring25</name>
-	<description>Composition of artifacts required for using the spring 2.5 Contexts. </description>
+	<name>sticky-composite-spring30</name>
+	<description>Composition of artifacts required for using the spring 3.0 Contexts. </description>
 
-	<inceptionYear>2007</inceptionYear>
+	<inceptionYear>2010</inceptionYear>
 	<dependencies>
 		<dependency>
 			<groupId>net.stickycode.composite</groupId>
@@ -41,7 +41,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
-			<version>[2.5.6.SEC02]</version>
+			<version>[3.0.4.RELEASE]</version>
 			<type>jar</type>
 			<scope>compile</scope>
 			<exclusions>
