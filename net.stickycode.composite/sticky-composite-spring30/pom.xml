@@ -23,7 +23,7 @@
 
 	<groupId>net.stickycode.composite</groupId>
 	<artifactId>sticky-composite-spring30</artifactId>
-	<version>1.1-SNAPSHOT</version>
+	<version>1.1</version>
 	<packaging>jar</packaging>
 
 	<name>sticky-composite-spring30</name>
@@ -53,4 +53,9 @@
 		</dependency>
 
 	</dependencies>
+
+  <scm>
+    <connection>scm:svn:https://stickycode.googlecode.com/svn/tags/net.stickycode.composite/sticky-composite-spring30-1.1</connection>
+    <developerConnection>scm:svn:https://stickycode.googlecode.com/svn/tags/net.stickycode.composite/sticky-composite-spring30-1.1</developerConnection>
+  </scm>
 </project>
