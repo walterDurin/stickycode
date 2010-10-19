@@ -12,7 +12,7 @@
 	<parent>
 		<artifactId>sticky-root</artifactId>
 		<groupId>net.stickycode.parent</groupId>
-		<version>1.5</version>
+		<version>1.7</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
@@ -30,7 +30,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-resources-plugin</artifactId>
-					<version>2.3</version>
+					<version>2.4.3</version>
 					<configuration>
 						<encoding>UTF-8</encoding>
 					</configuration>
@@ -107,12 +107,12 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-jar-plugin</artifactId>
-					<version>2.2</version>
+					<version>2.3.1</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-javadoc-plugin</artifactId>
-					<version>2.5</version>
+					<version>2.7</version>
 				</plugin>
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
