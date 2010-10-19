@@ -18,7 +18,7 @@
 
 	<groupId>net.stickycode.parent</groupId>
 	<artifactId>sticky-api</artifactId>
-	<version>1.1</version>
+	<version>1.2-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>sticky-api</name>
@@ -43,9 +43,4 @@
 		</plugins>
 
 	</build>
-
-  <scm>
-    <connection>scm:svn:https://stickycode.googlecode.com/svn/tags/net.stickycode.parent/sticky-api-1.1</connection>
-    <developerConnection>scm:svn:https://stickycode.googlecode.com/svn/tags/net.stickycode.parent/sticky-api-1.1</developerConnection>
-  </scm>
 </project>
