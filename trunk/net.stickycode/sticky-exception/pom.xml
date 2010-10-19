@@ -23,7 +23,7 @@
 
 	<groupId>net.stickycode</groupId>
 	<artifactId>sticky-exception</artifactId>
-	<version>1.2</version>
+	<version>1.3-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>sticky-exception</name>
@@ -40,9 +40,4 @@ descriptive</description>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
-  <scm>
-    <connection>scm:svn:https://stickycode.googlecode.com/svn/tags/net.stickycode/sticky-exception-1.2</connection>
-    <developerConnection>scm:svn:https://stickycode.googlecode.com/svn/tags/net.stickycode/sticky-exception-1.2</developerConnection>
-  </scm>
 </project>
