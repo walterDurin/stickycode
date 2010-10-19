@@ -84,7 +84,7 @@ version=1
 						<preparationGoals>clean enforcer:enforce</preparationGoals>
 						<remoteTagging>false</remoteTagging>
 						<suppressCommitBeforeTag>true</suppressCommitBeforeTag>
-						<scmCommentPrefix>[Releasing ${scm.tag}] </scmCommentPrefix>
+						<scmCommentPrefix>[Releasing ${project.scm.tag}] </scmCommentPrefix>
 					</configuration>
 				</plugin>
 				<plugin>
