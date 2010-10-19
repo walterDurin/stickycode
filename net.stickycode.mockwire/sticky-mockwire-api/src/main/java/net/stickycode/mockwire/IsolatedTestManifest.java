@@ -42,7 +42,7 @@ public interface IsolatedTestManifest extends ParameterSource {
   /**
    * Wire up the given testInstance by type using this manifest.
    */
-  void autowire(Object testInstance);
+  void autowire(Object testInstance) throws MissingBeanException;
 
   /**
    * Scan for components in from the given package roots

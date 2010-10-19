@@ -97,7 +97,6 @@ public class MockwireFieldInjectionAnnotationBeanPostProcessor extends Instantia
 	 * for Spring's standard {@link Autowired} annotation.
 	 * <p>Also supports JSR-330's {@link javax.inject.Inject} annotation, if available.
 	 */
-	@SuppressWarnings("unchecked")
 	public MockwireFieldInjectionAnnotationBeanPostProcessor() {
 		this.autowiredAnnotationTypes.add(Bless.class);
 		this.autowiredAnnotationTypes.add(Mock.class);

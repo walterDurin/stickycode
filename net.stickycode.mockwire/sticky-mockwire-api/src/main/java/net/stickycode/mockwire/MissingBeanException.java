@@ -12,13 +12,32 @@
  */
 package net.stickycode.mockwire;
 
+import net.stickycode.exception.PermanentException;
+
 
 @SuppressWarnings("serial")
 public class MissingBeanException
-    extends CodingException {
+    extends PermanentException {
 
-  public MissingBeanException(String message, Object... parameters) {
-    super(message, parameters);
+
+  public MissingBeanException(Object target, String missingBeanName, Class<?> missingBeanType) {
+    super("Missing a bean named {} of type {} when attempting to inject {}", missingBeanName, missingBeanType, target.getClass().getSimpleName());
+  }
+
+  public MissingBeanException(Object target, Class<?> missingBeanType) {
+    super("Missing a bean of type {} when attempting to inject {}", missingBeanType.getSimpleName(), target.getClass().getSimpleName());
+  }
+
+  public MissingBeanException(Throwable t, Object target, String missingBeanName, Class<?> missingBeanType) {
+    super(t, "Missing a bean named {} of type {} when attempting to inject {}", missingBeanName, missingBeanType, target.getClass().getSimpleName());
+  }
+
+  public MissingBeanException(Throwable t, Object target, Class<?> missingBeanType) {
+    super(t, "Missing a bean of type {} when attempting to inject {}", missingBeanType.getSimpleName(), target.getClass().getSimpleName());
+  }
+
+  public MissingBeanException(Class<?> type) {
+    super("Missing bean of type {}, expected 1 in the context but found none", type.getSimpleName());
   }
 
 }

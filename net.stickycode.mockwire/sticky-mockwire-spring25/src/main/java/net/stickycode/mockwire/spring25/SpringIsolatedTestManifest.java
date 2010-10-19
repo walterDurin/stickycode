@@ -27,6 +27,8 @@ import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
+import org.springframework.beans.factory.xml.ResourceEntityResolver;
+import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
 import org.springframework.context.support.GenericApplicationContext;
@@ -121,11 +123,28 @@ public class SpringIsolatedTestManifest
 
   @Override
   public void scanPackages(String[] scanRoots) {
+    ClassPathBeanDefinitionScanner scanner = createScanner(scanRoots);
+    XmlBeanDefinitionReader beanDefinitionReader = createXmlLoader();
+    for (String s : scanRoots)
+      if (s.endsWith(".xml"))
+        beanDefinitionReader.loadBeanDefinitions(s);
+      else
+        scanner.scan(scanRoots);
+  }
+
+  private ClassPathBeanDefinitionScanner createScanner(String[] scanRoots) {
     ClassPathBeanDefinitionScanner scanner = new ClassPathBeanDefinitionScanner(this);
     scanner.setIncludeAnnotationConfig(true);
     scanner.addIncludeFilter(new AnnotationTypeFilter(StickyComponent.class));
     log.info("scanning roots {}", scanRoots);
-    scanner.scan(scanRoots);
+    return scanner;
+  }
+
+  private XmlBeanDefinitionReader createXmlLoader() {
+    XmlBeanDefinitionReader beanDefinitionReader = new XmlBeanDefinitionReader(this);
+    beanDefinitionReader.setResourceLoader(this);
+    beanDefinitionReader.setEntityResolver(new ResourceEntityResolver(this));
+    return beanDefinitionReader;
   }
 
 }
