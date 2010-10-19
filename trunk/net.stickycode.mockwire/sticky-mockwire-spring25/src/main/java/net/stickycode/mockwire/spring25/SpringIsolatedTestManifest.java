@@ -23,6 +23,7 @@ import net.stickycode.stereotype.StickyComponent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
@@ -85,7 +86,11 @@ public class SpringIsolatedTestManifest
       Throwable cause = e.getMostSpecificCause();
       if (cause instanceof NoSuchBeanDefinitionException) {
         NoSuchBeanDefinitionException n = (NoSuchBeanDefinitionException)cause;
-        throw new MissingBeanException("Missing {} of type {}", n.getBeanName() == null ? "bean" : n.getBeanName(), n.getBeanType().getName());
+        if (n.getBeanName() == null)
+          throw new MissingBeanException(testInstance, n.getBeanType());
+        else
+          throw new MissingBeanException(testInstance, n.getBeanName(), n.getBeanType());
+
       }
     }
   }
@@ -116,9 +121,9 @@ public class SpringIsolatedTestManifest
       return beans.values().iterator().next();
 
     if (beans.size() == 0)
-      throw new MissingBeanException("Missing bean of type {}", type.getName());
+      throw new MissingBeanException(type);
 
-    throw new NonUniqueBeanException("Found {} beans {} of type {}, expected 1", beans.size(), beans.keySet(), type.getName());
+    throw new NonUniqueBeanException(beans.size(), beans.keySet(), type);
   }
 
   @Override
