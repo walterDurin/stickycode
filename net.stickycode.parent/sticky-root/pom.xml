@@ -13,7 +13,7 @@
 
 	<groupId>net.stickycode.parent</groupId>
 	<artifactId>sticky-root</artifactId>
-	<version>1.8-SNAPSHOT</version>
+	<version>1.9-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>sticky-root</name>
