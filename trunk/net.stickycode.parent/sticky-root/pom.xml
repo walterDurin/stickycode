@@ -13,7 +13,7 @@
 
 	<groupId>net.stickycode.parent</groupId>
 	<artifactId>sticky-root</artifactId>
-	<version>1.7</version>
+	<version>1.8-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>sticky-root</name>
@@ -36,8 +36,8 @@
 	<description>Define the distribution management and general plugins used in all sticky projects</description>
 	<inceptionYear>2010</inceptionYear>
 	<scm>
-		<connection>scm:svn:https://stickycode.googlecode.com/svn/tags/net.stickycode.parent/sticky-root-1.7</connection>
-		<developerConnection>scm:svn:https://stickycode.googlecode.com/svn/tags/net.stickycode.parent/sticky-root-1.7</developerConnection>
+		<connection>scm:svn:https://null</connection>
+		<developerConnection>scm:svn:https://null</developerConnection>
 	</scm>
 
 	<organization>
