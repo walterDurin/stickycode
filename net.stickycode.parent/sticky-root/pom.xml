@@ -13,7 +13,7 @@
 
 	<groupId>net.stickycode.parent</groupId>
 	<artifactId>sticky-root</artifactId>
-	<version>1.9-SNAPSHOT</version>
+	<version>1.10-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>sticky-root</name>
@@ -84,7 +84,7 @@ version=1
 						<preparationGoals>clean enforcer:enforce</preparationGoals>
 						<remoteTagging>false</remoteTagging>
 						<suppressCommitBeforeTag>true</suppressCommitBeforeTag>
-						<scmCommentPrefix>[Releasing ${project.artifactId}-${project.releaseVersion}] </scmCommentPrefix>
+						<scmCommentPrefix>[Releasing ${scm.tag}] </scmCommentPrefix>
 					</configuration>
 				</plugin>
 				<plugin>
