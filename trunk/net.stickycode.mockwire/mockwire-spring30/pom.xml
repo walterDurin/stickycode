@@ -23,7 +23,7 @@
 
 	<groupId>net.stickycode.mockwire</groupId>
 	<artifactId>mockwire-spring30</artifactId>
-	<version>1.3-SNAPSHOT</version>
+	<version>1.4-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>mockwire-spring30</name>
