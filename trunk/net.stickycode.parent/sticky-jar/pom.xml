@@ -12,7 +12,7 @@
 	<parent>
 		<artifactId>sticky-root</artifactId>
 		<groupId>net.stickycode.parent</groupId>
-		<version>1.7</version>
+		<version>1.11</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
