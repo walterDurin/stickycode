@@ -83,6 +83,8 @@ version=1
 						<goals>enforcer:enforce deploy</goals>
 						<preparationGoals>clean enforcer:enforce</preparationGoals>
 						<remoteTagging>false</remoteTagging>
+						<suppressCommitBeforeTag>true</suppressCommitBeforeTag>
+						<scmCommentPrefix>[Release] ${project.artifactId}-${project.version} </scmCommentPrefix>
 					</configuration>
 				</plugin>
 				<plugin>
