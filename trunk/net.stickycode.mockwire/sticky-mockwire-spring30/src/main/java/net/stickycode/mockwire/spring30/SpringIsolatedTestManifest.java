@@ -15,6 +15,11 @@ package net.stickycode.mockwire.spring30;
 import java.beans.Introspector;
 import java.util.Map;
 
+import net.stickycode.mockwire.IsolatedTestManifest;
+import net.stickycode.mockwire.MissingBeanException;
+import net.stickycode.mockwire.NonUniqueBeanException;
+import net.stickycode.stereotype.StickyComponent;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -28,11 +33,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
 import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.core.type.filter.AnnotationTypeFilter;
-
-import net.stickycode.mockwire.IsolatedTestManifest;
-import net.stickycode.mockwire.MissingBeanException;
-import net.stickycode.mockwire.NonUniqueBeanException;
-import net.stickycode.stereotype.StickyComponent;
 
 public class SpringIsolatedTestManifest
     extends GenericApplicationContext
@@ -79,8 +79,9 @@ public class SpringIsolatedTestManifest
       Throwable cause = e.getMostSpecificCause();
       if (cause instanceof NoSuchBeanDefinitionException) {
         NoSuchBeanDefinitionException n = (NoSuchBeanDefinitionException)cause;
-        throw new MissingBeanException("Missing {} of type {}", n.getBeanName() == null ? "bean" : n.getBeanName(), n.getBeanType().getName());
+        throw new MissingBeanException(n, testInstance, n.getBeanType());
       }
+      throw new TestInjectionFailure(e, testInstance);
     }
   }
 
@@ -110,9 +111,9 @@ public class SpringIsolatedTestManifest
       return beans.values().iterator().next();
 
     if (beans.size() == 0)
-      throw new MissingBeanException("Missing bean of type {}", type.getName());
+      throw new MissingBeanException(type);
 
-    throw new NonUniqueBeanException("Found {} beans {} of type {}, expected 1", beans.size(), beans.keySet(), type.getName());
+    throw new NonUniqueBeanException(beans.size(), beans.keySet(), type);
   }
 
   @Override
