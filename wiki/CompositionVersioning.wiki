@@ -17,7 +17,7 @@ A -> D 3.2
 Now if both versions were binary compatible that would be fine. But how do you know? With Ranges you can define the compatibility contracts with constraints.
 
 == Ranges ==
-In my world 2.4 and 3.2 are not compatible, the major version is different, so things like deprecated methods might be gone. I always use ranges that allows one to constrain whats resolved. For example
+In my world 2.4 and 3.2 are not compatible, the major version is different, so things like deprecated methods might be gone. 
 
 {{{
 A -> B -> C -> D [2,3)
