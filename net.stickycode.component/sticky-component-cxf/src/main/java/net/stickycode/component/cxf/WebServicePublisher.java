@@ -78,10 +78,10 @@ public class WebServicePublisher
   private String getLeaf(Package p) {
     String name = p.getName();
     String version = name.substring(name.lastIndexOf('.') + 1);
-    if (version.matches("^v[0-9]+$"))
+    if (version.matches("^v[\\.0-9]+$"))
       return "/" + version;
 
-    return "";
+    throw new WebServiceShouldExistInVersionedPackageException(p);
   }
 
 }
