@@ -10,18 +10,23 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
  */
-package net.stickycode.mockwire.reflector;
+package net.stickycode.reflector;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-import java.util.List;
 
+public abstract class AnnotatedMethodProcessor
+    implements MethodProcessor {
 
-public interface MethodProcessor {
+  private Class<? extends Annotation> annotation;
 
-  void processMethod(Object target, Method method);
+  public AnnotatedMethodProcessor(Class<? extends Annotation> annotation) {
+    this.annotation = annotation;
+  }
 
-  boolean canProcess(Method method);
-
-  void sort(List<Method> methods);
+  @Override
+  public boolean canProcess(Method method) {
+    return method.isAnnotationPresent(annotation);
+  }
 
 }

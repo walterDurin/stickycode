@@ -10,15 +10,23 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
  */
-package net.stickycode.mockwire.reflector;
+package net.stickycode.reflector;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 
 
-public interface FieldProcessor {
+public abstract class AnnotatedFieldProcessor
+    implements FieldProcessor {
 
-  void processField(Object target, Field field);
+  private Class<? extends Annotation> annotationClass;
 
-  boolean canProcess(Field field);
+  public AnnotatedFieldProcessor(Class<? extends Annotation> annotation) {
+    this.annotationClass = annotation;
+  }
 
+  @Override
+  public boolean canProcess(Field field) {
+    return field.isAnnotationPresent(annotationClass);
+  }
 }
