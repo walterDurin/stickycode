@@ -14,6 +14,7 @@ package net.stickycode.reflector;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.util.List;
 
 public abstract class AnnotatedMethodProcessor
     implements MethodProcessor {
@@ -27,6 +28,10 @@ public abstract class AnnotatedMethodProcessor
   @Override
   public boolean canProcess(Method method) {
     return method.isAnnotationPresent(annotation);
+  }
+
+  @Override
+  public void sort(List<Method> methods) {
   }
 
 }
