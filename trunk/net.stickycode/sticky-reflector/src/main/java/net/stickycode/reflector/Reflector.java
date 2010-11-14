@@ -51,8 +51,8 @@ public class Reflector {
     for (MethodProcessor processor : methodProcessors)
       processor.sort(methods);
 
-    for (Method method : methods)
-      for (MethodProcessor processor : methodProcessors)
+    for (MethodProcessor processor : methodProcessors)
+      for (Method method : methods)
         processor.processMethod(target, method);
   }
 
@@ -71,12 +71,12 @@ public class Reflector {
   }
 
   private void processFields(Object target, Class<?> type) {
-    Field[] fields = type.getDeclaredFields();
-    for (Field field : fields)
-      for (FieldProcessor processor : fieldProcessors)
-        if (processor.canProcess(field))
-          processor.processField(target, field);
-
+    for (FieldProcessor processor : fieldProcessors) {
+      Field[] fields = type.getDeclaredFields();
+      for (Field field : fields)
+          if (processor.canProcess(field))
+            processor.processField(target, field);
+    }
   }
 
   public Reflector forEachMethod(MethodProcessor... processors) {
