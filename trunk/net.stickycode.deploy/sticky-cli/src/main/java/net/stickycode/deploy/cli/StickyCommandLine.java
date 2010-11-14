@@ -10,49 +10,31 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
  */
-package net.stickycode.deploy;
+package net.stickycode.deploy.cli;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
+import net.stickycode.configured.ConfigurationSystem;
+import net.stickycode.configured.source.EnvironmentConfigurationSource;
+import net.stickycode.configured.source.SystemPropertiesConfigurationSource;
+import net.stickycode.reflector.Reflector;
 
 
 public class StickyCommandLine {
 
-
-  private Map<String, String> options = new HashMap<String, String>();
-  private Collection<String> commands = new LinkedList<String>();
+  private final ConfigurationSystem configuration = new ConfigurationSystem();
 
   public StickyCommandLine(String[] args) {
-    for (String s : args) {
-      if (s.startsWith("--"))
-        addOption(s.substring(2));
-      else
-        addCommand(s);
-    }
+    configuration.add(new CommandLineConfigurationSource(args));
+    configuration.add(new SystemPropertiesConfigurationSource());
+    configuration.add(new EnvironmentConfigurationSource());
   }
 
-  private void addOption(String option) {
-    int split = option.indexOf('=');
-    if (split == -1)
-      options.put(option, null);
-    else
-      options.put(
-          option.substring(0, split),
-          option.substring(split + 1));
-  }
+  public void launch(Object application, StickyShutdownHandler shutdownHandler) {
+    System.out.println("CTRL-C to exit");
 
-  private void addCommand(String s) {
-    if (!Character.isJavaIdentifierStart(s.charAt(0)))
-      throw new InvalidCommandException(s, s.charAt(0));
-
-    for (char c : s.toCharArray()) {
-      if (!Character.isJavaIdentifierPart(c))
-        throw new InvalidCommandException(s, c);
-    }
-
-    commands.add(s);
+    StickySignalTrap trap = signalTrap();
+    trap.shutdown(shutdownHandler);
+    trap.noHangup();
+    trap.waitForExit();
   }
 
   public void waitForExit() throws InterruptedException {
@@ -65,7 +47,11 @@ public class StickyCommandLine {
     return new StickySignalTrap();
   }
 
-  public void configure(Object configuration) {
+  public void configure(Object target) {
+    Reflector reflector = new Reflector();
+    reflector.forEachField(new OptionFieldProcessor(configuration));
+    reflector.process(target);
+    configuration.configure();
   }
 
   public void execute(Object deployer) {
