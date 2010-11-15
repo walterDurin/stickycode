@@ -10,10 +10,12 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
  */
-package net.stickycode.coercion;
+package net.stickycode.configured;
 
 import java.util.List;
 
+import net.stickycode.coercion.Coercion;
+import net.stickycode.coercion.CoercionTarget;
 import net.stickycode.exception.PermanentException;
 
 
