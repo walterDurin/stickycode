@@ -23,7 +23,7 @@
 
 	<groupId>net.stickycode</groupId>
 	<artifactId>sticky-reflector</artifactId>
-	<version>1.1-SNAPSHOT</version>
+	<version>1.1</version>
 	<packaging>jar</packaging>
 
 	<name>sticky-reflector</name>
@@ -33,4 +33,9 @@ monitoring, management and more</description>
 	<inceptionYear>2010</inceptionYear>
 	<dependencies>
 	</dependencies>
+
+  <scm>
+    <connection>scm:svn:https://stickycode.googlecode.com/svn/tags/net.stickycode/sticky-reflector-1.1</connection>
+    <developerConnection>scm:svn:https://stickycode.googlecode.com/svn/tags/net.stickycode/sticky-reflector-1.1</developerConnection>
+  </scm>
 </project>
