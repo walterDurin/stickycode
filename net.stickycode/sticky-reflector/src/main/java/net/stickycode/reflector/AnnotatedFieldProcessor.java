@@ -19,14 +19,19 @@ import java.lang.reflect.Field;
 public abstract class AnnotatedFieldProcessor
     implements FieldProcessor {
 
-  private Class<? extends Annotation> annotationClass;
+  private Class<? extends Annotation>[] annotationClasses;
 
-  public AnnotatedFieldProcessor(Class<? extends Annotation> annotation) {
-    this.annotationClass = annotation;
+  public AnnotatedFieldProcessor(Class<? extends Annotation>... annotation) {
+    this.annotationClasses = annotation;
   }
 
   @Override
   public boolean canProcess(Field field) {
-    return field.isAnnotationPresent(annotationClass);
+    for (Class<? extends Annotation> a : annotationClasses) {
+      if (field.isAnnotationPresent(a))
+        return true;
+    }
+
+    return false;
   }
 }
