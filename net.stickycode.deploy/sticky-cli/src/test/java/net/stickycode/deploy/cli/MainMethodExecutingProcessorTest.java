@@ -10,24 +10,34 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
  */
-package net.stickycode.deploy.tomcat;
+package net.stickycode.deploy.cli;
+
+import java.lang.reflect.Method;
+
+import org.junit.Test;
+
+import static org.fest.assertions.Assertions.assertThat;
 
 
-import net.stickycode.deploy.signal.AbstractStickyShutdownHandler;
+public class MainMethodExecutingProcessorTest {
 
+  class Application {
+    boolean run = false;
 
-public class TomcatShutdownHandler
-    extends AbstractStickyShutdownHandler {
-
-  private final TomcatDeployer deployer;
-
-  public TomcatShutdownHandler(TomcatDeployer deployer) {
-    this.deployer = deployer;
+    @Main
+    public void run() {
+      run = true;
+    }
   }
 
-  @Override
-  public void shutdown() {
-    deployer.stop();
+  @Test
+  public void runMain() throws SecurityException, NoSuchMethodException {
+    Method method = Application.class.getMethod("run", new Class<?>[0]);
+    MainMethodExecutingProcessor m = new MainMethodExecutingProcessor();
+    Application a = new Application();
+    m.processMethod(a, method);
+    assertThat(a.run).isTrue();
   }
+
 
 }
