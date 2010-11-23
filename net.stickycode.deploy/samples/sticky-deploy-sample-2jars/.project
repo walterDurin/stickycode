@@ -1,5 +1,5 @@
 <projectDescription>
-  <name>sticky-deployer-embedded</name>
+  <name>sticky-deployer-sample-2jar</name>
   <comment>The plugin definitions for jar projects</comment>
   <projects/>
   <buildSpec>
