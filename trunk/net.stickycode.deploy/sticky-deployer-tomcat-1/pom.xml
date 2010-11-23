@@ -26,7 +26,7 @@
 	<version>1.5-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>sticky-deployer-tomcat6</name>
+	<name>sticky-deployer-tomcat6-1</name>
 	<description>Class, Field and Method metadata used to remove boilerplate code for construction, configuration, scheduling,
 monitoring, management and more</description>
 
