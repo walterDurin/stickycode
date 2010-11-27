@@ -12,27 +12,14 @@
  */
 package net.stickycode.deploy.bootstrap;
 
-import java.io.File;
+@SuppressWarnings("serial")
+public class TheUncompressedSizeListedInJarIsGreaterThan2GbWhichSeemsWrong
+    extends RuntimeException {
 
-import org.junit.Test;
-
-import static org.fest.assertions.Assertions.assertThat;
-
-
-public class BootstrapFunctionalTest {
-
-  @Test
-  public void boot() throws ClassNotFoundException {
-    StickyEmbedder b = new StickyEmbedder() {
-      @Override
-      protected File deriveApplicationFile() {
-        return new File("target/sticky-deployer-embedded-sample.jar");
-      }
-    };
-
-    assertThat(b.getLibraries()).hasSize(2);
-    assertThat(b.getLibraries().iterator().next().getClasses()).hasSize(1);
-    assertThat(b.getLibraries().iterator().next().getResources()).hasSize(4);
+  public TheUncompressedSizeListedInJarIsGreaterThan2GbWhichSeemsWrong(
+      String className, long compressedSize, long size) {
+    super(String.format("The size of %s was %s which seems too big. The compressed size is %s.",
+        className, size, compressedSize));
   }
 
 }
