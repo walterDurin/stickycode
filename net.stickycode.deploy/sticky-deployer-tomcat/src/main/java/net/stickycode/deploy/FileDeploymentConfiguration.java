@@ -10,29 +10,24 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
  */
-package net.stickycode.deploy.bootstrap;
+package net.stickycode.deploy;
 
 import java.io.File;
 
-import org.junit.Test;
+import net.stickycode.stereotype.Configured;
 
-import static org.fest.assertions.Assertions.assertThat;
+public class FileDeploymentConfiguration
+    extends EmbeddedDeploymentConfiguration {
 
+  @Configured
+  private File application;
 
-public class BootstrapFunctionalTest {
-
-  @Test
-  public void boot() throws ClassNotFoundException {
-    StickyEmbedder b = new StickyEmbedder() {
-      @Override
-      protected File deriveApplicationFile() {
-        return new File("target/sticky-deployer-embedded-sample.jar");
-      }
-    };
-
-    assertThat(b.getLibraries()).hasSize(2);
-    assertThat(b.getLibraries().iterator().next().getClasses()).hasSize(1);
-    assertThat(b.getLibraries().iterator().next().getResources()).hasSize(4);
+  public FileDeploymentConfiguration() {
+    super();
   }
 
+  @Override
+  public String getDocumentBase() {
+    return application.getAbsolutePath();
+  }
 }
