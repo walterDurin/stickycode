@@ -10,17 +10,27 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
  */
-package net.stickycode.deploy.bootstrap;
+package net.stickycode.deploy;
 
-@SuppressWarnings("serial")
-public class TheClassBeingLoadedWasBiggerThan2GWhichSeemsWrong
-    extends RuntimeException {
+import java.io.File;
 
-  public TheClassBeingLoadedWasBiggerThan2GWhichSeemsWrong(
-      String className, long compressedSize, long size, long bytesLoaded) {
+import org.junit.Test;
 
-    super(String.format(
-        "The size of %s was %s which seems too big. In the manifest the compressed size was %s and the real size was %s.",
-        className, bytesLoaded, compressedSize, size));
+import net.stickycode.deploy.bootstrap.StickyEmbedder;
+
+
+public class EmbeddedTomcatFunctionalTest {
+
+  @Test
+  public void helloWorld() {
+    StickyEmbedder e = new StickyEmbedder("--debug") {
+      @Override
+      protected File deriveApplicationFile() {
+        return new File("target/dependency/sticky-helloworld-war-application.war");
+      }
+    };
+    e.initialise();
+    e.launch();
   }
+
 }
