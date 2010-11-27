@@ -1,5 +1,5 @@
 <projectDescription>
-  <name>sticky-helloworld-war</name>
+  <name>sticky-example-embedded-war</name>
   <comment>A very simple webapp for testing things that need webapps</comment>
   <projects/>
   <buildSpec>
