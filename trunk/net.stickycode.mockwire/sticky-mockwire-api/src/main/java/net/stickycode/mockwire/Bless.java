@@ -19,6 +19,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * See {@link UnderTest} as its a more descriptive name
+ *
  * Mark a field as defining a bean in an isolated test context and for injection of the value created in the isolated test context.
  *
  * In the following example <code>ConcreteClass</code> will be blessed into a singleton in the isolated test context created
@@ -63,10 +65,13 @@ import java.lang.annotation.Target;
  *  }
  *
  * </pre>
+ *
+ * @See {@link UnderTest}
  */
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD, ElementType.FIELD})
+@Deprecated
 public @interface Bless {
 
 }

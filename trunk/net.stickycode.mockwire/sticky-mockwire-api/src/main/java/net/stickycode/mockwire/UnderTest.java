@@ -19,40 +19,57 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * See {@link Controlled} as its a more descriptive name
+ * In empirical terms this is the object of investigation that we are going to prod and see what happens.
  *
- * Mark a field as defining a mocked bean in an isolated test context.
+ * Technically we mark a field as defining a bean in an isolated test context and also mark the field for injection of the value created in the isolated test context.
  *
- * In the following example <code>AnInterface</code> will be <code>Mock</code>ed into a singleton in the isolate test context created
- * by <code>Mockwire.isolate()</code>.
+ *
+ * In the following example <code>ConcreteClass</code> will be blessed into a singleton in the isolated test context created
+ * by <code>Mockwire.isolate()</code> or using <code>&#064;RunWith(MockwireRunner.class)</code>
  *
  * <pre>
  *  public class MockwireTest {
  *
- *  &#064;Mock
- *  AnInterface field;
+ *  &#064;UnderTest
+ *  ConcreteClass field;
  *
  *  &#064;Inject
  *  IsolateTestContext context;
  *
- *  @Before
+ *  &#064;Before
  *  public void setup() {
  *  	Mockwire.isolate(this);
  *  }
  *
- *  @Test
- *  public void testBless() {
- *    assertThat(context.getBeanNamesForType(AnInterface)).hasSize(1);
+ *  &#064;Test
+ *  public void testUnderTest() {
+ *    assertThat(context.getBeanNamesForType(ConcreteClass.class)).hasSize(1);
+ *    assertThat(field).isNotNull();
  *  }
  *
  * </pre>
  *
- * @see Controlled
+ * <pre>
+ *  &#064;RunWith(MockwireRunner.class)
+ *  public class MockwireTest {
+ *
+ *  &#064;UnderTest
+ *  ConcreteClass field;
+ *
+ *  &#064;Inject
+ *  IsolateTestContext context;
+ *
+ *  &#064;Test
+ *  public void testUnderTest() {
+ *    assertThat(context.getBeanNamesForType(ConcreteClass.class)).hasSize(1);
+ *    assertThat(field).isNotNull();
+ *  }
+ *
+ * </pre>
  */
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD, ElementType.FIELD})
-@Deprecated
-public @interface Mock {
+public @interface UnderTest {
 
 }
