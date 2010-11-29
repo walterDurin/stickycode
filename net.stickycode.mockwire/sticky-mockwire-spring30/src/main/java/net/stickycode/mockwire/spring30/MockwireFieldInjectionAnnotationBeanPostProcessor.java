@@ -63,7 +63,9 @@ import org.springframework.util.Assert;
 import org.springframework.util.ReflectionUtils;
 
 import net.stickycode.mockwire.Bless;
+import net.stickycode.mockwire.Controlled;
 import net.stickycode.mockwire.Mock;
+import net.stickycode.mockwire.UnderTest;
 
 /**
  *A copy of {@link AutowiredAnnotationBeanPostProcessor} that only wires {@link Mock}, {@link Bless} and {@link Inject} on fields.
@@ -101,6 +103,8 @@ public class MockwireFieldInjectionAnnotationBeanPostProcessor extends Instantia
 		this.autowiredAnnotationTypes.add(Bless.class);
 		this.autowiredAnnotationTypes.add(Mock.class);
 		this.autowiredAnnotationTypes.add(Inject.class);
+		this.autowiredAnnotationTypes.add(UnderTest.class);
+		this.autowiredAnnotationTypes.add(Controlled.class);
 	}
 
 

@@ -13,9 +13,11 @@
 package net.stickycode.mockwire;
 
 
-
 public interface Mocker {
 
+  /**
+   * Return an object that appears to be of <code>type<code> but can be fully controlled to isolate and test real code.
+   */
   <T> T mock(Class<T> type);
 
 }

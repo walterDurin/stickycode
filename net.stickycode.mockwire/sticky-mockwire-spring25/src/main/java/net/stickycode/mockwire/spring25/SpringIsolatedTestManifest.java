@@ -109,6 +109,8 @@ public class SpringIsolatedTestManifest
     log.info("registering definition '{}' for type '{}'", beanName, type.getName());
     GenericBeanDefinition bd = new GenericBeanDefinition();
     bd.setBeanClass(type);
+    bd.setAutowireCandidate(true);
+    bd.setAutowireMode(GenericBeanDefinition.AUTOWIRE_BY_TYPE);
     getDefaultListableBeanFactory().registerBeanDefinition(beanName, bd);
   }
 
