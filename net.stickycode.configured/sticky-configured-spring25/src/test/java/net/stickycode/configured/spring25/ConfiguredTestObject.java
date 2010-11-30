@@ -10,23 +10,14 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
  */
-package net.stickycode.configured.source;
+package net.stickycode.configured.spring25;
 
-import net.stickycode.configured.ConfigurationSource;
-import net.stickycode.stereotype.component.StickyRepository;
+import net.stickycode.stereotype.Configured;
 
-@StickyRepository
-public class EnvironmentConfigurationSource
-    implements ConfigurationSource {
 
-  @Override
-  public boolean hasValue(String key) {
-    return System.getenv(key) != null;
-  }
+public class ConfiguredTestObject {
 
-  @Override
-  public String getValue(String key) {
-    return System.getenv(key);
-  }
+  @Configured
+  String bob;
 
 }
