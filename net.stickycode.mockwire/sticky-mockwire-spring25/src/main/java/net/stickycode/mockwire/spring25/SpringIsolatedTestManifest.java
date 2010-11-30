@@ -15,6 +15,8 @@ package net.stickycode.mockwire.spring25;
 import java.beans.Introspector;
 import java.util.Map;
 
+import net.stickycode.exception.PermanentException;
+import net.stickycode.exception.TransientException;
 import net.stickycode.mockwire.IsolatedTestManifest;
 import net.stickycode.mockwire.MissingBeanException;
 import net.stickycode.mockwire.NonUniqueBeanException;
@@ -45,13 +47,20 @@ public class SpringIsolatedTestManifest
 
     registerPostProcessor(new InjectAnnotationBeanPostProcessor());
     registerPostProcessor(new MockInjectionAnnotationBeanPostProcessor());
+    registerPostProcessor(new ControlledInjectionAnnotationBeanPostProcessor());
+
     BlessInjectionAnnotationBeanPostProcessor blessInjector = new BlessInjectionAnnotationBeanPostProcessor();
     blessInjector.setBeanFactory(getDefaultListableBeanFactory());
     getBeanFactory().addBeanPostProcessor(blessInjector);
 
+    UnderTestInjectionAnnotationBeanPostProcessor underTestInjectionAnnotationBeanPostProcessor = new UnderTestInjectionAnnotationBeanPostProcessor();
+    underTestInjectionAnnotationBeanPostProcessor.setBeanFactory(getDefaultListableBeanFactory());
+    getBeanFactory().addBeanPostProcessor(underTestInjectionAnnotationBeanPostProcessor);
+
     getBeanFactory().registerSingleton(
         Introspector.decapitalize(getClass().getSimpleName()),
         this);
+
   }
 
   private void registerPostProcessor(AutowiredAnnotationBeanPostProcessor autowiredProcessor) {
@@ -79,16 +88,23 @@ public class SpringIsolatedTestManifest
   @Override
   public void autowire(Object testInstance) {
     try {
+      refresh();
       getAutowireCapableBeanFactory().autowireBean(testInstance);
     }
     catch (BeansException e) {
+      if (e.getCause() instanceof PermanentException)
+        throw (PermanentException)e.getCause();
+
+      if (e.getCause() instanceof TransientException)
+        throw (TransientException)e.getCause();
+
       Throwable cause = e.getMostSpecificCause();
       if (cause instanceof NoSuchBeanDefinitionException) {
         NoSuchBeanDefinitionException n = (NoSuchBeanDefinitionException)cause;
         if (n.getBeanName() == null)
-          throw new MissingBeanException(testInstance, n.getBeanType());
+          throw new MissingBeanException(e, testInstance, n.getBeanType());
         else
-          throw new MissingBeanException(testInstance, n.getBeanName(), n.getBeanType());
+          throw new MissingBeanException(e, testInstance, n.getBeanName(), n.getBeanType());
 
       }
     }

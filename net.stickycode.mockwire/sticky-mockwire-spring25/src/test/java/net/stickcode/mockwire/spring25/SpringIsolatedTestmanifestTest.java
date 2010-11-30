@@ -55,6 +55,6 @@ public class SpringIsolatedTestmanifestTest {
       }
     });
     manifest.registerBean("bob", new Example(), Example.class);
-    manifest.refresh();
+    manifest.autowire(this);
   }
 }
