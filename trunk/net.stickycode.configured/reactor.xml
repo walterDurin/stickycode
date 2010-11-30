@@ -29,5 +29,6 @@
 	<name>sticky-reactor</name>
 	<modules>
 		<module>sticky-configured</module>
+		<module>sticky-configured-spring25</module>
 	</modules>
 </project>
