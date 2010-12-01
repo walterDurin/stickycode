@@ -38,5 +38,12 @@ monitoring, management and more</description>
 			<version>1</version>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
+			<groupId>net.stickycode.composite</groupId>
+			<artifactId>sticky-composite-unittest</artifactId>
+			<version>[1,2)</version>
+			<type>jar</type>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 </project>

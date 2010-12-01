@@ -33,4 +33,8 @@ import java.lang.annotation.Target;
 @Documented
 public @interface Schedule {
 
+  /**
+   * Describe the scheduling such that when configuration of it is required it makes sense
+   */
+  String value() default "";
 }

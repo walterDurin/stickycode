@@ -39,7 +39,7 @@ import java.lang.annotation.Target;
  *   &#064;Configured
  *   private String user;
  *
- *   &#064;Configured
+ *   &#064;Configured("The url for accessing some service")
  *   private URL url;
  *
  * }
@@ -77,8 +77,15 @@ public @interface Configured {
   boolean secret() default false;
 
   /**
+   * @see {@link Configured#value()}
    * A brief description of the purpose of the configuration
    */
+  @Deprecated
   String description() default "";
+
+  /**
+   * Describe the configuration such that someone reading this message could provide appropriate configuration
+   */
+  String value() default "";
 
 }

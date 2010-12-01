@@ -35,5 +35,8 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface ConfiguredContent {
-
+  /**
+   * Describe the configuration such that someone reading this message could provide appropriate configuration
+   */
+  String value() default "";
 }
