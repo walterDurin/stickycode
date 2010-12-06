@@ -1,9 +1,12 @@
 package net.stickycode.mockwire;
 
+import java.lang.annotation.Annotation;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+
+import net.stickycode.stereotype.StickyComponent;
 
 
 /**
@@ -62,5 +65,13 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface MockwireContainment {
+  /**
+   * The list of paths to build the context from
+   */
   String[] value() default {};
+
+  /**
+   * Identify components marked with these annotations
+   */
+  Class<? extends Annotation>[] componentMarkers() default {StickyComponent.class};
 }
