@@ -10,21 +10,25 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
  */
-package net.stickycode.mockwire.spring25;
+package net.stickycode.mockwire;
 
-import java.lang.annotation.Annotation;
+import java.io.IOException;
 
-import javax.inject.Inject;
-
-import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
+import net.stickycode.exception.PermanentException;
 
 
-public class InjectAnnotationBeanPostProcessor
-    extends AutowiredAnnotationBeanPostProcessor {
+@SuppressWarnings("serial")
+public class ClasspathResourceNotFoundException
+    extends PermanentException {
 
-  @Override
-  protected Class<? extends Annotation> getAutowiredAnnotationType() {
-    return Inject.class;
+  public ClasspathResourceNotFoundException(String resource) {
+    super("Resource {} cound not be found in the classpath", resource);
   }
+
+  public ClasspathResourceNotFoundException(IOException e, String resource) {
+    super(e, "Resource {} cound not be found in the classpath", resource);
+  }
+
+
 
 }

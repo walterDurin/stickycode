@@ -18,7 +18,6 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
@@ -30,14 +29,10 @@ import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
 import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.core.type.filter.AnnotationTypeFilter;
 
-import net.stickycode.configured.ConfigurationSystem;
-import net.stickycode.configured.source.EnvironmentConfigurationSource;
-import net.stickycode.configured.source.SystemPropertiesConfigurationSource;
+import net.stickycode.configured.spring25.ConfiguredBeanPostProcessor;
 import net.stickycode.exception.PermanentException;
 import net.stickycode.mockwire.IsolatedTestManifest;
 import net.stickycode.mockwire.MissingBeanException;
-import net.stickycode.mockwire.MockwireConfigured;
-import net.stickycode.mockwire.MockwireConfigured.Priority;
 import net.stickycode.mockwire.NonUniqueBeanException;
 import net.stickycode.stereotype.StickyComponent;
 
@@ -152,5 +147,13 @@ public class SpringIsolatedTestManifest
     beanDefinitionReader.setResourceLoader(this);
     beanDefinitionReader.setEntityResolver(new ResourceEntityResolver(this));
     return beanDefinitionReader;
+  }
+
+  @Override
+  public void registerConfigurationSystem(String name, Object configurationSystem, Class<?> type) {
+    registerBean(name, configurationSystem, type);
+    registerType(
+        Introspector.decapitalize(ConfiguredBeanPostProcessor.class.getSimpleName()),
+        ConfiguredBeanPostProcessor.class);
   }
 }

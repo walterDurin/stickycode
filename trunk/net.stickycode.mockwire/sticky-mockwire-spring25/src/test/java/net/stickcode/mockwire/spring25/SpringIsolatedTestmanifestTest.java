@@ -44,7 +44,7 @@ public class SpringIsolatedTestmanifestTest {
   }
 
   @Test
-  public void test2() {
+  public void checkBeanFactoryPostProcessors() {
     SpringIsolatedTestManifest manifest = new SpringIsolatedTestManifest();
     assertThat(manifest.getBeanDefinitionCount()).isEqualTo(0);
     manifest.addBeanFactoryPostProcessor(new BeanFactoryPostProcessor() {
