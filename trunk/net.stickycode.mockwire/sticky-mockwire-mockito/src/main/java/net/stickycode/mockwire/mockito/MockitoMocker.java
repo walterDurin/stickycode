@@ -24,4 +24,9 @@ public class MockitoMocker implements Mocker {
     return Mockito.mock(type);
   }
 
+  @Override
+  public <T> T mock(String mockName, Class<T> type) {
+    return Mockito.mock(type, mockName);
+  }
+
 }
