@@ -13,6 +13,7 @@
 package net.stickycode.mockwire;
 
 
+
 public interface IsolatedTestManifest extends ParameterSource {
 
   /**
@@ -48,5 +49,7 @@ public interface IsolatedTestManifest extends ParameterSource {
    * Scan for components in from the given package roots
    */
   void scanPackages(String[] scanRoots);
+
+  void registerConfigurationSystem(String name, Object configurationSystem, Class<?> type);
 
 }

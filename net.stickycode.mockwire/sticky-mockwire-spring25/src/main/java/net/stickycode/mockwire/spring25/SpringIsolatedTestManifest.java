@@ -15,6 +15,7 @@ package net.stickycode.mockwire.spring25;
 import java.beans.Introspector;
 import java.util.Map;
 
+import net.stickycode.configured.spring25.ConfiguredBeanPostProcessor;
 import net.stickycode.exception.PermanentException;
 import net.stickycode.exception.TransientException;
 import net.stickycode.mockwire.IsolatedTestManifest;
@@ -45,27 +46,14 @@ public class SpringIsolatedTestManifest
   public SpringIsolatedTestManifest() {
     super();
 
-    registerPostProcessor(new InjectAnnotationBeanPostProcessor());
-    registerPostProcessor(new MockInjectionAnnotationBeanPostProcessor());
-    registerPostProcessor(new ControlledInjectionAnnotationBeanPostProcessor());
-
-    BlessInjectionAnnotationBeanPostProcessor blessInjector = new BlessInjectionAnnotationBeanPostProcessor();
+    MockwireFieldInjectionAnnotationBeanPostProcessor blessInjector = new MockwireFieldInjectionAnnotationBeanPostProcessor();
     blessInjector.setBeanFactory(getDefaultListableBeanFactory());
     getBeanFactory().addBeanPostProcessor(blessInjector);
-
-    UnderTestInjectionAnnotationBeanPostProcessor underTestInjectionAnnotationBeanPostProcessor = new UnderTestInjectionAnnotationBeanPostProcessor();
-    underTestInjectionAnnotationBeanPostProcessor.setBeanFactory(getDefaultListableBeanFactory());
-    getBeanFactory().addBeanPostProcessor(underTestInjectionAnnotationBeanPostProcessor);
 
     getBeanFactory().registerSingleton(
         Introspector.decapitalize(getClass().getSimpleName()),
         this);
 
-  }
-
-  private void registerPostProcessor(AutowiredAnnotationBeanPostProcessor autowiredProcessor) {
-    autowiredProcessor.setBeanFactory(getDefaultListableBeanFactory());
-    getBeanFactory().addBeanPostProcessor(autowiredProcessor);
   }
 
   public SpringIsolatedTestManifest(ApplicationContext parent) {
@@ -167,6 +155,14 @@ public class SpringIsolatedTestManifest
     beanDefinitionReader.setResourceLoader(this);
     beanDefinitionReader.setEntityResolver(new ResourceEntityResolver(this));
     return beanDefinitionReader;
+  }
+
+  @Override
+  public void registerConfigurationSystem(String name, Object configurationSystem, Class<?> type) {
+    registerBean(name, configurationSystem, type);
+    registerType(
+        Introspector.decapitalize(ConfiguredBeanPostProcessor.class.getSimpleName()),
+        ConfiguredBeanPostProcessor.class);
   }
 
 }
