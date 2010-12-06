@@ -12,10 +12,13 @@
  */
 package net.stickycode.mockwire;
 
+import java.lang.annotation.Annotation;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+
+import net.stickycode.stereotype.Configured;
 
 /**
  * Define configuration used for configuring wired components in the Mockwire context.
@@ -132,5 +135,10 @@ public @interface MockwireConfigured {
    * When should system properties be used to resolve configuration. Defaults to Fallback
    */
   Priority useSystemProperties() default Priority.Fallback;
+
+  /**
+   * When configuring classes look for fields marked with there annotations
+   */
+  Class<? extends Annotation>[] configuredMarkers() default {Configured.class};
 
 }
