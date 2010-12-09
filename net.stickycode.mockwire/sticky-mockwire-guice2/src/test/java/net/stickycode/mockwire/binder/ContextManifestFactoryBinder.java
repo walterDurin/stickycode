@@ -1,7 +1,7 @@
 package net.stickycode.mockwire.binder;
 
 import net.stickycode.mockwire.IsolatedTestManifest;
-import net.stickycode.mockwire.spring30.SpringIsolatedTestManifest;
+import net.stickycode.mockwire.guice2.GuiceIsolatedTestManifest;
 
 
 public class ContextManifestFactoryBinder
@@ -9,7 +9,7 @@ public class ContextManifestFactoryBinder
 
   @Override
   public IsolatedTestManifest create() {
-    return new SpringIsolatedTestManifest();
+    return new GuiceIsolatedTestManifest();
   }
 
 }

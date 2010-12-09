@@ -10,35 +10,17 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
  */
-package net.stickycode.mockwire;
+package net.stickycode.mockwire.guice2;
 
-import javax.inject.Inject;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
 
-import org.junit.Before;
-import org.junit.Test;
+import net.stickycode.mockwire.FieldBlessingTest;
 
-import static org.fest.assertions.Assertions.assertThat;
+@RunWith(Suite.class)
+@SuiteClasses({FieldBlessingTest.class})
+public class TckTest {
 
-public class FieldBlessingTest {
 
-  @Bless
-  private Autowirable autowirable;
-
-	@Inject
-	private Autowirable injected;
-
-	@Inject
-	IsolatedTestManifest context;
-
-	@Before
-	public void setup() {
-		Mockwire.isolate(this);
-	}
-
-	@Test
-	public void atBless() {
-	  assertThat(context.hasRegisteredType(Autowirable.class)).isTrue();
-	  assertThat(injected).isNotNull();
-	  assertThat(autowirable).isNotNull();
-	}
 }
