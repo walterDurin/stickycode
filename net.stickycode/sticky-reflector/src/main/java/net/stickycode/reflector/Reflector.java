@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-
 public class Reflector {
 
   private List<FieldProcessor> fieldProcessors = new LinkedList<FieldProcessor>();
@@ -32,6 +31,18 @@ public class Reflector {
       fieldProcessors.add(fieldProcessor);
     }
     return this;
+  }
+
+  public void process(Class<?> type) {
+    List<Method> methods = new ArrayList<Method>();
+
+    while (type != Object.class) {
+      processFields(null, type);
+      collectMethods(methods, null, type);
+      type = type.getSuperclass();
+    }
+
+    processMethods(methods, null);
   }
 
   public void process(Object target) {
@@ -74,8 +85,8 @@ public class Reflector {
     for (FieldProcessor processor : fieldProcessors) {
       Field[] fields = type.getDeclaredFields();
       for (Field field : fields)
-          if (processor.canProcess(field))
-            processor.processField(target, field);
+        if (processor.canProcess(field))
+          processor.processField(target, field);
     }
   }
 

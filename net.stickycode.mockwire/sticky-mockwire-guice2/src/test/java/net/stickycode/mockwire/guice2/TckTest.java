@@ -16,11 +16,17 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import net.stickycode.mockwire.DependentMethodBlessingTest;
 import net.stickycode.mockwire.FieldBlessingTest;
+import net.stickycode.mockwire.FieldMockingTest;
+import net.stickycode.mockwire.UnblessableTypesTest;
 
 @RunWith(Suite.class)
-@SuiteClasses({FieldBlessingTest.class})
+@SuiteClasses({
+    FieldBlessingTest.class,
+    FieldMockingTest.class,
+    UnblessableTypesTest.class,
+    DependentMethodBlessingTest.class })
 public class TckTest {
-
 
 }

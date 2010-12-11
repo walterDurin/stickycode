@@ -39,8 +39,8 @@ public class FieldMockingTest {
 	@Test
 	public void atMock() {
 	  assertThat(context.hasRegisteredType(Mockable.class)).isTrue();
-	  assertThat(mockable).isNotNull();
 	  assertThat(injected).isNotNull();
+	  assertThat(mockable).isNotNull();
 	}
 
 	public void verifyMock() {
