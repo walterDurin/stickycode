@@ -10,31 +10,11 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
  */
-package net.stickycode.mockwire;
+package net.stickycode.reflector;
 
-import javax.inject.Inject;
 
-import org.junit.Before;
-import org.junit.Test;
+public interface ValueSource {
 
-import static org.fest.assertions.Assertions.assertThat;
+  Object get(Class<?> type);
 
-public class FieldBlessingTest {
-
-  @Bless
-  private Autowirable autowirable;
-
-	@Inject
-	private Autowirable injected;
-
-	@Inject
-	IsolatedTestManifest context;
-
-	@Test
-	public void atBless() {
-	  Mockwire.isolate(this);
-	  assertThat(context.hasRegisteredType(Autowirable.class)).isTrue();
-	  assertThat(injected).isNotNull();
-	  assertThat(autowirable).isNotNull();
-	}
 }
