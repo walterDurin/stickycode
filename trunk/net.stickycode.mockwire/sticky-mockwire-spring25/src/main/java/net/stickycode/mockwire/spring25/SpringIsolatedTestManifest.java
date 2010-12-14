@@ -95,6 +95,8 @@ public class SpringIsolatedTestManifest
           throw new MissingBeanException(e, testInstance, n.getBeanName(), n.getBeanType());
 
       }
+
+      throw new PermanentException(e, "Failed");
     }
   }
 

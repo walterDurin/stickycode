@@ -10,15 +10,17 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
  */
-package net.stickycode.mockwire.spring30;
+package net.stickycode.mockwire.configured;
 
-import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
 
+@RunWith(Suite.class)
+@SuiteClasses({
+    ConfiguredTest.class,
+    MockwireConfigurationSourceTest.class,
+})
+public class MockwireConfiguredTck {
 
-public class ConfiguredTest {
-
-  @Test
-  public void check() {
-//    Mockwire.isolate(MockConfiguredProperties.class);
-  }
 }
