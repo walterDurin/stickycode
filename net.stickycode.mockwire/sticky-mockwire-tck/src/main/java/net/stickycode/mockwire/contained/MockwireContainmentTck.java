@@ -10,23 +10,17 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
  */
-package net.stickycode.mockwire.guice2;
+package net.stickycode.mockwire.contained;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import net.stickycode.mockwire.DependentMethodBlessingTest;
-import net.stickycode.mockwire.FieldBlessingTest;
-import net.stickycode.mockwire.FieldMockingTest;
-import net.stickycode.mockwire.UnblessableTypesTest;
-
 @RunWith(Suite.class)
 @SuiteClasses({
-    FieldBlessingTest.class,
-    FieldMockingTest.class,
-    UnblessableTypesTest.class,
-    DependentMethodBlessingTest.class })
-public class TckTest {
+
+    ContainmentTest.class
+})
+public class MockwireContainmentTck {
 
 }

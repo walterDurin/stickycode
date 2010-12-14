@@ -52,5 +52,19 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
+			<groupId>net.stickycode.mockwire</groupId>
+			<artifactId>sticky-mockwire-tck</artifactId>
+			<version>[3,4)</version>
+			<type>jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.stickycode.mockwire</groupId>
+			<artifactId>sticky-mockwire-mockito</artifactId>
+			<version>[2,3)</version>
+			<type>jar</type>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 </project>
