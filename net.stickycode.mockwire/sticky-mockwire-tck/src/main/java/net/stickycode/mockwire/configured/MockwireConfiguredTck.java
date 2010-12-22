@@ -19,7 +19,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({
     ConfiguredTest.class,
-    MockwireConfigurationSourceTest.class,
+    MockwireConfigurationSourceTest.class
 })
 public class MockwireConfiguredTck {
 
