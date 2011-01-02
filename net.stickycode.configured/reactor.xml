@@ -30,5 +30,6 @@
 	<modules>
 		<module>sticky-configured</module>
 		<module>sticky-configured-spring25</module>
+		<module>sticky-configured-spring30</module>
 	</modules>
 </project>
