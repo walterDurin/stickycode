@@ -22,7 +22,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>net.stickycode</groupId>
-	<artifactId>reactor</artifactId>
+	<artifactId>sticky-reactor</artifactId>
 	<version>1.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
