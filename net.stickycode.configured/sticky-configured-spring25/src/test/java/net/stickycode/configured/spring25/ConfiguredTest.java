@@ -12,42 +12,51 @@
  */
 package net.stickycode.configured.spring25;
 
-import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
-import net.stickycode.mockwire.IsolatedTestManifest;
-import net.stickycode.mockwire.Mockwire;
-import net.stickycode.mockwire.MockwireContainment;
-import net.stickycode.mockwire.UnderTest;
-import net.stickycode.mockwire.junit4.MockwireRunner;
+import net.stickycode.configured.ConfigurationSource;
+import net.stickycode.configured.ConfigurationSystem;
 import net.stickycode.stereotype.Configured;
 
 import static org.fest.assertions.Assertions.assertThat;
 
-@RunWith(MockwireRunner.class)
-@MockwireContainment("/net.stickycode.configured")
 public class ConfiguredTest {
 
-  @BeforeClass
-  static public void before() {
-    System.setProperty("configuredTestObject.bob", "jones");
+  public class ConfiguredTestObject {
+
+    @Configured
+    String bob;
   }
 
-  @UnderTest
   ConfiguredTestObject configured;
 
   @Test
   public void configured() {
-    assertThat(configured).describedAs("Object under test was not injected").isNotNull();
+    configure();
     assertThat(configured.bob).describedAs("Configured field was not set").isNotNull();
   }
 
-  @Test
-  public void notConfigured() {
-    Mockwire.contain(this);
-    assertThat(configured).describedAs("Object under test was not injected").isNotNull();
-    assertThat(configured.bob).describedAs("Configured field was not set").isNotNull();
+  private void configure() {
+    configured = new ConfiguredTestObject();
+
+    ConfigurationSystem system = new ConfigurationSystem();
+    system.add(new ConfigurationSource() {
+
+      @Override
+      public boolean hasValue(String key) {
+        return "configuredTestObject.bob".equals(key);
+      }
+
+      @Override
+      public String getValue(String key) {
+        return "jones";
+      }
+    });
+
+    ConfiguredBeanPostProcessor processor = new ConfiguredBeanPostProcessor();
+    processor.configuration = system;
+    processor.postProcessAfterInstantiation(configured, "configured");
+    system.configure();
   }
 
 }

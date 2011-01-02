@@ -14,33 +14,37 @@ package net.stickycode.configured.spring25;
 
 import org.junit.Test;
 
+import net.stickycode.configured.ConfigurationSystem;
 import net.stickycode.configured.ConfigurationValueNotFoundForKeyException;
-import net.stickycode.mockwire.Mockwire;
-import net.stickycode.mockwire.MockwireContainment;
+import net.stickycode.configured.ConfiguredFieldsMustNotBePrimitiveAsDefaultDerivationIsImpossibleException;
 import net.stickycode.stereotype.Configured;
 
 public class PrimitiveHaveNoDefaultsTest {
 
-
-  @MockwireContainment("/net.stickycode.configured")
   public class NotConfiguredTestObject {
     @Configured
     Boolean noDefault;
   }
 
-  @MockwireContainment("/net.stickycode.configured")
   public class PrimitiveTestObject {
     @Configured
     boolean primitivesNotConfigurable;
   }
 
-  @Test(expected=ConfiguredFieldsMustNotBePrimitiveAsDefaultDerivationIsImpossible.class)
+  @Test(expected=ConfiguredFieldsMustNotBePrimitiveAsDefaultDerivationIsImpossibleException.class)
   public void primitivesHaveNoDefaults() {
-    Mockwire.contain(new PrimitiveTestObject());
+    configure(new PrimitiveTestObject());
   }
 
   @Test(expected=ConfigurationValueNotFoundForKeyException.class)
   public void notConfiguredThrowsANiceException() {
-    Mockwire.contain(new NotConfiguredTestObject());
+    configure(new NotConfiguredTestObject());
+  }
+
+  private void configure(Object target) {
+    ConfigurationSystem system = new ConfigurationSystem();
+    ConfiguredBeanPostProcessor processor = new ConfiguredBeanPostProcessor();
+    processor.setConfiguration(system);
+    processor.postProcessAfterInstantiation(target, "configured");
   }
 }

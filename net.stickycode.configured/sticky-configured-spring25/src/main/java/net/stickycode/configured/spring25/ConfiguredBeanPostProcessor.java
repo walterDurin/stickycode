@@ -21,19 +21,21 @@ import net.stickycode.configured.ConfigurationSystem;
 import net.stickycode.reflector.Reflector;
 import net.stickycode.stereotype.StickyComponent;
 
+/**
+ * Registers fields marked as configured for configuration
+ */
 @StickyComponent
 public class ConfiguredBeanPostProcessor
     extends InstantiationAwareBeanPostProcessorAdapter {
 
   @Inject
-  private ConfigurationSystem configuration;
+  ConfigurationSystem configuration;
 
   @Override
   public boolean postProcessAfterInstantiation(Object bean, String beanName) throws BeansException {
     new Reflector()
-    .forEachField(new ConfiguredFieldProcessor(configuration))
-    .process(bean);
-    configuration.configure();
+        .forEachField(new ConfiguredFieldProcessor(configuration))
+        .process(bean);
     return true;
   }
 

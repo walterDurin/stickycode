@@ -15,6 +15,7 @@ package net.stickycode.configured.spring25;
 import java.lang.reflect.Field;
 
 import net.stickycode.configured.ConfigurationSystem;
+import net.stickycode.configured.ConfiguredFieldsMustNotBePrimitiveAsDefaultDerivationIsImpossibleException;
 import net.stickycode.reflector.AnnotatedFieldProcessor;
 import net.stickycode.stereotype.Configured;
 
@@ -32,7 +33,7 @@ public class ConfiguredFieldProcessor
   @Override
   public void processField(Object target, Field field) {
     if (field.getType().isPrimitive())
-      throw new ConfiguredFieldsMustNotBePrimitiveAsDefaultDerivationIsImpossible(target, field);
+      throw new ConfiguredFieldsMustNotBePrimitiveAsDefaultDerivationIsImpossibleException(target, field);
 
     configuration.registerField(target, field);
   }
