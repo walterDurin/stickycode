@@ -33,8 +33,12 @@ public class ConfiguredBeanPostProcessor
     new Reflector()
     .forEachField(new ConfiguredFieldProcessor(configuration))
     .process(bean);
-    configuration.configure();
     return true;
   }
+
+  public void setConfiguration(ConfigurationSystem configuration) {
+    this.configuration = configuration;
+  }
+
 
 }

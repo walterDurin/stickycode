@@ -10,7 +10,7 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
  */
-package net.stickycode.configured.spring25;
+package net.stickycode.configured;
 
 import java.lang.reflect.Field;
 
@@ -18,10 +18,10 @@ import net.stickycode.exception.PermanentException;
 
 
 @SuppressWarnings("serial")
-public class ConfiguredFieldsMustNotBePrimitiveAsDefaultDerivationIsImpossible
+public class ConfiguredFieldsMustNotBePrimitiveAsDefaultDerivationIsImpossibleException
     extends PermanentException {
 
-  public ConfiguredFieldsMustNotBePrimitiveAsDefaultDerivationIsImpossible(Object target, Field field) {
+  public ConfiguredFieldsMustNotBePrimitiveAsDefaultDerivationIsImpossibleException(Object target, Field field) {
     super("The field '{}' on '{}' is a primitive type '{}'. In order to provide a simple convention default values " +
     		"for configured fields are specified field initialisers, this means that primitive fields default values cannot be determined." +
     		"I chose to make this an error to ensure that the developer has thought carefully about whether or not a value should have a default. "
