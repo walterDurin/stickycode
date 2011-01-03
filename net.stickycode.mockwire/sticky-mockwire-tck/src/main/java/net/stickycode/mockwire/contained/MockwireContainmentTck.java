@@ -18,8 +18,9 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({
-
-    ContainmentTest.class
+    ContainmentTest.class,
+    CommonAnnotationsDirectTest.class,
+    CommonAnnotationsTest.class
 })
 public class MockwireContainmentTck {
 

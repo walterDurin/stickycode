@@ -10,7 +10,7 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
  */
-package net.stickycode.mockwire.spring30;
+package net.stickycode.mockwire.contained;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -24,7 +24,6 @@ import net.stickycode.stereotype.Configured;
 
 import static org.fest.assertions.Assertions.assertThat;
 
-//XXX promote to tck
 @MockwireConfigured("postConstructed.value=something")
 public class CommonAnnotationsDirectTest {
 
