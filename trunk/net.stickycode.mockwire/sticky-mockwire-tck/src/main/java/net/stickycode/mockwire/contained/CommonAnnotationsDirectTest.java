@@ -32,31 +32,31 @@ public class CommonAnnotationsDirectTest {
     @Configured
     String value;
 
-    boolean init = false;
-    boolean destroy = false;
+    boolean initialised = false;
+    boolean destroyed = false;
 
     @PostConstruct
     public void init() {
       if (value == null)
         throw new RuntimeException();
 
-      init = true;
+      initialised = true;
     }
 
     @PreDestroy
     public void destroy() {
-      destroy = true;
+      destroyed = true;
     }
   }
 
   @UnderTest
-  PostConstructed check;
+  PostConstructed target;
 
   @Test
   public void postConstruct() {
     Mockwire.isolate(this);
-    assertThat(check.init).isTrue();
-    assertThat(check.value).isEqualTo("something");
-    assertThat(check.destroy).isTrue();
+    assertThat(target.initialised).isTrue();
+    assertThat(target.value).isEqualTo("something");
+    assertThat(target.destroyed).isTrue();
   }
 }
