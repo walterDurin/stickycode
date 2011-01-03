@@ -23,7 +23,7 @@
 
 	<groupId>net.stickycode.configured</groupId>
 	<artifactId>sticky-configured-spring25</artifactId>
-	<version>1.3-SNAPSHOT</version>
+	<version>1.4-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>sticky-configured-spring25</name>
