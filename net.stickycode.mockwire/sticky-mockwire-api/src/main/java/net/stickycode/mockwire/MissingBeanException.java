@@ -24,6 +24,10 @@ public class MissingBeanException
     super("Missing a bean named {} of type {} when attempting to inject {}", missingBeanName, missingBeanType, target.getClass().getSimpleName());
   }
 
+  public MissingBeanException(Class<?> target, String missingBeanName, Class<?> missingBeanType) {
+    super("Missing a bean named {} of type {} when attempting to inject {}", missingBeanName, missingBeanType, target.getSimpleName());
+  }
+
   public MissingBeanException(Object target, Class<?> missingBeanType) {
     super("Missing a bean of type {} when attempting to inject {}", missingBeanType.getSimpleName(), target.getClass().getSimpleName());
   }
