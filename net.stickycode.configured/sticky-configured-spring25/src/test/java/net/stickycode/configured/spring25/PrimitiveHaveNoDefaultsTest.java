@@ -44,7 +44,7 @@ public class PrimitiveHaveNoDefaultsTest {
   private void configure(Object target) {
     ConfigurationSystem system = new ConfigurationSystem();
     ConfiguredBeanPostProcessor processor = new ConfiguredBeanPostProcessor();
-    processor.configuration = system;
+    processor.setConfiguration(system);
     processor.postProcessAfterInstantiation(target, "configured");
     system.configure();
   }

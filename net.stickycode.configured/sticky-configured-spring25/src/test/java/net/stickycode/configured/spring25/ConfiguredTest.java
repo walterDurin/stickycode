@@ -54,9 +54,8 @@ public class ConfiguredTest {
     });
 
     ConfiguredBeanPostProcessor processor = new ConfiguredBeanPostProcessor();
-    processor.configuration = system;
+    processor.setConfiguration(system);
     processor.postProcessAfterInstantiation(configured, "configured");
-    system.configure();
   }
 
 }
