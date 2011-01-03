@@ -33,23 +33,23 @@ public class CommonAnnotationsTest {
     @Configured
     String value;
 
-    boolean init = false;
+    boolean initialised = false;
 
     @PostConstruct
     public void init() {
       if (value == null)
         throw new RuntimeException();
 
-      init = true;
+      initialised = true;
     }
   }
 
   @UnderTest
-  PostConstructed check;
+  PostConstructed target;
 
   @Test
   public void postConstruct() {
-    assertThat(check.init).isTrue();
-    assertThat(check.value).isEqualTo("something");
+    assertThat(target.initialised).isTrue();
+    assertThat(target.value).isEqualTo("something");
   }
 }
