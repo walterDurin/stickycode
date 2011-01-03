@@ -40,14 +40,14 @@ public class SpringIsolatedTestmanifestTest {
   @Test
   public void empty() {
     SpringIsolatedTestManifest manifest = new SpringIsolatedTestManifest();
-    assertThat(manifest.getBeanDefinitionCount()).isEqualTo(0);
+    assertThat(manifest.getContext().getBeanDefinitionCount()).isEqualTo(0);
   }
 
   @Test
   public void checkBeanFactoryPostProcessors() {
     SpringIsolatedTestManifest manifest = new SpringIsolatedTestManifest();
-    assertThat(manifest.getBeanDefinitionCount()).isEqualTo(0);
-    manifest.addBeanFactoryPostProcessor(new BeanFactoryPostProcessor() {
+    assertThat(manifest.getContext().getBeanDefinitionCount()).isEqualTo(0);
+    manifest.getContext().addBeanFactoryPostProcessor(new BeanFactoryPostProcessor() {
 
       @Override
       public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
@@ -55,6 +55,6 @@ public class SpringIsolatedTestmanifestTest {
       }
     });
     manifest.registerBean("bob", new Example(), Example.class);
-    manifest.autowire(this);
+    manifest.prepareTest(this);
   }
 }

@@ -43,13 +43,26 @@ public interface IsolatedTestManifest extends ParameterSource {
   /**
    * Wire up the given testInstance by type using this manifest.
    */
-  void autowire(Object testInstance) throws MissingBeanException;
+  void prepareTest(Object testInstance) throws MissingBeanException;
 
   /**
    * Scan for components in from the given package roots
    */
   void scanPackages(String[] scanRoots);
 
+  /**
+   * Register a bean that is a configuration system
+   */
   void registerConfigurationSystem(String name, Object configurationSystem, Class<?> type);
+
+  /**
+   * Allows manifest to doing any initialisation prior to being used to wire up test instances
+   */
+  void startup(Class<?> testClass);
+
+  /**
+   * Allows the manifest to perform any shutdown required after a test is run
+   */
+  void shutdown();
 
 }
