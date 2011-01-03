@@ -14,7 +14,6 @@ package net.stickycode.mockwire;
 
 import javax.inject.Inject;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import static org.fest.assertions.Assertions.assertThat;
