@@ -22,7 +22,7 @@ public class UnblessableTypesTest {
     @Bless NonStaticType hidden;
   }
 
-  @Test(expected=CannotBlessNonStaticTypesException.class)
+  @Test(expected=NonStaticMemberTypesCannotBePutUnderTestException.class)
   public void checkBlessedStaticInnerTypesError() {
     // invoke statically so we can assert the exception is expected
     Mockwire.isolate(new NonStaticTypeTest());
@@ -34,7 +34,7 @@ public class UnblessableTypesTest {
     @Bless Super iface;
   }
 
-  @Test(expected=CannotBlessInterfacesException.class)
+  @Test(expected=InterfacesCannotBePutUnderTestException.class)
   public void checkBlessedIntefacesError() {
     // invoke statically so we can assert the exception is expected
     Mockwire.isolate(new CantBlessInterfacesTest());
@@ -44,7 +44,7 @@ public class UnblessableTypesTest {
     @SuppressWarnings("unused")
     @Bless void voidMethod() {};
   }
-  @Test(expected=CannotBlessVoidMethodException.class)
+  @Test(expected=VoidMethodsCannotBeUsedAsFactoriesForCodeUnderTestException.class)
   public void checkBlessVoidMethodsError() {
     Mockwire.isolate(new CantBlessVoidMethodsTest());
   }
