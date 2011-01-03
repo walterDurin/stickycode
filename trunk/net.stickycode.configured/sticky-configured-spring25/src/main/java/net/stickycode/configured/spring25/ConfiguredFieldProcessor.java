@@ -27,6 +27,7 @@ public class ConfiguredFieldProcessor
 
   public ConfiguredFieldProcessor(ConfigurationSystem configuration) {
     super(Configured.class);
+    assert configuration != null;
     this.configuration = configuration;
   }
 

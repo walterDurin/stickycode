@@ -29,7 +29,7 @@ public class ConfiguredBeanPostProcessor
     extends InstantiationAwareBeanPostProcessorAdapter {
 
   @Inject
-  ConfigurationSystem configuration;
+  private ConfigurationSystem configuration;
 
   @Override
   public boolean postProcessAfterInstantiation(Object bean, String beanName) throws BeansException {
@@ -37,6 +37,10 @@ public class ConfiguredBeanPostProcessor
         .forEachField(new ConfiguredFieldProcessor(configuration))
         .process(bean);
     return true;
+  }
+
+  public void setConfiguration(ConfigurationSystem configuration) {
+    this.configuration = configuration;
   }
 
 }
