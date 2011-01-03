@@ -20,8 +20,7 @@ import net.stickycode.mockwire.MockwireTck;
 
 @RunWith(Suite.class)
 @SuiteClasses({
-//    MockwireTestKit.class
-  MockwireTck.class,
+  MockwireTck.class
 })
 public class MockwireTckTest {
 
