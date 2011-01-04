@@ -40,6 +40,13 @@
 		</dependency>
 		<dependency>
 			<groupId>net.stickycode.mockwire</groupId>
+			<artifactId>sticky-mockwire</artifactId>
+			<version>[4,5)</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.stickycode.mockwire</groupId>
 			<artifactId>sticky-mockwire-spring30</artifactId>
 			<version>[4,5)</version>
 			<type>jar</type>
