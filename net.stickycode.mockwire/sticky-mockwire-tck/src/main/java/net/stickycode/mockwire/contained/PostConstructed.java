@@ -12,30 +12,28 @@
  */
 package net.stickycode.mockwire.contained;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 
-import org.junit.Test;
+import net.stickycode.stereotype.Configured;
 
-import net.stickycode.mockwire.Mockwire;
-import net.stickycode.mockwire.MockwireConfigured;
-import net.stickycode.mockwire.MockwireContext;
-import net.stickycode.mockwire.UnderTest;
+public class PostConstructed {
+  @Configured
+  String value;
 
-import static org.fest.assertions.Assertions.assertThat;
+  boolean initialised = false;
+  boolean destroyed = false;
 
-@MockwireConfigured("postConstructed.value=something")
-public class CommonAnnotationsDirectTest {
+  @PostConstruct
+  public void init() {
+    if (value == null)
+      throw new RuntimeException();
 
-  @UnderTest
-  PostConstructed target;
-
-  @Test
-  public void postConstruct() {
-    MockwireContext context = Mockwire.isolate(this);
-    assertThat(target.initialised).isTrue();
-    assertThat(target.value).isEqualTo("something");
-
-    context.shutdown();
-    assertThat(target.destroyed).isTrue();
+    initialised = true;
   }
 
+  @PreDestroy
+  public void destroy() {
+    destroyed = true;
+  }
 }

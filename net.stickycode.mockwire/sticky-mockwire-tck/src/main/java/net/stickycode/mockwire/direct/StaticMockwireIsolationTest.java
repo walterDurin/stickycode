@@ -11,7 +11,7 @@ public class StaticMockwireIsolationTest
 
   @Before
   public void setup() {
-    Mockwire.isolate(this);
     super.setup();
+    Mockwire.isolate(this);
   }
 }

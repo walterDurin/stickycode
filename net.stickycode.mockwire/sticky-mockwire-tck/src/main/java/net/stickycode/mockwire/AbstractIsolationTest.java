@@ -23,7 +23,7 @@ import static org.fest.assertions.Assertions.assertThat;
 
 public abstract class AbstractIsolationTest {
 
-	@Mock
+	@Controlled
 	private Mockable m;
 
 	@UnderTest
@@ -40,13 +40,17 @@ public abstract class AbstractIsolationTest {
 
 	@Before
 	public void setup() {
-		assertThat(d).isNotNull();
-		assertThat(m).isNotNull();
-		assertThat(a).isNotNull();
+		assertThat(d).isNull();
+		assertThat(m).isNull();
+		assertThat(a).isNull();
 	}
 
 	@Test
 	public void objectsAreAutowired() {
+	  assertThat(d).isNotNull();
+	  assertThat(m).isNotNull();
+	  assertThat(a).isNotNull();
+
 		assertThat(injected).isNotNull();
 		assertThat(injected.getMock()).isNotNull();
 		assertThat(injected.getAutowirable()).isNotNull();

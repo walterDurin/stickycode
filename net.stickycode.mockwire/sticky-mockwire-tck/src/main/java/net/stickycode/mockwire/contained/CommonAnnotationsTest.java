@@ -14,6 +14,8 @@ package net.stickycode.mockwire.contained;
 
 import javax.annotation.PostConstruct;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -28,28 +30,35 @@ import static org.fest.assertions.Assertions.assertThat;
 @MockwireConfigured("postConstructed.value=something")
 public class CommonAnnotationsTest {
 
-
-  public static class PostConstructed {
-    @Configured
-    String value;
-
-    boolean initialised = false;
-
-    @PostConstruct
-    public void init() {
-      if (value == null)
-        throw new RuntimeException();
-
-      initialised = true;
-    }
-  }
-
   @UnderTest
   PostConstructed target;
 
+  @Before
+  public void before() {
+    assertThat(target).isNull();
+//    assertThat(target.initialised).isTrue();
+//    assertThat(target.destroyed).isFalse();
+//    assertThat(target.value).isNull();
+  }
+
   @Test
   public void postConstruct() {
+    assertThat(target).isNotNull();
     assertThat(target.initialised).isTrue();
+    assertThat(target.destroyed).isFalse();
     assertThat(target.value).isEqualTo("something");
+  }
+
+  @Test
+  public void postConstruct2() {
+    assertThat(target).isNotNull();
+    assertThat(target.initialised).isTrue();
+    assertThat(target.destroyed).isFalse();
+    assertThat(target.value).isEqualTo("something");
+  }
+
+  @After
+  public void after() {
+    assertThat(target.destroyed).isFalse();
   }
 }
