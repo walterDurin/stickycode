@@ -30,6 +30,7 @@ import org.springframework.context.annotation.CommonAnnotationBeanPostProcessor;
 import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.core.type.filter.AnnotationTypeFilter;
 
+import net.stickycode.component.spring25.InjectAnnotationBeanPostProcessor;
 import net.stickycode.configured.ConfigurationSystem;
 import net.stickycode.configured.spring25.ConfiguredBeanPostProcessor;
 import net.stickycode.exception.PermanentException;
@@ -53,6 +54,10 @@ public class SpringIsolatedTestManifest
     MockwireFieldInjectionAnnotationBeanPostProcessor blessInjector = new MockwireFieldInjectionAnnotationBeanPostProcessor();
     blessInjector.setBeanFactory(context.getDefaultListableBeanFactory());
     context.getBeanFactory().addBeanPostProcessor(blessInjector);
+
+    InjectAnnotationBeanPostProcessor inject = new InjectAnnotationBeanPostProcessor();
+    inject.setBeanFactory(context.getDefaultListableBeanFactory());
+    context.getBeanFactory().addBeanPostProcessor(inject);
 
     CommonAnnotationBeanPostProcessor commonPostProcessor = new CommonAnnotationBeanPostProcessor();
     commonPostProcessor.setBeanFactory(context.getDefaultListableBeanFactory());
