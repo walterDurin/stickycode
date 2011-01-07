@@ -101,7 +101,6 @@ public class MockwireFieldInjectionAnnotationBeanPostProcessor extends Instantia
 	public MockwireFieldInjectionAnnotationBeanPostProcessor() {
 		this.autowiredAnnotationTypes.add(Bless.class);
 		this.autowiredAnnotationTypes.add(Mock.class);
-		this.autowiredAnnotationTypes.add(Inject.class);
 		this.autowiredAnnotationTypes.add(UnderTest.class);
 		this.autowiredAnnotationTypes.add(Controlled.class);
 	}
