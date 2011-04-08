@@ -87,7 +87,7 @@ version=1
 					<configuration>
 						<tagBase>https://stickycode.googlecode.com/svn/tags/${project.groupId}</tagBase>
 						<goals>enforcer:enforce deploy</goals>
-						<preparationGoals>clean enforcer:enforce</preparationGoals>
+						<preparationGoals>enforcer:enforce clean verify</preparationGoals>
 						<remoteTagging>false</remoteTagging>
 						<suppressCommitBeforeTag>true</suppressCommitBeforeTag>
 						<scmCommentPrefix>[Releasing ${project.artifactId}] </scmCommentPrefix>
