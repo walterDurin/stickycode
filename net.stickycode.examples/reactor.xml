@@ -17,20 +17,23 @@
 	<parent>
 		<groupId>net.stickycode.parent</groupId>
 		<artifactId>sticky-root</artifactId>
-		<version>1.12</version>
+		<version>1.11</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>net.stickycode.parent</groupId>
-	<artifactId>sticky-parent-reactor</artifactId>
+	<groupId>net.stickycode.examples</groupId>
+	<artifactId>reactor</artifactId>
 	<version>1.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>reactor</name>
+	<name>sticky-examples-reactor</name>
 	<modules>
-		<module>sticky-api</module>
-		<module>sticky-jar</module>
-		<module>sticky-root</module>
-		<module>sticky-war</module>
+		<!--
+		<module>sticky-example-bootstrap</module>
+		-->
+		<module>sticky-example-embedded-war</module>
+		<module>sticky-example-mockwire</module>
+		<module>sticky-example-mockwire-spring3</module>
+		<module>sticky-helloworld-war</module>
 	</modules>
 </project>
