@@ -17,10 +17,14 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import net.stickycode.mockwire.MockwireTck;
+import net.stickycode.mockwire.direct.MockwireDirectTck;
+import net.stickycode.mockwire.junit4.MockwireRunnerTck;
 
 @RunWith(Suite.class)
 @SuiteClasses({
-  MockwireTck.class
+  MockwireTck.class,
+  MockwireDirectTck.class,
+  MockwireRunnerTck.class
 })
 public class MockwireTckTest {
 
