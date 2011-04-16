@@ -30,26 +30,6 @@
 	<dependencies>
 		<dependency>
 			<groupId>net.stickycode.mockwire</groupId>
-			<artifactId>sticky-mockwire-api</artifactId>
-			<version>[4,5)</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>com.jolira</groupId>
-			<artifactId>guice</artifactId>
-			<version>2.1.8</version>
-		</dependency>
-
-		<dependency>
-			<groupId>net.stickycode.composite</groupId>
-			<artifactId>sticky-composite-logging-deploy</artifactId>
-			<version>[1,2)</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>net.stickycode.mockwire</groupId>
 			<artifactId>sticky-mockwire-tck</artifactId>
 			<version>[4.4,5)</version>
 			<scope>test</scope>
@@ -59,6 +39,28 @@
 			<artifactId>sticky-mockwire-mockito</artifactId>
 			<version>[2,3)</version>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.stickycode.composite</groupId>
+			<artifactId>sticky-composite-logging-deploy</artifactId>
+			<version>[1,2)</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>net.stickycode.mockwire</groupId>
+			<artifactId>sticky-mockwire-api</artifactId>
+			<version>[4,5)</version>
+		</dependency>
+		<dependency>
+			<groupId>com.jolira</groupId>
+			<artifactId>guice</artifactId>
+			<version>2.1.8</version>
+		</dependency>
+		<dependency>
+			<groupId>net.stickycode.composite</groupId>
+			<artifactId>sticky-composite-logging-api</artifactId>
+			<version>[1,2)</version>
 		</dependency>
 		<dependency>
 			<groupId>net.stickycode</groupId>
