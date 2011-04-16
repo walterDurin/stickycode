@@ -1,12 +1,30 @@
+/**
+ * Copyright (c) 2011 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved.
+ *
+ * This program is licensed to you under the Apache License Version 2.0,
+ * and you may not use this file except in compliance with the Apache License Version 2.0.
+ * You may obtain a copy of the Apache License Version 2.0 at http://www.apache.org/licenses/LICENSE-2.0.
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the Apache License Version 2.0 is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
+ */
 package net.stickycode.mockwire.guice2;
 
 import java.util.LinkedList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.Key;
 import com.google.inject.MembersInjector;
+import com.google.inject.Provider;
+import com.google.inject.Stage;
 import com.google.inject.TypeLiteral;
 import com.google.inject.matcher.Matchers;
 import com.google.inject.spi.TypeEncounter;
@@ -15,6 +33,7 @@ import com.google.inject.spi.TypeListener;
 import net.stickycode.mockwire.Bless;
 import net.stickycode.mockwire.Controlled;
 import net.stickycode.mockwire.IsolatedTestManifest;
+import net.stickycode.mockwire.MissingBeanException;
 import net.stickycode.mockwire.Mock;
 import net.stickycode.mockwire.UnderTest;
 import net.stickycode.reflector.AnnotatedFieldSettingProcessor;
@@ -22,6 +41,8 @@ import net.stickycode.reflector.Reflector;
 
 public class GuiceIsolatedTestManifest
     implements IsolatedTestManifest {
+
+  private Logger log = LoggerFactory.getLogger(getClass());
 
   static public class Bean {
 
@@ -100,11 +121,11 @@ public class GuiceIsolatedTestManifest
       extends AbstractModule {
 
     private Manifest manifest;
-    private Object testInstance;
+    private Class<?> testClass;
 
-    public IsolatedTestModule(Object testInstance, Manifest manifest) {
+    public IsolatedTestModule(Class<?> testClass, Manifest manifest) {
       this.manifest = manifest;
-      this.testInstance = testInstance;
+      this.testClass = testClass;
     }
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
@@ -115,7 +136,7 @@ public class GuiceIsolatedTestManifest
         @Override
         public <I> void hear(TypeLiteral<I> type, final TypeEncounter<I> encounter) {
           Class<? super I> rawType = type.getRawType();
-          if (rawType.equals(testInstance.getClass())) {
+          if (rawType.equals(testClass)) {
             final Values valueCollector = new Values(encounter);
             new Reflector()
                 .forEachField(valueCollector)
@@ -136,12 +157,14 @@ public class GuiceIsolatedTestManifest
         }
       });
 
-      for (Class<?> type : manifest.getTypes()) {
-        bind(type);
-      }
-      for (Bean b : manifest.getBeans()) {
+      for (final Bean b : manifest.getBeans()) {
         TypeLiteral type = TypeLiteral.get(b.getType());
+        log.debug("binding type {} to instance {}", type, b.getInstance());
         bind(type).toInstance(b.getInstance());
+      }
+      for (Class<?> type : manifest.getTypes()) {
+        log.debug("binding type {}", type);
+        bind(type);
       }
 
     }
@@ -153,23 +176,19 @@ public class GuiceIsolatedTestManifest
   }
 
   @Override
-  public void autowire(Object testInstance) {
-    injector = Guice.createInjector(new IsolatedTestModule(testInstance, manifest));
-    injector.injectMembers(testInstance);
-  }
-
-  @Override
   public boolean hasRegisteredType(Class<?> type) {
     return manifest.hasRegisteredType(type);
   }
 
   @Override
   public void registerBean(String beanName, Object bean, Class<?> type) {
+    log.debug("register bean {} to instance of {}", beanName, type.getName());
     manifest.register(beanName, bean, type);
   }
 
   @Override
   public void registerType(String beanName, Class<?> type) {
+    log.debug("register name {} to type {}", beanName, type.getName());
     manifest.register(beanName, type);
   }
 
@@ -186,6 +205,20 @@ public class GuiceIsolatedTestManifest
   @Override
   public void registerConfigurationSystem(String name, Object configurationSystem, Class<?> type) {
     manifest.register(name, configurationSystem, type);
+  }
+
+  @Override
+  public void prepareTest(Object testInstance) throws MissingBeanException {
+    injector.injectMembers(testInstance);
+  }
+
+  @Override
+  public void shutdown() {
+  }
+
+  @Override
+  public void startup(Class<?> testClass) {
+    injector = Guice.createInjector(Stage.PRODUCTION, new IsolatedTestModule(testClass, manifest));
   }
 
 }
