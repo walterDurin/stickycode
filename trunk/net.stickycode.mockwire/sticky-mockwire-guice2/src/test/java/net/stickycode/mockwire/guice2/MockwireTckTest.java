@@ -16,16 +16,20 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import net.stickycode.mockwire.MockwireTck;
-import net.stickycode.mockwire.direct.MockwireDirectTck;
-import net.stickycode.mockwire.junit4.MockwireRunnerTck;
+import net.stickycode.mockwire.FieldBlessingTest;
+import net.stickycode.mockwire.FieldMockingTest;
+import net.stickycode.mockwire.UnblessableTypesTest;
 
 @RunWith(Suite.class)
 @SuiteClasses({
-  MockwireTck.class,
-  MockwireDirectTck.class,
-  MockwireRunnerTck.class
-})
+      FieldBlessingTest.class,
+      FieldMockingTest.class,
+      UnblessableTypesTest.class })
 public class MockwireTckTest {
+
+  /**
+   * This is an anchor for Infinitest to rerun this suite if its changes
+   */
+  GuiceIsolatedTestManifest anchor;
 
 }
