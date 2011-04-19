@@ -14,6 +14,8 @@ package net.stickycode.configured.spring25;
 
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessorAdapter;
 
@@ -28,11 +30,14 @@ import net.stickycode.stereotype.StickyComponent;
 public class ConfiguredBeanPostProcessor
     extends InstantiationAwareBeanPostProcessorAdapter {
 
+  private Logger log = LoggerFactory.getLogger(getClass());
+
   @Inject
   private ConfigurationSystem configuration;
 
   @Override
   public boolean postProcessAfterInstantiation(Object bean, String beanName) throws BeansException {
+    log.info("configuring {}", beanName);
     new Reflector()
         .forEachField(new ConfiguredFieldProcessor(configuration))
         .process(bean);
