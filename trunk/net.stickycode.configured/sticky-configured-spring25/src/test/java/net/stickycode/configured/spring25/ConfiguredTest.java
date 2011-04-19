@@ -12,6 +12,8 @@
  */
 package net.stickycode.configured.spring25;
 
+import java.util.List;
+
 import org.junit.Test;
 
 import net.stickycode.configured.ConfigurationSource;
@@ -26,30 +28,41 @@ public class ConfiguredTest {
 
     @Configured
     String bob;
+
+    @Configured
+    List<Integer> numbers;
   }
 
-  ConfiguredTestObject configured;
+  ConfiguredTestObject configured = new ConfiguredTestObject();
 
   @Test
   public void configured() {
     configure();
-    assertThat(configured.bob).describedAs("Configured field was not set").isNotNull();
+    assertThat(configured.bob)
+        .describedAs("Configured field was not set")
+        .isNotNull();
+
+    assertThat(configured.numbers).containsExactly(1, 3, 5, 7);
   }
 
   private void configure() {
-    configured = new ConfiguredTestObject();
-
     ConfigurationSystem system = new ConfigurationSystem();
     system.add(new ConfigurationSource() {
 
       @Override
       public boolean hasValue(String key) {
-        return "configuredTestObject.bob".equals(key);
+        if (key.endsWith("bob"))
+          return true;
+
+        return "configuredTestObject.numbers".equals(key);
       }
 
       @Override
       public String getValue(String key) {
-        return "jones";
+        if (key.endsWith("bob"))
+          return "jones";
+
+        return "1,3,5,7";
       }
     });
 

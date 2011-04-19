@@ -14,6 +14,9 @@ package net.stickycode.configured.spring25;
 
 import java.lang.reflect.Field;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import net.stickycode.configured.ConfigurationSystem;
 import net.stickycode.configured.ConfiguredFieldsMustNotBePrimitiveAsDefaultDerivationIsImpossibleException;
 import net.stickycode.reflector.AnnotatedFieldProcessor;
@@ -22,6 +25,8 @@ import net.stickycode.stereotype.Configured;
 
 public class ConfiguredFieldProcessor
     extends AnnotatedFieldProcessor {
+
+  private Logger log = LoggerFactory.getLogger(getClass());
 
   private final ConfigurationSystem configuration;
 
@@ -36,6 +41,7 @@ public class ConfiguredFieldProcessor
     if (field.getType().isPrimitive())
       throw new ConfiguredFieldsMustNotBePrimitiveAsDefaultDerivationIsImpossibleException(target, field);
 
+    log.debug("configuring {}", field.getName());
     configuration.registerField(target, field);
   }
 
