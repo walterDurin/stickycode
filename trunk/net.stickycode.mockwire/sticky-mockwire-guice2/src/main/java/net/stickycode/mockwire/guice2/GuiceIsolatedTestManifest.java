@@ -21,20 +21,16 @@ import org.slf4j.LoggerFactory;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.google.inject.Key;
 import com.google.inject.MembersInjector;
-import com.google.inject.Provider;
 import com.google.inject.Stage;
 import com.google.inject.TypeLiteral;
 import com.google.inject.matcher.Matchers;
 import com.google.inject.spi.TypeEncounter;
 import com.google.inject.spi.TypeListener;
 
-import net.stickycode.mockwire.Bless;
 import net.stickycode.mockwire.Controlled;
 import net.stickycode.mockwire.IsolatedTestManifest;
 import net.stickycode.mockwire.MissingBeanException;
-import net.stickycode.mockwire.Mock;
 import net.stickycode.mockwire.UnderTest;
 import net.stickycode.reflector.AnnotatedFieldSettingProcessor;
 import net.stickycode.reflector.Reflector;
@@ -149,7 +145,7 @@ public class GuiceIsolatedTestManifest
                 new Reflector()
                     .forEachField(
                         new AnnotatedFieldSettingProcessor(valueCollector,
-                            Bless.class, UnderTest.class, Mock.class, Controlled.class))
+                            UnderTest.class, Controlled.class))
                     .process(instance);
               }
             });

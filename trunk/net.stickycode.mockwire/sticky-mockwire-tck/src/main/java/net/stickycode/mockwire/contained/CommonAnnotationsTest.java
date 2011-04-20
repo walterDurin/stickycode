@@ -12,8 +12,6 @@
  */
 package net.stickycode.mockwire.contained;
 
-import javax.annotation.PostConstruct;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,7 +20,6 @@ import org.junit.runner.RunWith;
 import net.stickycode.mockwire.MockwireConfigured;
 import net.stickycode.mockwire.UnderTest;
 import net.stickycode.mockwire.junit4.MockwireRunner;
-import net.stickycode.stereotype.Configured;
 
 import static org.fest.assertions.Assertions.assertThat;
 

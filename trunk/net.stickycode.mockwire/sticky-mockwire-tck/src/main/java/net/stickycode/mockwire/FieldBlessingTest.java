@@ -20,7 +20,7 @@ import static org.fest.assertions.Assertions.assertThat;
 
 public class FieldBlessingTest {
 
-  @Bless
+  @UnderTest
   private Autowirable autowirable;
 
 	@Inject
@@ -30,7 +30,7 @@ public class FieldBlessingTest {
 	IsolatedTestManifest context;
 
 	@Test
-	public void atBless() {
+	public void underTest() {
 	  Mockwire.isolate(this);
 	  assertThat(context.hasRegisteredType(Autowirable.class)).isTrue();
 	  assertThat(injected).isNotNull();

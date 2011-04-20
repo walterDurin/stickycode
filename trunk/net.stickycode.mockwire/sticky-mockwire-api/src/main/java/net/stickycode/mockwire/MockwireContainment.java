@@ -23,7 +23,7 @@ import net.stickycode.stereotype.StickyComponent;
  *  &#064;MockwireContainment()
  *  public class ContainedTest {
  *
- *  &#064;Bless
+ *  &#064;UnderTest
  *  SomeConcreteClass field;
  *
  *  &#064;Inject
@@ -48,7 +48,7 @@ import net.stickycode.stereotype.StickyComponent;
  *  &#064;MockwireContainment("net.stickcode.other")
  *  public class ContainedTest {
  *
- *  &#064;Bless
+ *  &#064;UnderTest
  *  SomeConcreteClass field;
  *
  *  &#064;Inject

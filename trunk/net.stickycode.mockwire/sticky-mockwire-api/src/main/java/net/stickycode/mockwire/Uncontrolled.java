@@ -19,40 +19,44 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * See {@link Controlled} as its a more descriptive name
+ * Empirically speaking this marks an object as being uncontrolled in the experiment, its not directly under test but can't be
+ * mocked.
  *
- * Mark a field as defining a mocked bean in an isolated test context.
+ * Technically mark a field as defining a real bean in an isolated test context. The mockwire implementation MUST NOT inject this field to
+ * avoid it actually being used in the test.
  *
- * In the following example <code>AnInterface</code> will be <code>Mock</code>ed into a singleton in the isolate test context created
+ * In the following example <code>ConcreteClass</code> will be registered into a singleton in the isolated test context created
  * by <code>Mockwire.isolate()</code>.
  *
  * <pre>
  *  public class MockwireTest {
  *
- *  &#064;Mock
- *  AnInterface field;
+ *  &#064;Uncontrolled
+ *  ConcreteClass uncontrolled;
+ *
+ *  &#064;UnderTest
+ *  OtherConcreteClass underTest;
  *
  *  &#064;Inject
  *  IsolateTestContext context;
  *
- *  @Before
+ *  &#064;Before
  *  public void setup() {
  *  	Mockwire.isolate(this);
  *  }
  *
- *  @Test
+ *  &#064;Test
  *  public void testBless() {
- *    assertThat(context.getBeanNamesForType(AnInterface)).hasSize(1);
+ *    assertThat(context.hasBeanOfType(ConcreteClass.class)).isTrue();
+ *    assertThat(uncontrolled).isNull();
+ *    assertThat(underTest).isNotNull();
  *  }
  *
  * </pre>
- *
- * @see Controlled
  */
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD, ElementType.FIELD})
-@Deprecated
-public @interface Mock {
+public @interface Uncontrolled {
 
 }
