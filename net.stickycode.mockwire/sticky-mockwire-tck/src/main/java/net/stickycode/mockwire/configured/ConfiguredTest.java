@@ -24,7 +24,6 @@ import static org.fest.assertions.Assertions.assertThat;
 
 public class ConfiguredTest {
 
-
   @MockwireConfigured("configuredObject.a=b")
   public class StringConfigured {
     @UnderTest

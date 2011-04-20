@@ -42,7 +42,7 @@ public class DependentMethodBlessingTest {
     }
   }
 
-  @Mock
+  @Controlled
   Mockable mockable;
 
 	@Inject
@@ -51,12 +51,12 @@ public class DependentMethodBlessingTest {
 	@Inject
 	AutowirableWithAutowirable nested;
 
-	@Bless
+	@UnderTest
   public AutowirableWithMockable factory(Mockable mockable) {
     return new AutowirableWithMockable(mockable);
   }
 
-	@Bless
+	@UnderTest
 	public AutowirableWithAutowirable dependency(AutowirableWithMockable autowirable) {
 	  return new AutowirableWithAutowirable(autowirable);
 	}
@@ -65,12 +65,12 @@ public class DependentMethodBlessingTest {
 	IsolatedTestManifest context;
 
 	@Test
-	public void atBless() {
-//	XXX  assertThat(context.hasRegisteredType(AutowirableWithMockable.class)).isTrue();
+	public void underTest() {
+	  assertThat(context.hasRegisteredType(AutowirableWithMockable.class)).isTrue();
 	  assertThat(injected).isNotNull();
 	  assertThat(injected.mockable).isNotNull();
 	  assertThat(nested).isNotNull();
-//	XXX  assertThat(context.hasRegisteredType(AutowirableWithAutowirable.class)).isTrue();
+    assertThat(context.hasRegisteredType(AutowirableWithAutowirable.class)).isTrue();
 	  assertThat(nested.autowirableWithMockable).isNotNull();
 	}
 }

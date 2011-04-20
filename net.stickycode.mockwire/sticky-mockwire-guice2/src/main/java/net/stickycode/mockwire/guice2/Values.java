@@ -19,9 +19,7 @@ import java.util.Map;
 import com.google.inject.Provider;
 import com.google.inject.spi.TypeEncounter;
 
-import net.stickycode.mockwire.Bless;
 import net.stickycode.mockwire.Controlled;
-import net.stickycode.mockwire.Mock;
 import net.stickycode.mockwire.UnderTest;
 import net.stickycode.reflector.AnnotatedFieldProcessor;
 import net.stickycode.reflector.ValueSource;
@@ -34,7 +32,7 @@ public class Values
   private final TypeEncounter<?> encounter;
 
   public Values(TypeEncounter<?> encounter) {
-    super(Bless.class, UnderTest.class, Mock.class, Controlled.class);
+    super(UnderTest.class, Controlled.class);
     this.encounter = encounter;
   }
 

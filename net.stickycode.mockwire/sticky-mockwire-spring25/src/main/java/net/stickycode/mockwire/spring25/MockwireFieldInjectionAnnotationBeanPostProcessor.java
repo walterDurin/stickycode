@@ -21,11 +21,9 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -58,9 +56,7 @@ import org.springframework.core.PriorityOrdered;
 import org.springframework.util.Assert;
 import org.springframework.util.ReflectionUtils;
 
-import net.stickycode.mockwire.Bless;
 import net.stickycode.mockwire.Controlled;
-import net.stickycode.mockwire.Mock;
 import net.stickycode.mockwire.UnderTest;
 
 /**
@@ -96,8 +92,6 @@ public class MockwireFieldInjectionAnnotationBeanPostProcessor extends Instantia
 	 * <p>Also supports JSR-330's {@link javax.inject.Inject} annotation, if available.
 	 */
 	public MockwireFieldInjectionAnnotationBeanPostProcessor() {
-		this.autowiredAnnotationTypes.add(Bless.class);
-		this.autowiredAnnotationTypes.add(Mock.class);
 		this.autowiredAnnotationTypes.add(UnderTest.class);
 		this.autowiredAnnotationTypes.add(Controlled.class);
 	}

@@ -25,7 +25,7 @@ import static org.mockito.Mockito.when;
 @RunWith(MockwireRunner.class)
 public class FieldMockingTest {
 
-	@Mock
+	@Controlled
 	private Mockable mockable;
 
 	@Inject

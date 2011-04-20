@@ -4,19 +4,19 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import net.stickycode.mockwire.Autowirable;
-import net.stickycode.mockwire.Bless;
-import net.stickycode.mockwire.Mock;
+import net.stickycode.mockwire.Controlled;
 import net.stickycode.mockwire.Mockable;
+import net.stickycode.mockwire.UnderTest;
 
 import static org.fest.assertions.Assertions.assertThat;
 
 @RunWith(MockwireRunner.class)
 public class RunnerTest {
 
-  @Mock
+  @Controlled
   Mockable mockable;
 
-  @Bless
+  @UnderTest
   Autowirable autowirable;
 
   @Test

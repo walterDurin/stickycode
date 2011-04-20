@@ -62,9 +62,7 @@ import org.springframework.core.PriorityOrdered;
 import org.springframework.util.Assert;
 import org.springframework.util.ReflectionUtils;
 
-import net.stickycode.mockwire.Bless;
 import net.stickycode.mockwire.Controlled;
-import net.stickycode.mockwire.Mock;
 import net.stickycode.mockwire.UnderTest;
 
 /**
@@ -100,8 +98,6 @@ public class MockwireFieldInjectionAnnotationBeanPostProcessor extends Instantia
 	 * <p>Also supports JSR-330's {@link javax.inject.Inject} annotation, if available.
 	 */
 	public MockwireFieldInjectionAnnotationBeanPostProcessor() {
-		this.autowiredAnnotationTypes.add(Bless.class);
-		this.autowiredAnnotationTypes.add(Mock.class);
 		this.autowiredAnnotationTypes.add(Inject.class);
 		this.autowiredAnnotationTypes.add(UnderTest.class);
 		this.autowiredAnnotationTypes.add(Controlled.class);
@@ -452,118 +448,6 @@ public class MockwireFieldInjectionAnnotationBeanPostProcessor extends Instantia
 			catch (Throwable ex) {
 				throw new BeanCreationException("Could not autowire field: " + field, ex);
 			}
-		}
-	}
-
-
-	/**
-	 * Class representing injection information about an annotated method.
-	 */
-	private class AutowiredMethodElement extends InjectionMetadata.InjectedElement {
-
-		private final boolean required;
-
-		private volatile boolean cached = false;
-
-		private volatile Object[] cachedMethodArguments;
-
-		public AutowiredMethodElement(Method method, boolean required, PropertyDescriptor pd) {
-			super(method, pd);
-			this.required = required;
-		}
-
-		@Override
-		protected void inject(Object bean, String beanName, PropertyValues pvs) throws Throwable {
-			if (this.skip == null && this.pd != null && pvs != null && pvs.contains(this.pd.getName())) {
-				// Explicit value provided as part of the bean definition.
-				this.skip = Boolean.TRUE;
-			}
-			if (this.skip != null && this.skip) {
-				return;
-			}
-			Method method = (Method) this.member;
-			try {
-				Object[] arguments;
-				if (this.cached) {
-					// Shortcut for avoiding synchronization...
-					arguments = resolveCachedArguments(beanName);
-				}
-				else {
-					synchronized (this) {
-						if (!this.cached) {
-							Class[] paramTypes = method.getParameterTypes();
-							arguments = new Object[paramTypes.length];
-							Set<String> autowiredBeanNames = new LinkedHashSet<String>(arguments.length);
-							TypeConverter typeConverter = beanFactory.getTypeConverter();
-							this.cachedMethodArguments = new Object[arguments.length];
-							for (int i = 0; i < arguments.length; i++) {
-								MethodParameter methodParam = new MethodParameter(method, i);
-								GenericTypeResolver.resolveParameterType(methodParam, bean.getClass());
-								DependencyDescriptor descriptor = new DependencyDescriptor(methodParam, this.required);
-								this.cachedMethodArguments[i] = descriptor;
-								arguments[i] = beanFactory.resolveDependency(
-										descriptor, beanName, autowiredBeanNames, typeConverter);
-								if (arguments[i] == null) {
-									arguments = null;
-									break;
-								}
-							}
-							if (arguments != null) {
-								registerDependentBeans(beanName, autowiredBeanNames);
-								if (autowiredBeanNames.size() == paramTypes.length) {
-									Iterator<String> it = autowiredBeanNames.iterator();
-									for (int i = 0; i < paramTypes.length; i++) {
-										String autowiredBeanName = it.next();
-										if (beanFactory.containsBean(autowiredBeanName)) {
-											if (beanFactory.isTypeMatch(autowiredBeanName, paramTypes[i])) {
-												this.cachedMethodArguments[i] = new RuntimeBeanReference(autowiredBeanName);
-											}
-										}
-										else {
-											this.cachedMethodArguments[i] = arguments[i];
-										}
-									}
-								}
-							}
-							else {
-								this.cachedMethodArguments = null;
-							}
-							this.cached = true;
-						}
-						else {
-							// Already cached in the meantime...
-							arguments = resolveCachedArguments(beanName);
-						}
-					}
-				}
-				if (this.skip == null) {
-					if (this.pd != null && pvs instanceof MutablePropertyValues) {
-						((MutablePropertyValues) pvs).registerProcessedProperty(this.pd.getName());
-					}
-					this.skip = Boolean.FALSE;
-				}
-				if (arguments != null) {
-					ReflectionUtils.makeAccessible(method);
-					method.invoke(bean, arguments);
-				}
-			}
-			catch (InvocationTargetException ex) {
-				throw ex.getTargetException();
-			}
-			catch (Throwable ex) {
-				throw new BeanCreationException("Could not autowire method: " + method, ex);
-			}
-		}
-
-		private Object[] resolveCachedArguments(String beanName) {
-			if (this.cachedMethodArguments == null) {
-				return null;
-			}
-			Object[] arguments = new Object[this.cachedMethodArguments.length];
-			for (int i = 0; i < arguments.length; i++) {
-				arguments[i] = resolvedCachedArgument(beanName, this.cachedMethodArguments[i]);
-			}
-			return arguments;
 		}
 	}
 

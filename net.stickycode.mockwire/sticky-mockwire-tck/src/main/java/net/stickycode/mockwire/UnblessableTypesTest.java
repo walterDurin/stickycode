@@ -19,7 +19,7 @@ public class UnblessableTypesTest {
   private class NonStaticType {}
   private class NonStaticTypeTest {
     @SuppressWarnings("unused")
-    @Bless NonStaticType hidden;
+    @UnderTest NonStaticType hidden;
   }
 
   @Test(expected=NonStaticMemberTypesCannotBePutUnderTestException.class)
@@ -31,7 +31,7 @@ public class UnblessableTypesTest {
   private interface Super {}
   private class CantBlessInterfacesTest {
     @SuppressWarnings("unused")
-    @Bless Super iface;
+    @UnderTest Super iface;
   }
 
   @Test(expected=InterfacesCannotBePutUnderTestException.class)
@@ -42,7 +42,7 @@ public class UnblessableTypesTest {
 
   private class CantBlessVoidMethodsTest {
     @SuppressWarnings("unused")
-    @Bless void voidMethod() {};
+    @UnderTest void voidMethod() {};
   }
   @Test(expected=VoidMethodsCannotBeUsedAsFactoriesForCodeUnderTestException.class)
   public void checkBlessVoidMethodsError() {

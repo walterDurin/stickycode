@@ -24,7 +24,7 @@ public class MethodBlessingTest {
 	@Inject
 	private Autowirable injected;
 
-	@Bless
+	@UnderTest
   public Autowirable factory() {
     return new Autowirable();
   }
@@ -38,7 +38,7 @@ public class MethodBlessingTest {
 	}
 
 	@Test
-	public void atBless() {
+	public void underTest() {
 	  assertThat(context.hasRegisteredType(Autowirable.class)).isTrue();
 	  assertThat(injected).isNotNull();
 	}
