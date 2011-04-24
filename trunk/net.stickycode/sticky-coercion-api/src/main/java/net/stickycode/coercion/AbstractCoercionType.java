@@ -39,7 +39,7 @@ public abstract class AbstractCoercionType
     throw new RuntimeException();
   }
 
-  public CoercionType getComponentCoercionType() {
+  public AbstractCoercionType getComponentCoercionType() {
     return new CoercionType(resolve(getComponentType()));
   }
 
@@ -65,7 +65,7 @@ public abstract class AbstractCoercionType
     if (short.class.equals(componentType))
       return Short.class;
 
-    throw new UnknownPrimitiveTypeException(componentType.getName());
+    throw new UnknownPrimitiveTypeException(componentType);
   }
 
 }

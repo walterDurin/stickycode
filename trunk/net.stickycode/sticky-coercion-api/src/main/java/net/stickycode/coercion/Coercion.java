@@ -12,16 +12,26 @@
  */
 package net.stickycode.coercion;
 
-import net.stickycode.exception.PermanentException;
+/**
+ * Contract for a converter of strings to a define type.
+ *
+ * @param <T> The type that can be converted to
+ */
+public interface Coercion<T> {
 
+  /**
+   * Coerce the given string value into the type represented by this coercion.
+   *
+   * @param value The string value to convert. WILL NOT be null.
+   * @return A non null string value
+   * @throws A subtype of {@link AbstractFailedToCoerceValueException} if the value was not valid
+   */
+  T coerce(CoercionTarget type, String value)
+      throws AbstractFailedToCoerceValueException;
 
-@SuppressWarnings("serial")
-public abstract class AbstractFailedToCoerceValueException
-    extends PermanentException {
-
-  public AbstractFailedToCoerceValueException(Throwable t, String message, Object... arguments) {
-    super(t, message, arguments);
-  }
-
+  /**
+   * Return true if this coercion is applicable for the given target type
+   */
+  boolean isApplicableTo(CoercionTarget type);
 
 }
