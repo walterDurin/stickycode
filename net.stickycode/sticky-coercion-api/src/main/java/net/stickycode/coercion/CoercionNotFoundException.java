@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2010 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved.
+ * Copyright (c) 2011 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved.
  *
  * This program is licensed to you under the Apache License Version 2.0,
  * and you may not use this file except in compliance with the Apache License Version 2.0.
@@ -12,12 +12,15 @@
  */
 package net.stickycode.coercion;
 
+import java.util.Collection;
+
+import net.stickycode.exception.PermanentException;
+
 @SuppressWarnings("serial")
-public class UnknownPrimitiveTypeException
-    extends RuntimeException {
+public class CoercionNotFoundException
+    extends PermanentException {
 
-  public UnknownPrimitiveTypeException(String name) {
-    super(name);
+  public CoercionNotFoundException(CoercionTarget target, Collection<Coercion> coercions) {
+    super("A coercion was not found for {} in these coercions {}", target, coercions);
   }
-
 }

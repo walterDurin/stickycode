@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved.
+ * Copyright (c) 2010 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved.
  *
  * This program is licensed to you under the Apache License Version 2.0,
  * and you may not use this file except in compliance with the Apache License Version 2.0.
@@ -12,16 +12,18 @@
  */
 package net.stickycode.coercion;
 
+import net.stickycode.exception.PermanentException;
 
+/**
+ * Really it should never happen that an unknown primitive type is encountered but just
+ *  in case heres a really nice description of the problem.
+ */
+@SuppressWarnings("serial")
+public class UnknownPrimitiveTypeException
+    extends PermanentException {
 
-public interface CoercionTarget {
-
-  Class<?> getType();
-
-  boolean isArray();
-
-  Class<?> getComponentType();
-
-  CoercionTarget getComponentCoercionType();
+  public UnknownPrimitiveTypeException(Class<?> componentType) {
+    super("An unknown primitive type {} was encountered", componentType.getName());
+  }
 
 }

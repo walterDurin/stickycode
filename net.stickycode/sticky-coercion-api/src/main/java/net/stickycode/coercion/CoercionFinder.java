@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2010 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved.
+ * Copyright (c) 2011 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved.
  *
  * This program is licensed to you under the Apache License Version 2.0,
  * and you may not use this file except in compliance with the Apache License Version 2.0.
@@ -13,22 +13,16 @@
 package net.stickycode.coercion;
 
 
-
-
-public interface Coercion<T> {
+public interface CoercionFinder {
 
   /**
-   * Coerce the given string value into the type represented by this coercion.
-   * @param value The string value to convert. WILL NOT be null.
-   * @return A non null value
-   * @throws A subtype of {@link AbstractFailedToCoerceValueException} if the value was not valid
+   * Find a coercion for the given target.
+   *
+   * @param target The target to find a coercion for
+   * @return The appropriate conversion
+   * @throws CoercionNotFoundException if there is no coercion registered that is appropriate for the given target
    */
-  T coerce(CoercionTarget type, String value)
-    throws AbstractFailedToCoerceValueException;
-
-  /**
-   * Return true if this coercion is applicable for the given target type
-   */
-  boolean isApplicableTo(CoercionTarget type);
+  Coercion<?> find(CoercionTarget target)
+    throws CoercionNotFoundException;
 
 }
