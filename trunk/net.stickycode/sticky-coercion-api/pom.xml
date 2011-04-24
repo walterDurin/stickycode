@@ -22,26 +22,19 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>net.stickycode</groupId>
-	<artifactId>sticky-coercion</artifactId>
-	<version>2.3-SNAPSHOT</version>
+	<artifactId>sticky-coercion-api</artifactId>
+	<version>2.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>sticky-coercion</name>
-	<description>A simple coercion library for converting strings to objects</description>
+	<name>sticky-coercion-api</name>
+	<description>A simple coercion library api for defining strings to object conversion</description>
 
-	<inceptionYear>2009</inceptionYear>
+	<inceptionYear>2003</inceptionYear>
 	<dependencies>
 		<dependency>
-			<groupId>net.stickycode.composite</groupId>
-			<artifactId>sticky-composite-unittest</artifactId>
-			<version>[1.4, 2)</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
 			<groupId>net.stickycode</groupId>
-			<artifactId>sticky-coercion-api</artifactId>
-			<version>2.1-SNAPSHOT</version>
-			<scope>compile</scope>
+			<artifactId>sticky-exception</artifactId>
+			<version>[1,2)</version>
 		</dependency>
 	</dependencies>
 </project>
