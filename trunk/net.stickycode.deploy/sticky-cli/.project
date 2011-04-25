@@ -1,7 +1,6 @@
 <projectDescription>
   <name>sticky-cli</name>
-  <comment>Class, Field and Method metadata used to remove boilerplate code for construction, configuration, scheduling, 
-monitoring, management and more</comment>
+  <comment>Using annotations and sensical conventions to derive intuitive command line parsing</comment>
   <projects/>
   <buildSpec>
     <buildCommand>
