@@ -16,13 +16,11 @@ import java.lang.reflect.Field;
 
 import org.junit.Test;
 
-import net.stickycode.configured.ConfigurationSource;
 import net.stickycode.configured.ConfigurationSystem;
 import net.stickycode.stereotype.Configured;
 
-import static org.mockito.Mockito.mock;
-
 import static org.fest.assertions.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
 public class ConfiguredTest {
 

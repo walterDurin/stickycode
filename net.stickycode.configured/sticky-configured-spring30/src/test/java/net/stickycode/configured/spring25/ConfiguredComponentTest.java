@@ -22,6 +22,8 @@ import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.context.support.GenericApplicationContext;
 
+import net.stickycode.coercion.Coercions;
+import net.stickycode.coercion.PatternCoercion;
 import net.stickycode.configured.ConfigurationSource;
 import net.stickycode.configured.ConfigurationSystem;
 import net.stickycode.stereotype.Configured;
@@ -60,6 +62,8 @@ public class ConfiguredComponentTest {
     when(configurationSource.getValue("configuredTestObject.numbers")).thenReturn("1,3,5,7");
     c.getBeanFactory().registerSingleton(name(ConfigurationSource.class), configurationSource);
 
+    registerType(c, PatternCoercion.class);
+    registerType(c, Coercions.class);
     registerType(c, ConfigurationSystem.class);
     registerType(c, ConfiguredBeanPostProcessor.class);
     registerType(c, AutowiredAnnotationBeanPostProcessor.class);

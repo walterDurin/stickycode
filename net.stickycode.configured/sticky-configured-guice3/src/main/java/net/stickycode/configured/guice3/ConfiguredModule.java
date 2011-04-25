@@ -18,9 +18,9 @@ import com.google.inject.AbstractModule;
 import com.google.inject.TypeLiteral;
 import com.google.inject.matcher.Matchers;
 import com.google.inject.multibindings.Multibinder;
-import com.google.inject.util.Types;
 
 import net.stickycode.coercion.Coercion;
+import net.stickycode.coercion.CoercionFinder;
 import net.stickycode.coercion.Coercions;
 import net.stickycode.coercion.PatternCoercion;
 import net.stickycode.configured.ConfigurationSystem;
@@ -44,7 +44,7 @@ public class ConfiguredModule
     TypeLiteral<Coercion> type = TypeLiteral.get(Coercion.class);
     Multibinder<Coercion> extensions = Multibinder.newSetBinder(binder(), type);
     extensions.addBinding().to(PatternCoercion.class);
-    bind(Coercions.class);
+    bind(CoercionFinder.class).to(Coercions.class);
   }
 
 }
