@@ -1,6 +1,6 @@
 <projectDescription>
   <name>sticky-mockwire</name>
-  <comment>Isolation and definition of test contexts</comment>
+  <comment>A mechnism for using a test class as the manifest for isolating the context of a test. Thereby using the same di mechanism you would expect in production but fully controlled to isolate the variable under test.</comment>
   <projects/>
   <buildSpec>
     <buildCommand>

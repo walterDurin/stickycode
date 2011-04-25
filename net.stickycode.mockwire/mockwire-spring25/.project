@@ -1,6 +1,6 @@
 <projectDescription>
   <name>mockwire-spring25</name>
-  <comment>Isolation and definition of test contexts</comment>
+  <comment>Isolation and definition of test contexts using Spring25 and Mockito</comment>
   <projects/>
   <buildSpec>
     <buildCommand>
