@@ -53,5 +53,11 @@
 			<artifactId>sticky-composite-spring30</artifactId>
 			<version>[1,2)</version>
 		</dependency>
+		<dependency>
+			<groupId>net.stickycode.composite</groupId>
+			<artifactId>sticky-composite-logging-deploy</artifactId>
+			<version>[1.2,2)</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 </project>

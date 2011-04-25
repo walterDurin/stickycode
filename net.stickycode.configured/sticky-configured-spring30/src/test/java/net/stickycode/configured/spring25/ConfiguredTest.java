@@ -12,51 +12,55 @@
  */
 package net.stickycode.configured.spring25;
 
+import java.lang.reflect.Field;
+
 import org.junit.Test;
 
 import net.stickycode.configured.ConfigurationSource;
 import net.stickycode.configured.ConfigurationSystem;
 import net.stickycode.stereotype.Configured;
 
+import static org.mockito.Mockito.mock;
+
 import static org.fest.assertions.Assertions.assertThat;
 
 public class ConfiguredTest {
 
-  public class ConfiguredTestObject {
+  @Configured
+  String configured;
 
-    @Configured
-    String bob;
+  String notConfigured;
+
+  @Test
+  public void notConfigured() {
+    ConfiguredFieldProcessor configuredFieldProcessor = new ConfiguredFieldProcessor(null);
+    assertThat(configuredFieldProcessor.canProcess(getField("notConfigured"))).isFalse();
   }
-
-  ConfiguredTestObject configured;
 
   @Test
   public void configured() {
-    configure();
-    assertThat(configured.bob).describedAs("Configured field was not set").isNotNull();
+    ConfiguredFieldProcessor configuredFieldProcessor = new ConfiguredFieldProcessor(null);
+    assertThat(configuredFieldProcessor.canProcess(getField("configured"))).isTrue();
   }
 
-  private void configure() {
-    configured = new ConfiguredTestObject();
-
-    ConfigurationSystem system = new ConfigurationSystem();
-    system.add(new ConfigurationSource() {
-
-      @Override
-      public boolean hasValue(String key) {
-        return "configuredTestObject.bob".equals(key);
-      }
-
-      @Override
-      public String getValue(String key) {
-        return "jones";
-      }
-    });
-
-    ConfiguredBeanPostProcessor processor = new ConfiguredBeanPostProcessor();
-    processor.setConfiguration(system);
-    processor.postProcessAfterInstantiation(configured, "configured");
-//    system.configure();
+  @Test
+  public void configured2() {
+    ConfigurationSystem mock = mock(ConfigurationSystem.class);
+    ConfiguredFieldProcessor configuredFieldProcessor = new ConfiguredFieldProcessor(mock);
+    assertThat(configuredFieldProcessor.canProcess(getField("configured"))).isTrue();
   }
+
+  private Field getField(String fieldName) {
+    try {
+      return getClass().getDeclaredField(fieldName);
+    }
+    catch (SecurityException e) {
+      throw new RuntimeException(e);
+    }
+    catch (NoSuchFieldException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
 
 }
