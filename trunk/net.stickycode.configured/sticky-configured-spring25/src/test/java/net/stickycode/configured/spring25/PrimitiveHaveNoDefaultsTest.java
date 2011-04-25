@@ -12,37 +12,16 @@
  */
 package net.stickycode.configured.spring25;
 
-import org.junit.Test;
-
+import net.stickycode.configured.AbstractPrimitiveConfiguratedTest;
+import net.stickycode.configured.ConfigurationSource;
 import net.stickycode.configured.ConfigurationSystem;
-import net.stickycode.configured.ConfigurationValueNotFoundForKeyException;
-import net.stickycode.configured.ConfiguredFieldsMustNotBePrimitiveAsDefaultDerivationIsImpossibleException;
-import net.stickycode.stereotype.Configured;
 
-public class PrimitiveHaveNoDefaultsTest {
+public class PrimitiveHaveNoDefaultsTest
+    extends AbstractPrimitiveConfiguratedTest {
 
-  public class NotConfiguredTestObject {
-    @Configured
-    Boolean noDefault;
-  }
-
-  public class PrimitiveTestObject {
-    @Configured
-    boolean primitivesNotConfigurable;
-  }
-
-  @Test(expected=ConfiguredFieldsMustNotBePrimitiveAsDefaultDerivationIsImpossibleException.class)
-  public void primitivesHaveNoDefaults() {
-    configure(new PrimitiveTestObject());
-  }
-
-  @Test(expected=ConfigurationValueNotFoundForKeyException.class)
-  public void notConfiguredThrowsANiceException() {
-    configure(new NotConfiguredTestObject());
-  }
-
-  private void configure(Object target) {
-    ConfigurationSystem system = new ConfigurationSystem();
+  @Override
+  protected void configure(Object target, ConfigurationSource configurationSource) {
+    ConfigurationSystem system = new ConfigurationSystem(configurationSource);
     ConfiguredBeanPostProcessor processor = new ConfiguredBeanPostProcessor();
     processor.setConfiguration(system);
     processor.postProcessAfterInstantiation(target, "configured");

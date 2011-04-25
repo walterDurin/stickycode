@@ -21,6 +21,8 @@ import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.context.support.GenericApplicationContext;
 
+import net.stickycode.coercion.Coercions;
+import net.stickycode.coercion.PatternCoercion;
 import net.stickycode.component.spring25.InjectAnnotationBeanPostProcessor;
 import net.stickycode.configured.ConfigurationSource;
 import net.stickycode.configured.ConfigurationSystem;
@@ -55,6 +57,8 @@ public class ConfiguredTest {
   private void configure(Object instance) {
     GenericApplicationContext c = new GenericApplicationContext();
     registerType(c, ConfigurationSystem.class);
+    registerType(c, PatternCoercion.class);
+    registerType(c, Coercions.class);
     registerType(c, ConfiguredBeanPostProcessor.class);
     registerType(c, InjectAnnotationBeanPostProcessor.class);
     ConfigurationSource configurationSource = Mockito.mock(ConfigurationSource.class);
@@ -63,6 +67,7 @@ public class ConfiguredTest {
     when(configurationSource.getValue("configuredTestObject.bob")).thenReturn("yay");
     when(configurationSource.getValue("configuredTestObject.numbers")).thenReturn("1,3,5,7");
     c.getBeanFactory().registerSingleton(name(ConfigurationSource.class), configurationSource);
+
     c.refresh();
 
     c.getAutowireCapableBeanFactory().autowireBean(instance);
