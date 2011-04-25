@@ -13,9 +13,7 @@
 package net.stickycode.configured.spring25;
 
 import java.beans.Introspector;
-import java.util.List;
 
-import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
@@ -24,42 +22,23 @@ import org.springframework.context.support.GenericApplicationContext;
 
 import net.stickycode.coercion.Coercions;
 import net.stickycode.coercion.PatternCoercion;
+import net.stickycode.configured.AbstractConfiguredComponentTest;
 import net.stickycode.configured.ConfigurationSource;
 import net.stickycode.configured.ConfigurationSystem;
-import net.stickycode.stereotype.Configured;
 
 import static org.mockito.Mockito.when;
 
-import static org.fest.assertions.Assertions.assertThat;
-public class ConfiguredComponentTest {
+public class ConfiguredComponentTest
+    extends AbstractConfiguredComponentTest {
 
-  public class ConfiguredTestObject {
-
-    @Configured
-    String bob;
-
-    @Configured
-    List<Integer> numbers;
-  }
-
-  @Test
-  public void configured() {
-    ConfiguredTestObject instance = new ConfiguredTestObject();
-    configure(instance);
-    assertThat(instance.bob)
-        .describedAs("Configured field was not set")
-        .isNotNull();
-
-    assertThat(instance.numbers).containsExactly(1, 3, 5, 7);
-  }
-
-  private void configure(Object instance) {
+  @Override
+  protected ConfigurationSystem configure(ConfiguredTestObject instance) {
     GenericApplicationContext c = new GenericApplicationContext();
     ConfigurationSource configurationSource = Mockito.mock(ConfigurationSource.class);
     when(configurationSource.hasValue("configuredTestObject.bob")).thenReturn(true);
     when(configurationSource.hasValue("configuredTestObject.numbers")).thenReturn(true);
     when(configurationSource.getValue("configuredTestObject.bob")).thenReturn("yay");
-    when(configurationSource.getValue("configuredTestObject.numbers")).thenReturn("1,3,5,7");
+    when(configurationSource.getValue("configuredTestObject.numbers")).thenReturn("1,5,3,7");
     c.getBeanFactory().registerSingleton(name(ConfigurationSource.class), configurationSource);
 
     registerType(c, PatternCoercion.class);
@@ -71,6 +50,8 @@ public class ConfiguredComponentTest {
     c.refresh();
 
     c.getAutowireCapableBeanFactory().autowireBean(instance);
+
+    return c.getBean(ConfigurationSystem.class);
   }
 
   public void registerType(GenericApplicationContext c, Class<?> type) {
