@@ -12,8 +12,6 @@
  */
 package net.stickycode.configured.guice3;
 
-import java.util.Set;
-
 import com.google.inject.AbstractModule;
 import com.google.inject.TypeLiteral;
 import com.google.inject.matcher.Matchers;
@@ -38,8 +36,9 @@ public class ConfiguredModule
     bindListener(Matchers.any(), listener);
   }
 
-  private Set<Coercion<?>> coercions;
-
+  // XXX So coercion needs to be not <?> as there is not way that I could figure
+  // out how to actually get guice to multibind to a set of Coercion<?>
+  @SuppressWarnings("rawtypes")
   private void bindCoercions() {
     TypeLiteral<Coercion> type = TypeLiteral.get(Coercion.class);
     Multibinder<Coercion> extensions = Multibinder.newSetBinder(binder(), type);

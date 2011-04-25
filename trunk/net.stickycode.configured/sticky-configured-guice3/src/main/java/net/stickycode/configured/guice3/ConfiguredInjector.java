@@ -16,6 +16,7 @@ import com.google.inject.Inject;
 import com.google.inject.MembersInjector;
 
 import net.stickycode.configured.ConfigurationSystem;
+import net.stickycode.configured.ConfiguredFieldProcessor;
 import net.stickycode.reflector.Reflector;
 
 public class ConfiguredInjector

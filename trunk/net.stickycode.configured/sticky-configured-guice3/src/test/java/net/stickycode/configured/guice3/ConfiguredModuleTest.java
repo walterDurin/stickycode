@@ -12,9 +12,6 @@
  */
 package net.stickycode.configured.guice3;
 
-import java.util.List;
-
-import org.junit.Test;
 import org.mockito.Mockito;
 
 import com.google.inject.AbstractModule;
@@ -23,35 +20,17 @@ import com.google.inject.Injector;
 import com.google.inject.Module;
 import com.google.inject.multibindings.Multibinder;
 
+import net.stickycode.configured.AbstractConfiguredComponentTest;
 import net.stickycode.configured.ConfigurationSource;
 import net.stickycode.configured.ConfigurationSystem;
-import net.stickycode.stereotype.Configured;
 
-import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
-public class ConfiguredModuleTest {
+public class ConfiguredModuleTest
+    extends
+    AbstractConfiguredComponentTest {
 
-  public class ConfiguredTestObject {
-    @Configured
-    String bob;
-
-    @Configured
-    List<Integer> numbers;
-  }
-
-  @Test
-  public void first() {
-    ConfiguredTestObject instance = new ConfiguredTestObject();
-    ConfigurationSystem configuration = configure(instance);
-    assertThat(instance.bob).as("Injector should have configured a value").isNotNull();
-    assertThat(instance.bob).isEqualTo("yay");
-    assertThat(instance.numbers).isNotNull();
-    assertThat(instance.numbers).containsExactly(1,5,3,7);
-
-    assertThat(configuration.registeredFieldCount()).isEqualTo(2);
-  }
-
+  @Override
   protected ConfigurationSystem configure(ConfiguredTestObject instance) {
     Injector injector = Guice.createInjector(configurationSourceModule(), new ConfiguredModule());
     injector.injectMembers(instance);

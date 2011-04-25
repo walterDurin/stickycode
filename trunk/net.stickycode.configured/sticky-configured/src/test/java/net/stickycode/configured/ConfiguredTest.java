@@ -10,42 +10,53 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
  */
-package net.stickycode.configured.spring25;
+package net.stickycode.configured;
 
 import java.lang.reflect.Field;
+import java.util.List;
 
 import org.junit.Test;
 
-import net.stickycode.configured.ConfigurationSystem;
 import net.stickycode.stereotype.Configured;
 
 import static org.fest.assertions.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
 
 public class ConfiguredTest {
 
   @Configured
   String configured;
 
+  @Configured
+  Integer number;
+
+  @Configured
+  List<Double> doubles;
+
   String notConfigured;
 
   @Test
   public void notConfigured() {
-    ConfiguredFieldProcessor configuredFieldProcessor = new ConfiguredFieldProcessor(null);
-    assertThat(configuredFieldProcessor.canProcess(getField("notConfigured"))).isFalse();
+    assertThat(canProcess("notConfigured")).isFalse();
   }
 
   @Test
   public void configured() {
-    ConfiguredFieldProcessor configuredFieldProcessor = new ConfiguredFieldProcessor(null);
-    assertThat(configuredFieldProcessor.canProcess(getField("configured"))).isTrue();
+    assertThat(canProcess("configured")).isTrue();
   }
 
   @Test
-  public void configured2() {
-    ConfigurationSystem mock = mock(ConfigurationSystem.class);
-    ConfiguredFieldProcessor configuredFieldProcessor = new ConfiguredFieldProcessor(mock);
-    assertThat(configuredFieldProcessor.canProcess(getField("configured"))).isTrue();
+  public void configuredNumber() {
+    assertThat(canProcess("number")).isTrue();
+  }
+
+  @Test
+  public void configuredDoubles() {
+    assertThat(canProcess("doubles")).isTrue();
+  }
+
+  private boolean canProcess(String fieldName) {
+    ConfiguredFieldProcessor configuredFieldProcessor = new ConfiguredFieldProcessor(null);
+    return configuredFieldProcessor.canProcess(getField(fieldName));
   }
 
   private Field getField(String fieldName) {
@@ -59,6 +70,5 @@ public class ConfiguredTest {
       throw new RuntimeException(e);
     }
   }
-
 
 }
