@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2010 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved.
+ * Copyright (c) 2011 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved.
  *
  * This program is licensed to you under the Apache License Version 2.0,
  * and you may not use this file except in compliance with the Apache License Version 2.0.
@@ -12,11 +12,15 @@
  */
 package net.stickycode.configured;
 
-import java.lang.reflect.Field;
+import net.stickycode.coercion.CoercionTarget;
 
+public interface ConfigurationAttribute
+    extends CoercionTarget {
 
-public interface KeyGenerator {
+  boolean hasDefaultValue();
 
-  String getKey(Object target, Field field);
+  void setValue(Object coerce);
+
+  String getName();
 
 }
