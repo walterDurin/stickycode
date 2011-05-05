@@ -30,4 +30,11 @@
 	<description>Taking the configuration out of applications, using the same principles that underly dependency injection</description>
 
 	<inceptionYear>2008</inceptionYear>
+	<dependencies>
+		<dependency>
+			<groupId>net.stickycode</groupId>
+			<artifactId>sticky-coercion-api</artifactId>
+			<version>[2,3)</version>
+		</dependency>
+	</dependencies>
 </project>

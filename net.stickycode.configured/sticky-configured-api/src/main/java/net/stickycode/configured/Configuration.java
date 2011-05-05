@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2010 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved.
+ * Copyright (c) 2011 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved.
  *
  * This program is licensed to you under the Apache License Version 2.0,
  * and you may not use this file except in compliance with the Apache License Version 2.0.
@@ -12,17 +12,13 @@
  */
 package net.stickycode.configured;
 
-import java.util.Collection;
+public interface Configuration
+    extends Iterable<ConfigurationAttribute> {
 
-import net.stickycode.exception.PermanentException;
+  void preConfigure();
 
+  void postConfigure();
 
-@SuppressWarnings("serial")
-public class ConfigurationValueNotFoundForKeyException
-    extends PermanentException {
-
-  public ConfigurationValueNotFoundForKeyException(String key, Collection<ConfigurationSource> sources) {
-    super("A value for '{}' could not be found in '{}'", key, sources);
-  }
+  Class<?> getType();
 
 }
