@@ -28,6 +28,7 @@
 
 	<name>sticky-reactor</name>
 	<modules>
+		<module>sticky-configured-api</module>
 		<module>sticky-configured</module>
 		<module>sticky-configured-tck</module>
 		<module>sticky-configured-spring25</module>
