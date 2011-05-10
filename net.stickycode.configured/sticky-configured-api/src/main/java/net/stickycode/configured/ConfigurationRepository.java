@@ -12,11 +12,10 @@
  */
 package net.stickycode.configured;
 
+
 public interface ConfigurationRepository
     extends Iterable<Configuration> {
 
-  void register(ConfigurationAttribute attribute);
-
-  MethodInvoker getPreConfiguredMethods();
+  void register(Configuration attribute);
 
 }

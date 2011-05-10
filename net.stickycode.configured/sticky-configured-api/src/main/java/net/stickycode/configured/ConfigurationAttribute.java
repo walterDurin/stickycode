@@ -23,4 +23,6 @@ public interface ConfigurationAttribute
 
   String getName();
 
+  Object getTarget();
+
 }
