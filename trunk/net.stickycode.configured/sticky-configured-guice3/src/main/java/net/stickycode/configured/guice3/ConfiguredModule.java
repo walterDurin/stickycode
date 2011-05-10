@@ -21,7 +21,9 @@ import net.stickycode.coercion.Coercion;
 import net.stickycode.coercion.CoercionFinder;
 import net.stickycode.coercion.Coercions;
 import net.stickycode.coercion.PatternCoercion;
+import net.stickycode.configured.ConfigurationRepository;
 import net.stickycode.configured.ConfigurationSystem;
+import net.stickycode.configured.InlineConfigurationRepository;
 
 public class ConfiguredModule
     extends AbstractModule {
@@ -29,17 +31,18 @@ public class ConfiguredModule
   @Override
   protected void configure() {
     bind(ConfigurationSystem.class).asEagerSingleton();
-    bind(ConfiguredInjector.class);
+    bind(ConfiguredInjector.class).asEagerSingleton();
+    bind(ConfigurationRepository.class).to(InlineConfigurationRepository.class).asEagerSingleton();
     bindCoercions();
     ConfiguredTypeListener listener = new ConfiguredTypeListener();
     requestInjection(listener);
     bindListener(Matchers.any(), listener);
   }
 
-  // XXX So coercion needs to be not <?> as there is not way that I could figure
+  // XXX So coercion needs to be '' not '<?>' as there is no way that I could figure
   // out how to actually get guice to multibind to a set of Coercion<?>
-  @SuppressWarnings("rawtypes")
   private void bindCoercions() {
+//    TypeLiteral<Coercion<?>> t = new CoercionTypeLiteral();
     TypeLiteral<Coercion> type = TypeLiteral.get(Coercion.class);
     Multibinder<Coercion> extensions = Multibinder.newSetBinder(binder(), type);
     extensions.addBinding().to(PatternCoercion.class);
