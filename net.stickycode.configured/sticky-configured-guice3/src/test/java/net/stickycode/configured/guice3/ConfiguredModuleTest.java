@@ -12,45 +12,36 @@
  */
 package net.stickycode.configured.guice3;
 
+import java.util.Collections;
+
 import org.mockito.Mockito;
 
-import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
-import com.google.inject.multibindings.Multibinder;
 
 import net.stickycode.configured.AbstractConfiguredComponentTest;
 import net.stickycode.configured.ConfigurationSource;
-import net.stickycode.configured.ConfigurationSystem;
 
 import static org.mockito.Mockito.when;
 
 public class ConfiguredModuleTest
-    extends
-    AbstractConfiguredComponentTest {
+    extends AbstractConfiguredComponentTest {
 
   @Override
-  protected ConfigurationSystem configure(ConfiguredTestObject instance) {
+  protected void configure(ConfiguredTestObject instance) {
     Injector injector = Guice.createInjector(configurationSourceModule(), new ConfiguredModule());
     injector.injectMembers(instance);
-    return injector.getInstance(ConfigurationSystem.class);
+    injector.injectMembers(this);
   }
 
   private Module configurationSourceModule() {
-    return new AbstractModule() {
-
-      @Override
-      protected void configure() {
-        Multibinder<ConfigurationSource> sources = Multibinder.newSetBinder(binder(), ConfigurationSource.class);
-        ConfigurationSource configurationSource = Mockito.mock(ConfigurationSource.class);
-        when(configurationSource.hasValue("configuredTestObject.bob")).thenReturn(true);
-        when(configurationSource.hasValue("configuredTestObject.numbers")).thenReturn(true);
-        when(configurationSource.getValue("configuredTestObject.bob")).thenReturn("yay");
-        when(configurationSource.getValue("configuredTestObject.numbers")).thenReturn("1,5,3,7");
-        sources.addBinding().toInstance(configurationSource);
-      }
-    };
+    ConfigurationSource configurationSource = Mockito.mock(ConfigurationSource.class);
+    when(configurationSource.hasValue("configuredTestObject.bob")).thenReturn(true);
+    when(configurationSource.hasValue("configuredTestObject.numbers")).thenReturn(true);
+    when(configurationSource.getValue("configuredTestObject.bob")).thenReturn("yay");
+    when(configurationSource.getValue("configuredTestObject.numbers")).thenReturn("1,5,3,7");
+    return new ConfigurationSourceModule(Collections.singletonList(configurationSource));
   }
 
 }

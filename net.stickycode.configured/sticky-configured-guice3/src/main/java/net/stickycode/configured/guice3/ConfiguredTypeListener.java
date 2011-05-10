@@ -16,6 +16,9 @@ import java.lang.reflect.Field;
 
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.google.inject.TypeLiteral;
 import com.google.inject.spi.TypeEncounter;
 import com.google.inject.spi.TypeListener;
@@ -24,14 +27,17 @@ import net.stickycode.stereotype.Configured;
 
 public class ConfiguredTypeListener
     implements TypeListener {
+  private Logger log = LoggerFactory.getLogger(getClass());
 
   @Inject
   private ConfiguredInjector membersInjector;
 
   @Override
   public <I> void hear(TypeLiteral<I> type, TypeEncounter<I> encounter) {
-    if (typeIsConfigured(type))
+    if (typeIsConfigured(type)) {
       encounter.register(membersInjector);
+      log.info("encountering {} registering injector {}", type, membersInjector);
+    }
   }
 
   private <I> boolean typeIsConfigured(TypeLiteral<I> type) {

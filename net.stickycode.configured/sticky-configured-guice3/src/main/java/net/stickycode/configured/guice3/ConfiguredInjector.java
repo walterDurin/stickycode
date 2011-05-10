@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2010 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved.
+ * Copyright (c) 2011 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved.
  *
  * This program is licensed to you under the Apache License Version 2.0,
  * and you may not use this file except in compliance with the Apache License Version 2.0.
@@ -12,10 +12,13 @@
  */
 package net.stickycode.configured.guice3;
 
+import java.beans.Introspector;
+
 import com.google.inject.Inject;
 import com.google.inject.MembersInjector;
 
-import net.stickycode.configured.ConfigurationSystem;
+import net.stickycode.configured.ConfigurationRepository;
+import net.stickycode.configured.ConfiguredConfiguration;
 import net.stickycode.configured.ConfiguredFieldProcessor;
 import net.stickycode.reflector.Reflector;
 
@@ -23,13 +26,16 @@ public class ConfiguredInjector
     implements MembersInjector<Object> {
 
   @Inject
-  private ConfigurationSystem configuration;
+  private ConfigurationRepository configurationRepository;
 
   @Override
   public void injectMembers(Object instance) {
+    String name = Introspector.decapitalize(instance.getClass().getSimpleName());
+    ConfiguredConfiguration configuration = new ConfiguredConfiguration(instance);
     new Reflector()
         .forEachField(new ConfiguredFieldProcessor(configuration))
         .process(instance);
+    configurationRepository.register(configuration);
   }
 
 }

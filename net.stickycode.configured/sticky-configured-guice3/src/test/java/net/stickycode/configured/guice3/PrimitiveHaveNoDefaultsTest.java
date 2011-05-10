@@ -12,12 +12,11 @@
  */
 package net.stickycode.configured.guice3;
 
-import com.google.inject.AbstractModule;
+import java.util.Collections;
+
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.google.inject.Module;
 import com.google.inject.ProvisionException;
-import com.google.inject.multibindings.Multibinder;
 
 import net.stickycode.configured.AbstractPrimitiveConfiguratedTest;
 import net.stickycode.configured.ConfigurationSource;
@@ -27,9 +26,10 @@ public class PrimitiveHaveNoDefaultsTest
     extends AbstractPrimitiveConfiguratedTest {
 
   protected void configure(Object target, ConfigurationSource noConfigurationSource) {
-    Injector injector = Guice.createInjector(configurationSourceModule(noConfigurationSource), new ConfiguredModule());
+    Injector injector = Guice.createInjector(new ConfigurationSourceModule(Collections.singletonList(noConfigurationSource)), new ConfiguredModule());
     try {
       injector.injectMembers(target);
+      injector.injectMembers(this);
     }
     catch (ProvisionException e) {
       if (e.getCause() instanceof PermanentException)
@@ -39,14 +39,4 @@ public class PrimitiveHaveNoDefaultsTest
     }
   }
 
-  private Module configurationSourceModule(final ConfigurationSource source) {
-    return new AbstractModule() {
-
-      @Override
-      protected void configure() {
-        Multibinder<ConfigurationSource> sources = Multibinder.newSetBinder(binder(), ConfigurationSource.class);
-        sources.addBinding().toInstance(source);
-      }
-    };
-  }
 }
