@@ -10,7 +10,7 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
  */
-package net.stickycode.configured.spring25;
+package net.stickycode.configured.spring30;
 
 import java.beans.Introspector;
 
@@ -24,19 +24,10 @@ import net.stickycode.coercion.PatternCoercion;
 import net.stickycode.configured.AbstractPrimitiveConfiguratedTest;
 import net.stickycode.configured.ConfigurationSource;
 import net.stickycode.configured.ConfigurationSystem;
+import net.stickycode.configured.InlineConfigurationRepository;
 
 public class PrimitiveHaveNoDefaultsTest
     extends AbstractPrimitiveConfiguratedTest {
-
-  // @Override
-  // protected ConfigurationSystem configure(ConfiguredTestObject instance) {
-  // ConfigurationSource configurationSource = Mockito.mock(ConfigurationSource.class);
-  // when(configurationSource.hasValue("configuredTestObject.bob")).thenReturn(true);
-  // when(configurationSource.hasValue("configuredTestObject.numbers")).thenReturn(true);
-  // when(configurationSource.getValue("configuredTestObject.bob")).thenReturn("yay");
-  // when(configurationSource.getValue("configuredTestObject.numbers")).thenReturn("1,5,3,7");
-  // return configure(instance, c, configurationSource);
-  // }
 
   protected void configure(Object instance, ConfigurationSource configurationSource) {
     GenericApplicationContext c = new GenericApplicationContext();
@@ -44,6 +35,7 @@ public class PrimitiveHaveNoDefaultsTest
 
     registerType(c, PatternCoercion.class);
     registerType(c, Coercions.class);
+    registerType(c, InlineConfigurationRepository.class);
     registerType(c, ConfigurationSystem.class);
     registerType(c, ConfiguredBeanPostProcessor.class);
     registerType(c, AutowiredAnnotationBeanPostProcessor.class);
@@ -51,6 +43,7 @@ public class PrimitiveHaveNoDefaultsTest
     c.refresh();
 
     c.getAutowireCapableBeanFactory().autowireBean(instance);
+    c.getAutowireCapableBeanFactory().autowireBean(this);
   }
 
   public void registerType(GenericApplicationContext c, Class<?> type) {
