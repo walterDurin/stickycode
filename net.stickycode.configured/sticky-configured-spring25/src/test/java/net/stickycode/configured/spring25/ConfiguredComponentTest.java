@@ -22,9 +22,11 @@ import org.springframework.context.support.GenericApplicationContext;
 
 import net.stickycode.coercion.Coercions;
 import net.stickycode.coercion.PatternCoercion;
+import net.stickycode.component.spring25.InjectAnnotationBeanPostProcessor;
 import net.stickycode.configured.AbstractConfiguredComponentTest;
 import net.stickycode.configured.ConfigurationSource;
 import net.stickycode.configured.ConfigurationSystem;
+import net.stickycode.configured.InlineConfigurationRepository;
 
 import static org.mockito.Mockito.when;
 
@@ -32,8 +34,9 @@ public class ConfiguredComponentTest
     extends AbstractConfiguredComponentTest {
 
   @Override
-  protected ConfigurationSystem configure(ConfiguredTestObject instance) {
+  protected void configure(ConfiguredTestObject instance) {
     GenericApplicationContext c = new GenericApplicationContext();
+
     ConfigurationSource configurationSource = Mockito.mock(ConfigurationSource.class);
     when(configurationSource.hasValue("configuredTestObject.bob")).thenReturn(true);
     when(configurationSource.hasValue("configuredTestObject.numbers")).thenReturn(true);
@@ -41,22 +44,23 @@ public class ConfiguredComponentTest
     when(configurationSource.getValue("configuredTestObject.numbers")).thenReturn("1,5,3,7");
     c.getBeanFactory().registerSingleton(name(ConfigurationSource.class), configurationSource);
 
-    registerType(c, PatternCoercion.class);
-    registerType(c, Coercions.class);
+    registerType(c, InjectAnnotationBeanPostProcessor.class);
+    registerType(c, InlineConfigurationRepository.class);
     registerType(c, ConfigurationSystem.class);
     registerType(c, ConfiguredBeanPostProcessor.class);
-    registerType(c, AutowiredAnnotationBeanPostProcessor.class);
+    registerType(c, PatternCoercion.class);
+    registerType(c, Coercions.class);
 
     c.refresh();
 
     c.getAutowireCapableBeanFactory().autowireBean(instance);
-
-    return (ConfigurationSystem) c.getBean("configurationSystem", ConfigurationSystem.class);
+    c.getAutowireCapableBeanFactory().autowireBean(this);
   }
 
   public void registerType(GenericApplicationContext c, Class<?> type) {
     GenericBeanDefinition bd = new GenericBeanDefinition();
     bd.setBeanClass(type);
+    bd.setAutowireCandidate(true);
     bd.setAutowireMode(AbstractBeanDefinition.AUTOWIRE_BY_TYPE);
     c.getDefaultListableBeanFactory().registerBeanDefinition(name(type), bd);
   }
