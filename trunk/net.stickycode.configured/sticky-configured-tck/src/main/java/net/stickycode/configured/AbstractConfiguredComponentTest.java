@@ -12,8 +12,13 @@
  */
 package net.stickycode.configured;
 
+import java.math.BigDecimal;
+import java.util.Iterator;
 import java.util.List;
 
+import javax.inject.Inject;
+
+import org.fest.assertions.Collections;
 import org.junit.Test;
 
 import net.stickycode.configured.ConfigurationSystem;
@@ -36,24 +41,38 @@ public abstract class AbstractConfiguredComponentTest {
     super();
   }
 
-  protected abstract ConfigurationSystem configure(ConfiguredTestObject instance);
+  protected abstract void configure(ConfiguredTestObject instance);
+
+  @Inject
+  ConfigurationRepository configurations;
+
+  @Inject
+  ConfigurationSystem system;
 
   @Test
   public void verifySystemConfigured() {
     ConfiguredTestObject instance = new ConfiguredTestObject();
-    ConfigurationSystem configuration = configure(instance);
+    configure(instance);
+
+    assertThat(system)
+        .as("Implementors must inject(this) so that the configuration system can be configured")
+        .isNotNull();
+
+    system.configure();
 
     assertThat(instance.bob)
-      .as("Injector should have configured a value")
-      .isNotNull();
+        .as("Injector should have configured a value")
+        .isNotNull();
     assertThat(instance.bob).isEqualTo("yay");
 
     assertThat(instance.numbers)
-      .as("Injector should have configured a value")
-      .isNotNull();
+        .as("Injector should have configured a value")
+        .isNotNull();
     assertThat(instance.numbers).containsExactly(1, 5, 3, 7);
 
-    assertThat(configuration.registeredFieldCount()).isEqualTo(2);
+    assertThat(configurations).hasSize(1);
+    Configuration c = configurations.iterator().next();
+    assertThat(c).hasSize(2);
   }
 
 }

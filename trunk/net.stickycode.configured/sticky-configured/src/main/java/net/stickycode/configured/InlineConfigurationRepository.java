@@ -12,19 +12,32 @@
  */
 package net.stickycode.configured;
 
-public interface Configuration
-    extends Iterable<ConfigurationAttribute> {
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 
-  void preConfigure();
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-  void postConfigure();
 
-  Class<?> getType();
+public class InlineConfigurationRepository
+    implements ConfigurationRepository {
 
-  void addAttribute(ConfigurationAttribute attribute);
+  private Logger log = LoggerFactory.getLogger(getClass());
 
-  boolean hasTarget(Object target);
+  private List<Configuration> configurations = new ArrayList<Configuration>();
 
-  String getName();
+  @Override
+  public Iterator<Configuration> iterator() {
+    return Collections.unmodifiableList(configurations).iterator();
+  }
+
+  @Override
+  public void register(Configuration configuration) {
+    assert configuration != null;
+    log.info("registering {}", configuration);
+    configurations.add(configuration);
+  }
 
 }
