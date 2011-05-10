@@ -12,14 +12,18 @@
  */
 package net.stickycode.configured.spring25;
 
+import java.lang.reflect.Field;
+
 import javax.inject.Inject;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessorAdapter;
 
-import net.stickycode.configured.ConfigurationSystem;
+import net.stickycode.configured.ConfigurationRepository;
+import net.stickycode.configured.ConfiguredConfiguration;
 import net.stickycode.configured.ConfiguredFieldProcessor;
 import net.stickycode.reflector.Reflector;
+import net.stickycode.stereotype.Configured;
 import net.stickycode.stereotype.StickyComponent;
 
 @StickyComponent
@@ -27,18 +31,26 @@ public class ConfiguredBeanPostProcessor
     extends InstantiationAwareBeanPostProcessorAdapter {
 
   @Inject
-  private ConfigurationSystem configuration;
+  private ConfigurationRepository configurationRepository;
 
   @Override
   public boolean postProcessAfterInstantiation(Object bean, String beanName) throws BeansException {
-    new Reflector()
-        .forEachField(new ConfiguredFieldProcessor(configuration))
-        .process(bean);
+    if (typeIsConfigured(bean.getClass())) {
+      ConfiguredConfiguration configuration = new ConfiguredConfiguration(bean);
+      new Reflector()
+          .forEachField(new ConfiguredFieldProcessor(configuration))
+          .process(bean);
+      configurationRepository.register(configuration);
+    }
     return true;
   }
 
-  public void setConfiguration(ConfigurationSystem configuration) {
-    this.configuration = configuration;
+  private boolean typeIsConfigured(Class<?> type) {
+    for (Field field : type.getDeclaredFields())
+      if (field.isAnnotationPresent(Configured.class))
+        return true;
+
+    return false;
   }
 
 }

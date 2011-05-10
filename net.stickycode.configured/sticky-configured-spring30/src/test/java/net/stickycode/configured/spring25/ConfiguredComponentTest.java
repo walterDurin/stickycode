@@ -32,7 +32,7 @@ public class ConfiguredComponentTest
     extends AbstractConfiguredComponentTest {
 
   @Override
-  protected ConfigurationSystem configure(ConfiguredTestObject instance) {
+  protected void configure(ConfiguredTestObject instance) {
     GenericApplicationContext c = new GenericApplicationContext();
     ConfigurationSource configurationSource = Mockito.mock(ConfigurationSource.class);
     when(configurationSource.hasValue("configuredTestObject.bob")).thenReturn(true);
@@ -50,8 +50,7 @@ public class ConfiguredComponentTest
     c.refresh();
 
     c.getAutowireCapableBeanFactory().autowireBean(instance);
-
-    return c.getBean(ConfigurationSystem.class);
+    c.getAutowireCapableBeanFactory().autowireBean(this);
   }
 
   public void registerType(GenericApplicationContext c, Class<?> type) {
