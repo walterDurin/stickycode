@@ -25,7 +25,7 @@ import java.lang.annotation.Target;
  * <p>
  * <h3>Examples</h3>
  * <p>
- * Using classpath scannin with spring for example you would get a component <b>configuredBean</b> will be initialised with values from keys
+ * Using classpath scanning with spring for example you would get a component <b>configuredBean</b> will be initialised with values from keys
  * <b>configuredBean.password</b>, <b>configuredBean.user</b> and <b>configuredBean.url</b> where url is coerced appropriately.
  * </p>
  *
@@ -54,11 +54,11 @@ import java.lang.annotation.Target;
  * <p>In this example there is a reasonable default for the theme because its packaged with the bean but can be overridden by configuration.
  * Note that the Boolean field is not primitive, if it was will get an error at application construction as the default nature of the field could not be determined.
  * <pre>
- * &#064;StrickyComponent
+ * &#064;StickyComponent
  * public ThemedWebsiteWithSecureLoginBean {
  *
  *   &#064;Configured
- *   private String defaultTheme = "butterfly"
+ *   private String defaultTheme = "butterfly";
  *
  *   &#064;Configured
  *   private Boolean allowAnonymousLoging = true;
