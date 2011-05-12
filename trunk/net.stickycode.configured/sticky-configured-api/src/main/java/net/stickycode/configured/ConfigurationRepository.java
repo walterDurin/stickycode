@@ -12,10 +12,17 @@
  */
 package net.stickycode.configured;
 
-
+/**
+ * A repository of application {@link Configuration}'s.
+ */
 public interface ConfigurationRepository
     extends Iterable<Configuration> {
 
-  void register(Configuration attribute);
+  /**
+   * Register a configuration with the repository.
+   *
+   * @param configuration The configuration to register
+   */
+  void register(Configuration configuration);
 
 }

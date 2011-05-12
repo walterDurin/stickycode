@@ -12,28 +12,19 @@
  */
 package net.stickycode.configured;
 
+import net.stickycode.exception.PermanentException;
+
 /**
- * A source of configuration values.
+ * Configuration key did not have a value when looked up even though the {@link ConfigurationSource} previously said it could
+ * resolve it.
  */
-public interface ConfigurationSource {
+@SuppressWarnings("serial")
+public class ConfigurationNotFoundException
+    extends PermanentException {
 
-  /**
-   * Return true if this configuration source has a value for the given key.
-   *
-   * @param key The key to configuration
-   * @return true if this configuration source has a value for the given key
-   */
-  boolean hasValue(String key);
-
-  /**
-   * Return the value for configuration for the given key.
-   *
-   * As the {@link #hasValue(String)} should be called first implementations should never return null.
-   *
-   * @param key The key too lookup
-   * @return The value found for the given key never null.
-   */
-  String getValue(String key)
-    throws ConfigurationNotFoundException;
-
+  public ConfigurationNotFoundException(String key) {
+    super(
+        "Configuration key {} did not have a value when looked up even though the {@link ConfigurationSource} previously said it could resolve it.",
+        key);
+  }
 }

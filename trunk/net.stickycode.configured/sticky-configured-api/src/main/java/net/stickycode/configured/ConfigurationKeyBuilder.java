@@ -12,10 +12,18 @@
  */
 package net.stickycode.configured;
 
-
-
+/**
+ * Contract for defining the format of keys used to lookup configuration.
+ */
 public interface ConfigurationKeyBuilder {
 
+  /**
+   * Build the key for looking up the value of an attribute on a configuration.
+   *
+   * @param configuration The parent of the attribute
+   * @param attribute The attribute to build a key for
+   * @return The key for the configuration lookup
+   */
   String buildKey(Configuration configuration, ConfigurationAttribute attribute);
 
 }
