@@ -35,6 +35,9 @@ public class ConfiguredTypeListener
   @Override
   public <I> void hear(TypeLiteral<I> type, TypeEncounter<I> encounter) {
     if (typeIsConfigured(type)) {
+      if (membersInjector == null)
+        throw new AssertionError(getClass().getSimpleName() + " was not injected with a " + ConfiguredInjector.class.getSimpleName());
+
       encounter.register(membersInjector);
       log.info("encountering {} registering injector {}", type, membersInjector);
     }
