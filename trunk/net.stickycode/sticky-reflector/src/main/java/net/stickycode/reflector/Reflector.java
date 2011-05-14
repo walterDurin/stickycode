@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2010 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved.
+ * Copyright (c) 2011 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved.
  *
  * This program is licensed to you under the Apache License Version 2.0,
  * and you may not use this file except in compliance with the Apache License Version 2.0.
@@ -15,21 +15,35 @@ package net.stickycode.reflector;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Reflector {
 
-  private List<FieldProcessor> fieldProcessors = new LinkedList<FieldProcessor>();
-  private List<MethodProcessor> methodProcessors = new LinkedList<MethodProcessor>();
+  private List<FieldProcessor> fieldProcessors;
+  private List<MethodProcessor> methodProcessors;
 
   public Reflector() {
   }
 
   public Reflector forEachField(FieldProcessor... processors) {
-    for (FieldProcessor fieldProcessor : processors) {
-      fieldProcessors.add(fieldProcessor);
-    }
+    if (fieldProcessors == null)
+      fieldProcessors = Arrays.asList(processors);
+    else
+      for (FieldProcessor fieldProcessor : processors)
+        fieldProcessors.add(fieldProcessor);
+
+    return this;
+  }
+
+  public Reflector forEachMethod(MethodProcessor... processors) {
+    if (methodProcessors == null)
+      methodProcessors = Arrays.asList(processors);
+    else
+      for (MethodProcessor methodProcessor : processors) {
+        methodProcessors.add(methodProcessor);
+      }
+
     return this;
   }
 
@@ -37,12 +51,16 @@ public class Reflector {
     List<Method> methods = new ArrayList<Method>();
 
     while (type != Object.class) {
-      processFields(null, type);
-      collectMethods(methods, null, type);
+      if (fieldProcessors != null)
+        processFields(null, type);
+
+      if (methodProcessors != null)
+        collectMethods(methods, null, type);
       type = type.getSuperclass();
     }
 
-    processMethods(methods, null);
+    if (methodProcessors != null)
+      processMethods(methods, null);
   }
 
   public void process(Object target) {
@@ -50,12 +68,17 @@ public class Reflector {
 
     Class<?> type = target.getClass();
     while (type != Object.class) {
-      processFields(target, type);
-      collectMethods(methods, target, type);
+      if (fieldProcessors != null)
+        processFields(target, type);
+
+      if (methodProcessors != null)
+        collectMethods(methods, target, type);
+
       type = type.getSuperclass();
     }
 
-    processMethods(methods, target);
+    if (methodProcessors != null)
+      processMethods(methods, target);
   }
 
   private void processMethods(List<Method> methods, Object target) {
@@ -88,13 +111,6 @@ public class Reflector {
         if (processor.canProcess(field))
           processor.processField(target, field);
     }
-  }
-
-  public Reflector forEachMethod(MethodProcessor... processors) {
-    for (MethodProcessor methodProcessor : processors) {
-      methodProcessors.add(methodProcessor);
-    }
-    return this;
   }
 
 }
