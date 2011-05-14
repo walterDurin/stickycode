@@ -13,6 +13,7 @@
 package net.stickycode.mockwire.contained;
 
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,38 +25,35 @@ import net.stickycode.mockwire.junit4.MockwireRunner;
 import static org.fest.assertions.Assertions.assertThat;
 
 @RunWith(MockwireRunner.class)
-@MockwireConfigured("postConstructed.value=something")
+@MockwireConfigured("beanWithLifecycle.value=something")
 public class CommonAnnotationsTest {
 
   @UnderTest
-  PostConstructed target;
+  BeanWithLifecycle target;
+
+  private static BeanWithLifecycle preserve;
 
   @Before
   public void before() {
     assertThat(target).isNull();
-//    assertThat(target.initialised).isTrue();
-//    assertThat(target.destroyed).isFalse();
-//    assertThat(target.value).isNull();
   }
 
   @Test
-  public void postConstruct() {
+  public void cycle() {
     assertThat(target).isNotNull();
     assertThat(target.initialised).isTrue();
     assertThat(target.destroyed).isFalse();
     assertThat(target.value).isEqualTo("something");
-  }
-
-  @Test
-  public void postConstruct2() {
-    assertThat(target).isNotNull();
-    assertThat(target.initialised).isTrue();
-    assertThat(target.destroyed).isFalse();
-    assertThat(target.value).isEqualTo("something");
+    preserve = target;
   }
 
   @After
   public void after() {
     assertThat(target.destroyed).isFalse();
+  }
+
+  @AfterClass
+  public static void afterClass() {
+    assertThat(preserve.destroyed).isTrue();
   }
 }
