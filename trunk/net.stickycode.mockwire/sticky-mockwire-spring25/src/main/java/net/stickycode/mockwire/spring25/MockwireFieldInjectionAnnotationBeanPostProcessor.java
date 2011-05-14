@@ -25,7 +25,6 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -35,6 +34,7 @@ import javax.inject.Inject;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.mockito.Mock;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.PropertyValues;
 import org.springframework.beans.TypeConverter;
@@ -79,7 +79,8 @@ public class MockwireFieldInjectionAnnotationBeanPostProcessor extends Instantia
 
 	private ConfigurableListableBeanFactory beanFactory;
 
-	private final Map<Class<?>, Constructor[]> candidateConstructorsCache =
+	@SuppressWarnings("rawtypes")
+  private final Map<Class<?>, Constructor[]> candidateConstructorsCache =
 			new ConcurrentHashMap<Class<?>, Constructor[]>();
 
 	private final Map<Class<?>, InjectionMetadata> injectionMetadataCache =
@@ -101,7 +102,7 @@ public class MockwireFieldInjectionAnnotationBeanPostProcessor extends Instantia
 	 * Set the 'autowired' annotation type, to be used on constructors, fields,
 	 * setter methods and arbitrary config methods.
 	 * <p>The default autowired annotation type is the Spring-provided
-	 * {@link Autowired} annotation, as well as {@link Value}.
+	 * {@link Autowired} annotation.
 	 * <p>This setter property exists so that developers can provide their own
 	 * (non-Spring-specific) annotation type to indicate that a member is
 	 * supposed to be autowired.
@@ -116,7 +117,7 @@ public class MockwireFieldInjectionAnnotationBeanPostProcessor extends Instantia
 	 * Set the 'autowired' annotation types, to be used on constructors, fields,
 	 * setter methods and arbitrary config methods.
 	 * <p>The default autowired annotation type is the Spring-provided
-	 * {@link Autowired} annotation, as well as {@link Value}.
+	 * {@link Autowired} annotation.
 	 * <p>This setter property exists so that developers can provide their own
 	 * (non-Spring-specific) annotation types to indicate that a member is
 	 * supposed to be autowired.
@@ -164,14 +165,15 @@ public class MockwireFieldInjectionAnnotationBeanPostProcessor extends Instantia
 	}
 
 
-	public void postProcessMergedBeanDefinition(RootBeanDefinition beanDefinition, Class beanType, String beanName) {
+	public void postProcessMergedBeanDefinition(RootBeanDefinition beanDefinition, @SuppressWarnings("rawtypes") Class beanType, String beanName) {
 		if (beanType != null) {
 			InjectionMetadata metadata = findAutowiringMetadata(beanType);
 			metadata.checkConfigMembers(beanDefinition);
 		}
 	}
 
-	@Override
+	@SuppressWarnings("rawtypes")
+  @Override
 	public Constructor[] determineCandidateConstructors(Class beanClass, String beanName) throws BeansException {
 		// Quick check on the concurrent map first, with minimal locking.
 		Constructor[] candidateConstructors = this.candidateConstructorsCache.get(beanClass);
@@ -260,7 +262,7 @@ public class MockwireFieldInjectionAnnotationBeanPostProcessor extends Instantia
 	}
 
 
-	private InjectionMetadata findAutowiringMetadata(Class clazz) {
+	private InjectionMetadata findAutowiringMetadata(@SuppressWarnings("rawtypes") Class clazz) {
 		// Quick check on the concurrent map first, with minimal locking.
 		InjectionMetadata metadata = this.injectionMetadataCache.get(clazz);
 		if (metadata == null) {
@@ -275,12 +277,11 @@ public class MockwireFieldInjectionAnnotationBeanPostProcessor extends Instantia
 		return metadata;
 	}
 
-	private InjectionMetadata buildAutowiringMetadata(Class clazz) {
-		LinkedList<InjectionMetadata.InjectedElement> elements = new LinkedList<InjectionMetadata.InjectedElement>();
+	@SuppressWarnings("rawtypes")
+  private InjectionMetadata buildAutowiringMetadata(Class clazz) {
 		Class<?> targetClass = clazz;
 		InjectionMetadata metadata = new InjectionMetadata(clazz);
 		do {
-			LinkedList<InjectionMetadata.InjectedElement> currElements = new LinkedList<InjectionMetadata.InjectedElement>();
 			for (Field field : targetClass.getDeclaredFields()) {
 				Annotation annotation = findAutowiredAnnotation(field);
 				if (annotation != null) {
@@ -317,7 +318,8 @@ public class MockwireFieldInjectionAnnotationBeanPostProcessor extends Instantia
 	 * @return the target beans, or an empty Collection if no bean of this type is found
 	 * @throws BeansException if bean retrieval failed
 	 */
-	protected <T> Map<String, T> findAutowireCandidates(Class<T> type) throws BeansException {
+	@SuppressWarnings("unchecked")
+  protected <T> Map<String, T> findAutowireCandidates(Class<T> type) throws BeansException {
 		if (this.beanFactory == null) {
 			throw new IllegalStateException("No BeanFactory configured - " +
 					"override the getBeanOfType method or specify the 'beanFactory' property");
