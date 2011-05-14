@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2010 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved.
+ * Copyright (c) 2011 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved.
  *
  * This program is licensed to you under the Apache License Version 2.0,
  * and you may not use this file except in compliance with the Apache License Version 2.0.
@@ -12,19 +12,28 @@
  */
 package net.stickycode.mockwire.guice2;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
+public class BeanHolder {
 
-import net.stickycode.mockwire.MockwireTestKit;
+  private Object instance;
+  private Class<?> type;
+  private String name;
 
-@RunWith(Suite.class)
-@SuiteClasses({ MockwireTestKit.class })
-public class MockwireTckTest {
+  public BeanHolder(String name, Object bean, Class<?> type) {
+    this.instance = bean;
+    this.type = type;
+    this.name = name;
+  }
 
-  /**
-   * This is an anchor for Infinitest to rerun this suite if its changes
-   */
-  GuiceIsolatedTestManifest anchor;
+  public Class<?> getType() {
+    return type;
+  }
+
+  public Object getInstance() {
+    return instance;
+  }
+
+  public String getName() {
+    return name;
+  }
 
 }
