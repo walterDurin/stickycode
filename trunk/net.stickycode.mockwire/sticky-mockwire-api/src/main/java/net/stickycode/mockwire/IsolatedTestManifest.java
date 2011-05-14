@@ -12,6 +12,10 @@
  */
 package net.stickycode.mockwire;
 
+import java.util.List;
+
+import net.stickycode.configured.ConfigurationSource;
+
 
 
 public interface IsolatedTestManifest extends ParameterSource {
@@ -51,11 +55,6 @@ public interface IsolatedTestManifest extends ParameterSource {
   void scanPackages(String[] scanRoots);
 
   /**
-   * Register a bean that is a configuration system
-   */
-  void registerConfigurationSystem(String name, Object configurationSystem, Class<?> type);
-
-  /**
    * Allows manifest to doing any initialisation prior to being used to wire up test instances
    */
   void startup(Class<?> testClass);
@@ -64,5 +63,15 @@ public interface IsolatedTestManifest extends ParameterSource {
    * Allows the manifest to perform any shutdown required after a test is run
    */
   void shutdown();
+
+  /**
+   * Register a the given sources for looking up configuration
+   */
+  void registerConfiguationSystem(List<ConfigurationSource> configurationSources);
+
+  /**
+   * Configure all Configured beans in the context, this includes PreConfigured and PostConfigured methods.
+   */
+  void configure();
 
 }
