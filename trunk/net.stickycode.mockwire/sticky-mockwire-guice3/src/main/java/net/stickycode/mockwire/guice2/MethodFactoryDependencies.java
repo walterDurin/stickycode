@@ -24,21 +24,30 @@ import net.stickycode.mockwire.UnderTest;
 import net.stickycode.reflector.AnnotatedFieldProcessor;
 import net.stickycode.reflector.ValueSource;
 
-public class Values
-  extends AnnotatedFieldProcessor
+public class MethodFactoryDependencies
+    extends AnnotatedFieldProcessor
     implements ValueSource {
 
   private final Map<Class<?>, Provider<?>> providers = new HashMap<Class<?>, Provider<?>>();
   private final TypeEncounter<?> encounter;
 
-  public Values(TypeEncounter<?> encounter) {
+  public MethodFactoryDependencies(TypeEncounter<?> encounter) {
     super(UnderTest.class, Controlled.class);
+    assert encounter != null;
     this.encounter = encounter;
   }
 
   @Override
   public Object get(Class<?> type) {
-    return providers.get(type).get();
+    Provider<?> provider = providers.get(type);
+    if (provider == null)
+      throw new RuntimeException();
+
+    Object x = provider.get();
+    if (x == null)
+      throw new RuntimeException();
+
+    return x;
   }
 
   @Override

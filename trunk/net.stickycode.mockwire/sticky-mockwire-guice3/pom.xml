@@ -50,19 +50,14 @@
 			<version>[5,6)</version>
 		</dependency>
 		<dependency>
-			<groupId>com.google.inject</groupId>
-			<artifactId>guice</artifactId>
-			<version>3.0</version>
-		</dependency>
-		<dependency>
 			<groupId>net.stickycode.composite</groupId>
 			<artifactId>sticky-composite-logging-api</artifactId>
 			<version>[1,2)</version>
 		</dependency>
 		<dependency>
-			<groupId>net.stickycode</groupId>
-			<artifactId>sticky-reflector</artifactId>
-			<version>[1,2)</version>
+			<groupId>net.stickycode.configured</groupId>
+			<artifactId>sticky-configured-guice3</artifactId>
+			<version>[0,1)</version>
 		</dependency>
 	</dependencies>
 </project>
