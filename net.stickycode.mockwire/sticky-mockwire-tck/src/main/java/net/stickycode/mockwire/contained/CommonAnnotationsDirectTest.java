@@ -22,14 +22,14 @@ import net.stickycode.mockwire.UnderTest;
 
 import static org.fest.assertions.Assertions.assertThat;
 
-@MockwireConfigured("postConstructed.value=something")
+@MockwireConfigured("beanWithLifecycle.value=something")
 public class CommonAnnotationsDirectTest {
 
   @UnderTest
-  PostConstructed target;
+  BeanWithLifecycle target;
 
   @Test
-  public void postConstruct() {
+  public void cycle() {
     MockwireContext context = Mockwire.isolate(this);
     assertThat(target.initialised).isTrue();
     assertThat(target.value).isEqualTo("something");
