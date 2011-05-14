@@ -16,8 +16,12 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 import net.stickycode.stereotype.Configured;
+import net.stickycode.stereotype.PostConfigured;
+import net.stickycode.stereotype.PreConfigured;
 
-public class PostConstructed {
+import static org.fest.assertions.Assertions.assertThat;
+
+public class BeanWithLifecycle {
   @Configured
   String value;
 
@@ -26,14 +30,32 @@ public class PostConstructed {
 
   @PostConstruct
   public void init() {
-    if (value == null)
-      throw new RuntimeException();
-
+    assertThat(initialised).isFalse();
+    assertThat(value).isNull();
+    assertThat(destroyed).isFalse();
     initialised = true;
+  }
+
+  @PreConfigured
+  public void preconfigured() {
+    assertThat(initialised).isTrue();
+    assertThat(value).isNull();
+    assertThat(destroyed).isFalse();
+  }
+
+  @PostConfigured
+  public void postconfigured() {
+    assertThat(initialised).isTrue();
+    assertThat(value).isNotNull();
+    assertThat(destroyed).isFalse();
   }
 
   @PreDestroy
   public void destroy() {
+    assertThat(value).isNotNull();
+    assertThat(initialised).isTrue();
+    assertThat(destroyed).isFalse();
     destroyed = true;
+    System.out.println("Destroyed");
   }
 }
