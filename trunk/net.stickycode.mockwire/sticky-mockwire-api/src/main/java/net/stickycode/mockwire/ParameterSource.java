@@ -12,9 +12,20 @@
  */
 package net.stickycode.mockwire;
 
-
+/**
+ * A source of instantiated beans that can be looked up by type.
+ */
 public interface ParameterSource {
 
-  Object getBeanOfType(Class<?> type);
+  /**
+   * Return a instance of the given bean type.
+   * 
+   * @throws MissingBeanException if there is no instance bound to type
+   * @throws NonUniqueBeanException if more than on instance of the given type exists in the context
+   * 
+   * @return An instance of the given type
+   */
+  <T> T getBeanOfType(Class<T> type)
+      throws MissingBeanException, NonUniqueBeanException;
 
 }
