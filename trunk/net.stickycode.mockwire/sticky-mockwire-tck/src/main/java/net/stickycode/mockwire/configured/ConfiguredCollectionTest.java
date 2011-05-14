@@ -27,13 +27,13 @@ import static org.fest.assertions.Assertions.assertThat;
 public class ConfiguredCollectionTest {
 
   @MockwireConfigured("configuredObject.numbers=1,3,5,7,11")
-  public class StringConfigured {
+  public static class StringConfigured {
     @UnderTest
     ConfiguredObject configured;
   }
 
   @MockwireConfigured
-  public class PropertiesConfigured {
+  public static class PropertiesConfigured {
     @UnderTest
     ConfiguredObject configured;
   }
@@ -41,6 +41,10 @@ public class ConfiguredCollectionTest {
   public static class ConfiguredObject {
     @Configured
     List<Integer> numbers;
+
+    public ConfiguredObject() {
+      super();
+    }
   }
 
   @Test
