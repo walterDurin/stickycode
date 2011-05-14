@@ -12,8 +12,6 @@
  */
 package net.stickycode.configured.guice3;
 
-import java.beans.Introspector;
-
 import com.google.inject.Inject;
 import com.google.inject.MembersInjector;
 
@@ -30,7 +28,6 @@ public class ConfiguredInjector
 
   @Override
   public void injectMembers(Object instance) {
-    String name = Introspector.decapitalize(instance.getClass().getSimpleName());
     ConfiguredConfiguration configuration = new ConfiguredConfiguration(instance);
     new Reflector()
         .forEachField(new ConfiguredFieldProcessor(configuration))
