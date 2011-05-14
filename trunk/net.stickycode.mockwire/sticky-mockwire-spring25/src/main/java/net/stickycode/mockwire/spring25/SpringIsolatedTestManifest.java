@@ -13,6 +13,7 @@
 package net.stickycode.mockwire.spring25;
 
 import java.beans.Introspector;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -28,8 +29,12 @@ import org.springframework.context.annotation.CommonAnnotationBeanPostProcessor;
 import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.core.type.filter.AnnotationTypeFilter;
 
+import net.stickycode.coercion.Coercions;
+import net.stickycode.coercion.PatternCoercion;
 import net.stickycode.component.spring25.InjectAnnotationBeanPostProcessor;
+import net.stickycode.configured.ConfigurationSource;
 import net.stickycode.configured.ConfigurationSystem;
+import net.stickycode.configured.InlineConfigurationRepository;
 import net.stickycode.configured.spring25.ConfiguredBeanPostProcessor;
 import net.stickycode.exception.PermanentException;
 import net.stickycode.mockwire.IsolatedTestManifest;
@@ -109,10 +114,12 @@ public class SpringIsolatedTestManifest
   }
 
   @Override
-  public Object getBeanOfType(Class<?> type) {
-    Map<String, ?> beans = context.getBeansOfType(type);
+  @SuppressWarnings("unchecked")
+  public <T> T getBeanOfType(Class<T> type) {
+    // XXX The map is not generic but we know it contains objects so this is safe
+    Map<String, Object> beans = context.getBeansOfType(type);
     if (beans.size() == 1)
-      return beans.values().iterator().next();
+      return (T)beans.values().iterator().next();
 
     if (beans.size() == 0)
       throw new MissingBeanException(type);
@@ -147,11 +154,27 @@ public class SpringIsolatedTestManifest
   }
 
   @Override
-  public void registerConfigurationSystem(String name, Object configurationSystem, Class<?> type) {
-    registerBean(name, configurationSystem, type);
-    ConfiguredBeanPostProcessor configurer = new ConfiguredBeanPostProcessor();
-    configurer.setConfiguration((ConfigurationSystem) configurationSystem);
-    context.getBeanFactory().addBeanPostProcessor(configurer);
+  public void registerConfiguationSystem(List<ConfigurationSource> configurationSources) {
+    registerType(context, InjectAnnotationBeanPostProcessor.class);
+    registerType(context, InlineConfigurationRepository.class);
+    registerType(context, ConfigurationSystem.class);
+    registerType(context, ConfiguredBeanPostProcessor.class);
+    registerType(context, PatternCoercion.class);
+    registerType(context, Coercions.class);
+    for (ConfigurationSource configurationSource : configurationSources) {
+      registerBean(name(configurationSource.getClass()), configurationSource, ConfigurationSource.class);
+    }
+  }
+
+  public void registerType(GenericApplicationContext c, Class<?> type) {
+    GenericBeanDefinition bd = new GenericBeanDefinition();
+    bd.setBeanClass(type);
+    bd.setAutowireMode(AbstractBeanDefinition.AUTOWIRE_BY_TYPE);
+    c.getDefaultListableBeanFactory().registerBeanDefinition(name(type), bd);
+  }
+
+  private String name(Class<?> type) {
+    return Introspector.decapitalize(type.getSimpleName());
   }
 
   @Override
@@ -179,6 +202,11 @@ public class SpringIsolatedTestManifest
 
   public GenericApplicationContext getContext() {
     return context;
+  }
+
+  @Override
+  public void configure() {
+    getBeanOfType(ConfigurationSystem.class).configure();
   }
 
 }
