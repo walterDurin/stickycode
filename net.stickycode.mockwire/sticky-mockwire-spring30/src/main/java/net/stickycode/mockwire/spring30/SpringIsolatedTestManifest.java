@@ -13,6 +13,7 @@
 package net.stickycode.mockwire.spring30;
 
 import java.beans.Introspector;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -28,8 +29,12 @@ import org.springframework.context.annotation.CommonAnnotationBeanPostProcessor;
 import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.core.type.filter.AnnotationTypeFilter;
 
+import net.stickycode.coercion.Coercions;
+import net.stickycode.coercion.PatternCoercion;
+import net.stickycode.configured.ConfigurationSource;
 import net.stickycode.configured.ConfigurationSystem;
-import net.stickycode.configured.spring25.ConfiguredBeanPostProcessor;
+import net.stickycode.configured.InlineConfigurationRepository;
+import net.stickycode.configured.spring30.ConfiguredBeanPostProcessor;
 import net.stickycode.exception.PermanentException;
 import net.stickycode.mockwire.IsolatedTestManifest;
 import net.stickycode.mockwire.MissingBeanException;
@@ -61,7 +66,6 @@ public class SpringIsolatedTestManifest
         this);
   }
 
-
   @Override
   public boolean hasRegisteredType(Class<?> type) {
     return context.getBeanNamesForType(type).length > 0;
@@ -75,17 +79,15 @@ public class SpringIsolatedTestManifest
     catch (BeansException e) {
       Throwable cause = e.getMostSpecificCause();
       if (cause instanceof NoSuchBeanDefinitionException) {
-        NoSuchBeanDefinitionException n = (NoSuchBeanDefinitionException)cause;
+        NoSuchBeanDefinitionException n = (NoSuchBeanDefinitionException) cause;
         throw new MissingBeanException(n, testInstance, n.getBeanType());
       }
       if (cause instanceof PermanentException)
-        throw (PermanentException)cause;
+        throw (PermanentException) cause;
 
       throw new TestInjectionFailure(e, testInstance.getClass());
     }
   }
-
-
 
   @Override
   public void registerBean(String beanName, Object bean, Class<?> type) {
@@ -107,10 +109,10 @@ public class SpringIsolatedTestManifest
   }
 
   @Override
-  public Object getBeanOfType(Class<?> type) {
+  public <T> T getBeanOfType(Class<T> type) {
     Map<String, ?> beans = context.getBeansOfType(type);
     if (beans.size() == 1)
-      return beans.values().iterator().next();
+      return (T) beans.values().iterator().next();
 
     if (beans.size() == 0)
       throw new MissingBeanException(type);
@@ -145,14 +147,6 @@ public class SpringIsolatedTestManifest
   }
 
   @Override
-  public void registerConfigurationSystem(String name, Object configurationSystem, Class<?> type) {
-    registerBean(name, configurationSystem, type);
-    ConfiguredBeanPostProcessor beanPostProcessor = new ConfiguredBeanPostProcessor();
-    beanPostProcessor.setConfiguration((ConfigurationSystem) configurationSystem);
-    context.getBeanFactory().addBeanPostProcessor(beanPostProcessor);
-  }
-
-  @Override
   public void startup(Class<?> testClass) {
     try {
       context.refresh();
@@ -160,16 +154,15 @@ public class SpringIsolatedTestManifest
     catch (BeansException e) {
       Throwable cause = e.getMostSpecificCause();
       if (cause instanceof NoSuchBeanDefinitionException) {
-        NoSuchBeanDefinitionException n = (NoSuchBeanDefinitionException)cause;
+        NoSuchBeanDefinitionException n = (NoSuchBeanDefinitionException) cause;
         throw new MissingBeanException(n, testClass, n.getBeanType());
       }
       if (cause instanceof PermanentException)
-        throw (PermanentException)cause;
+        throw (PermanentException) cause;
 
       throw new TestInjectionFailure(e, testClass);
     }
   }
-
 
   @Override
   public void shutdown() {
@@ -178,6 +171,33 @@ public class SpringIsolatedTestManifest
 
   GenericApplicationContext getContext() {
     return context;
+  }
+
+  @Override
+  public void registerConfiguationSystem(List<ConfigurationSource> configurationSources) {
+    registerType(context, InlineConfigurationRepository.class);
+    registerType(context, ConfigurationSystem.class);
+    registerType(context, ConfiguredBeanPostProcessor.class);
+    registerType(context, PatternCoercion.class);
+    registerType(context, Coercions.class);
+    for (ConfigurationSource configurationSource : configurationSources) {
+      registerBean(name(configurationSource.getClass()), configurationSource, ConfigurationSource.class);
+    }
+  }
+
+  public void registerType(GenericApplicationContext c, Class<?> type) {
+    GenericBeanDefinition bd = new GenericBeanDefinition();
+    bd.setBeanClass(type);
+    bd.setAutowireMode(AbstractBeanDefinition.AUTOWIRE_BY_TYPE);
+    c.getDefaultListableBeanFactory().registerBeanDefinition(name(type), bd);
+  }
+
+  private String name(Class<?> type) {
+    return Introspector.decapitalize(type.getSimpleName());
+  }
+  @Override
+  public void configure() {
+    getBeanOfType(ConfigurationSystem.class).configure();
   }
 
 }
