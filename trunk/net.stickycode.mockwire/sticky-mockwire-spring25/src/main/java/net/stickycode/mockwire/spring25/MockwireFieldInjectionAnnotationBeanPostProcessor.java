@@ -30,11 +30,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-import javax.inject.Inject;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.mockito.Mock;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.PropertyValues;
 import org.springframework.beans.TypeConverter;
@@ -57,10 +54,11 @@ import org.springframework.util.Assert;
 import org.springframework.util.ReflectionUtils;
 
 import net.stickycode.mockwire.Controlled;
+import net.stickycode.mockwire.Uncontrolled;
 import net.stickycode.mockwire.UnderTest;
 
 /**
- *A copy of {@link AutowiredAnnotationBeanPostProcessor} that only wires {@link Mock}, {@link Bless} and {@link Inject} on fields.
+ *A copy of {@link AutowiredAnnotationBeanPostProcessor} that only wires {@link UnderTest}, {@link Controlled} and {@link Uncontrolled} on fields.
  * @see AutowiredAnnotationBeanPostProcessor
  */
 public class MockwireFieldInjectionAnnotationBeanPostProcessor extends InstantiationAwareBeanPostProcessorAdapter
