@@ -18,7 +18,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import net.stickycode.mockwire.Bless;
+import net.stickycode.mockwire.Controlled;
 import net.stickycode.mockwire.Mock;
+import net.stickycode.mockwire.UnderTest;
 import net.stickycode.mockwire.junit4.MockwireRunner;
 
 import static org.fest.assertions.Assertions.assertThat;
@@ -42,11 +44,11 @@ public class UnitDependenciesTest {
     }
   }
 
-  @Bless
+  @UnderTest
   Unit unit;
 
-  @Mock
-  Dependency mocked;
+  @Controlled
+  Dependency controlled;
 
   @Test
   public void simple() {
@@ -54,6 +56,6 @@ public class UnitDependenciesTest {
     assertThat(unit.dependency).isNotNull();
 
     unit.call();
-    verify(mocked).call();
+    verify(controlled).call();
   }
 }
