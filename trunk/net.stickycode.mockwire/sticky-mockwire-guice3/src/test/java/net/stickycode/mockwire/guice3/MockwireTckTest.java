@@ -10,13 +10,14 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
  */
-package net.stickycode.mockwire.guice2;
+package net.stickycode.mockwire.guice3;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import net.stickycode.mockwire.MockwireTestKit;
+import net.stickycode.mockwire.guice2.GuiceIsolatedTestManifest;
 
 @RunWith(Suite.class)
 @SuiteClasses({ MockwireTestKit.class })
