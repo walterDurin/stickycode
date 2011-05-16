@@ -32,8 +32,7 @@
 		<dependency>
 			<groupId>net.stickycode.mockwire</groupId>
 			<artifactId>mockwire-spring25</artifactId>
-			<version>[1,2)</version>
-			<type>jar</type>
+			<version>[3,4)</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

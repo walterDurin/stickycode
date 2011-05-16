@@ -20,8 +20,8 @@ import javax.inject.Inject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import net.stickycode.mockwire.Bless;
-import net.stickycode.mockwire.Mock;
+import net.stickycode.mockwire.Controlled;
+import net.stickycode.mockwire.UnderTest;
 import net.stickycode.mockwire.junit4.MockwireRunner;
 
 import static org.fest.assertions.Assertions.assertThat;
@@ -31,10 +31,10 @@ import static org.mockito.Mockito.when;
 @RunWith(MockwireRunner.class)
 public class DecentTest {
 
-  @Bless
+  @UnderTest
   CumulativeService service;
 
-  @Mock
+  @Controlled
   Repository repository;
 
   @Test
@@ -46,13 +46,13 @@ public class DecentTest {
   @Test
   public void cumulate1is1() {
     when(repository.getDatas())
-      .thenReturn(Collections.singletonList(new Data(1)));
+        .thenReturn(Collections.singletonList(new Data(1)));
     assertThat(service.getDataSummary()).isEqualTo(1);
   }
-  
+
   @Test
   public void cumulativeLots() {
-    
+
   }
 }
 
