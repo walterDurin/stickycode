@@ -17,7 +17,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import net.stickycode.mockwire.MockwireTestKit;
-import net.stickycode.mockwire.guice2.GuiceIsolatedTestManifest;
+import net.stickycode.mockwire.guice3.GuiceIsolatedTestManifest;
 
 @RunWith(Suite.class)
 @SuiteClasses({ MockwireTestKit.class })
