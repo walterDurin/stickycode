@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2010 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved.
+ * Copyright (c) 2011 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved.
  *
  * This program is licensed to you under the Apache License Version 2.0,
  * and you may not use this file except in compliance with the Apache License Version 2.0.
@@ -12,19 +12,17 @@
  */
 package net.stickycode.mockwire.guice3;
 
+import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import net.stickycode.mockwire.MockwireTck;
-import net.stickycode.mockwire.direct.MockwireDirectTck;
-import net.stickycode.mockwire.junit4.MockwireRunnerTck;
+import net.stickycode.mockwire.contained.MockwireContainmentTck;
 
+@Ignore
 @RunWith(Suite.class)
-@SuiteClasses({ MockwireTck.class,
-    MockwireDirectTck.class,
-    MockwireRunnerTck.class })
-public class MockwireTckTest {
+@SuiteClasses({ MockwireContainmentTck.class })
+public class ContainmentTck {
 
   /**
    * This is an anchor for Infinitest to rerun this suite if its changes
