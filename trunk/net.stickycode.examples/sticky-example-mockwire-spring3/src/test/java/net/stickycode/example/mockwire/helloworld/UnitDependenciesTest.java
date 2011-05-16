@@ -17,15 +17,9 @@ import javax.inject.Inject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import net.stickycode.mockwire.Bless;
 import net.stickycode.mockwire.Controlled;
-import net.stickycode.mockwire.Mock;
 import net.stickycode.mockwire.UnderTest;
 import net.stickycode.mockwire.junit4.MockwireRunner;
-
-import static org.mockito.Mockito.doThrow;
-
-import static org.mockito.Mockito.when;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
@@ -51,7 +45,6 @@ public class UnitDependenciesTest {
   @Inject
   Dependency dip;
 
-
   @UnderTest
   Unit unit;
 
@@ -64,7 +57,6 @@ public class UnitDependenciesTest {
     assertThat(mocked).isNotNull();
     assertThat(dip).isNotNull();
     assertThat(unit.dependency).isNotNull();
-    doThrow(new RuntimeException()).when(mocked).call();
     unit.call();
     verify(mocked).call();
   }

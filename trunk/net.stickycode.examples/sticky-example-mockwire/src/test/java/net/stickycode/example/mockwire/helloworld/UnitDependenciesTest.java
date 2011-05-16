@@ -44,6 +44,9 @@ public class UnitDependenciesTest {
     }
   }
 
+  @Inject
+  Dependency dip;
+
   @UnderTest
   Unit unit;
 
@@ -54,7 +57,7 @@ public class UnitDependenciesTest {
   public void simple() {
     assertThat(unit).isNotNull();
     assertThat(unit.dependency).isNotNull();
-
+    assertThat(dip).isNotNull();
     unit.call();
     verify(controlled).call();
   }
