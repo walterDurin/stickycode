@@ -110,6 +110,7 @@ public class SpringIsolatedTestManifest
   }
 
   @Override
+  @SuppressWarnings("unchecked")
   public <T> T getBeanOfType(Class<T> type) {
     Map<String, ?> beans = context.getBeansOfType(type);
     if (beans.size() == 1)
