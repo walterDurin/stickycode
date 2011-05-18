@@ -34,6 +34,7 @@ import net.stickycode.coercion.PatternCoercion;
 import net.stickycode.configured.ConfigurationSource;
 import net.stickycode.configured.ConfigurationSystem;
 import net.stickycode.configured.InlineConfigurationRepository;
+import net.stickycode.configured.SimpleNameDotFieldConfigurationKeyBuilder;
 import net.stickycode.configured.spring30.ConfiguredBeanPostProcessor;
 import net.stickycode.exception.PermanentException;
 import net.stickycode.mockwire.IsolatedTestManifest;
@@ -177,6 +178,7 @@ public class SpringIsolatedTestManifest
   public void registerConfiguationSystem(List<ConfigurationSource> configurationSources) {
     registerType(context, InlineConfigurationRepository.class);
     registerType(context, ConfigurationSystem.class);
+    registerType(context, SimpleNameDotFieldConfigurationKeyBuilder.class);
     registerType(context, ConfiguredBeanPostProcessor.class);
     registerType(context, PatternCoercion.class);
     registerType(context, Coercions.class);
