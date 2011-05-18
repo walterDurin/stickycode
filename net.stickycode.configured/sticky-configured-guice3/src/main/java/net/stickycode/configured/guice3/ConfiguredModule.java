@@ -13,6 +13,7 @@
 package net.stickycode.configured.guice3;
 
 import com.google.inject.AbstractModule;
+import com.google.inject.Singleton;
 import com.google.inject.TypeLiteral;
 import com.google.inject.matcher.Matchers;
 import com.google.inject.multibindings.Multibinder;
@@ -21,18 +22,21 @@ import net.stickycode.coercion.Coercion;
 import net.stickycode.coercion.CoercionFinder;
 import net.stickycode.coercion.Coercions;
 import net.stickycode.coercion.PatternCoercion;
+import net.stickycode.configured.ConfigurationKeyBuilder;
 import net.stickycode.configured.ConfigurationRepository;
 import net.stickycode.configured.ConfigurationSystem;
 import net.stickycode.configured.InlineConfigurationRepository;
+import net.stickycode.configured.SimpleNameDotFieldConfigurationKeyBuilder;
 
 public class ConfiguredModule
     extends AbstractModule {
 
   @Override
   protected void configure() {
-    bind(ConfigurationSystem.class).asEagerSingleton();
-    bind(ConfiguredInjector.class).asEagerSingleton();
-    bind(ConfigurationRepository.class).to(InlineConfigurationRepository.class).asEagerSingleton();
+    bind(ConfigurationSystem.class).in(Singleton.class);
+    bind(ConfiguredInjector.class).in(Singleton.class);
+    bind(ConfigurationKeyBuilder.class).to(SimpleNameDotFieldConfigurationKeyBuilder.class).in(Singleton.class);
+    bind(ConfigurationRepository.class).to(InlineConfigurationRepository.class).in(Singleton.class);
     bindCoercions();
     ConfiguredTypeListener listener = new ConfiguredTypeListener();
     requestInjection(listener);
