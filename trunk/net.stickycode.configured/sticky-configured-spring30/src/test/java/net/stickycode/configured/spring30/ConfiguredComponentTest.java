@@ -26,6 +26,7 @@ import net.stickycode.configured.AbstractConfiguredComponentTest;
 import net.stickycode.configured.ConfigurationSource;
 import net.stickycode.configured.ConfigurationSystem;
 import net.stickycode.configured.InlineConfigurationRepository;
+import net.stickycode.configured.SimpleNameDotFieldConfigurationKeyBuilder;
 
 import static org.mockito.Mockito.when;
 
@@ -45,6 +46,7 @@ public class ConfiguredComponentTest
     registerType(c, PatternCoercion.class);
     registerType(c, Coercions.class);
     registerType(c, InlineConfigurationRepository.class);
+    registerType(c, SimpleNameDotFieldConfigurationKeyBuilder.class);
     registerType(c, ConfigurationSystem.class);
     registerType(c, ConfiguredBeanPostProcessor.class);
     registerType(c, AutowiredAnnotationBeanPostProcessor.class);

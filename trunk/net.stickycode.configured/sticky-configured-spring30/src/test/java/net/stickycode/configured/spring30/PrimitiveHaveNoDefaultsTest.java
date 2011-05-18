@@ -25,6 +25,7 @@ import net.stickycode.configured.AbstractPrimitiveConfiguratedTest;
 import net.stickycode.configured.ConfigurationSource;
 import net.stickycode.configured.ConfigurationSystem;
 import net.stickycode.configured.InlineConfigurationRepository;
+import net.stickycode.configured.SimpleNameDotFieldConfigurationKeyBuilder;
 
 public class PrimitiveHaveNoDefaultsTest
     extends AbstractPrimitiveConfiguratedTest {
@@ -36,6 +37,7 @@ public class PrimitiveHaveNoDefaultsTest
     registerType(c, PatternCoercion.class);
     registerType(c, Coercions.class);
     registerType(c, InlineConfigurationRepository.class);
+    registerType(c, SimpleNameDotFieldConfigurationKeyBuilder.class);
     registerType(c, ConfigurationSystem.class);
     registerType(c, ConfiguredBeanPostProcessor.class);
     registerType(c, AutowiredAnnotationBeanPostProcessor.class);

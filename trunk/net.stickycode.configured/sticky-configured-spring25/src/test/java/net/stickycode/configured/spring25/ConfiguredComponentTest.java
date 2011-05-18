@@ -15,7 +15,6 @@ package net.stickycode.configured.spring25;
 import java.beans.Introspector;
 
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.context.support.GenericApplicationContext;
@@ -27,6 +26,7 @@ import net.stickycode.configured.AbstractConfiguredComponentTest;
 import net.stickycode.configured.ConfigurationSource;
 import net.stickycode.configured.ConfigurationSystem;
 import net.stickycode.configured.InlineConfigurationRepository;
+import net.stickycode.configured.SimpleNameDotFieldConfigurationKeyBuilder;
 
 import static org.mockito.Mockito.when;
 
@@ -47,6 +47,7 @@ public class ConfiguredComponentTest
     registerType(c, InjectAnnotationBeanPostProcessor.class);
     registerType(c, InlineConfigurationRepository.class);
     registerType(c, ConfigurationSystem.class);
+    registerType(c, SimpleNameDotFieldConfigurationKeyBuilder.class);
     registerType(c, ConfiguredBeanPostProcessor.class);
     registerType(c, PatternCoercion.class);
     registerType(c, Coercions.class);
