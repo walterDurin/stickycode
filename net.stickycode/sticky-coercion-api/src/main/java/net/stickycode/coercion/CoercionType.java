@@ -14,13 +14,13 @@ package net.stickycode.coercion;
 
 import java.lang.reflect.ParameterizedType;
 
-final class CoercionType
+public final class CoercionType
     extends AbstractCoercionType {
 
   private final Class<?> type;
   private final ParameterizedType genericType;
 
-  CoercionType(Class<?> type) {
+  public CoercionType(Class<?> type) {
     this.type = type;
     this.genericType = null;
   }
