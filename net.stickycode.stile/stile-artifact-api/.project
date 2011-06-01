@@ -1,5 +1,5 @@
 <projectDescription>
-  <name>stile-artifact</name>
+  <name>stile-artifact-api</name>
   <comment>The plugin definitions for jar projects</comment>
   <projects/>
   <buildSpec>
