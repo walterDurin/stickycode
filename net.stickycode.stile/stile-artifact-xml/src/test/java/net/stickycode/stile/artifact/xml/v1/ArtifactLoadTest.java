@@ -8,18 +8,24 @@ import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.UnmarshalException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TestName;
 import org.xml.sax.SAXException;
 
 public class ArtifactLoadTest {
 
+  @Rule
+  public TestName testName = new TestName();
+
   @Test
-  public void load() {
+  public void sample1() throws JAXBException, SAXException {
     XmlArtifact artifact = load("sample1.xml");
     assertThat(artifact.getId()).isEqualTo("stile");
     assertThat(artifact.getGroup()).isEqualTo("net.stickycode.stile");
@@ -35,6 +41,36 @@ public class ArtifactLoadTest {
     t.setProject(artifactReference("net.stickycode.project", "1.12"));
     t.setDependencies(dependencies());
     save(t);
+  }
+
+  @Test(expected = UnmarshalException.class)
+  public void empty() throws JAXBException, SAXException {
+    load("empty.xml");
+  }
+
+  @Test(expected = UnmarshalException.class)
+  public void justArtifact() throws JAXBException, SAXException {
+    load("artifact-unqualified.xml");
+  }
+
+  @Test(expected = UnmarshalException.class)
+  public void noGroup() throws JAXBException, SAXException {
+    load("artifact-no-group.xml");
+  }
+
+  @Test(expected = UnmarshalException.class)
+  public void noId() throws JAXBException, SAXException {
+    load("artifact-no-id.xml");
+  }
+
+  @Test(expected = UnmarshalException.class)
+  public void noPackaging() throws JAXBException, SAXException {
+    load("artifact-no-packaging.xml");
+  }
+
+  @Test(expected = UnmarshalException.class)
+  public void noProject() throws JAXBException, SAXException {
+    load("artifact-no-project.xml");
   }
 
   private DependenciesType dependencies() {
@@ -55,7 +91,6 @@ public class ArtifactLoadTest {
       Schema schema = schema();
       marshaller.setSchema(schema);
       marshaller.setProperty("jaxb.formatted.output", true);
-//      JAXBElement<XmlArtifact> e = new JAXBElement<XmlArtifact>(new QName("artifact"), XmlArtifact.class, t);
       marshaller.marshal(t, System.out);
     }
     catch (JAXBException e) {
@@ -64,33 +99,22 @@ public class ArtifactLoadTest {
     catch (SAXException e) {
       throw new RuntimeException(e);
     }
-
-//    return unmarshaller.marshal(new StreamSource(sampleSource), XmlArtifact.class).getValue();
-
   }
 
-  private XmlArtifact load(String string) {
+  private XmlArtifact load(String string) throws JAXBException, SAXException {
     assertThat(string).isNotNull();
     InputStream sampleSource = getClass().getResourceAsStream(string);
     assertThat(sampleSource).isNotNull();
-    try {
-      JAXBContext context = JAXBContext.newInstance(XmlArtifact.class);
-      Unmarshaller unmarshaller = context.createUnmarshaller();
-      Schema schema = schema();
-      unmarshaller.setSchema(schema);
-      return unmarshaller.unmarshal(new StreamSource(sampleSource), XmlArtifact.class).getValue();
-    }
-    catch (JAXBException e) {
-      throw new RuntimeException(e);
-    }
-    catch (SAXException e) {
-      throw new RuntimeException(e);
-    }
+    JAXBContext context = JAXBContext.newInstance(XmlArtifact.class);
+    Unmarshaller unmarshaller = context.createUnmarshaller();
+    Schema schema = schema();
+    unmarshaller.setSchema(schema);
+    return unmarshaller.unmarshal(new StreamSource(sampleSource), XmlArtifact.class).getValue();
   }
 
   private Schema schema() throws SAXException {
     SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-    InputStream schemaSource = getClass().getResourceAsStream("Artifact.xsd");
+    InputStream schemaSource = getClass().getResourceAsStream("Artifact-v1.xsd");
     assertThat(schemaSource).isNotNull();
     Schema schema = factory.newSchema(new StreamSource(schemaSource));
     return schema;
