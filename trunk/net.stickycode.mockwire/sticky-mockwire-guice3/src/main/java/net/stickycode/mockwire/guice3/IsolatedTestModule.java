@@ -27,6 +27,7 @@ public class IsolatedTestModule
   private Logger log = LoggerFactory.getLogger(getClass());
 
   private final IsolatedTestModuleMetadata manifest;
+
   private final Class<?> testClass;
 
   public IsolatedTestModule(Class<?> testClass, IsolatedTestModuleMetadata manifest) {
@@ -44,14 +45,35 @@ public class IsolatedTestModule
       log.debug("binding type '{}' to instance '{}'", type, b.getInstance());
       bind(type).toInstance(b.getInstance());
     }
-    for (Class<?> type : manifest.getTypes()) {
+    for (Class type : manifest.getTypes()) {
       log.debug("binding type '{}'", type);
       bind(type).in(Singleton.class);
+      bindInterfaces(type, type.getInterfaces());
+      bindSuperType(type, type.getSuperclass());
     }
 
-    for (Module  module: manifest.getModules()) {
+    for (Module module : manifest.getModules()) {
       log.debug("installing module '{}'", module);
       install(module);
+    }
+  }
+
+  private void bindSuperType(Class type, Class superClass) {
+    if (superClass != null && !superClass.equals(Object.class)) {
+      bind(superClass).to(type).in(Singleton.class);
+      bindInterfaces(type, superClass.getInterfaces());
+      bindSuperType(type, superClass.getSuperclass());
+    }
+  }
+
+  /**
+   * Recurse and bind all the interfaces implemented by the given type.
+   */
+  @SuppressWarnings({ "rawtypes", "unchecked" })
+  private void bindInterfaces(Class type, Class[] interfaces) {
+    for (Class implemented : interfaces) {
+      bind(implemented).to(type).in(Singleton.class);
+      bindInterfaces(type, implemented.getInterfaces());
     }
   }
 
