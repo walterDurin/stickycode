@@ -69,7 +69,6 @@ public class IsolatedTestModuleMetadata {
     modules.add(module);
   }
 
-
   List<Module> getModules() {
     return modules;
   }

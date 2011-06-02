@@ -12,13 +12,13 @@
  */
 package net.stickycode.mockwire.guice3;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
-
 import net.stickycode.mockwire.MockwireTck;
 import net.stickycode.mockwire.direct.MockwireDirectTck;
 import net.stickycode.mockwire.junit4.MockwireRunnerTck;
+
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({ MockwireTck.class,
