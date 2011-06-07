@@ -1,6 +1,6 @@
 package net.stickycode.stile.version.component;
 
-import static net.stickycode.stile.version.Prerequisites.notBlank;
+import static net.stickycode.exception.Preconditions.notBlank;
 
 import java.util.LinkedList;
 import java.util.List;

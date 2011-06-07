@@ -1,6 +1,6 @@
 package net.stickycode.stile.version.component;
 
-import static net.stickycode.stile.version.Prerequisites.notNull;
+import static net.stickycode.exception.Preconditions.notNull;
 import net.stickycode.stile.version.VersionComponent;
 
 class NumericVersionComponent
