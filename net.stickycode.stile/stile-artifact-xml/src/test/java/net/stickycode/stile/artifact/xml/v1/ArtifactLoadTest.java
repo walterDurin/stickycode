@@ -1,6 +1,7 @@
 package net.stickycode.stile.artifact.xml.v1;
 
 import static org.fest.assertions.Assertions.assertThat;
+import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 
 import java.io.InputStream;
 
@@ -14,6 +15,9 @@ import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 
+
+import net.stickycode.resource.ClasspathResource;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
@@ -23,6 +27,8 @@ public class ArtifactLoadTest {
 
   @Rule
   public TestName testName = new TestName();
+
+  XmlArtifactParser parser = new XmlArtifactParser();
 
   @Test
   public void sample1() throws JAXBException, SAXException {
@@ -88,7 +94,7 @@ public class ArtifactLoadTest {
     try {
       JAXBContext context = JAXBContext.newInstance(XmlArtifact.class);
       Marshaller marshaller = context.createMarshaller();
-      Schema schema = schema();
+      Schema schema = parser.getSchema();
       marshaller.setSchema(schema);
       marshaller.setProperty("jaxb.formatted.output", true);
       marshaller.marshal(t, System.out);
@@ -96,28 +102,13 @@ public class ArtifactLoadTest {
     catch (JAXBException e) {
       throw new RuntimeException(e);
     }
-    catch (SAXException e) {
-      throw new RuntimeException(e);
-    }
   }
 
-  private XmlArtifact load(String string) throws JAXBException, SAXException {
+  private XmlArtifact load(String string) {
     assertThat(string).isNotNull();
     InputStream sampleSource = getClass().getResourceAsStream(string);
     assertThat(sampleSource).isNotNull();
-    JAXBContext context = JAXBContext.newInstance(XmlArtifact.class);
-    Unmarshaller unmarshaller = context.createUnmarshaller();
-    Schema schema = schema();
-    unmarshaller.setSchema(schema);
-    return unmarshaller.unmarshal(new StreamSource(sampleSource), XmlArtifact.class).getValue();
-  }
-
-  private Schema schema() throws SAXException {
-    SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-    InputStream schemaSource = getClass().getResourceAsStream("Artifact-v1.xsd");
-    assertThat(schemaSource).isNotNull();
-    Schema schema = factory.newSchema(new StreamSource(schemaSource));
-    return schema;
+    return parser.unmarshall(new ClasspathResource(getClass(), string));
   }
 
 }
