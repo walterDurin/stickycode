@@ -55,7 +55,7 @@ public class XmlArtifactParser
       return unmarshaller.unmarshal(source, XmlArtifact.class).getValue();
     }
     catch (JAXBException e) {
-      throw new RuntimeException(e);
+      throw new ParseFailureException(e);
     }
   }
 

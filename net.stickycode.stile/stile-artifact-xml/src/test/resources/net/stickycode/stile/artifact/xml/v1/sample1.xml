@@ -30,4 +30,9 @@
 			<use id="net.stickycode.composite.logging.deploy" version="[1.1,2)" />
 		</unittest>
 	</dependencies>
+	<plugins>
+		<jar:plugin xmlns:jar="stile://net.stickycode.stile.jar/v1.1">
+		
+		</jar:plugin>
+	</plugins>
 </artifact>
