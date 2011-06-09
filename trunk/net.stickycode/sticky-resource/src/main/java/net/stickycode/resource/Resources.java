@@ -8,4 +8,6 @@ abstract public class Resources
   @Override
   abstract public Iterator<Resource> iterator();
 
+  abstract public String getReference();
+
 }
