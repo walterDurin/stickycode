@@ -49,32 +49,32 @@ public class ArtifactLoadTest {
     save(t);
   }
 
-  @Test(expected = UnmarshalException.class)
+  @Test(expected = ParseFailureException.class)
   public void empty() throws JAXBException, SAXException {
     load("empty.xml");
   }
 
-  @Test(expected = UnmarshalException.class)
+  @Test(expected = ParseFailureException.class)
   public void justArtifact() throws JAXBException, SAXException {
     load("artifact-unqualified.xml");
   }
 
-  @Test(expected = UnmarshalException.class)
+  @Test(expected = ParseFailureException.class)
   public void noGroup() throws JAXBException, SAXException {
     load("artifact-no-group.xml");
   }
 
-  @Test(expected = UnmarshalException.class)
+  @Test(expected = ParseFailureException.class)
   public void noId() throws JAXBException, SAXException {
     load("artifact-no-id.xml");
   }
 
-  @Test(expected = UnmarshalException.class)
+  @Test(expected = ParseFailureException.class)
   public void noPackaging() throws JAXBException, SAXException {
     load("artifact-no-packaging.xml");
   }
 
-  @Test(expected = UnmarshalException.class)
+  @Test(expected = ParseFailureException.class)
   public void noProject() throws JAXBException, SAXException {
     load("artifact-no-project.xml");
   }
