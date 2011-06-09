@@ -58,4 +58,9 @@ public class DirectoryResources
     return resources.iterator();
   }
 
+  @Override
+  public String getReference() {
+    return "ref";
+  }
+
 }
