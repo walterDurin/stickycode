@@ -22,7 +22,7 @@ public class FileResource
 
   @Override
   public String toString() {
-    return "file://" + file.getAbsolutePath();
+    return "file://" + file.getPath();
   }
 
   @Override
