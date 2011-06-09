@@ -23,7 +23,7 @@
 
 	<groupId>net.stickycode</groupId>
 	<artifactId>sticky-exception</artifactId>
-	<version>1.4-SNAPSHOT</version>
+	<version>1.5-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>sticky-exception</name>
