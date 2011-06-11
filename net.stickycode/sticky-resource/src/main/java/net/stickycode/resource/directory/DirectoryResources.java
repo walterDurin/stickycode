@@ -1,36 +1,18 @@
-package net.stickycode.resource;
+package net.stickycode.resource.directory;
 
 import static net.stickycode.exception.Preconditions.notNull;
 
 import java.io.File;
-import java.io.FileFilter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import net.stickycode.resource.Resource;
+import net.stickycode.resource.ResourceType;
+import net.stickycode.resource.Resources;
+
 public class DirectoryResources
     extends Resources {
-
-  private final class DirectoryOrExtensionFilter
-      implements FileFilter {
-
-    private final ResourceType resourceType;
-
-    public DirectoryOrExtensionFilter(ResourceType resourceType) {
-      this.resourceType = resourceType;
-    }
-
-    @Override
-    public boolean accept(File path) {
-      if (!path.canRead())
-        return false;
-
-      if (path.isDirectory())
-        return true;
-
-      return resourceType.matchesExtension(path.getName());
-    }
-  }
 
   private final List<Resource> resources = new ArrayList<Resource>();
 
@@ -41,6 +23,7 @@ public class DirectoryResources
   public DirectoryResources(File baseDirectory, ResourceType resourceType) {
     this.baseDirectory = notNull(baseDirectory, "Base directory cannot be null");
     this.resourceType = notNull(resourceType, "The resource type cannot be null");
+    // TODO create a stateful scanner class that uses iteration not recursion
     scan(this.baseDirectory);
   }
 
@@ -60,7 +43,7 @@ public class DirectoryResources
 
   @Override
   public String getReference() {
-    return "ref";
+    return null;
   }
 
 }
