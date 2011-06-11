@@ -1,10 +1,13 @@
-package net.stickycode.resource;
+package net.stickycode.resource.directory;
 
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+
+import net.stickycode.resource.Resource;
+import net.stickycode.resource.ResourceNotFoundException;
 
 public class FileResource
     implements Resource {

@@ -1,9 +1,12 @@
-package net.stickycode.resource;
+package net.stickycode.resource.directory;
 
 import java.io.File;
 import java.util.Iterator;
 
-public class FileResources
+import net.stickycode.resource.Resource;
+import net.stickycode.resource.Resources;
+
+public class FilesFromResources
     implements Iterable<File> {
 
   public class FileIterator
@@ -34,7 +37,7 @@ public class FileResources
 
   private final Resources resources;
 
-  public FileResources(Resources resources) {
+  public FilesFromResources(Resources resources) {
     super();
     this.resources = resources;
   }
