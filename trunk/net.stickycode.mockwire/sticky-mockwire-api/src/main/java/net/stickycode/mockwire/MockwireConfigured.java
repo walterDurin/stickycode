@@ -98,7 +98,7 @@ import net.stickycode.stereotype.Configured;
  *
  *      &#064;Test
  *      public void check() {
- *        assertThat(a.b).isEqualTo("frompropfile");
+ *        assertThat(a.b).isEqualTo("fromotherpropfile");
  *      }
  *
  *   }
@@ -137,7 +137,7 @@ public @interface MockwireConfigured {
   Priority useSystemProperties() default Priority.Fallback;
 
   /**
-   * When configuring classes look for fields marked with there annotations
+   * When configuring classes look for fields marked with these annotations
    */
   Class<? extends Annotation>[] configuredMarkers() default {Configured.class};
 

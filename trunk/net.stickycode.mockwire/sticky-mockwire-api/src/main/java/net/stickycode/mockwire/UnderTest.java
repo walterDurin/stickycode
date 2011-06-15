@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2010 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved.
+ * Copyright (c) 2011 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved.
  *
  * This program is licensed to you under the Apache License Version 2.0,
  * and you may not use this file except in compliance with the Apache License Version 2.0.
@@ -20,56 +20,59 @@ import java.lang.annotation.Target;
 
 /**
  * In empirical terms this is the object of investigation that we are going to prod and see what happens.
- *
- * Technically we mark a field as defining a bean in an isolated test context and also mark the field for injection of the value created in the isolated test context.
- *
- *
- * In the following example <code>ConcreteClass</code> will be blessed into a singleton in the isolated test context created
- * by <code>Mockwire.isolate()</code> or using <code>&#064;RunWith(MockwireRunner.class)</code>
- *
- * <pre>
- *  public class MockwireTest {
- *
- *  &#064;UnderTest
- *  ConcreteClass field;
- *
- *  &#064;Inject
- *  IsolateTestContext context;
- *
- *  &#064;Before
- *  public void setup() {
- *  	Mockwire.isolate(this);
- *  }
- *
- *  &#064;Test
- *  public void testUnderTest() {
- *    assertThat(context.getBeanNamesForType(ConcreteClass.class)).hasSize(1);
- *    assertThat(field).isNotNull();
- *  }
- *
- * </pre>
- *
+ * 
+ * <p>
+ * Technically we mark a field as defining a bean in an isolated test context and also mark the field for injection of the value
+ * created in the isolated test context.
+ * </p>
+ * 
+ * <p>
+ * In the following example <code>ConcreteClass</code> will be blessed into a singleton in the isolated test context.
+ * </p>
+ * 
+ * <h3>Using &#064;RunWith(MockwireRunner.class)</h3>
+ * 
  * <pre>
  *  &#064;RunWith(MockwireRunner.class)
  *  public class MockwireTest {
- *
+ * 
  *  &#064;UnderTest
  *  ConcreteClass field;
- *
- *  &#064;Inject
- *  IsolateTestContext context;
- *
+ * 
  *  &#064;Test
  *  public void testUnderTest() {
- *    assertThat(context.getBeanNamesForType(ConcreteClass.class)).hasSize(1);
  *    assertThat(field).isNotNull();
  *  }
- *
+ * 
+ * </pre>
+ * 
+ * <h3>Using Mockwire.isolate()</h3>
+ * 
+ * <pre>
+ *  public class MockwireTest {
+ * 
+ *  &#064;UnderTest
+ *  ConcreteClass field;
+ * 
+ *  &#064;Before
+ *  public void setup() {
+ *    Mockwire.isolate(this);
+ *  }
+ * 
+ *  &#064;Test
+ *  public void testUnderTest() {
+ *    assertThat(field).isNotNull();
+ *  }
+ * 
  * </pre>
  */
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD, ElementType.FIELD})
+@Target({ ElementType.METHOD, ElementType.FIELD })
 public @interface UnderTest {
 
+  /**
+   * Configuration for the object under test, used to resolve any {@link Configured} fields
+   */
+  String[] value() default {};
 }
