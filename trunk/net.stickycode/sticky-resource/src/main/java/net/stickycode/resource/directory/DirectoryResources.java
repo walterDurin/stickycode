@@ -24,6 +24,9 @@ public class DirectoryResources
     this.baseDirectory = notNull(baseDirectory, "Base directory cannot be null");
     this.resourceType = notNull(resourceType, "The resource type cannot be null");
     // TODO create a stateful scanner class that uses iteration not recursion
+    if (!this.baseDirectory.isDirectory())
+      throw new RuntimeException(baseDirectory.getAbsolutePath() + " is not a directory");
+
     scan(this.baseDirectory);
   }
 
