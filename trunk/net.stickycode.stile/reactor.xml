@@ -30,10 +30,10 @@
 	<modules>
 		<module>../net.stickycode/sticky-resource</module>
 		<module>stile-version</module>
+		<module>sticky-stile</module>
 		<module>stile-artifact-api</module>
 		<module>stile-artifact-xml</module>
 		<module>stile-artifact</module>
-		<module>sticky-stile</module>
 		<module>stile-cli</module>
 	</modules>
 </project>

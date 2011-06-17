@@ -1,20 +1,13 @@
 package net.stickycode.stile.artifact.xml.v1;
 
 import static org.fest.assertions.Assertions.assertThat;
-import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 
 import java.io.InputStream;
 
-import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
-import javax.xml.bind.UnmarshalException;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
-import javax.xml.validation.SchemaFactory;
-
 
 import net.stickycode.resource.ClasspathResource;
 
