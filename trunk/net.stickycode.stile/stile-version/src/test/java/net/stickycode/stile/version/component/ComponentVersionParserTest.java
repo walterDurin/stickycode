@@ -2,8 +2,6 @@ package net.stickycode.stile.version.component;
 
 import static org.fest.assertions.Assertions.assertThat;
 
-import net.stickycode.stile.version.Version;
-import net.stickycode.stile.version.VersionComponent;
 import net.stickycode.stile.version.component.ComponentVersionParser;
 import net.stickycode.stile.version.component.DefinedStringVersionComponent;
 import net.stickycode.stile.version.component.NumericVersionComponent;
@@ -12,6 +10,7 @@ import net.stickycode.stile.version.component.RevisionNumericVersionComponent;
 import net.stickycode.stile.version.component.StringVersionComponent;
 import net.stickycode.stile.version.component.VersionDefinition;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class ComponentVersionParserTest {
@@ -34,7 +33,8 @@ public class ComponentVersionParserTest {
     check("0.1", new NumericVersionComponent(0), new NumericVersionComponent(1));
     check("0-1", new NumericVersionComponent(0), new NumericVersionComponent(1));
   }
-
+  
+  
   @Test
   public void revisions() {
     check("r1", new RevisionNumericVersionComponent(1));
@@ -73,16 +73,15 @@ public class ComponentVersionParserTest {
     check("rc", new DefinedStringVersionComponent(VersionDefinition.RC));
   }
 
-  private <T> void check(String versionString, VersionComponent<T> versionComponent) {
-    Version v = new ComponentVersionParser().parse(versionString);
-    assertThat(v).hasSize(1);
+  private void check(String versionString, AbstractVersionComponent versionComponent) {
+    ComponentVersion v = new ComponentVersionParser().parse(versionString);
     assertThat(v).containsOnly(versionComponent);
     assertThat(v).excludes(new NumericVersionComponent(212));
     assertThat(v).excludes(new NumericVersionComponent(3));
   }
 
-  private void check(String versionString, VersionComponent<?> first, VersionComponent<?> second) {
-    Version v = new ComponentVersionParser().parse(versionString);
+  private void check(String versionString, AbstractVersionComponent first, AbstractVersionComponent second) {
+    ComponentVersion v = new ComponentVersionParser().parse(versionString);
     assertThat(v).hasSize(2);
     assertThat(v).containsOnly(first, second);
     assertThat(v).excludes(new NumericVersionComponent(212));

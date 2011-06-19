@@ -1,10 +1,9 @@
 package net.stickycode.stile.version.component;
 
 import static net.stickycode.exception.Preconditions.notNull;
-import net.stickycode.stile.version.VersionComponent;
 
 class NumericVersionComponent
-    extends VersionComponent<Integer> {
+    extends AbstractVersionComponent {
 
   private Integer value;
 
@@ -13,13 +12,29 @@ class NumericVersionComponent
   }
 
   @Override
-  protected Integer getValue() {
-    return value;
+  public String toString() {
+    return value.toString();
   }
 
   @Override
-  public String toString() {
-    return value.toString();
+  public ComponentOrdering getOrdering() {
+    return ComponentOrdering.Numeric;
+  }
+
+  @Override
+  protected int valueHashCode() {
+    return value.hashCode();
+  }
+  
+  @Override
+  public boolean valueEquals(Object obj) {
+    NumericVersionComponent other = (NumericVersionComponent) obj;
+    return value.equals(other.value);
+  }
+  
+  @Override
+  public int compareTo(AbstractVersionComponent o) {
+    return value.compareTo(((NumericVersionComponent)o).value);
   }
 
 }
