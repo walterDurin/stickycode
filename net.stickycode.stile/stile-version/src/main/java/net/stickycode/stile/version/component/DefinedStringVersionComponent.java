@@ -2,11 +2,10 @@ package net.stickycode.stile.version.component;
 
 import static net.stickycode.exception.Preconditions.notNull;
 
-import net.stickycode.stile.version.VersionComponent;
 import net.stickycode.stile.version.component.VersionDefinition;
 
 class DefinedStringVersionComponent
-    extends VersionComponent<VersionDefinition> {
+    extends AbstractVersionComponent {
 
   private VersionDefinition value;
 
@@ -15,13 +14,24 @@ class DefinedStringVersionComponent
   }
 
   @Override
-  protected VersionDefinition getValue() {
-    return value;
+  public String toString() {
+    return value.name();
   }
 
   @Override
-  public String toString() {
-    return value.name();
+  public ComponentOrdering getOrdering() {
+    return ComponentOrdering.Prerelease;
+  }
+  
+  @Override
+  protected int valueHashCode() {
+    return value.hashCode();
+  }
+  
+  @Override
+  public boolean valueEquals(Object obj) {
+    DefinedStringVersionComponent other = (DefinedStringVersionComponent) obj;
+    return value.equals(other.value);
   }
 
 }

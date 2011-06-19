@@ -10,5 +10,10 @@ class PatchNumericVersionComponent
   public PatchNumericVersionComponent(String s) {
     this(new Integer(s));
   }
+  
+  @Override
+  public ComponentOrdering getOrdering() {
+    return ComponentOrdering.Patch;
+  }
 
 }

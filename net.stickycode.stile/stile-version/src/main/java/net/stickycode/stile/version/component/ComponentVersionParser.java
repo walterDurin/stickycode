@@ -6,8 +6,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import net.stickycode.stile.version.Version;
-import net.stickycode.stile.version.VersionComponent;
 import net.stickycode.stile.version.VersionParser;
 
 
@@ -16,12 +14,12 @@ public class ComponentVersionParser implements VersionParser {
   private static Pattern NUMERIC_VERSION = Pattern.compile("[pr]?[0-9]+");
 
   @Override
-  public Version parse(String versionString) {
+  public ComponentVersion parse(String versionString) {
     return process(notBlank(versionString, "Version spec cannot be blank"));
   }
 
-  private Version process(String versionString) {
-    List<VersionComponent<?>> v = new LinkedList<VersionComponent<?>>();
+  private ComponentVersion process(String versionString) {
+    List<AbstractVersionComponent> v = new LinkedList<AbstractVersionComponent>();
 
     for (String s : versionString.split("[-,_:.]")) {
       if (NUMERIC_VERSION.matcher(s).matches())
@@ -31,10 +29,10 @@ public class ComponentVersionParser implements VersionParser {
         v.add(parseString(s));
     }
 
-    return new Version(v);
+    return new ComponentVersion(v);
   }
 
-  private VersionComponent<?> parseString(String s) {
+  private AbstractVersionComponent parseString(String s) {
     try {
       return new DefinedStringVersionComponent(VersionDefinition.fromCode(s));
     }
@@ -43,7 +41,7 @@ public class ComponentVersionParser implements VersionParser {
     }
   }
 
-  private VersionComponent<?> parseNumeric(String s) {
+  private AbstractVersionComponent parseNumeric(String s) {
     if (s.startsWith("p"))
       return new PatchNumericVersionComponent(s.substring(1));
 
