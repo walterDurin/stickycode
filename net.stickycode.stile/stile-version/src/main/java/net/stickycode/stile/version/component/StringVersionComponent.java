@@ -1,7 +1,6 @@
 package net.stickycode.stile.version.component;
 
 import static net.stickycode.exception.Preconditions.notBlank;
-import net.stickycode.exception.Preconditions;
 
 class StringVersionComponent
     extends AbstractVersionComponent {
