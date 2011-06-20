@@ -2,15 +2,6 @@ package net.stickycode.stile.version.component;
 
 import static org.fest.assertions.Assertions.assertThat;
 
-import net.stickycode.stile.version.component.ComponentVersionParser;
-import net.stickycode.stile.version.component.DefinedStringVersionComponent;
-import net.stickycode.stile.version.component.NumericVersionComponent;
-import net.stickycode.stile.version.component.PatchNumericVersionComponent;
-import net.stickycode.stile.version.component.RevisionNumericVersionComponent;
-import net.stickycode.stile.version.component.StringVersionComponent;
-import net.stickycode.stile.version.component.VersionDefinition;
-
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class ComponentVersionParserTest {
