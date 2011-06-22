@@ -9,11 +9,6 @@ class NumericVersionComponent
   }
 
   @Override
-  public ComponentOrdering getOrdering() {
-    return ComponentOrdering.Release;
-  }
-
-  @Override
   protected int valueHashCode() {
     return toString().hashCode();
   }
