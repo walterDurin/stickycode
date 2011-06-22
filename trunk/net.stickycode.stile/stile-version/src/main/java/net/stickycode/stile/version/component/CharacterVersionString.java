@@ -17,4 +17,9 @@ public class CharacterVersionString
     return true;
   }
 
+  @Override
+  public CharacterVersionString asCharacter() {
+    return this;
+  }
+
 }

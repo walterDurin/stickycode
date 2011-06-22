@@ -54,14 +54,14 @@ public class VersionSpliteratorTest {
   @Test
   public void inTheWild() {
     check("0.9.0-incubator-SNAPSHOT", n("0"), n("9"), n("0"), s("incubator"), s("SNAPSHOT"));
-    check("0.9.5-RC2",  n("0"), n("9"), n("5"), s("RC"), s("2"));
-    check("0.9.9-SNAPSHOT",  n("0"), n("9"), n("9"), s("SNAPSHOT"));
-    check("1.0.0.GA",  n("1"), n("0"), n("0"), s("GA"));
+    check("0.9.5-RC2", n("0"), n("9"), n("5"), s("RC"), s("2"));
+    check("0.9.9-SNAPSHOT", n("0"), n("9"), n("9"), s("SNAPSHOT"));
+    check("1.0.0.GA", n("1"), n("0"), n("0"), s("GA"));
     check("1.0.0-PFD-3-jboss-1", n("1"), n("0"), n("0"), s("PFD"), n("3"), s("jboss"), n("1"));
-    check("1.0.1B-rc4",  n("1"), n("0"), n("1"), s("B"), s("rc"), n("4"));
+    check("1.0.1B-rc4", n("1"), n("0"), n("1"), s("B"), s("rc"), n("4"));
   }
 
-  @Test(timeout=1000)
+  @Test(timeout = 2000)
   public void load() {
     for (int i = 0; i < 1000; i++) {
       numeric();
@@ -71,26 +71,15 @@ public class VersionSpliteratorTest {
       revisions();
     }
   }
-  //
-  // @Test
-  // public void greekVersion() {
-  // check("alpha", new DefinedStringVersionComponent(VersionDefinition.ALPHA));
-  // check("alPha", new DefinedStringVersionComponent(VersionDefinition.ALPHA));
-  // check("ALPHA", new DefinedStringVersionComponent(VersionDefinition.ALPHA));
-  // check("1-ALPHA", new NumericVersionString(1), new DefinedStringVersionComponent(VersionDefinition.ALPHA));
-  //
-  // check("beta", new DefinedStringVersionComponent(VersionDefinition.BETA));
-  // check("Beta", new DefinedStringVersionComponent(VersionDefinition.BETA));
-  // check("BETA", new DefinedStringVersionComponent(VersionDefinition.BETA));
-  //
-  // check("fcs", new DefinedStringVersionComponent(VersionDefinition.FCS));
-  //
-  // check("rc", new DefinedStringVersionComponent(VersionDefinition.RC));
-  // }
 
   private void check(String versionString, VersionString... components) {
     VersionStringSpliterator v = new VersionStringSpliterator(versionString);
     assertThat(v).containsOnly(components);
+    StringBuilder b = new StringBuilder();
+    for (VersionString v2 : new VersionStringSpliterable(versionString)) {
+      b.append(v2.getSeparator()).append(v2.toString());
+    }
+    assertThat(versionString).isEqualTo(b.toString());
   }
 
   private NumericVersionString n(String source) {

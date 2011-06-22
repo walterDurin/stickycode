@@ -1,14 +1,10 @@
 package net.stickycode.stile.version.component;
 
 import static net.stickycode.exception.Preconditions.notBlank;
-
-import java.util.LinkedList;
-import java.util.List;
-
 import net.stickycode.stile.version.VersionParser;
 
-
-public class ComponentVersionParser implements VersionParser {
+public class ComponentVersionParser
+    implements VersionParser {
 
   @Override
   public ComponentVersion parse(String versionString) {
@@ -16,37 +12,24 @@ public class ComponentVersionParser implements VersionParser {
   }
 
   private ComponentVersion process(String versionString) {
-    List<AbstractVersionComponent> v = new LinkedList<AbstractVersionComponent>();
-
-    VersionString previous = null;
+    ComponentVersion v = new ComponentVersion();
     for (VersionString s : new VersionStringSpliterable(versionString)) {
       if (s.isNumber())
-        v.add(parseNumeric(previous, s));
+        v.add(new NumericVersionComponent(s.asNumeric()));
 
-      else if (s.isString())
-        v.add(parseString(s));
+      else if (v.last() == null)
+        v.add(new StringVersionComponent(s.asCharacter()));
+
+      else {
+        ComponentOrdering ordering = ComponentOrdering.fromCode(s.toString());
+        if (ordering == null)
+          v.add(new StringVersionComponent(s.asCharacter()));
+        else
+          v.last().qualify(ordering, s.asCharacter());
+      }
     }
 
-    return new ComponentVersion(v);
-  }
-
-  private AbstractVersionComponent parseString(VersionString s) {
-    try {
-      return new DefinedStringVersionComponent(VersionDefinition.fromCode(s.toString()));
-    }
-    catch (IllegalArgumentException e) {
-      return new StringVersionComponent(s.toString());
-    }
-  }
-
-  private AbstractVersionComponent parseNumeric(VersionString previous, VersionString s) {
-//    if (s.startsWith("p"))
-//      return new PatchNumericVersionComponent(s.substring(1));
-//
-//    if (s.startsWith("r"))
-//      return new RevisionNumericVersionComponent(s.substring(1));
-
-    return new NumericVersionComponent(Integer.valueOf(s.toString()));
+    return v;
   }
 
 }
