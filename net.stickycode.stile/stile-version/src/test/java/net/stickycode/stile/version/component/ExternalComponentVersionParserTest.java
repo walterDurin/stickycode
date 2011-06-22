@@ -110,39 +110,36 @@ public class ExternalComponentVersionParserTest {
     check("2.2-beta-4");
     check("2.2-beta-5");
     check("2.2-SNAPSHOT");
-//    check("[2.5.6.SEC02]");
-//    check("2.5.6.SEC02");
-//    check("2.5.D1");
-//    check("2.5-SNAPSHOT");
-//    check("3.0.2-FINAL");
-//    check("3.0.3.RELEASE");
-//    check("[3.0.4.RELEASE]");
-//    check("3.0.4.RELEASE");
-//    check("3.0.5.RELEASE");
-//    check("3.0-beta-1-SNAPSHOT");
-//    check("3.0-beta-3");
-//    check("3.0.PFD20090525");
-//    check("3.0-rc3");
-//    check("3.2.4.Final");
-//    check("3.3.0-v20070604");
-//    check("3.8.0.GA");
-//    check("3.9.0.GA");
-//    check("4.0.2.GA");
-//    check("4.1.0.GA");
-//    check("4aug2000r7-dev");
-//    check("7.0.0.v20091005");
-//    check("7.0.1.v20091125");
-//    check("7.1.4.v20100610");
-//    check("8.4-701.jdbc4");
-//    check("build210");
-//    check("r09");
-//    check("snapshot-20080530");
+    check("2.5.6.SEC02");
+    check("2.5.D1");
+    check("2.5-SNAPSHOT");
+    check("3.0.2-FINAL");
+    check("3.0.3.RELEASE");
+    check("3.0.4.RELEASE");
+    check("3.0.5.RELEASE");
+    check("3.0-beta-1-SNAPSHOT");
+    check("3.0-beta-3");
+    check("3.0.PFD20090525");
+    check("3.0-rc3");
+    check("3.2.4.Final");
+    check("3.3.0-v20070604");
+    check("3.8.0.GA");
+    check("3.9.0.GA");
+    check("4.0.2.GA");
+    check("4.1.0.GA");
+    check("4aug2000r7-dev");
+    check("7.0.0.v20091005");
+    check("7.0.1.v20091125");
+    check("7.1.4.v20100610");
+    check("8.4-701.jdbc4");
+    check("build210");
+    check("r09");
+    check("snapshot-20080530");
   }
 
   @Test(timeout=2000)
-  @Ignore
   public void load() {
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 1000; i++) {
       others();
     }
   }

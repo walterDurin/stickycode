@@ -12,6 +12,9 @@ public abstract class VersionString
   private final int end;
 
   public VersionString(CharSequence source, int separator, int start, int end) {
+    if (separator == end || start == end)
+      throw new RuntimeException("Invalidate version spec " + source);
+
     this.source = source;
     this.separator = separator;
     this.start = start;
