@@ -20,44 +20,39 @@ public class ComponentVersion
     return new VersionComponentIterator(head);
   }
 
-  // @Override
-  // public int hashCode() {
-  // final int prime = 31;
-  // int result = 1;
-  // result = prime * result + ((components == null) ? 0 : components.hashCode());
-  // return result;
-  // }
-  //
-  // @Override
-  // public boolean equals(Object obj) {
-  // if (this == obj)
-  // return true;
-  // if (obj == null)
-  // return false;
-  // if (getClass() != obj.getClass())
-  // return false;
-  // ComponentVersion other = (ComponentVersion) obj;
-  // if (components == null) {
-  // if (other.components != null)
-  // return false;
-  // }
-  // else
-  // if (!components.equals(other.components))
-  // return false;
-  // return true;
-  // }
-  //
-  // @Override
-  // public String toString() {
-  // StringBuilder b = new StringBuilder();
-  // Iterator<AbstractVersionComponent> i = components.iterator();
-  // b.append(i.next());
-  // while (i.hasNext()) {
-  // b.append('.').append(i.next());
-  // }
-  // return b.toString();
-  // }
-  //
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    for (AbstractVersionComponent component : this) {
+      result = prime * result + component.hashCode();
+    }
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+
+    if (obj == null)
+      return false;
+
+    if (getClass() != obj.getClass())
+      return false;
+
+    Iterator<AbstractVersionComponent> i = ((ComponentVersion)obj).iterator();
+    for (AbstractVersionComponent component : this) {
+      if (!i.hasNext())
+        return false;
+
+      if (!component.equals(i.next()))
+        return false;
+    }
+
+    return !i.hasNext();
+  }
+
   @Override
   public int compareTo(Version o) {
     if (this == o)
@@ -100,7 +95,7 @@ public class ComponentVersion
   public String toString() {
     StringBuilder b = new StringBuilder();
     for (AbstractVersionComponent component : this) {
-      b.append(component);
+      b.append(component.fullString());
     }
     return b.toString();
   }

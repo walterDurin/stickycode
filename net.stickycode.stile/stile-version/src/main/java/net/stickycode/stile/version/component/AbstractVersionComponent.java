@@ -22,12 +22,9 @@ public abstract class AbstractVersionComponent
     int compareVersionString = versionString.toString().compareTo(o.versionString.toString());
     if (compareVersionString != 0)
       return compareVersionString;
-    
-    int compareOrdering = getOrdering().compareTo(o.getOrdering());
-    if (compareOrdering != 0)
-      return compareOrdering;
 
-    return 0;
+
+    return getOrdering().compareTo(o.getOrdering());
   }
 
   public ComponentOrdering getOrdering() {
@@ -74,6 +71,13 @@ public abstract class AbstractVersionComponent
       return versionString.toString() + qualifier.toString();
 
     return versionString.toString();
+  }
+
+  public String fullString() {
+    if (qualifier != null)
+      return versionString.fullString() + qualifier.fullString();
+
+    return versionString.fullString();
   }
 
   public void qualify(ComponentOrdering ordering, CharacterVersionString qualifier) {

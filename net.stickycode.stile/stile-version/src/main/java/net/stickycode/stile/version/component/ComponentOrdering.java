@@ -3,9 +3,9 @@ package net.stickycode.stile.version.component;
 public enum ComponentOrdering {
 
   Snapshot("snapshot"),
-  Gamma("gamma"),
-  Beta("beta"),
   Alpha("alpha"),
+  Beta("beta"),
+  Gamma("gamma"),
   ReleaseCandidate("rc"),
   Release(),
   FinalCandidateSelection("fcs", "ga"),

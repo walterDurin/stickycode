@@ -54,6 +54,10 @@ public abstract class VersionString
     return source.subSequence(start, end).toString();
   }
 
+  public String fullString() {
+    return source.subSequence(separator, end).toString();
+  }
+
   @Override
   public boolean equals(Object obj) {
     if (this == obj)
