@@ -62,6 +62,9 @@ public class VersionStringSpliterator
         return new CharacterVersionString(source, position, start, end);
     }
 
+    if (end == start)
+      throw new InvalidVersionStringException(source, start);
+
     return new CharacterVersionString(source, position, start, end);
   }
 
