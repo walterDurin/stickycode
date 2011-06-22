@@ -16,6 +16,40 @@ public class VersionSpliteratorTest {
     new VersionStringSpliterator("");
   }
 
+  @Test(expected = InvalidVersionStringException.class)
+  public void invalidBracket() {
+    new VersionStringSpliterator("[2,3)").next();
+  }
+
+  @Test(expected = InvalidVersionStringException.class)
+  public void invalidQuotes() {
+    new VersionStringSpliterator("'2-3'").next();
+  }
+
+  @Test(expected = InvalidVersionStringException.class)
+  public void invalidQuotes2() {
+    for (VersionString s : new VersionStringSpliterable("2-3'"))
+      assertThat(s).isNotNull();
+  }
+
+  @Test(expected = InvalidVersionStringException.class)
+  public void invalidComma() {
+    for (VersionString s : new VersionStringSpliterable("2,3"))
+      assertThat(s).isNotNull();
+  }
+
+  @Test(expected = InvalidVersionStringException.class)
+  public void invalidParenthesis() {
+    for (VersionString s : new VersionStringSpliterable("(2,3)"))
+      assertThat(s).isNotNull();
+  }
+
+  @Test(expected = InvalidVersionStringException.class)
+  public void invalidParenthesis2() {
+    for (VersionString s : new VersionStringSpliterable("2,3)"))
+      assertThat(s).isNotNull();
+  }
+
   @Test
   public void numeric() {
     check("1", n("1"));
