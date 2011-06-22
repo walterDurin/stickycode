@@ -17,4 +17,9 @@ public class NumericVersionString
     return false;
   }
 
+  @Override
+  public NumericVersionString asNumeric() {
+    return this;
+  }
+
 }

@@ -12,8 +12,8 @@ import net.stickycode.resource.ClasspathResource;
 import net.stickycode.resource.Resource;
 import net.stickycode.stile.artifact.Artifact;
 import net.stickycode.stile.artifact.ArtifactParser;
-import net.stickycode.stile.version.Version;
 import net.stickycode.stile.version.VersionParser;
+import net.stickycode.stile.version.component.ComponentVersion;
 import net.stickycode.stile.version.component.ComponentVersionParser;
 
 import org.xml.sax.SAXException;
@@ -44,7 +44,7 @@ public class XmlArtifactParser
   @Override
   public Artifact parse(Resource resource) {
     XmlArtifact artifact = unmarshall(resource);
-    Version version = versionParser.parse(artifact.getVersion());
+    ComponentVersion version = versionParser.parse(artifact.getVersion());
     return new Artifact(artifact.getGroup() + "." + artifact.getId(), version);
   }
 

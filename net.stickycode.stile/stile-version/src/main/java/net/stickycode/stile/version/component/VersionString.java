@@ -64,4 +64,20 @@ public abstract class VersionString
 
     return toString().equals(obj.toString());
   }
+
+  public String getSeparator() {
+    return source.subSequence(separator, start).toString();
+  }
+
+  public NumericVersionString asNumeric() {
+    throw new IllegalStateException();
+  }
+
+  public CharacterVersionString asCharacter() {
+    throw new IllegalStateException();
+  }
+
+  public boolean isQualifier() {
+    return false;
+  }
 }

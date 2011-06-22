@@ -1,35 +1,27 @@
 package net.stickycode.stile.version.component;
 
-import static net.stickycode.exception.Preconditions.notBlank;
 
 class StringVersionComponent
     extends AbstractVersionComponent {
 
-  private final String value;
-
-  public StringVersionComponent(String value) {
-    this.value = notBlank(value, "String versions cannot be blank");
-  }
-
-  @Override
-  public String toString() {
-    return value;
+  public StringVersionComponent(CharacterVersionString versionString) {
+    super(versionString);
   }
 
   @Override
   public ComponentOrdering getOrdering() {
-    return ComponentOrdering.Named;
+    return ComponentOrdering.Release;
   }
 
   @Override
   protected int valueHashCode() {
-    return value.hashCode();
+    return toString().hashCode();
   }
 
   @Override
   public boolean valueEquals(Object obj) {
     StringVersionComponent other = (StringVersionComponent) obj;
-    return value.equals(other.value);
+    return toString().equals(other.toString());
   }
 
 }

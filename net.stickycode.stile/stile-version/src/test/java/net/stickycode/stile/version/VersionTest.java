@@ -16,7 +16,7 @@ public class VersionTest {
     symetric("whatever.1.1-rc1");
     symetric("whatever-1.1-rc1");
   }
-  
+
   @Test
   public void ordering() {
     sameSame("1", "1");
@@ -32,8 +32,9 @@ public class VersionTest {
     ordered("1-alpha", "1-beta");
     ordered("1-alpha", "1-gamma");
     ordered("1-beta", "1-gamma");
+    ordered("1-beta", "1-SNAPSHOT");
   }
-  
+
   @Test
   public void compareNumeric() {
     sameSame("1", "1");
@@ -67,5 +68,5 @@ public class VersionTest {
     assertThat(one).isEqualTo(otherOne);
     assertThat(otherOne).isEqualTo(one);
   }
-  
+
 }
