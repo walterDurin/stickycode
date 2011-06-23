@@ -10,25 +10,9 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
  */
-package net.stickycode.stile.version.component;
+package net.stickycode.stile.version.range;
 
 
-class StringVersionComponent
-    extends AbstractVersionComponent {
-
-  public StringVersionComponent(CharacterVersionString versionString) {
-    super(versionString);
-  }
-
-  @Override
-  protected int valueHashCode() {
-    return toString().hashCode();
-  }
-
-  @Override
-  public boolean valueEquals(Object obj) {
-    StringVersionComponent other = (StringVersionComponent) obj;
-    return toString().equals(other.toString());
-  }
+public interface Bound {
 
 }

@@ -10,25 +10,17 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
  */
-package net.stickycode.stile.version.component;
+package net.stickycode.stile.version.range;
+
+import net.stickycode.exception.PermanentException;
 
 
-class StringVersionComponent
-    extends AbstractVersionComponent {
+@SuppressWarnings("serial")
+public class VersionRangeMissingBoundException
+    extends PermanentException {
 
-  public StringVersionComponent(CharacterVersionString versionString) {
-    super(versionString);
-  }
-
-  @Override
-  protected int valueHashCode() {
-    return toString().hashCode();
-  }
-
-  @Override
-  public boolean valueEquals(Object obj) {
-    StringVersionComponent other = (StringVersionComponent) obj;
-    return toString().equals(other.toString());
+  public VersionRangeMissingBoundException(String versionRange) {
+    super("Version range '{}' is missing one or more bounds. Expecting something like [1,2).", versionRange);
   }
 
 }
