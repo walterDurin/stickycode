@@ -10,16 +10,21 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
  */
-package net.stickycode.stile.version.component;
+package net.stickycode.stile.version.range;
 
 import net.stickycode.exception.PermanentException;
 
+
 @SuppressWarnings("serial")
-public class InvalidVersionStringException
+public class InvalidVersionRangeSpecificationException
     extends PermanentException {
 
-  public InvalidVersionStringException(CharSequence source, int start) {
-    super("Character '{}' is not valid in version specification '{}'.", source, source.charAt(start));
+  public InvalidVersionRangeSpecificationException(String versionRange, char upperConstraint) {
+    super("Found upper constraint '{}' which is invalid. The specification '{}' should look something like this [1,2] or [1,2) or (2,3]  or (2,3).", upperConstraint, versionRange);
+  }
+
+  public InvalidVersionRangeSpecificationException(char lowerConstraint, String versionRange) {
+    super("Found lower constraint '{}' which is invalid. The specification '{}' should look something like this [1,2] or [1,2) or (2,3]  or (2,3).", lowerConstraint, versionRange);
   }
 
 }
