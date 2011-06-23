@@ -7,7 +7,7 @@ public class InvalidVersionStringException
     extends PermanentException {
 
   public InvalidVersionStringException(CharSequence source, int start) {
-    super("Character '{}' is not valid in version specification '{}'. ", source, source.charAt(start));
+    super("Character '{}' is not valid in version specification '{}'.", source, source.charAt(start));
   }
 
 }
