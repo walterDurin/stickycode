@@ -10,8 +10,9 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
  */
-package net.stickycode.stile.version.component;
+package net.stickycode.stile.version.range;
 
+import net.stickycode.stile.version.component.ComponentVersionParser;
 import net.stickycode.stile.version.range.ComponentVersionRangeParser;
 import net.stickycode.stile.version.range.InvalidVersionRangeSpecificationException;
 import net.stickycode.stile.version.range.VersionRangeMissingBoundException;
