@@ -17,11 +17,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>net.stickycode.stile</groupId>
-	<artifactId>sticky-stile</artifactId>
+	<artifactId>stile-sphere</artifactId>
 	<version>0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>sticky-stile</name>
+	<name>stile-sphere</name>
 
 	<inceptionYear>2011</inceptionYear>
 	<dependencies>
@@ -40,21 +40,6 @@
 			<artifactId>mockwire-guice3</artifactId>
 			<version>[0.1,1)</version>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>net.stickycode.composite</groupId>
-			<artifactId>sticky-composite-logging-deploy</artifactId>
-			<version>[1.2,2)</version>
-		</dependency>
-		<dependency>
-			<groupId>net.stickycode</groupId>
-			<artifactId>sticky-reflector</artifactId>
-			<version>[1.3,2)</version>
-		</dependency>
-		<dependency>
-			<groupId>net.stickycode.stile</groupId>
-			<artifactId>stile-sphere</artifactId>
-			<version>0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 
