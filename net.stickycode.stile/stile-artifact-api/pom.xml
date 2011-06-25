@@ -49,10 +49,5 @@
 			<artifactId>sticky-exception</artifactId>
 			<version>[1.3,2)</version>
 		</dependency>
-		<dependency>
-			<groupId>net.stickycode</groupId>
-			<artifactId>sticky-resource</artifactId>
-			<version>0.1-SNAPSHOT</version>
-		</dependency>
 	</dependencies>
 </project>

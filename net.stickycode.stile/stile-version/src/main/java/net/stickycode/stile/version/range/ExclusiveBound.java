@@ -12,13 +12,30 @@
  */
 package net.stickycode.stile.version.range;
 
-import net.stickycode.stile.version.component.ComponentVersion;
-
+import static net.stickycode.exception.Preconditions.notNull;
+import net.stickycode.stile.version.Bound;
+import net.stickycode.stile.version.Version;
 
 public class ExclusiveBound
     implements Bound {
 
-  public ExclusiveBound(ComponentVersion version) {
+  private final Version version;
+  
+  public ExclusiveBound(Version version) {
+    this.version = notNull(version, "Version of bound cannot be null");
   }
 
+  @Override
+  public boolean isExclusive() {
+    return true;
+  }
+
+  @Override
+  public boolean isInclusive() {
+    return false;
+  }
+
+  public Version getVersion() {
+    return version;
+  }
 }

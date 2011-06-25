@@ -16,6 +16,7 @@ import static net.stickycode.exception.Preconditions.notBlank;
 
 import javax.inject.Inject;
 
+import net.stickycode.stile.version.Bound;
 import net.stickycode.stile.version.VersionRange;
 import net.stickycode.stile.version.VersionRangeParser;
 import net.stickycode.stile.version.component.ComponentVersionParser;

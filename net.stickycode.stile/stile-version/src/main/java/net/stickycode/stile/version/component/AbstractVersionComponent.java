@@ -13,9 +13,10 @@
 package net.stickycode.stile.version.component;
 
 import static net.stickycode.exception.Preconditions.notNull;
+import net.stickycode.util.Linked;
 
 public abstract class AbstractVersionComponent
-    implements Comparable<AbstractVersionComponent> {
+    implements Comparable<AbstractVersionComponent>, Linked<AbstractVersionComponent> {
 
   private AbstractVersionComponent next;
 
@@ -69,7 +70,7 @@ public abstract class AbstractVersionComponent
 
   abstract protected boolean valueEquals(Object other);
 
-  AbstractVersionComponent getNext() {
+  public AbstractVersionComponent getNext() {
     return next;
   }
 

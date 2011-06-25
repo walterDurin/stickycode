@@ -17,5 +17,7 @@ public interface VersionRange {
   boolean includes(Version version);
 
   VersionRange intersection(VersionRange range);
+  
+  Bound getLowerBound();
 
 }
