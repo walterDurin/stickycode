@@ -15,6 +15,7 @@ package net.stickycode.stile.version.component;
 import java.util.Iterator;
 
 import net.stickycode.stile.version.Version;
+import net.stickycode.util.LinkedIterator;
 
 public class ComponentVersion
     implements Iterable<AbstractVersionComponent>, Version {
@@ -29,7 +30,7 @@ public class ComponentVersion
 
   @Override
   public Iterator<AbstractVersionComponent> iterator() {
-    return new VersionComponentIterator(head);
+    return new LinkedIterator<AbstractVersionComponent>(head);
   }
 
   @Override
@@ -43,14 +44,11 @@ public class ComponentVersion
   }
 
   @Override
-  public boolean equals(Object obj) {
+  public boolean equals(Version obj) {
     if (this == obj)
       return true;
 
     if (obj == null)
-      return false;
-
-    if (getClass() != obj.getClass())
       return false;
 
     Iterator<AbstractVersionComponent> i = ((ComponentVersion)obj).iterator();

@@ -12,14 +12,20 @@
  */
 package net.stickycode.stile.version.range;
 
+import net.stickycode.stile.version.Bound;
 import net.stickycode.stile.version.Version;
 import net.stickycode.stile.version.VersionRange;
-
 
 public class ComponentVersionRange
     implements VersionRange {
 
+  private final Bound lowerBound;
+
+  private final Bound upperBound;
+
   public ComponentVersionRange(Bound lowerBound, Bound upperBound) {
+    this.lowerBound = lowerBound;
+    this.upperBound = upperBound;
   }
 
   @Override
@@ -30,6 +36,14 @@ public class ComponentVersionRange
   @Override
   public VersionRange intersection(VersionRange range) {
     return null;
+  }
+
+  public Bound getLowerBound() {
+    return lowerBound;
+  }
+
+  public Bound getUpperBound() {
+    return upperBound;
   }
 
 }
