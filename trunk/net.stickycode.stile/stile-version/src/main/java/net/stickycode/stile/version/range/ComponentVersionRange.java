@@ -46,4 +46,22 @@ public class ComponentVersionRange
     return upperBound;
   }
 
+  @Override
+  public String toString() {
+    StringBuilder b = new StringBuilder();
+    if (lowerBound.isExclusive())
+      b.append("(");
+    else
+      b.append("[");
+    
+    b.append(lowerBound.getVersion()).append(",").append(upperBound.getVersion());
+    
+    if (upperBound.isExclusive())
+      b.append(")");
+    else
+      b.append("]");
+    
+    return b.toString();
+  }
+
 }
