@@ -5,6 +5,6 @@ public interface Identity<T>
 
   int hashCode();
 
-  boolean equals(T t);
+  boolean eq(T t);
 
 }
