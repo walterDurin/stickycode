@@ -9,7 +9,6 @@ public class Dependency
 
   private final String id;
 
-
   private final VersionRange version;
 
   public Dependency next;
@@ -36,5 +35,10 @@ public class Dependency
 
   public VersionRange getVersion() {
     return version;
+  }
+
+  @Override
+  public String toString() {
+    return id + "~" + version;
   }
 }
