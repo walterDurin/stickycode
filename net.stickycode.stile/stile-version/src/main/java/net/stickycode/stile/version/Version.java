@@ -17,6 +17,4 @@ public interface Version
 
   String toString();
 
-  boolean equals(Version version);
-
 }
