@@ -104,10 +104,13 @@ version=1
 						<tagBase>https://stickycode.googlecode.com/svn/tags/${project.groupId}</tagBase>
 						<goals>enforcer:enforce deploy</goals>
 						<preparationGoals>enforcer:enforce clean verify</preparationGoals>
+
+						<!-- Remote tagging is just a dumb idea it violates the whole point of tagging a know quantity -->
 						<remoteTagging>false</remoteTagging>
 						<suppressCommitBeforeTag>true</suppressCommitBeforeTag>
+
 						<scmCommentPrefix>[Releasing @{project.artifactId}-@{project-version}] </scmCommentPrefix>
-						<tag>@{project.artifactId}-@{project.version}</tag>
+						<tagNameFormat>@{project.artifactId}-@{project.releaseVersion}</tagNameFormat>
 					</configuration>
 				</plugin>
 				<plugin>
