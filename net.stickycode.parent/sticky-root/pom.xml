@@ -99,7 +99,7 @@ version=1
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-release-plugin</artifactId>
-					<version>2.2</version>
+					<version>2.1</version>
 					<configuration>
 						<tagBase>https://stickycode.googlecode.com/svn/tags/${project.groupId}</tagBase>
 						<goals>enforcer:enforce deploy</goals>
@@ -109,8 +109,7 @@ version=1
 						<remoteTagging>false</remoteTagging>
 						<suppressCommitBeforeTag>true</suppressCommitBeforeTag>
 
-						<scmCommentPrefix>[Releasing @{project.artifactId}-@{project-version}] </scmCommentPrefix>
-						<tagNameFormat>@{project.artifactId}-${project.releaseVersion}</tagNameFormat>
+						<scmCommentPrefix>[Releasing ${project.artifactId}] </scmCommentPrefix>
 					</configuration>
 				</plugin>
 				<plugin>
