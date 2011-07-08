@@ -107,7 +107,7 @@ version=1
 						<remoteTagging>false</remoteTagging>
 						<suppressCommitBeforeTag>true</suppressCommitBeforeTag>
 						<scmCommentPrefix>[Releasing @{project.artifactId}-@{project-version}] </scmCommentPrefix>
-						<tagNameFormat>${project.artifactId}-${project.version}</tagNameFormat>
+						<tag>@{project.artifactId}-@{project.version}</tag>
 					</configuration>
 				</plugin>
 				<plugin>
