@@ -106,7 +106,8 @@ version=1
 						<preparationGoals>enforcer:enforce clean verify</preparationGoals>
 						<remoteTagging>false</remoteTagging>
 						<suppressCommitBeforeTag>true</suppressCommitBeforeTag>
-						<scmCommentPrefix>[Releasing ${project.artifactId}] </scmCommentPrefix>
+						<scmCommentPrefix>[Releasing @{project.artifactId}-@{project-version] </scmCommentPrefix>
+						<tagNameFormat>@{project.artifactId}-@{project.version}</tagNameFormat>
 					</configuration>
 				</plugin>
 				<plugin>
