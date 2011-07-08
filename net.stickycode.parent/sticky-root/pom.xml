@@ -1,19 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-
-	Copyright (c) 2010 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved.
-
-	This program is licensed to you under the Apache License Version 2.0,
-	and you may not use this file except in compliance with the Apache License Version 2.0.
-	You may obtain a copy of the Apache License Version 2.0 at http://www.apache.org/licenses/LICENSE-2.0.
-
-	Unless required by applicable law or agreed to in writing,
-	software distributed under the Apache License Version 2.0 is distributed on an
-	"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-	See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
-
--->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<!-- Copyright (c) 2011 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved. -->
+<project
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 
@@ -23,6 +13,17 @@
 	<packaging>pom</packaging>
 
 	<name>sticky-root</name>
+	<description>Define the distribution management and general plugins used in all StickyCode projects</description>
+	<inceptionYear>2010</inceptionYear>
+	<url>http://www.StickyCode.net/</url>
+
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
 
 	<distributionManagement>
 		<repository>
@@ -39,17 +40,32 @@
 		</snapshotRepository>
 	</distributionManagement>
 
-	<description>Define the distribution management and general plugins used in all sticky projects</description>
-	<inceptionYear>2010</inceptionYear>
 	<scm>
-		<connection>scm:svn:https://null</connection>
-		<developerConnection>scm:svn:https://null</developerConnection>
+		<connection>scm:svn:http://stickycode.googlecode.com/svn/trunk/</connection>
+		<developerConnection>scm:svn:https://stickycode.googlecode.com/svn/trunk/</developerConnection>
 	</scm>
 
 	<organization>
 		<name>RedEngine Ltd</name>
 		<url>http://www.RedEngine.co.nz/</url>
 	</organization>
+
+	<developers>
+		<developer>
+			<email>michael@StickyCode.net</email>
+			<id>michael@StickyCode.net</id>
+			<name>Michael McCallum</name>
+			<roles>
+				<role>founder</role>
+				<role>architect</role>
+				<role>developer</role>
+			</roles>
+			<organization>Red Engine Ltd</organization>
+			<organizationUrl>http://www.RedEngine.co.nz</organizationUrl>
+			<timezone>+12</timezone>
+		</developer>
+	</developers>
+
 	<build>
 		<directory>${basedir}/${target.dir}</directory>
 		<outputDirectory>${basedir}/${target.dir}/classes</outputDirectory>
@@ -180,12 +196,12 @@ version=1
 
 	<properties>
 		<!--
-			Because UTF-8 is nice but not everywhere, it causes problems with different editors and windows editors in particular wanting to
-			put BOM's in when UTF-8 should NOT have them.
+			Because UTF-8 is nice but not everywhere, it causes problems with different editors and windows editors in particular wanting
+			to put BOM's in when UTF-8 should NOT have them.
 		-->
 		<!--
-			Appropriate encodings for other characters can be used that will be rendered properly at the UI layer. e.g. #&x123; for the
-			dagger character in an html source file will be rendered fine in the browser.
+			Appropriate encodings for other characters can be used that will be rendered properly at the UI layer. e.g. #&x123; for the dagger
+			character in an html source file will be rendered fine in the browser.
 		-->
 		<project.build.sourceEncoding>US-ASCII</project.build.sourceEncoding>
 		<target.dir>target</target.dir>
@@ -193,10 +209,39 @@ version=1
 
 	<profiles>
 		<profile>
+			<!-- Make sure eclipse outputs to a different directory otherwise the builders will clash with command line. -->
 			<id>running-in-eclipse</id>
 			<properties>
 				<target.dir>target-eclipse</target.dir>
 			</properties>
+		</profile>
+
+		<profile>
+			<id>sign-release-artifacts</id>
+			<activation>
+				<property>
+					<name>performRelease</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>1.1</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
 		</profile>
 	</profiles>
 
