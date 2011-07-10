@@ -31,7 +31,15 @@
 	</profiles>
 
 	<name>sticky-war</name>
-	<description>Definition of plugins used for war projects</description>
+	<description>The definition of StickyCode war projects</description>
+	<inceptionYear>2009</inceptionYear>
+	<url>http://www.StickyCode.net/parent/sticky-war.html</url>
+
+	<scm>
+		<connection>scm:svn:http://stickycode.googlecode.com/svn/trunk/net.stickycode.parent/sticky-war</connection>
+		<developerConnection>scm:svn:https://stickycode.googlecode.com/svn/trunk/net.stickycode.parent/sticky-war</developerConnection>
+	</scm>
+
 	<build>
 		<pluginManagement>
 			<plugins>
