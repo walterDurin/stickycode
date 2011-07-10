@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright (c) 2011 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved. -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 
@@ -12,7 +15,7 @@
 	<name>sticky-root</name>
 	<description>Define the distribution management and general plugins used in all StickyCode projects</description>
 	<inceptionYear>2010</inceptionYear>
-	<url>http://www.StickyCode.net/</url>
+	<url>http://www.StickyCode.net/parent/sticky-root.html</url>
 
 	<licenses>
 		<license>
@@ -38,8 +41,8 @@
 	</distributionManagement>
 
 	<scm>
-		<connection>scm:svn:http://stickycode.googlecode.com/svn/trunk/</connection>
-		<developerConnection>scm:svn:https://stickycode.googlecode.com/svn/trunk/</developerConnection>
+		<connection>scm:svn:http://stickycode.googlecode.com/svn/trunk/net.stickycode.parent</connection>
+		<developerConnection>scm:svn:https://stickycode.googlecode.com/svn/trunk/net.stickycode.parent</developerConnection>
 	</scm>
 
 	<organization>
@@ -102,7 +105,7 @@ version=1
 						<goals>enforcer:enforce deploy</goals>
 						<preparationGoals>enforcer:enforce clean verify</preparationGoals>
 
-						<!-- Remote tagging is just a dumb idea it violates the whole point of tagging a know quantity -->
+						<!-- Remote tagging is just a dumb idea it violates the whole point of tagging a known quantity -->
 						<remoteTagging>false</remoteTagging>
 						<suppressCommitBeforeTag>true</suppressCommitBeforeTag>
 
