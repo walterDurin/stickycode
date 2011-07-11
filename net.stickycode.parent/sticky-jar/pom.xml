@@ -5,7 +5,7 @@
 	<parent>
 		<artifactId>sticky-root</artifactId>
 		<groupId>net.stickycode.parent</groupId>
-		<version>1.16</version>
+		<version>1.17</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
@@ -17,7 +17,7 @@
 	<name>sticky-jar</name>
 	<description>The definition of a StickyCode jar project</description>
 	<inceptionYear>2010</inceptionYear>
-	<url>http://www.StickyCode.net/parent/sticky-jar.html</url>
+	<url>http://www.StickyCode.net/parent/sticky-jar/</url>
 
 	<scm>
 		<connection>scm:svn:http://stickycode.googlecode.com/svn/trunk/net.stickycode.parent/sticky-jar</connection>
