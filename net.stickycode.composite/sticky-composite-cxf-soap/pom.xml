@@ -21,6 +21,11 @@
 	<url>http://www.StickyCode.net/composite/sticky-composite-cxf-soap/</url>
 	<inceptionYear>2007</inceptionYear>
 
+	<scm>
+		<connection>scm:svn:http://stickycode.googlecode.com/svn/trunk/net.stickycode.composite/sticky-composite-cxf-soap</connection>
+		<developerConnection>scm:svn:https://stickycode.googlecode.com/svn/trunk/net.stickycode.composite/sticky-composite-cxf-soap</developerConnection>
+	</scm>
+
 	<properties>
 		<cxf.version>2.3.0</cxf.version>
 	</properties>
@@ -29,12 +34,12 @@
 		<dependency>
 			<groupId>net.stickycode.composite</groupId>
 			<artifactId>sticky-composite-logging-api</artifactId>
-			<version>[1,2)</version>
+			<version>[1.2,2)</version>
 		</dependency>
 		<dependency>
 			<groupId>net.stickycode.composite</groupId>
 			<artifactId>sticky-composite-spring30</artifactId>
-			<version>[1,2)</version>
+			<version>[1.2,2)</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.cxf</groupId>
