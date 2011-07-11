@@ -18,7 +18,7 @@
 
 	<name>sticky-composite-spring30</name>
 	<description>Composition of artifacts required for using the spring 3.0 Contexts</description>
-	<url>http://www.StickyCode.net/composite/sticky-somposite-spring30//</url>
+	<url>http://www.StickyCode.net/composite/sticky-composite-spring30/</url>
 	<inceptionYear>2010</inceptionYear>
 
 	<scm>
@@ -30,9 +30,8 @@
 		<dependency>
 			<groupId>net.stickycode.composite</groupId>
 			<artifactId>sticky-composite-logging-api</artifactId>
-			<version>[1.1,2)</version>
+			<version>[1.2,2)</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
