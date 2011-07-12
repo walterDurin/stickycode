@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>net.stickycode.parent</groupId>
 		<artifactId>sticky-jar</artifactId>
-		<version>1.14</version>
+		<version>1.15</version>
 	</parent>
 
 	<artifactId>sticky-war</artifactId>
@@ -38,6 +38,7 @@
 	<scm>
 		<connection>scm:svn:http://stickycode.googlecode.com/svn/trunk/net.stickycode.parent/sticky-war</connection>
 		<developerConnection>scm:svn:https://stickycode.googlecode.com/svn/trunk/net.stickycode.parent/sticky-war</developerConnection>
+		<url>http://code.google.com/p/stickycode/source/browse/#svn/trunk/net.stickycode.parent/sticky-war</url>
 	</scm>
 
 	<build>
