@@ -5,7 +5,7 @@
 	<parent>
 		<artifactId>sticky-root</artifactId>
 		<groupId>net.stickycode.parent</groupId>
-		<version>1.17</version>
+		<version>1.18</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
@@ -22,6 +22,7 @@
 	<scm>
 		<connection>scm:svn:http://stickycode.googlecode.com/svn/trunk/net.stickycode.parent/sticky-jar</connection>
 		<developerConnection>scm:svn:https://stickycode.googlecode.com/svn/trunk/net.stickycode.parent/sticky-jar</developerConnection>
+		<url>http://code.google.com/p/stickycode/source/browse/#svn/trunk/net.stickycode.parent/sticky-jar</url>
 	</scm>
 
 	<build>
