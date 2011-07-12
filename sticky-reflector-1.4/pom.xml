@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (c) 2010 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved. -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<parent>
+		<groupId>net.stickycode.parent</groupId>
+		<artifactId>sticky-jar</artifactId>
+		<version>1.14</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>net.stickycode</groupId>
+	<artifactId>sticky-reflector</artifactId>
+	<version>1.4</version>
+	<packaging>jar</packaging>
+
+	<name>sticky-reflector</name>
+	<description>Class, Field and Method metadata used to remove boilerplate code for construction, configuration, scheduling, monitoring, management and more</description>
+
+	<inceptionYear>2010</inceptionYear>
+		<url>http://www.StickyCode.net/sticky-reflector/</url>
+
+	<scm>
+		<connection>scm:svn:http://stickycode.googlecode.com/svn/tags/net.stickycode/sticky-reflector-1.4</connection>
+		<developerConnection>scm:svn:https://stickycode.googlecode.com/svn/tags/net.stickycode/sticky-reflector-1.4</developerConnection>
+	</scm>
+</project>
