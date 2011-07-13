@@ -19,12 +19,12 @@
 	<name>mockwire-spring30</name>
 	<description>Isolation and definition of test contexts using Spring 3.0 and Mockito</description>
 	<inceptionYear>2010</inceptionYear>
-	<url>http://www.StickyCode.net/mockwire/sticky-mockwire-spring30</url>
+	<url>http://www.StickyCode.net/mockwire/mockwire-spring30</url>
 
 	<scm>
-		<connection>scm:svn:http://stickycode.googlecode.com/svn/trunk/net.stickycode.mockwire/sticky-mockwire-spring30</connection>
-		<developerConnection>scm:svn:https://stickycode.googlecode.com/svn/trunk/net.stickycode.mockwire/sticky-mockwire-spring30</developerConnection>
-		<url>http://code.google.com/p/stickycode/source/browse/#svn/trunk/net.stickycode.mockwire/sticky-mockwire-spring30t</url>
+		<connection>scm:svn:http://stickycode.googlecode.com/svn/trunk/net.stickycode.mockwire/mockwire-spring30</connection>
+		<developerConnection>scm:svn:https://stickycode.googlecode.com/svn/trunk/net.stickycode.mockwire/mockwire-spring30</developerConnection>
+		<url>http://code.google.com/p/stickycode/source/browse/#svn/trunk/net.stickycode.mockwire/mockwire-spring30t</url>
 	</scm>
 
 	<dependencies>
