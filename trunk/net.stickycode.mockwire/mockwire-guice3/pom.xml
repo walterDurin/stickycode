@@ -18,13 +18,14 @@
 	<name>mockwire-guice3</name>
 	<description>Isolation and definition of test contexts using Guice 3 and Mockito</description>
 	<inceptionYear>2010</inceptionYear>
-	<url>http://www.StickyCode.net/mockwire/sticky-mockwire-guice3</url>
+	<url>http://www.StickyCode.net/mockwire/mockwire-guice3</url>
 
 	<scm>
-		<connection>scm:svn:http://stickycode.googlecode.com/svn/trunk/net.stickycode.mockwire/sticky-mockwire-guice3</connection>
-		<developerConnection>scm:svn:https://stickycode.googlecode.com/svn/trunk/net.stickycode.mockwire/sticky-mockwire-guice3</developerConnection>
-		<url>http://code.google.com/p/stickycode/source/browse/#svn/trunk/net.stickycode.mockwire/sticky-mockwire-guice3t</url>
+		<connection>scm:svn:http://stickycode.googlecode.com/svn/trunk/net.stickycode.mockwire/mockwire-guice3</connection>
+		<developerConnection>scm:svn:https://stickycode.googlecode.com/svn/trunk/net.stickycode.mockwire/mockwire-guice3</developerConnection>
+		<url>http://code.google.com/p/stickycode/source/browse/#svn/trunk/net.stickycode.mockwire/mockwire-guice3t</url>
 	</scm>
+
 	<dependencies>
 		<dependency>
 			<groupId>net.stickycode.composite</groupId>
