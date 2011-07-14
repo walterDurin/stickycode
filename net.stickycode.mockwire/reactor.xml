@@ -33,10 +33,10 @@
 	<module>sticky-mockwire-tck</module>
 	<module>sticky-mockwire-mockito</module>
 	<module>sticky-mockwire-spring25</module>
+	<module>sticky-mockwire-guice3</module>
 	<module>mockwire-spring25</module>
 	<module>sticky-mockwire-spring30</module>
 	<module>mockwire-spring30</module>
-	<module>sticky-mockwire-guice2</module>
 
 	</modules>
 </project>
