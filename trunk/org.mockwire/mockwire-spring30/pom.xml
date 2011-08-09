@@ -11,7 +11,7 @@
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>net.stickycode.mockwire</groupId>
+	<groupId>org.mockwire</groupId>
 	<artifactId>mockwire-spring30</artifactId>
 	<version>4.3-SNAPSHOT</version>
 	<packaging>jar</packaging>
@@ -22,31 +22,31 @@
 	<url>http://www.StickyCode.net/mockwire/mockwire-spring30</url>
 
 	<scm>
-		<connection>scm:svn:http://stickycode.googlecode.com/svn/trunk/net.stickycode.mockwire/mockwire-spring30</connection>
-		<developerConnection>scm:svn:https://stickycode.googlecode.com/svn/trunk/net.stickycode.mockwire/mockwire-spring30</developerConnection>
-		<url>http://code.google.com/p/stickycode/source/browse/#svn/trunk/net.stickycode.mockwire/mockwire-spring30t</url>
+		<connection>scm:svn:http://stickycode.googlecode.com/svn/trunk/org.mockwire/mockwire-spring30</connection>
+		<developerConnection>scm:svn:https://stickycode.googlecode.com/svn/trunk/org.mockwire/mockwire-spring30</developerConnection>
+		<url>http://code.google.com/p/stickycode/source/browse/#svn/trunk/org.mockwire/mockwire-spring30</url>
 	</scm>
 
 	<dependencies>
 		<dependency>
 			<groupId>net.stickycode.composite</groupId>
 			<artifactId>sticky-composite-logging-deploy</artifactId>
-			<version>[1,2)</version>
+			<version>[1.4,2)</version>
 		</dependency>
 		<dependency>
 			<groupId>net.stickycode.mockwire</groupId>
 			<artifactId>sticky-mockwire</artifactId>
-			<version>[5,6)</version>
+			<version>[5.7,6)</version>
 		</dependency>
 		<dependency>
 			<groupId>net.stickycode.mockwire</groupId>
 			<artifactId>sticky-mockwire-spring30</artifactId>
-			<version>[5,6)</version>
+			<version>[5.4,6)</version>
 		</dependency>
 		<dependency>
 			<groupId>net.stickycode.mockwire</groupId>
 			<artifactId>sticky-mockwire-mockito</artifactId>
-			<version>[3,4)</version>
+			<version>[3.2,4)</version>
 		</dependency>
 	</dependencies>
 </project>

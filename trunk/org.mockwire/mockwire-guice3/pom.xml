@@ -7,11 +7,11 @@
 	<parent>
 		<groupId>net.stickycode.parent</groupId>
 		<artifactId>sticky-jar</artifactId>
-		<version>1.9</version>
+		<version>1.15</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>net.stickycode.mockwire</groupId>
+	<groupId>org.mockwire</groupId>
 	<artifactId>mockwire-guice3</artifactId>
 	<version>0.3-SNAPSHOT</version>
 
@@ -21,31 +21,31 @@
 	<url>http://www.StickyCode.net/mockwire/mockwire-guice3</url>
 
 	<scm>
-		<connection>scm:svn:http://stickycode.googlecode.com/svn/trunk/net.stickycode.mockwire/mockwire-guice3</connection>
-		<developerConnection>scm:svn:https://stickycode.googlecode.com/svn/trunk/net.stickycode.mockwire/mockwire-guice3</developerConnection>
-		<url>http://code.google.com/p/stickycode/source/browse/#svn/trunk/net.stickycode.mockwire/mockwire-guice3t</url>
+		<connection>scm:svn:http://stickycode.googlecode.com/svn/trunk/org.mockwire/mockwire-guice3</connection>
+		<developerConnection>scm:svn:https://stickycode.googlecode.com/svn/trunk/org.mockwire/mockwire-guice3</developerConnection>
+		<url>http://code.google.com/p/stickycode/source/browse/#svn/trunk/org.mockwire/mockwire-guice3</url>
 	</scm>
 
 	<dependencies>
 		<dependency>
 			<groupId>net.stickycode.composite</groupId>
 			<artifactId>sticky-composite-logging-deploy</artifactId>
-			<version>[1,2)</version>
+			<version>[1.4,2)</version>
 		</dependency>
 		<dependency>
 			<groupId>net.stickycode.mockwire</groupId>
 			<artifactId>sticky-mockwire</artifactId>
-			<version>[5,6)</version>
+			<version>[5.7,6)</version>
 		</dependency>
 		<dependency>
 			<groupId>net.stickycode.mockwire</groupId>
 			<artifactId>sticky-mockwire-guice3</artifactId>
-			<version>[0,1)</version>
+			<version>[0.7,1)</version>
 		</dependency>
 		<dependency>
 			<groupId>net.stickycode.mockwire</groupId>
 			<artifactId>sticky-mockwire-mockito</artifactId>
-			<version>[3,4)</version>
+			<version>[3.2,4)</version>
 		</dependency>
 	</dependencies>
 </project>
