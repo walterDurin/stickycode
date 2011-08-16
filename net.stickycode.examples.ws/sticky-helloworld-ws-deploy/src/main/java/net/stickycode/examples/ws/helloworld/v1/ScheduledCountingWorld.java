@@ -12,25 +12,23 @@
  */
 package net.stickycode.examples.ws.helloworld.v1;
 
-import static org.fest.assertions.Assertions.assertThat;
-import net.stickycode.mockwire.MockwireConfigured;
-import net.stickycode.mockwire.junit4.MockwireRunner;
-import net.stickycode.stereotype.Configured;
+import net.stickycode.stereotype.Schedule;
+import net.stickycode.stereotype.StickyComponent;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+@StickyComponent
+public class ScheduledCountingWorld
+    implements CountingWorld {
 
-@RunWith(MockwireRunner.class)
-@MockwireConfigured
-public class EchoingHelloWorldIntegrationTest {
-
-  @Configured
-  HelloWorld client;
+  private int counter = 10;
   
-  @Test
-  public void ping() {
-    assertThat(client).isNotNull();
-    assertThat(client.hello("bob")).isEqualTo("Hello bob");
+  @Override
+  public Integer count() {
+    return counter;
   }
   
+  @Schedule
+  public void increment() {
+    counter++;
+  }
+
 }

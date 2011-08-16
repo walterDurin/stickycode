@@ -12,17 +12,11 @@
  */
 package net.stickycode.examples.ws.helloworld.v1;
 
-import net.stickycode.stereotype.Configured;
-import net.stickycode.stereotype.StickyComponent;
+import javax.jws.WebService;
 
-@StickyComponent
-public class HelloWorldClient {
-  
-  @Configured
-  HelloWorld client;
-  
-  public String hello() {
-    return client.hello("bob");
-  }
+@WebService
+public interface CountingWorld {
 
+  Integer count();
+  
 }

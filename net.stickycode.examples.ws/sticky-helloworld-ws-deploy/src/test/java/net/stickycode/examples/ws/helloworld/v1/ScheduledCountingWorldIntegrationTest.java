@@ -22,15 +22,19 @@ import org.junit.runner.RunWith;
 
 @RunWith(MockwireRunner.class)
 @MockwireConfigured
-public class EchoingHelloWorldIntegrationTest {
+public class ScheduledCountingWorldIntegrationTest {
 
   @Configured
-  HelloWorld client;
+  CountingWorld client;
   
   @Test
-  public void ping() {
+  public void ping() throws InterruptedException {
     assertThat(client).isNotNull();
-    assertThat(client.hello("bob")).isEqualTo("Hello bob");
+    int beginning = client.count();
+    Thread.sleep(1000);
+    assertThat(client.count() - beginning).isEqualTo(1);
+    Thread.sleep(1000);
+    assertThat(client.count() - beginning).isEqualTo(2);
   }
   
 }
