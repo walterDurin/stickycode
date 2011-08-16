@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (c) 2010 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved. -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<parent>
+		<groupId>net.stickycode.parent</groupId>
+		<artifactId>sticky-jar</artifactId>
+		<version>1.15</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>net.stickycode.component</groupId>
+	<artifactId>sticky-component-cxf</artifactId>
+	<version>2.2</version>
+	<packaging>jar</packaging>
+
+	<name>sticky-component-cxf</name>
+	<description>Class, Field and Method metadata used to remove boilerplate code for construction, configuration, scheduling, 
+monitoring, management and more</description>
+	<url>http://www.StickyCode.net/component/sticky-component-cxf/</url>
+	<inceptionYear>2009</inceptionYear>
+
+	<scm>
+		<connection>scm:svn:http://stickycode.googlecode.com/svn/tags/net.stickycode.component/sticky-component-cxf-2.2</connection>
+		<developerConnection>scm:svn:https://stickycode.googlecode.com/svn/tags/net.stickycode.component/sticky-component-cxf-2.2</developerConnection>
+		<url>http://code.google.com/p/stickycode/source/browse/#svn/tags/net.stickycode.component/sticky-component-cxf-2.2</url>
+	</scm>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.mockwire</groupId>
+			<artifactId>mockwire-spring30</artifactId>
+			<version>[4.2,5)</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jul-to-slf4j</artifactId>
+			<version>[1.6.0]</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>net.stickycode.composite</groupId>
+			<artifactId>sticky-composite-cxf-soap</artifactId>
+			<version>[3.1,4)</version>
+		</dependency>
+		<dependency>
+			<groupId>net.stickycode</groupId>
+			<artifactId>sticky-stereotype</artifactId>
+			<version>[1.5,2)</version>
+		</dependency>
+		<dependency>
+			<groupId>net.stickycode</groupId>
+			<artifactId>sticky-exception</artifactId>
+			<version>[1.6,2)</version>
+		</dependency>
+	</dependencies>
+</project>
