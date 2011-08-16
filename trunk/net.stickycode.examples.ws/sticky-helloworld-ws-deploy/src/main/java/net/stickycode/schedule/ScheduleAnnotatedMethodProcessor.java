@@ -10,27 +10,26 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
  */
-package net.stickycode.examples.ws.helloworld.v1;
+package net.stickycode.schedule;
 
-import static org.fest.assertions.Assertions.assertThat;
-import net.stickycode.mockwire.MockwireConfigured;
-import net.stickycode.mockwire.junit4.MockwireRunner;
-import net.stickycode.stereotype.Configured;
+import java.lang.reflect.Method;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import net.stickycode.reflector.AnnotatedMethodProcessor;
+import net.stickycode.stereotype.Schedule;
 
-@RunWith(MockwireRunner.class)
-@MockwireConfigured
-public class EchoingHelloWorldIntegrationTest {
 
-  @Configured
-  HelloWorld client;
+public class ScheduleAnnotatedMethodProcessor
+    extends AnnotatedMethodProcessor {
   
-  @Test
-  public void ping() {
-    assertThat(client).isNotNull();
-    assertThat(client.hello("bob")).isEqualTo("Hello bob");
+  
+  public ScheduleAnnotatedMethodProcessor() {
+    super(Schedule.class);
   }
-  
+
+  @Override
+  public void processMethod(Object target, Method method) {
+    Schedule schedule = method.getAnnotation(Schedule.class);
+    
+  }
+
 }
