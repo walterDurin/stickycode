@@ -19,18 +19,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * <p>Used to mark a field to be invoked on a schedule</p>
- *
- * <p>The schedule is NOT defined on the method or annotation but in the configuration system of the context, this separation is important</p>
- *
- * <p>I would argue you can very rarely define the schedule of something when writing the code but really its environmental. For example if I have
- * a scheduled method that were to periodically synchronized two systems, in a production environment this would most likely happen once a day for example but
- * to make quality assurance testing suitable it should run far more regularly to be useful to testers and acceptors. In order to ensure consistency across environments
- * the schedule should always be defined by the environment.</p>
+ * See {@link Scheduled}
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
+@Deprecated
 public @interface Schedule {
 
   /**
