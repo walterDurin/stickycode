@@ -27,7 +27,7 @@ monitoring, management and more</description>
 
 	<dependencies>
 		<dependency>
-			<groupId>net.stickycode.mockwire</groupId>
+			<groupId>org.mockwire</groupId>
 			<artifactId>mockwire-spring30</artifactId>
 			<version>[4.2,5)</version>
 			<scope>test</scope>
@@ -36,7 +36,7 @@ monitoring, management and more</description>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>jul-to-slf4j</artifactId>
-			<version>[1.6.0]</version>
+			<version>[1.6.1]</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
