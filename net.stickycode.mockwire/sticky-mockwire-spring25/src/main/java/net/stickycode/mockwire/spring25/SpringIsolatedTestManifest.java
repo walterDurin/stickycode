@@ -31,6 +31,7 @@ import org.springframework.core.type.filter.AnnotationTypeFilter;
 
 import net.stickycode.coercion.Coercions;
 import net.stickycode.coercion.PatternCoercion;
+import net.stickycode.coercion.ws.WebServiceCoercion;
 import net.stickycode.component.spring25.InjectAnnotationBeanPostProcessor;
 import net.stickycode.configured.ConfigurationSource;
 import net.stickycode.configured.ConfigurationSystem;
@@ -161,6 +162,7 @@ public class SpringIsolatedTestManifest
     registerType(context, SimpleNameDotFieldConfigurationKeyBuilder.class);
     registerType(context, ConfigurationSystem.class);
     registerType(context, ConfiguredBeanPostProcessor.class);
+    registerType(context, WebServiceCoercion.class);
     registerType(context, PatternCoercion.class);
     registerType(context, Coercions.class);
     for (ConfigurationSource configurationSource : configurationSources) {
