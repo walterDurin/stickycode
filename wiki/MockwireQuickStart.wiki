@@ -37,13 +37,13 @@ public class UnitTest {
 
 === Blessing and Mocking ===
 
-@Bless and @Mock and mock are used to define the types that end up in the wire test environment.
+@UnderTest, @Controlled, @Uncontrolled and @Configured are used to define the types that end up in the wired test environment.
 
-Mockwire scans the test class and identitifies the code you wish to test, 
+Mockwire scans the test class and identitifies the code you wish to test "@UnderTest", 
 
 e.g. SomeConcreteClass in being tested so we need to bless a real instance of it. How the class is turned into a real instance is left up to the DI tool in use.
 {{{
-@Bless
+@UnderTest
 SomeConcreteClass codeToTest;
 }}}
 
@@ -51,7 +51,7 @@ And controlled dependencies of the code to test,
 
 e.g. SomeConcreteClass requires a SomeInterface, this requirement is defined by @Inject
 {{{
-@Mock
+@Controlled
 SomeInterface thatSomeConcreteClassNeeds;
 }}}
 How the class actually gets mocked is left up to the Mocking implementation, I would highly recommend Mockito, but will supply bindings to other mocking libraries on request.
@@ -173,4 +173,10 @@ public class ServiceImplIntegrationTest {
 More than one package can be scanned with 
 {{{
 @MockwireContainment("/net/stickycode/example/containment/main", "/some/other/package)
+}}}
+
+If you prefer the package syntax
+
+{{{
+@MockwireContainment("net.stickycode.example.containment.main")
 }}}
