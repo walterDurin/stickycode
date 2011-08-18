@@ -17,9 +17,7 @@ import javax.inject.Inject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import net.stickycode.mockwire.Bless;
 import net.stickycode.mockwire.Controlled;
-import net.stickycode.mockwire.Mock;
 import net.stickycode.mockwire.UnderTest;
 import net.stickycode.mockwire.junit4.MockwireRunner;
 
