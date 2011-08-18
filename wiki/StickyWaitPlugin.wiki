@@ -3,3 +3,27 @@
 = Introduction =
 
 When using jetty to run a built war for integration testing it is often useful to run the war and then look at it interactively. Using the daemon mode works but you get errors.
+
+Include the wait plugin like so
+
+{{{
+<plugin>
+  <groupId>net.stickycode.plugins</groupId>
+    <artifactId>sticky-wait-plugin</artifactId>
+    <version>1.3</version>
+    <executions>
+      <execution>
+        <phase>integration-test</phase>
+        <goals>
+          <goal>wait</goal>
+        </goals>
+      </execution>
+    </executions>
+  </plugin>
+</plugins>
+}}}
+
+Will give you this when you run {{{mvn verify}}}
+  [INFO] 
+  [INFO] --- sticky-wait-plugin:1.3:wait (default) @ sticky-helloworld-  ws-deploy ---
+  Press ENTER key to continue...
