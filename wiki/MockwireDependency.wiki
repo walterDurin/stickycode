@@ -1,17 +1,37 @@
 #summary Mockwire dependency
 
-= Using the defaults =
+= Central =
 
-The defaults include mockito, junit4, spring 2.5, fest assertions and logback for logging
+Mockwire can be found in the Central maven repository.
 
+The default setup leverages junit4, mockito and fest plus your choice of dependency container.
+
+= For Spring 2.5.X =
 {{{
 <dependency>
-  <groupId>net.stickycode.mockwire</groupId>
+  <groupId>org.mockwire</groupId>
   <artifactId>mockwire-spring25</artifactId>
-  <version>[1,2)</version>
-  <type>jar</type>
+  <version>[4.2,5)</version>
   <scope>test</scope>
 </dependency>
 }}}
 
-You will need to add the StickyMavenRepository to you environment first. Hopefully i'll get around to pushing things into central soon.
+= For Spring 3.0.X =
+{{{
+<dependency>
+  <groupId>org.mockwire</groupId>
+  <artifactId>mockwire-spring30</artifactId>
+  <version>[4.2,5)</version>
+  <scope>test</scope>
+</dependency>
+}}}
+
+= For Guice 3 =
+{{{
+<dependency>
+  <groupId>org.mockwire</groupId>
+  <artifactId>mockwire-spring30</artifactId>
+  <version>[0.3,1)</version>
+  <scope>test</scope>
+</dependency>
+}}}
