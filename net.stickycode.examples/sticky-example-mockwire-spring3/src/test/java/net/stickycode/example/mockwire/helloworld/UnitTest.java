@@ -15,7 +15,6 @@ package net.stickycode.example.mockwire.helloworld;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import net.stickycode.mockwire.Bless;
 import net.stickycode.mockwire.UnderTest;
 import net.stickycode.mockwire.junit4.MockwireRunner;
 
