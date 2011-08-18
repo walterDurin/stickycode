@@ -18,7 +18,7 @@ public class UnitTest {
     }
   }
 
-  @Bless
+  @UnderTest
   Unit unit;
 
   @Test
@@ -49,10 +49,10 @@ public class UnitDependenciesTest {
     }
   }
 
-  @Bless
+  @UnderTest
   Unit unit;
 
-  @Mock
+  @Controlled
   Dependency mocked;
 
   @Test
