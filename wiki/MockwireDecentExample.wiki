@@ -8,10 +8,10 @@ The key thing to take away from this is that there is very little boilerplate (i
 @RunWith(MockwireRunner.class)
 public class DecentTest {
 
-  @Bless
+  @UnderTest
   CumulativeService service;
 
-  @Mock
+  @Controlled
   Repository repository;
 
   @Test
