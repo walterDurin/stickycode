@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (c) 2011 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved. -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<parent>
+		<groupId>net.stickycode.parent</groupId>
+		<artifactId>sticky-jar</artifactId>
+		<version>1.15</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>net.stickycode.scheduled</groupId>
+	<artifactId>sticky-scheduled-api</artifactId>
+	<version>2.3-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>sticky-scheduled-api</name>
+	<description>Taking the configuration out of applications, using the same principles that underly dependency injection</description>
+	<inceptionYear>2008</inceptionYear>
+	<url>http://www.StickyCode.net/scheduled/sticky-scheduled-api/</url>
+
+	<scm>
+		<connection>scm:svn:http://stickycode.googlecode.com/svn/trunk/net.stickycode.scheduled/sticky-scheduled-api</connection>
+		<developerConnection>scm:svn:https://stickycode.googlecode.com/svn/trunk/net.stickycode.scheduled/sticky-scheduled-api</developerConnection>
+		<url>http://code.google.com/p/stickycode/source/browse/#svn/trunk/net.stickycode.scheduled/sticky-scheduled-api</url>
+	</scm>
+
+	<dependencies>
+		<dependency>
+			<groupId>net.stickycode</groupId>
+			<artifactId>sticky-coercion-api</artifactId>
+			<version>[2.4,3)</version>
+		</dependency>
+	</dependencies>
+</project>
