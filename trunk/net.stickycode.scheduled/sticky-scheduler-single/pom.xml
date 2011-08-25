@@ -12,18 +12,18 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>net.stickycode.scheduled</groupId>
-	<artifactId>sticky-scheduled-spring30</artifactId>
+	<artifactId>sticky-scheduler-single</artifactId>
 	<version>1.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>sticky-scheduled-spring30</name>
+	<name>sticky-scheduler-single</name>
 	<description>Taking the configuration out of applications, using the same principles that underly dependency injection</description>
 
 	<inceptionYear>2008</inceptionYear>
 	<dependencies>
 		<dependency>
 			<groupId>net.stickycode.scheduled</groupId>
-			<artifactId>sticky-scheduled</artifactId>
+			<artifactId>sticky-scheduled-api</artifactId>
 			<version>[1,2)</version>
 		</dependency>
 
@@ -32,27 +32,7 @@
 			<artifactId>sticky-configured</artifactId>
 			<version>[2,3)</version>
 		</dependency>
-		<dependency>
-			<groupId>net.stickycode</groupId>
-			<artifactId>sticky-reflector</artifactId>
-			<version>[1,2)</version>
-		</dependency>
-		<dependency>
-			<groupId>net.stickycode</groupId>
-			<artifactId>sticky-exception</artifactId>
-			<version>[1,2)</version>
-		</dependency>
-		<dependency>
-			<groupId>net.stickycode.composite</groupId>
-			<artifactId>sticky-composite-spring30</artifactId>
-			<version>[1,2)</version>
-		</dependency>
-		<dependency>
-			<groupId>net.stickycode.composite</groupId>
-			<artifactId>sticky-composite-logging-deploy</artifactId>
-			<version>[1.2,2)</version>
-			<scope>test</scope>
-		</dependency>
+
 		<dependency>
 			<groupId>net.stickycode.composite</groupId>
 			<artifactId>sticky-composite-unittest</artifactId>
