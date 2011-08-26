@@ -12,28 +12,26 @@
  */
 package net.stickycode.scheduled;
 
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
+import net.stickycode.stereotype.component.StickyRepository;
 
-public class Schedule {
-  
-  private final long initialDelay;
-  private final long period;
+@StickyRepository
+public class InMemoryScheduledRunnableRepository
+    implements ScheduledRunnableRepository {
 
-  public Schedule(long initialDelay, long period) {
-    this.initialDelay = initialDelay;
-    this.period = period;
-  }
+  private List<ScheduledRunnable> schedules = new LinkedList<ScheduledRunnable>();
 
-  public long getInitialDelay() {
-    return initialDelay;
-  }
-
-  public long getPeriod() {
-    return period;
-  }
-  
   @Override
-  public String toString() {
-    return "after " + initialDelay + "s with period " + period + "s";
+  public void schedule(ScheduledRunnable runnable) {
+    schedules.add(runnable);
   }
+
+  @Override
+  public Iterator<ScheduledRunnable> iterator() {
+    return schedules.iterator();
+  }
+
 }

@@ -10,7 +10,7 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
  */
-package net.stickycode.scheduled;
+package net.stickycode.scheduled.spring30;
 
 import java.lang.reflect.Method;
 
@@ -19,6 +19,8 @@ import javax.inject.Inject;
 import net.stickycode.configured.ConfigurationRepository;
 import net.stickycode.configured.ConfiguredConfiguration;
 import net.stickycode.reflector.Reflector;
+import net.stickycode.scheduled.ScheduledMethodProcessor;
+import net.stickycode.scheduled.ScheduledRunnableRepository;
 import net.stickycode.stereotype.Scheduled;
 import net.stickycode.stereotype.StickyComponent;
 
@@ -33,7 +35,7 @@ public class ScheduledBeanPostProcessor
   private ConfigurationRepository configurationRepository;
   
   @Inject
-  private SchedulingSystem schedulingSystem;
+  private ScheduledRunnableRepository schedulingSystem;
 
   @Override
   public boolean postProcessAfterInstantiation(Object bean, String beanName) throws BeansException {
