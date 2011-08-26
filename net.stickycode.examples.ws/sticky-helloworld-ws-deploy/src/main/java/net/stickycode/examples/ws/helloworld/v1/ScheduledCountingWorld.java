@@ -12,7 +12,7 @@
  */
 package net.stickycode.examples.ws.helloworld.v1;
 
-import net.stickycode.stereotype.Schedule;
+import net.stickycode.stereotype.Scheduled;
 import net.stickycode.stereotype.StickyComponent;
 
 @StickyComponent
@@ -26,7 +26,7 @@ public class ScheduledCountingWorld
     return counter;
   }
   
-  @Schedule
+  @Scheduled
   public void increment() {
     counter++;
   }

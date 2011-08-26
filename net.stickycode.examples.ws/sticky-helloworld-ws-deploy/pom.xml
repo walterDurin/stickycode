@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>net.stickycode.parent</groupId>
 		<artifactId>sticky-war</artifactId>
-		<version>1.8</version>
+		<version>1.9</version>
 	</parent>
 
 	<groupId>net.stickycode.examples.ws</groupId>
@@ -63,6 +63,16 @@
 			<groupId>net.stickycode.configured</groupId>
 			<artifactId>sticky-configured-spring30</artifactId>
 			<version>[2.5,3)</version>
+		</dependency>
+		<dependency>
+			<groupId>net.stickycode.scheduled</groupId>
+			<artifactId>sticky-scheduler-single</artifactId>
+			<version>[1,2)</version>
+		</dependency>
+		<dependency>
+			<groupId>net.stickycode.scheduled</groupId>
+			<artifactId>sticky-scheduled-spring30</artifactId>
+			<version>[1,2)</version>
 		</dependency>
 	</dependencies>
 </project>

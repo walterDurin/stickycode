@@ -34,7 +34,5 @@ public class EchoingHelloWorld
   public Integer count() {
     return startIndex++;
   }
-  
-  
 
 }
