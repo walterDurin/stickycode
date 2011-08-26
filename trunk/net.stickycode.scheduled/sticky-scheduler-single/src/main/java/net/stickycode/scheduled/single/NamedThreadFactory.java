@@ -10,30 +10,31 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
  */
-package net.stickycode.scheduled;
+package net.stickycode.scheduled.single;
 
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.atomic.AtomicInteger;
 
+public class NamedThreadFactory
+    implements ThreadFactory {
 
-public class Schedule {
-  
-  private final long initialDelay;
-  private final long period;
+  final ThreadGroup group;
 
-  public Schedule(long initialDelay, long period) {
-    this.initialDelay = initialDelay;
-    this.period = period;
+  final AtomicInteger threadCounter = new AtomicInteger(1);
+
+  final String prefix;
+
+  public NamedThreadFactory(String prefix) {
+    this.prefix = prefix;
+    SecurityManager s = System.getSecurityManager();
+    if (s != null)
+      group = s.getThreadGroup();
+    else
+      group = Thread.currentThread().getThreadGroup();
   }
 
-  public long getInitialDelay() {
-    return initialDelay;
+  public Thread newThread(Runnable r) {
+    return new Thread(group, r, prefix + "-" + threadCounter.getAndIncrement(), 0);
   }
 
-  public long getPeriod() {
-    return period;
-  }
-  
-  @Override
-  public String toString() {
-    return "after " + initialDelay + "s with period " + period + "s";
-  }
 }

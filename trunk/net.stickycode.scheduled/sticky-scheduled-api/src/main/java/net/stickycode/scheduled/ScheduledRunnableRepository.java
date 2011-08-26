@@ -12,29 +12,9 @@
  */
 package net.stickycode.scheduled;
 
-import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.atomic.AtomicInteger;
+public interface ScheduledRunnableRepository
+    extends Iterable<ScheduledRunnable> {
 
-public class NamedThreadFactory
-    implements ThreadFactory {
-
-  final ThreadGroup group;
-
-  final AtomicInteger threadCounter = new AtomicInteger(1);
-
-  final String prefix;
-
-  public NamedThreadFactory(String prefix) {
-    this.prefix = prefix;
-    SecurityManager s = System.getSecurityManager();
-    if (s != null)
-      group = s.getThreadGroup();
-    else
-      group = Thread.currentThread().getThreadGroup();
-  }
-
-  public Thread newThread(Runnable r) {
-    return new Thread(group, r, prefix + "-" + threadCounter.getAndIncrement(), 0);
-  }
+  void schedule(ScheduledRunnable scheduledRunnable);
 
 }

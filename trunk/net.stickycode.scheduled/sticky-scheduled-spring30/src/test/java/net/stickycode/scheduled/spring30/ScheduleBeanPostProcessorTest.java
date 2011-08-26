@@ -10,11 +10,15 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
  */
-package net.stickycode.scheduled;
+package net.stickycode.scheduled.spring30;
 
 import static org.mockito.Mockito.verify;
 import net.stickycode.configured.ConfigurationRepository;
 import net.stickycode.configured.ConfiguredConfiguration;
+import net.stickycode.scheduled.ScheduledMethodInvoker;
+import net.stickycode.scheduled.ScheduledRunnableRepository;
+import net.stickycode.scheduled.SchedulingSystem;
+import net.stickycode.scheduled.spring30.ScheduledBeanPostProcessor;
 import net.stickycode.stereotype.Scheduled;
 
 import org.junit.Test;
@@ -41,7 +45,7 @@ public class ScheduleBeanPostProcessorTest {
   ConfigurationRepository repository;
   
   @Mock
-  SchedulingSystem schedulingSystem;
+  ScheduledRunnableRepository schedulingSystem;
   
   @InjectMocks
   ScheduledBeanPostProcessor p = new ScheduledBeanPostProcessor();
@@ -53,12 +57,5 @@ public class ScheduleBeanPostProcessorTest {
     
     verify(schedulingSystem).schedule(Matchers.any(ScheduledMethodInvoker.class));
     verify(repository).register(Matchers.any(ConfiguredConfiguration.class));
-    
-//    assertThat(schedule).isNotNull();
-//    assertThat(schedule.counter).isEqualTo(0);
-//    Thread.sleep(2000);
-//    assertThat(schedule.counter).isEqualTo(1);
-//    Thread.sleep(4000);
-//    assertThat(schedule.counter).isEqualTo(1);
   }
 }

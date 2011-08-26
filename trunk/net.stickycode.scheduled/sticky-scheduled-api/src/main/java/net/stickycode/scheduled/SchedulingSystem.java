@@ -14,6 +14,8 @@ package net.stickycode.scheduled;
 
 public interface SchedulingSystem {
 
-  void schedule(ScheduledRunnable scheduledRunnable);
+  void start();
+  
+  void stop();
 
 }
