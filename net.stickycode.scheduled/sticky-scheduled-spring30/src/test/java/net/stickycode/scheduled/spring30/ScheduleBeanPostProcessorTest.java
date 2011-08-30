@@ -17,8 +17,6 @@ import net.stickycode.configured.ConfigurationRepository;
 import net.stickycode.configured.ConfiguredConfiguration;
 import net.stickycode.scheduled.ScheduledMethodInvoker;
 import net.stickycode.scheduled.ScheduledRunnableRepository;
-import net.stickycode.scheduled.SchedulingSystem;
-import net.stickycode.scheduled.spring30.ScheduledBeanPostProcessor;
 import net.stickycode.stereotype.Scheduled;
 
 import org.junit.Test;
