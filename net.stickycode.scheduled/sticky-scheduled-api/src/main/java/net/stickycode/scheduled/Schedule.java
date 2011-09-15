@@ -12,28 +12,29 @@
  */
 package net.stickycode.scheduled;
 
+import java.util.concurrent.TimeUnit;
 
+/**
+ * The definition of repetition for a {@link ScheduledRunnable} defining the cycle of execution and the alignment of that execution.
+ */
+public interface Schedule {
 
-public class Schedule {
-  
-  private final long initialDelay;
-  private final long period;
+  /**
+   * The delay to wait before the initial execution of the {@link ScheduledRunnable} to align the schedule as specified.
+   */
+  long getInitialDelay();
 
-  public Schedule(long initialDelay, long period) {
-    this.initialDelay = initialDelay;
-    this.period = period;
-  }
+  /**
+   * The time between executions of the {@link ScheduledRunnable}
+   */
+  long getPeriod();
 
-  public long getInitialDelay() {
-    return initialDelay;
-  }
+  /**
+   * The units to use when interpreting the Period and initial delay
+   * @return the units of this schedule
+   */
+  TimeUnit getUnits();
 
-  public long getPeriod() {
-    return period;
-  }
-  
-  @Override
-  public String toString() {
-    return "after " + initialDelay + "s with period " + period + "s";
-  }
+  String toString();
+
 }
