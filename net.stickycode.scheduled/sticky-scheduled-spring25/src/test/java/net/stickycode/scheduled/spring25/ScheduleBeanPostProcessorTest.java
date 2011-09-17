@@ -10,13 +10,14 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
  */
-package net.stickycode.scheduled.spring30;
+package net.stickycode.scheduled.spring25;
 
 import static org.mockito.Mockito.verify;
 import net.stickycode.configured.ConfigurationRepository;
 import net.stickycode.configured.ConfiguredConfiguration;
 import net.stickycode.scheduled.ScheduledMethodInvoker;
 import net.stickycode.scheduled.ScheduledRunnableRepository;
+import net.stickycode.scheduled.spring25.ScheduledBeanPostProcessor;
 import net.stickycode.stereotype.Scheduled;
 
 import org.junit.Test;
