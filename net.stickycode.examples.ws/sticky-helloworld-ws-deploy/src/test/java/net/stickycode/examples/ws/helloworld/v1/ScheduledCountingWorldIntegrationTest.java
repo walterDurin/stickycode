@@ -30,11 +30,11 @@ public class ScheduledCountingWorldIntegrationTest {
   @Test
   public void ping() throws InterruptedException {
     assertThat(client).isNotNull();
-    int beginning = client.count();
-    Thread.sleep(1000);
-    assertThat(client.count() - beginning).isEqualTo(1);
-    Thread.sleep(1000);
-    assertThat(client.count() - beginning).isEqualTo(2);
+    for (int i = 0; i < 3; i++) {
+      int before = client.count();
+      Thread.sleep(2500);
+      assertThat(client.count()).isGreaterThan(before);
+    }
   }
   
 }
