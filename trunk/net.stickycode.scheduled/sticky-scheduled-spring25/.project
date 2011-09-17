@@ -1,5 +1,5 @@
 <projectDescription>
-  <name>sticky-scheduled-spring30</name>
+  <name>sticky-scheduled-spring25</name>
   <comment>Taking the configuration out of applications, using the same principles that underly dependency injection</comment>
   <projects/>
   <buildSpec>
