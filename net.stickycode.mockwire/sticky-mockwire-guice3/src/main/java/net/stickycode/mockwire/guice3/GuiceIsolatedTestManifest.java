@@ -12,7 +12,18 @@
  */
 package net.stickycode.mockwire.guice3;
 
+import static net.stickycode.configured.guice3.StickyModule.bootstrapModule;
+import static net.stickycode.configured.guice3.StickyModule.keyBuilderModule;
+
+import java.util.ArrayList;
 import java.util.List;
+
+import net.stickycode.configured.ConfigurationSource;
+import net.stickycode.configured.ConfigurationSystem;
+import net.stickycode.configured.guice3.ConfigurationSourceModule;
+import net.stickycode.guice3.jsr250.Jsr250Module;
+import net.stickycode.mockwire.IsolatedTestManifest;
+import net.stickycode.mockwire.MissingBeanException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,13 +31,7 @@ import org.slf4j.LoggerFactory;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
-import net.stickycode.configured.ConfigurationSource;
-import net.stickycode.configured.ConfigurationSystem;
-import net.stickycode.configured.guice3.ConfigurationSourceModule;
-import net.stickycode.configured.guice3.ConfiguredModule;
-import net.stickycode.guice3.jsr250.Jsr250Module;
-import net.stickycode.mockwire.IsolatedTestManifest;
-import net.stickycode.mockwire.MissingBeanException;
+import de.devsurf.injection.guice.scanner.PackageFilter;
 
 public class GuiceIsolatedTestManifest
     implements IsolatedTestManifest {
@@ -34,8 +39,12 @@ public class GuiceIsolatedTestManifest
   Logger log = LoggerFactory.getLogger(getClass());
 
   private IsolatedTestModuleMetadata manifest = new IsolatedTestModuleMetadata();
+
   private Injector injector;
-  private Injector configurationInjector;
+
+  private List<PackageFilter> packageFilters;
+
+  private List<ConfigurationSource> configurationSources;
 
   public GuiceIsolatedTestManifest() {
     manifest.registerBean("manifest", this, IsolatedTestManifest.class);
@@ -65,19 +74,30 @@ public class GuiceIsolatedTestManifest
 
   @Override
   public void scanPackages(String[] scanRoots) {
-    throw new UnsupportedOperationException();
+    if (packageFilters == null)
+      packageFilters = new ArrayList<PackageFilter>();
+
+    for (int i = 0; i < scanRoots.length; i++) {
+      packageFilters.add(PackageFilter.create(scanRoots[i]));
+    }
   }
 
   @Override
   public void prepareTest(Object testInstance) throws MissingBeanException {
     IsolatedTestModule isolatedTestModule = new IsolatedTestModule(testInstance.getClass(), manifest);
-    if (configurationInjector == null) {
-      injector = Guice.createInjector(isolatedTestModule);
-    }
+    if (packageFilters == null)
+      injector = Guice.createInjector(isolatedTestModule, new ConfigurationSourceModule(configurationSources));
     else
-      injector = configurationInjector.createChildInjector(isolatedTestModule);
+      injector = bootstrap().createChildInjector(isolatedTestModule);
 
     injector.injectMembers(testInstance);
+  }
+
+  private Injector bootstrap() {
+    return Guice.createInjector(
+        bootstrapModule(packageFilters.toArray(new PackageFilter[packageFilters.size()])),
+        keyBuilderModule(),
+        new ConfigurationSourceModule(configurationSources));
   }
 
   @Override
@@ -91,10 +111,12 @@ public class GuiceIsolatedTestManifest
 
   @Override
   public void registerConfiguationSystem(List<ConfigurationSource> configurationSources) {
-    configurationInjector = Guice.createInjector(
-        new Jsr250Module(),
-        new ConfigurationSourceModule(configurationSources),
-        new ConfiguredModule());
+    this.configurationSources = configurationSources;
+    if (packageFilters == null)
+      packageFilters = new ArrayList<PackageFilter>();
+    packageFilters.add(PackageFilter.create("net.stickycode.coercion"));
+    packageFilters.add(PackageFilter.create("net.stickycode.configured"));
+    packageFilters.add(PackageFilter.create("net.stickycode.guice3"));
   }
 
   @Override
