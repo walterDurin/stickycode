@@ -10,7 +10,7 @@
 
 	<groupId>net.stickycode.mockwire</groupId>
 	<artifactId>sticky-mockwire-tck</artifactId>
-	<version>6.1-SNAPSHOT</version>
+	<version>6.2-SNAPSHOT</version>
 
 	<name>sticky-mockwire-tck</name>
 	<description>The test kit to verify mockwire implementors.</description>
