@@ -19,7 +19,9 @@ import net.stickycode.configured.ConfigurationRepository;
 import net.stickycode.configured.ConfiguredConfiguration;
 import net.stickycode.configured.ConfiguredFieldProcessor;
 import net.stickycode.reflector.Reflector;
+import net.stickycode.stereotype.StickyComponent;
 
+@StickyComponent
 public class ConfiguredInjector
     implements MembersInjector<Object> {
 

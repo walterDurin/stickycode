@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright (c) 2011 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved. -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<parent>
 		<groupId>net.stickycode.parent</groupId>
 		<artifactId>sticky-jar</artifactId>
@@ -10,12 +13,12 @@
 
 	<groupId>net.stickycode.configured</groupId>
 	<artifactId>sticky-configured-guice3</artifactId>
-	<version>0.6-SNAPSHOT</version>
+	<version>1.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>sticky-configured-guice3</name>
 	<description>Taking the configuration out of applications, using the same principles that underly dependency injection and IOC</description>
-	<inceptionYear>2008</inceptionYear>
+	<inceptionYear>2010</inceptionYear>
 	<url>http://www.StickyCode.net/configured/sticky-configured-guice3/</url>
 
 	<scm>
@@ -41,7 +44,7 @@
 		<dependency>
 			<groupId>net.stickycode.configured</groupId>
 			<artifactId>sticky-configured</artifactId>
-			<version>[2,3)</version>
+			<version>[3.1,4)</version>
 		</dependency>
 		<dependency>
 			<groupId>net.stickycode</groupId>
@@ -54,5 +57,12 @@
 			<artifactId>guice-multibindings</artifactId>
 			<version>3.0</version>
 		</dependency>
+		<dependency>
+			<groupId>de.devsurf.injection.guice.scanner</groupId>
+			<artifactId>de.devsurf.injection.guice.scanner.asm</artifactId>
+			<version>0.8.7</version>
+		</dependency>
+		
+	
 	</dependencies>
 </project>

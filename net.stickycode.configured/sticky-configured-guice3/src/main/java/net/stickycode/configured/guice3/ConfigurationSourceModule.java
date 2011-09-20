@@ -30,6 +30,9 @@ public class ConfigurationSourceModule
 
   @Override
   protected void configure() {
+    if (configurationSources == null)
+      return;
+    
     Multibinder<ConfigurationSource> sources = Multibinder.newSetBinder(binder(), ConfigurationSource.class);
     for (ConfigurationSource source : configurationSources) {
       sources.addBinding().toInstance(source);
