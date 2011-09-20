@@ -16,10 +16,13 @@ import java.lang.reflect.Method;
 
 import javax.annotation.PostConstruct;
 
+import net.stickycode.stereotype.StickyComponent;
+
 import com.google.inject.TypeLiteral;
 import com.google.inject.spi.TypeEncounter;
 import com.google.inject.spi.TypeListener;
 
+@StickyComponent
 public class Jsr250TypeListener
     implements TypeListener {
 

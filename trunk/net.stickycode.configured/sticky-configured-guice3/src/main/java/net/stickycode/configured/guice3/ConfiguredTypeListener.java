@@ -24,7 +24,9 @@ import com.google.inject.spi.TypeEncounter;
 import com.google.inject.spi.TypeListener;
 
 import net.stickycode.stereotype.Configured;
+import net.stickycode.stereotype.StickyComponent;
 
+@StickyComponent
 public class ConfiguredTypeListener
     implements TypeListener {
   private Logger log = LoggerFactory.getLogger(getClass());
