@@ -17,28 +17,29 @@ import org.junit.Test;
 import net.stickycode.mockwire.Mockwire;
 import net.stickycode.mockwire.MockwireConfigured;
 import net.stickycode.mockwire.UnderTest;
-import net.stickycode.stereotype.Configured;
 
 import static org.fest.assertions.Assertions.assertThat;
-
 
 public class ConfiguredTest {
 
   @MockwireConfigured("configuredObject.a=b")
   public class StringConfigured {
+
     @UnderTest
     ConfiguredObject configured;
   }
 
   @MockwireConfigured
   public class PropertiesConfigured {
+
     @UnderTest
     ConfiguredObject configured;
   }
 
-  public static class ConfiguredObject {
-    @Configured
-    String a;
+  public class InlineConfigured {
+
+    @UnderTest("a=inline")
+    ConfiguredObject configured;
   }
 
   @Test
@@ -53,5 +54,12 @@ public class ConfiguredTest {
     PropertiesConfigured testInstance = new PropertiesConfigured();
     Mockwire.isolate(testInstance);
     assertThat(testInstance.configured.a).isEqualTo("bfromfile");
+  }
+
+  @Test
+  public void testObjectConfigured() {
+    InlineConfigured testInstance = new InlineConfigured();
+    Mockwire.isolate(testInstance);
+    assertThat(testInstance.configured.a).isEqualTo("inline");
   }
 }

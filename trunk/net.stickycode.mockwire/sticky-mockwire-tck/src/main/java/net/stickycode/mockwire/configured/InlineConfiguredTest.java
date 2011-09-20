@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2010 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved.
+ * Copyright (c) 2011 RedEngine Ltd, http://www.RedEngine.co.nz. All rights reserved.
  *
  * This program is licensed to you under the Apache License Version 2.0,
  * and you may not use this file except in compliance with the Apache License Version 2.0.
@@ -12,17 +12,21 @@
  */
 package net.stickycode.mockwire.configured;
 
+import static org.fest.assertions.Assertions.assertThat;
+import net.stickycode.mockwire.UnderTest;
+import net.stickycode.mockwire.junit4.MockwireRunner;
+
+import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
 
-@RunWith(Suite.class)
-@SuiteClasses({
-    ConfiguredTest.class,
-    InlineConfiguredTest.class,
-    ConfiguredCollectionTest.class,
-    MockwireConfigurationSourceTest.class
-})
-public class MockwireConfiguredTck {
+@RunWith(MockwireRunner.class)
+public class InlineConfiguredTest {
 
+  @UnderTest("a=inline")
+  ConfiguredObject target;
+  
+  @Test
+  public void inline() {
+    assertThat(target.a).isEqualTo("inline");
+  }
 }
