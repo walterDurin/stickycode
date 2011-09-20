@@ -31,6 +31,7 @@
 		<module>net.stickycode.parent/reactor.xml</module>
 		<module>net.stickycode/reactor.xml</module>
 		<module>net.stickycode.configured/reactor.xml</module>
+		<module>net.stickycode.scheduled/reactor.xml</module>
 		<module>net.stickycode.mockwire/reactor.xml</module>
 		<module>org.mockwire/reactor.xml</module>
 		<module>net.stickycode.deploy/reactor.xml</module>
