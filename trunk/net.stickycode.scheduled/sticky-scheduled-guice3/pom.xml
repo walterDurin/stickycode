@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright (c) 2011 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved. -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<parent>
 		<groupId>net.stickycode.parent</groupId>
 		<artifactId>sticky-jar</artifactId>
@@ -31,11 +34,17 @@
 			<version>[1.2,2)</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>net.stickycode.composite</groupId>
+			<artifactId>sticky-composite-unittest</artifactId>
+			<version>[1.7,2)</version>
+			<scope>test</scope>
+		</dependency>
 
 		<dependency>
 			<groupId>net.stickycode.scheduled</groupId>
 			<artifactId>sticky-scheduled</artifactId>
-			<version>[1,2)</version>
+			<version>[1.5,2)</version>
 		</dependency>
 		<dependency>
 			<groupId>net.stickycode</groupId>
@@ -45,13 +54,7 @@
 		<dependency>
 			<groupId>net.stickycode.configured</groupId>
 			<artifactId>sticky-configured-guice3</artifactId>
-			<version>[0.4,1)</version>
-		</dependency>
-		<dependency>
-			<groupId>net.stickycode.composite</groupId>
-			<artifactId>sticky-composite-unittest</artifactId>
-			<version>[1.7,2)</version>
-			<scope>test</scope>
+			<version>[0.5,1)</version>
 		</dependency>
 	</dependencies>
 </project>
