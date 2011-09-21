@@ -19,7 +19,7 @@ public class ScheduleTestObject {
   int counter = 0;
 
   @Scheduled
-  public void runit() {
+  public void runIt() {
     counter++;
   }
 }

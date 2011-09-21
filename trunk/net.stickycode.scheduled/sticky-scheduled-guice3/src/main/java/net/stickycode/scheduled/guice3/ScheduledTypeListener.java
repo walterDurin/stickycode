@@ -17,6 +17,7 @@ import java.lang.reflect.Method;
 import javax.inject.Inject;
 
 import net.stickycode.stereotype.Scheduled;
+import net.stickycode.stereotype.StickyComponent;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +26,7 @@ import com.google.inject.TypeLiteral;
 import com.google.inject.spi.TypeEncounter;
 import com.google.inject.spi.TypeListener;
 
+@StickyComponent
 public class ScheduledTypeListener
     implements TypeListener {
 

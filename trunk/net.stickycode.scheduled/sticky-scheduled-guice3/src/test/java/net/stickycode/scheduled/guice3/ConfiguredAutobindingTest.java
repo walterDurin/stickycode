@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved.
+ * Copyright (c) 2011 RedEngine Ltd, http://www.RedEngine.co.nz. All rights reserved.
  *
  * This program is licensed to you under the Apache License Version 2.0,
  * and you may not use this file except in compliance with the Apache License Version 2.0.
@@ -12,16 +12,16 @@
  */
 package net.stickycode.scheduled.guice3;
 
+import static de.devsurf.injection.guice.scanner.PackageFilter.create;
+import static net.stickycode.configured.guice3.StickyModule.bootstrapModule;
+import static net.stickycode.configured.guice3.StickyModule.keyBuilderModule;
 import static org.mockito.Mockito.when;
 
 import java.util.Collections;
 
-import net.stickycode.coercion.Coercion;
 import net.stickycode.configured.ConfigurationSource;
 import net.stickycode.configured.guice3.ConfigurationSourceModule;
-import net.stickycode.configured.guice3.ConfiguredModule;
 import net.stickycode.scheduled.SchedulingSystem;
-import net.stickycode.scheduled.configuration.ScheduleConfigurationCoercion;
 
 import org.mockito.Mockito;
 
@@ -30,33 +30,34 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
 
-public class ScheduledModuleTest
+public class ConfiguredAutobindingTest
     extends AbstractScheduledComponentTest {
 
   @Override
   protected void configure(ScheduleTestObject instance) {
-    Class<? extends Coercion> klass = ScheduleConfigurationCoercion.class;
-    Injector parent = Guice.createInjector(configurationSourceModule(), new ConfiguredModule().withCoercion(klass));
-    Injector injector = parent.createChildInjector(new ScheduledModule(), schedulingSystemModule());
+    Injector injector = Guice.createInjector(
+        bootstrapModule(create("net.stickycode")), 
+        keyBuilderModule(),
+        schedulingSystemModule(),
+        configurationSourceModule());
     injector.injectMembers(instance);
     injector.injectMembers(this);
   }
 
   private Module schedulingSystemModule() {
-    final SchedulingSystem system = Mockito.mock(SchedulingSystem.class);
     return new AbstractModule() {
 
       @Override
       protected void configure() {
-        bind(SchedulingSystem.class).toInstance(system);
+        bind(SchedulingSystem.class).toInstance(Mockito.mock(SchedulingSystem.class));
       }
     };
   }
 
   private Module configurationSourceModule() {
     ConfigurationSource configurationSource = Mockito.mock(ConfigurationSource.class);
-    when(configurationSource.hasValue("scheduleTestObject.runit")).thenReturn(true);
-    when(configurationSource.getValue("scheduleTestObject.runit")).thenReturn("every 2 seconds");
+    when(configurationSource.hasValue("scheduleTestObject.runIt")).thenReturn(true);
+    when(configurationSource.getValue("scheduleTestObject.runIt")).thenReturn("every 2 seconds");
     return new ConfigurationSourceModule(Collections.singletonList(configurationSource));
   }
 
