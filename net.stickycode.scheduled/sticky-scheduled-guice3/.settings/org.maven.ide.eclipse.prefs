@@ -1,9 +1,8 @@
-#Sun Sep 18 22:18:15 NZST 2011
-activeProfiles=
+activeProfiles=running-in-eclipse
 eclipse.preferences.version=1
-fullBuildGoals=process-test-resources
+fullBuildGoals=validate
 includeModules=false
 resolveWorkspaceProjects=true
-resourceFilterGoals=process-resources resources\:testResources
+resourceFilterGoals=validate
 skipCompilerPlugin=true
 version=1

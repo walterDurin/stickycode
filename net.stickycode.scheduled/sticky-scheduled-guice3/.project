@@ -1,6 +1,6 @@
 <projectDescription>
-  <name>sticky-configured-guice3</name>
-  <comment>Taking the configuration out of applications, using the same principles that underly dependency injection and IOC</comment>
+  <name>sticky-scheduled-guice3</name>
+  <comment>Taking the scheduling out of applications, using the same principles that underly dependency injection and IOC</comment>
   <projects/>
   <buildSpec>
     <buildCommand>
