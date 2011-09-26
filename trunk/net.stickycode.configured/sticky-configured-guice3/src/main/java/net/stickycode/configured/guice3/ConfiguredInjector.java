@@ -20,8 +20,10 @@ import net.stickycode.configured.ConfiguredConfiguration;
 import net.stickycode.configured.ConfiguredFieldProcessor;
 import net.stickycode.reflector.Reflector;
 import net.stickycode.stereotype.StickyComponent;
+import net.stickycode.stereotype.StickyFramework;
 
 @StickyComponent
+@StickyFramework
 public class ConfiguredInjector
     implements MembersInjector<Object> {
 

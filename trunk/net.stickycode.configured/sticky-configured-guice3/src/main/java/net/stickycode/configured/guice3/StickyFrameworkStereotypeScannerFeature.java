@@ -31,12 +31,12 @@ import de.devsurf.injection.guice.install.InstallationContext.BindingStage;
 import de.devsurf.injection.guice.scanner.features.BindingScannerFeature;
 
 @Singleton
-public class StickyStereotypeScannerFeature
+public class StickyFrameworkStereotypeScannerFeature
     extends BindingScannerFeature {
 
   @Override
   public BindingStage accept(Class<Object> annotatedClass, Map<String, Annotation> annotations) {
-    if (annotatedClass.isAnnotationPresent(StickyFramework.class))
+    if (!annotatedClass.isAnnotationPresent(StickyFramework.class))
       return BindingStage.IGNORE;
     
     if (annotatedClass.isAnnotationPresent(StickyComponent.class))

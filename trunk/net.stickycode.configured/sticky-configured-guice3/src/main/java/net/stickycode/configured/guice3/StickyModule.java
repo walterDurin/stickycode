@@ -23,17 +23,24 @@ import de.devsurf.injection.guice.scanner.PackageFilter;
 import de.devsurf.injection.guice.scanner.StartupModule;
 import de.devsurf.injection.guice.scanner.asm.ASMClasspathScanner;
 
-
 public class StickyModule {
 
   static public Module bootstrapModule(PackageFilter... packageFilter) {
+    return StartupModule
+        .create(ASMClasspathScanner.class, packageFilter)
+        .addFeature(StickyFrameworkStereotypeScannerFeature.class)
+        .addFeature(StickyFrameworkPluginMultibindingFeature.class)
+        .disableStartupConfiguration();
+  }
+
+  static public Module applicationModule(PackageFilter... packageFilter) {
     return StartupModule
         .create(ASMClasspathScanner.class, packageFilter)
         .addFeature(StickyStereotypeScannerFeature.class)
         .addFeature(StickyPluginMultibindingFeature.class)
         .disableStartupConfiguration();
   }
-  
+
   static public Module keyBuilderModule() {
     return new AbstractModule() {
 
@@ -43,6 +50,5 @@ public class StickyModule {
       }
     };
   }
-
 
 }

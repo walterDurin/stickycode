@@ -17,12 +17,14 @@ import java.lang.reflect.Method;
 import javax.annotation.PostConstruct;
 
 import net.stickycode.stereotype.StickyComponent;
+import net.stickycode.stereotype.StickyFramework;
 
 import com.google.inject.TypeLiteral;
 import com.google.inject.spi.TypeEncounter;
 import com.google.inject.spi.TypeListener;
 
 @StickyComponent
+@StickyFramework
 public class Jsr250TypeListener
     implements TypeListener {
 
