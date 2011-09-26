@@ -31,14 +31,14 @@ import de.devsurf.injection.guice.install.bindjob.BindingJob;
 import de.devsurf.injection.guice.install.bindjob.MultiBindingJob;
 
 @Singleton
-public class StickyPluginMultibindingFeature
+public class StickyFrameworkPluginMultibindingFeature
     extends StickyStereotypeScannerFeature {
 
   private Logger log = LoggerFactory.getLogger(getClass());
 
   @Override
   public BindingStage accept(Class<Object> annotatedClass, Map<String, Annotation> annotations) {
-    if (annotatedClass.isAnnotationPresent(StickyFramework.class))
+    if (!annotatedClass.isAnnotationPresent(StickyFramework.class))
       return BindingStage.IGNORE;
     
     if (annotatedClass.isAnnotationPresent(StickyPlugin.class))
