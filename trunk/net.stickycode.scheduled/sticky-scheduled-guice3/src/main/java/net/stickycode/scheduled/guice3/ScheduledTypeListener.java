@@ -18,6 +18,7 @@ import javax.inject.Inject;
 
 import net.stickycode.stereotype.Scheduled;
 import net.stickycode.stereotype.StickyComponent;
+import net.stickycode.stereotype.StickyFramework;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,6 +28,7 @@ import com.google.inject.spi.TypeEncounter;
 import com.google.inject.spi.TypeListener;
 
 @StickyComponent
+@StickyFramework
 public class ScheduledTypeListener
     implements TypeListener {
 
@@ -39,7 +41,7 @@ public class ScheduledTypeListener
   public <I> void hear(TypeLiteral<I> type, TypeEncounter<I> encounter) {
     if (typeIsScheduled(type)) {
       if (membersInjector == null)
-        throw new AssertionError(getClass().getSimpleName() + " was not injected with a " + ScheduledInjector.class.getSimpleName());
+        throw new AssertionError("on hearing " + type.getRawType().getName() + " found that " + getClass().getSimpleName() + " was not injected with a " + ScheduledInjector.class.getSimpleName());
 
       encounter.register(membersInjector);
       log.info("encountering {} registering injector {}", type, membersInjector);
