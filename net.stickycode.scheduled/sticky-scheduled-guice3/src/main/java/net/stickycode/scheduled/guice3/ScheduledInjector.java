@@ -18,11 +18,13 @@ import net.stickycode.reflector.Reflector;
 import net.stickycode.scheduled.ScheduledMethodProcessor;
 import net.stickycode.scheduled.ScheduledRunnableRepository;
 import net.stickycode.stereotype.StickyComponent;
+import net.stickycode.stereotype.StickyFramework;
 
 import com.google.inject.Inject;
 import com.google.inject.MembersInjector;
 
 @StickyComponent
+@StickyFramework
 public class ScheduledInjector
     implements MembersInjector<Object> {
 
