@@ -21,6 +21,7 @@ import java.util.Collections;
 
 import net.stickycode.configured.ConfigurationSource;
 import net.stickycode.configured.guice3.ConfigurationSourceModule;
+import net.stickycode.configured.guice3.StickyModule;
 import net.stickycode.scheduled.SchedulingSystem;
 
 import org.mockito.Mockito;
@@ -36,10 +37,12 @@ public class ConfiguredAutobindingTest
   @Override
   protected void configure(ScheduleTestObject instance) {
     Injector injector = Guice.createInjector(
-        bootstrapModule(create("net.stickycode")), 
-        keyBuilderModule(),
-        schedulingSystemModule(),
-        configurationSourceModule());
+        bootstrapModule(create("net.stickycode")),
+        keyBuilderModule())
+        .createChildInjector(
+            StickyModule.applicationModule(create("net.stickycode")),
+            schedulingSystemModule(),
+            configurationSourceModule());
     injector.injectMembers(instance);
     injector.injectMembers(this);
   }
