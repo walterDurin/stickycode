@@ -16,14 +16,16 @@ import java.util.Map.Entry;
 
 import javax.annotation.PreDestroy;
 
+import net.stickycode.configured.InvokingAnnotatedMethodProcessor;
+import net.stickycode.reflector.Reflector;
+
+import org.slf4j.Logger;
+
 import com.google.inject.AbstractModule;
 import com.google.inject.Binding;
 import com.google.inject.Injector;
 import com.google.inject.Key;
 import com.google.inject.matcher.Matchers;
-
-import net.stickycode.configured.InvokingAnnotatedMethodProcessor;
-import net.stickycode.reflector.Reflector;
 
 public class Jsr250Module
     extends AbstractModule {
@@ -33,12 +35,18 @@ public class Jsr250Module
     bindListener(Matchers.any(), new Jsr250TypeListener());
   }
 
-  public static void preDestroy(Injector injector) {
-    for (Entry<Key<?>, Binding<?>> binding : injector.getAllBindings().entrySet()) {
+  public static void preDestroy(Logger log, Injector injector) {
+    log.info("@PreDestroy of {}", injector);
+    InvokingAnnotatedMethodProcessor preDestroyProcessor = new InvokingAnnotatedMethodProcessor(PreDestroy.class);
+    for (Entry<Key<?>, Binding<?>> binding : injector.getBindings().entrySet()) {
       new Reflector()
-          .forEachMethod(new InvokingAnnotatedMethodProcessor(PreDestroy.class))
+          .forEachMethod(preDestroyProcessor)
           .process(binding.getValue().getProvider().get());
     }
+
+    Injector parent = injector.getParent();
+    if (parent != null)
+      preDestroy(log, parent);
   }
 
 }
