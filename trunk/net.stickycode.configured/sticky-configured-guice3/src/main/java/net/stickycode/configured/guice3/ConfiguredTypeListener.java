@@ -13,8 +13,15 @@
 package net.stickycode.configured.guice3;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 import javax.inject.Inject;
+
+import net.stickycode.stereotype.Configured;
+import net.stickycode.stereotype.PostConfigured;
+import net.stickycode.stereotype.PreConfigured;
+import net.stickycode.stereotype.StickyComponent;
+import net.stickycode.stereotype.StickyFramework;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,10 +29,6 @@ import org.slf4j.LoggerFactory;
 import com.google.inject.TypeLiteral;
 import com.google.inject.spi.TypeEncounter;
 import com.google.inject.spi.TypeListener;
-
-import net.stickycode.stereotype.Configured;
-import net.stickycode.stereotype.StickyComponent;
-import net.stickycode.stereotype.StickyFramework;
 
 @StickyComponent
 @StickyFramework
@@ -50,6 +53,14 @@ public class ConfiguredTypeListener
   private <I> boolean typeIsConfigured(TypeLiteral<I> type) {
     for (Field field : type.getRawType().getDeclaredFields())
       if (field.isAnnotationPresent(Configured.class))
+        return true;
+    
+    for (Method method : type.getRawType().getDeclaredMethods())
+      if (method.isAnnotationPresent(PostConfigured.class))
+        return true;
+    
+    for (Method method : type.getRawType().getDeclaredMethods())
+      if (method.isAnnotationPresent(PreConfigured.class))
         return true;
 
     return false;
