@@ -18,8 +18,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import net.stickycode.stereotype.StickyComponent;
 import net.stickycode.stereotype.StickyFramework;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.inject.MembersInjector;
 import com.google.inject.Scopes;
@@ -28,23 +30,24 @@ import com.google.inject.matcher.Matchers;
 import com.google.inject.spi.TypeListener;
 
 import de.devsurf.injection.guice.install.InstallationContext.BindingStage;
-import de.devsurf.injection.guice.scanner.features.BindingScannerFeature;
 
 @Singleton
 public class StickyFrameworkStereotypeScannerFeature
-    extends BindingScannerFeature {
+    extends StickyStereotypeScannerFeature {
+  
+  private Logger log = LoggerFactory.getLogger(StickyFrameworkStereotypeScannerFeature.class);
 
   @Override
   public BindingStage accept(Class<Object> annotatedClass, Map<String, Annotation> annotations) {
     if (!annotatedClass.isAnnotationPresent(StickyFramework.class))
       return BindingStage.IGNORE;
-    
-    if (annotatedClass.isAnnotationPresent(StickyComponent.class))
-      return BindingStage.BUILD;
+
+    if (annotatedClass.isAnnotationPresent(getComponentAnnotation()))
+      return deriveStage(annotatedClass);
 
     for (Annotation annotation : annotatedClass.getAnnotations()) {
-      if (annotation.annotationType().isAnnotationPresent(StickyComponent.class))
-        return BindingStage.BUILD;
+      if (annotation.annotationType().isAnnotationPresent(getComponentAnnotation()))
+        return deriveStage(annotatedClass);
     }
 
     return BindingStage.IGNORE;
@@ -53,7 +56,8 @@ public class StickyFrameworkStereotypeScannerFeature
   @Override
   @SuppressWarnings("unchecked")
   public void process(Class<Object> annotatedClass, Map<String, Annotation> annotations) {
-    System.out.println(annotatedClass.getName());
+    log.info("process {} with {}", annotatedClass, annotations);
+    
     Class<Object>[] interfaces = (Class<Object>[]) annotatedClass.getInterfaces();
 
     if (interfaces.length == 0) {

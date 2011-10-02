@@ -12,7 +12,6 @@
  */
 package net.stickycode.configured.guice3;
 
-import static net.stickycode.configured.guice3.StickyModule.applicationModule;
 import static net.stickycode.configured.guice3.StickyModule.bootstrapModule;
 import static net.stickycode.configured.guice3.StickyModule.keyBuilderModule;
 
@@ -27,9 +26,8 @@ public class StickyGuice {
     PackageFilter[] packageFilters = createFilters(packages);
     return Guice.createInjector(
               bootstrapModule(packageFilters),
-              keyBuilderModule())
-           .createChildInjector(
-               applicationModule(packageFilters));
+              keyBuilderModule());
+           
   }
 
   private static PackageFilter[] createFilters(String[] packages) {
