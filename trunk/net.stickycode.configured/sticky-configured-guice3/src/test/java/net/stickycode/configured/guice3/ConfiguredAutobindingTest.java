@@ -34,7 +34,8 @@ public class ConfiguredAutobindingTest
   protected void configure(ConfiguredTestObject target) {
     PackageFilter packageFilter = PackageFilter.create("net.stickycode");
     Module startup = StickyModule.bootstrapModule(packageFilter);
-    Injector injector = Guice.createInjector(startup, StickyModule.keyBuilderModule(), configurationSourceModule());
+    Injector injector = Guice.createInjector(startup, StickyModule.keyBuilderModule())
+        .createChildInjector(StickyModule.applicationModule(packageFilter), configurationSourceModule());
     injector.injectMembers(target);
     injector.injectMembers(this);
   }
@@ -47,6 +48,5 @@ public class ConfiguredAutobindingTest
     when(configurationSource.getValue("configuredTestObject.numbers")).thenReturn("1,5,3,7");
     return new ConfigurationSourceModule(Collections.singletonList(configurationSource));
   }
-
 
 }

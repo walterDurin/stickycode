@@ -18,6 +18,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import net.stickycode.coercion.Coercion;
+import net.stickycode.configured.ConfigurationRepository;
 import net.stickycode.stereotype.StickyComponent;
 import net.stickycode.stereotype.StickyFramework;
 
@@ -34,26 +39,57 @@ import de.devsurf.injection.guice.scanner.features.BindingScannerFeature;
 public class StickyStereotypeScannerFeature
     extends BindingScannerFeature {
 
+  private Logger log = LoggerFactory.getLogger(StickyStereotypeScannerFeature.class);
+
   @Override
   public BindingStage accept(Class<Object> annotatedClass, Map<String, Annotation> annotations) {
     if (annotatedClass.isAnnotationPresent(StickyFramework.class))
       return BindingStage.IGNORE;
     
-    if (annotatedClass.isAnnotationPresent(StickyComponent.class))
-      return BindingStage.BUILD;
+    if (annotatedClass.isAnnotationPresent(getComponentAnnotation()))
+      return deriveStage(annotatedClass);
 
     for (Annotation annotation : annotatedClass.getAnnotations()) {
-      if (annotation.annotationType().isAnnotationPresent(StickyComponent.class))
-        return BindingStage.BUILD;
+      if (annotation.annotationType().isAnnotationPresent(getComponentAnnotation()))
+        return deriveStage(annotatedClass);
     }
 
     return BindingStage.IGNORE;
   }
 
+  protected Class<? extends Annotation> getComponentAnnotation() {
+    return StickyComponent.class;
+  }
+
+  protected BindingStage deriveStage(Class<Object> annotatedClass) {
+    BindingStage calculateStage = calculateStage(annotatedClass);
+    log.info("adding {} at {}", annotatedClass.getName(), calculateStage);
+    return calculateStage;
+  }
+
+  private BindingStage calculateStage(Class<Object> annotatedClass) {
+    for (Class<?> contract : annotatedClass.getInterfaces()) {
+      if (contract.isAssignableFrom(ConfigurationRepository.class))
+        return BindingStage.BOOT_BEFORE;
+
+      if (contract.isAssignableFrom(MembersInjector.class))
+        return BindingStage.BOOT;
+
+      if (contract.isAssignableFrom(TypeListener.class))
+        return BindingStage.BOOT_POST;
+
+      String packageName = contract.getName();
+      if (packageName.startsWith("net.stickycode.scheduled.ScheduledRunnableRepository"))
+        return BindingStage.BOOT_BEFORE;
+    }
+
+    return BindingStage.BINDING;
+  }
+
   @Override
   @SuppressWarnings("unchecked")
   public void process(Class<Object> annotatedClass, Map<String, Annotation> annotations) {
-    System.out.println(annotatedClass.getName());
+    log.info("process {} with {}", annotatedClass, annotations);
     Class<Object>[] interfaces = (Class<Object>[]) annotatedClass.getInterfaces();
 
     if (interfaces.length == 0) {
