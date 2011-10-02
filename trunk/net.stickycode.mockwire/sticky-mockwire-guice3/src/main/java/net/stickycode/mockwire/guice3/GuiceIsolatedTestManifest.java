@@ -21,6 +21,7 @@ import java.util.List;
 import net.stickycode.configured.ConfigurationSource;
 import net.stickycode.configured.ConfigurationSystem;
 import net.stickycode.configured.guice3.ConfigurationSourceModule;
+import net.stickycode.configured.guice3.StickyModule;
 import net.stickycode.guice3.jsr250.Jsr250Module;
 import net.stickycode.mockwire.IsolatedTestManifest;
 import net.stickycode.mockwire.MissingBeanException;
@@ -30,6 +31,7 @@ import org.slf4j.LoggerFactory;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.Stage;
 
 import de.devsurf.injection.guice.scanner.PackageFilter;
 
@@ -84,29 +86,36 @@ public class GuiceIsolatedTestManifest
 
   @Override
   public void prepareTest(Object testInstance) throws MissingBeanException {
+    // this should be in start up but we can't startup guice without the instance...
     IsolatedTestModule isolatedTestModule = new IsolatedTestModule(testInstance.getClass(), manifest);
     if (packageFilters == null)
       injector = Guice.createInjector(isolatedTestModule, new ConfigurationSourceModule(configurationSources));
     else
-      injector = bootstrap().createChildInjector(isolatedTestModule);
+      injector = bootstrap(isolatedTestModule);
 
     injector.injectMembers(testInstance);
   }
 
-  private Injector bootstrap() {
-    return Guice.createInjector(
-        bootstrapModule(packageFilters.toArray(new PackageFilter[packageFilters.size()])),
-        keyBuilderModule(),
-        new ConfigurationSourceModule(configurationSources));
+  private Injector bootstrap(IsolatedTestModule isolatedTestModule) {
+    PackageFilter[] filters = packageFilters.toArray(new PackageFilter[packageFilters.size()]);
+    return Guice.createInjector(Stage.PRODUCTION,
+        bootstrapModule(filters),
+        keyBuilderModule()
+        )
+        .createChildInjector(
+            isolatedTestModule,
+            StickyModule.applicationModule(filters),
+            new ConfigurationSourceModule(configurationSources));
   }
 
   @Override
   public void shutdown() {
-    Jsr250Module.preDestroy(injector);
+    Jsr250Module.preDestroy(log, injector);
   }
 
   @Override
   public void startup(Class<?> testClass) {
+
   }
 
   @Override
@@ -114,9 +123,9 @@ public class GuiceIsolatedTestManifest
     this.configurationSources = configurationSources;
     if (packageFilters == null)
       packageFilters = new ArrayList<PackageFilter>();
-    packageFilters.add(PackageFilter.create("net.stickycode.coercion"));
-    packageFilters.add(PackageFilter.create("net.stickycode.configured"));
-    packageFilters.add(PackageFilter.create("net.stickycode.guice3"));
+     packageFilters.add(PackageFilter.create("net.stickycode.coercion"));
+     packageFilters.add(PackageFilter.create("net.stickycode.configured"));
+     packageFilters.add(PackageFilter.create("net.stickycode.guice3"));
   }
 
   @Override
