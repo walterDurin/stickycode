@@ -36,6 +36,11 @@
 		</dependency>
 		<dependency>
 			<groupId>net.stickycode.mockwire</groupId>
+			<artifactId>sticky-mockwire</artifactId>
+			<version>[6.1,7)</version>
+		</dependency>
+		<dependency>
+			<groupId>net.stickycode.mockwire</groupId>
 			<artifactId>sticky-mockwire-mockito</artifactId>
 			<version>[3.2,4)</version>
 		</dependency>
