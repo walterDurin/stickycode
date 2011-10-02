@@ -18,13 +18,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import net.stickycode.coercion.Coercion;
 import net.stickycode.configured.ConfigurationRepository;
 import net.stickycode.stereotype.StickyComponent;
 import net.stickycode.stereotype.StickyFramework;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.inject.MembersInjector;
 import com.google.inject.Scopes;
