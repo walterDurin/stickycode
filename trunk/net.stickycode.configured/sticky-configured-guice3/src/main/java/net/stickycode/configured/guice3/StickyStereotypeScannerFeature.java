@@ -21,6 +21,7 @@ import java.util.Map;
 import net.stickycode.configured.ConfigurationRepository;
 import net.stickycode.stereotype.StickyComponent;
 import net.stickycode.stereotype.StickyFramework;
+import net.stickycode.stereotype.component.StickyRepository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +30,7 @@ import com.google.inject.MembersInjector;
 import com.google.inject.Scopes;
 import com.google.inject.Singleton;
 import com.google.inject.matcher.Matchers;
+import com.google.inject.spi.InjectionListener;
 import com.google.inject.spi.TypeListener;
 
 import de.devsurf.injection.guice.install.InstallationContext.BindingStage;
@@ -38,7 +40,7 @@ import de.devsurf.injection.guice.scanner.features.BindingScannerFeature;
 public class StickyStereotypeScannerFeature
     extends BindingScannerFeature {
 
-  private Logger log = LoggerFactory.getLogger(StickyStereotypeScannerFeature.class);
+  private Logger log = LoggerFactory.getLogger(getClass());
 
   @Override
   public BindingStage accept(Class<Object> annotatedClass, Map<String, Annotation> annotations) {
@@ -73,10 +75,16 @@ public class StickyStereotypeScannerFeature
 
       if (contract.isAssignableFrom(MembersInjector.class))
         return BindingStage.BOOT;
+      
+      if (contract.isAssignableFrom(InjectionListener.class))
+        return BindingStage.BOOT;
 
       if (contract.isAssignableFrom(TypeListener.class))
         return BindingStage.BOOT_POST;
 
+      if (annotatedClass.isAnnotationPresent(StickyRepository.class))
+        return BindingStage.BOOT_BEFORE;
+        
       String packageName = contract.getName();
       if (packageName.startsWith("net.stickycode.scheduled.ScheduledRunnableRepository"))
         return BindingStage.BOOT_BEFORE;
@@ -100,9 +108,9 @@ public class StickyStereotypeScannerFeature
       }
       interfaces = interfaceCollection.toArray(new Class[interfaceCollection.size()]);
     }
-    if (interfaces.length == 0) {
-      bind(annotatedClass, null, Scopes.SINGLETON);
-    }
+    
+    bind(annotatedClass, null, Scopes.SINGLETON);
+    
     for (Class<Object> interf : interfaces) {
       if (interf.isAssignableFrom(MembersInjector.class))
         bind(annotatedClass, null, Scopes.SINGLETON);
