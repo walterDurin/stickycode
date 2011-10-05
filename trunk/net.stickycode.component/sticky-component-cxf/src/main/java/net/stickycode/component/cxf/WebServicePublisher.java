@@ -1,10 +1,13 @@
 package net.stickycode.component.cxf;
 
-import java.util.logging.LogManager;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.annotation.PreDestroy;
 import javax.inject.Inject;
-import javax.jws.WebService;
 
+import net.stickycode.stereotype.PostConfigured;
 import net.stickycode.stereotype.StickyComponent;
 
 import org.apache.cxf.Bus;
@@ -14,64 +17,66 @@ import org.apache.cxf.jaxws.JaxWsServerFactoryBean;
 import org.apache.cxf.jaxws.support.JaxWsServiceFactoryBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.bridge.SLF4JBridgeHandler;
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.config.BeanPostProcessor;
 
 @StickyComponent
-public class WebServicePublisher
-    implements BeanPostProcessor {
+public class WebServicePublisher {
 
-  static {
-    java.util.logging.Logger util = LogManager.getLogManager().getLogger("");
-    for (java.util.logging.Handler handler : util.getHandlers())
-      util.removeHandler(handler);
-    SLF4JBridgeHandler.install();
-  }
-
-  private Logger log = LoggerFactory.getLogger(getClass());
+  private Logger log = LoggerFactory.getLogger(WebServicePublisher.class);
 
   @Inject
-  Bus bus;
+  public Bus busProvider;
 
-  @Override
-  public Object postProcessAfterInitialization(Object bean, String beanName)
-      throws BeansException {
-    process(bean, beanName);
-    return bean;
+  @Inject
+  private WebServiceExposureRepository exposures;
+
+  private List<EndpointImpl> webServices = new ArrayList<EndpointImpl>();
+
+  @PostConfigured
+  public void exposeWebservices() {
+    log.info("exposing web services");
+    for (WebServiceExposure e : exposures) {
+      log.info("publish {}", e.bean());
+      publish(e.bean(), e.name(), e.contract());
+    }
   }
 
-  @Override
-  public Object postProcessBeforeInitialization(Object bean, String beanName)
-      throws BeansException {
-    return bean;
-  }
-
-  void process(Object bean, String beanName) {
-    for (Class<?> i : bean.getClass().getInterfaces())
-      if (i.isAnnotationPresent(WebService.class))
-        publish(bean, beanName, i);
+  @PreDestroy
+  public void shutdown() {
+    for (EndpointImpl i : webServices) {
+      i.stop();
+    }
   }
 
   private void publish(Object bean, String beanName, Class<?> i) {
     log.info("Publishing {} as web service {}", beanName, i.getSimpleName());
     String address = "/" + i.getSimpleName() + getLeaf(bean.getClass().getPackage());
-    JaxWsServerFactoryBean factory = createServerFactory();
+    JaxWsServerFactoryBean factory = createServerFactory(i);
     factory.setServiceClass(i);
-    new EndpointImpl(bus, bean, factory).publish(address);
+
+    EndpointImpl endpointImpl = new EndpointImpl(getBus(), bean, factory);
+    endpointImpl.publish(address);
+    webServices.add(endpointImpl);
   }
 
-  protected JaxWsServerFactoryBean createServerFactory() {
+  private Bus getBus() {
+    return busProvider;
+  };
+
+  protected JaxWsServerFactoryBean createServerFactory(Class<?> i) {
     JaxWsServerFactoryBean serverFactory = new JaxWsServerFactoryBean();
-    serverFactory.setBus(bus);
-    serverFactory.setServiceFactory(createServiceFactory());
+    serverFactory.setBus(getBus());
+    serverFactory.setServiceFactory(createServiceFactory(i));
     serverFactory.setBindingId(SoapBindingConstants.SOAP11_BINDING_ID);
     return serverFactory;
   }
 
-  protected JaxWsServiceFactoryBean createServiceFactory() {
+  protected JaxWsServiceFactoryBean createServiceFactory(Class<?> i) {
     JaxWsServiceFactoryBean s = new JaxWsServiceFactoryBean();
-    s.setBus(bus);
+    s.setBus(getBus());
+    URL classpathWsdl = i.getResource(i.getSimpleName() + ".wsdl");
+    if (classpathWsdl != null)
+      s.setWsdlURL(classpathWsdl);
+
     return s;
   }
 
