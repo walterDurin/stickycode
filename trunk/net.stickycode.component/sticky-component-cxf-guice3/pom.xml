@@ -10,7 +10,7 @@
 
 	<groupId>net.stickycode.component</groupId>
 	<artifactId>sticky-component-cxf-guice3</artifactId>
-	<version>1.1-SNAPSHOT</version>
+	<version>1.2-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>sticky-component-cxf-guice3</name>
@@ -51,6 +51,11 @@
 			<groupId>net.stickycode</groupId>
 			<artifactId>sticky-exception</artifactId>
 			<version>[1.6,2)</version>
+		</dependency>
+		<dependency>
+			<groupId>net.stickycode.configured</groupId>
+			<artifactId>sticky-configured-guice3</artifactId>
+			<version>[0,2)</version>
 		</dependency>
 	</dependencies>
 </project>
