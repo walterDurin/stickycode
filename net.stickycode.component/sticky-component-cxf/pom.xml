@@ -10,7 +10,7 @@
 
 	<groupId>net.stickycode.component</groupId>
 	<artifactId>sticky-component-cxf</artifactId>
-	<version>2.3-SNAPSHOT</version>
+	<version>3.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>sticky-component-cxf</name>
@@ -34,11 +34,6 @@ monitoring, management and more</description>
 		</dependency>
 
 		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>jul-to-slf4j</artifactId>
-			<version>[1.6.0]</version>
-		</dependency>
-		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
 			<version>2.5</version>
@@ -47,7 +42,7 @@ monitoring, management and more</description>
 		<dependency>
 			<groupId>net.stickycode.composite</groupId>
 			<artifactId>sticky-composite-cxf-soap</artifactId>
-			<version>[3.1,4)</version>
+			<version>[4.1,5)</version>
 		</dependency>
 		<dependency>
 			<groupId>net.stickycode</groupId>
