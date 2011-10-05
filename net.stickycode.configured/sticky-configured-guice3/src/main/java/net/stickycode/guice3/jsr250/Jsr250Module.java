@@ -25,6 +25,8 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Binding;
 import com.google.inject.Injector;
 import com.google.inject.Key;
+import com.google.inject.internal.BindingImpl;
+import com.google.inject.internal.Scoping;
 import com.google.inject.matcher.Matchers;
 
 public class Jsr250Module
@@ -35,13 +37,15 @@ public class Jsr250Module
     bindListener(Matchers.any(), new Jsr250TypeListener());
   }
 
-  public static void preDestroy(Logger log, Injector injector) {
+  public static void preDestroy(final Logger log, Injector injector) {
     log.info("@PreDestroy of {}", injector);
-    InvokingAnnotatedMethodProcessor preDestroyProcessor = new InvokingAnnotatedMethodProcessor(PreDestroy.class);
+    Reflector reflector = new Reflector().forEachMethod(new InvokingAnnotatedMethodProcessor(PreDestroy.class));
     for (Entry<Key<?>, Binding<?>> binding : injector.getBindings().entrySet()) {
-      new Reflector()
-          .forEachMethod(preDestroyProcessor)
-          .process(binding.getValue().getProvider().get());
+      Binding<?> value = binding.getValue();
+      if (((BindingImpl<?>) value).getScoping().equals(Scoping.SINGLETON_ANNOTATION))
+        reflector.process(binding.getValue().getProvider().get());
+      if (((BindingImpl<?>) value).getScoping().equals(Scoping.SINGLETON_INSTANCE))
+        reflector.process(binding.getValue().getProvider().get());
     }
 
     Injector parent = injector.getParent();
