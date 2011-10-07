@@ -205,6 +205,7 @@ public class GuiceIsolatedTestManifest
 
   @Override
   public void prepareTest(Object testInstance) throws MissingBeanException {
+    injector = Guice.createInjector(Stage.PRODUCTION, new IsolatedTestModule(testClass, manifest));
     injector.injectMembers(testInstance);
   }
 
@@ -214,7 +215,6 @@ public class GuiceIsolatedTestManifest
 
   @Override
   public void startup(Class<?> testClass) {
-    injector = Guice.createInjector(Stage.PRODUCTION, new IsolatedTestModule(testClass, manifest));
   }
 
 }
