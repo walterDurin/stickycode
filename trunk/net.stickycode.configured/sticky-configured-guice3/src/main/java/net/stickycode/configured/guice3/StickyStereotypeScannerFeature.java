@@ -112,12 +112,10 @@ public class StickyStereotypeScannerFeature
     bind(annotatedClass, null, Scopes.SINGLETON);
     
     for (Class<Object> interf : interfaces) {
-      if (interf.isAssignableFrom(MembersInjector.class))
-        bind(annotatedClass, null, Scopes.SINGLETON);
+      if (interf.isAssignableFrom(TypeListener.class))
+        bindListener(annotatedClass);
       else
-        if (interf.isAssignableFrom(TypeListener.class))
-          bindListener(annotatedClass);
-        else
+        if (!interf.isAssignableFrom(MembersInjector.class))
           bind(annotatedClass, interf, (Annotation) null, Scopes.SINGLETON);
     }
   }
