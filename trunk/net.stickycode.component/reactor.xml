@@ -8,18 +8,15 @@
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>net.stickycode.composite</groupId>
+	<groupId>net.stickycode.component</groupId>
 	<artifactId>reactor</artifactId>
 	<version>1.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>composite-reactor</name>
+	<name>component-reactor</name>
 	<modules>
-		<module>sticky-composite-cxf-soap</module>
-		<module>sticky-composite-logging-api</module>
-		<module>sticky-composite-logging-deploy</module>
-		<module>sticky-composite-spring25</module>
-		<module>sticky-composite-spring30</module>
-		<module>sticky-composite-unittest</module>
+		<module>sticky-component-spring25</module>
+		<module>sticky-component-cxf</module>
+		<module>sticky-component-cxf-guice3</module>
 	</modules>
 </project>

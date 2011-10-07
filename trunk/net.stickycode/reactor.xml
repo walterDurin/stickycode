@@ -33,5 +33,6 @@
 		<module>sticky-coercion-api</module>
 		<module>sticky-reflector</module>
 		<module>sticky-coercion</module>
+		<module>sticky-resource</module>
 	</modules>
 </project>
