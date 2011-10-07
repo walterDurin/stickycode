@@ -3,6 +3,7 @@ package net.stickycode.resource;
 import static net.stickycode.exception.Preconditions.notNull;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 
 public class ClasspathResource
@@ -25,19 +26,31 @@ public class ClasspathResource
 
   @Override
   public InputStream getSource() {
-    InputStream resourceAsStream = base.getResourceAsStream(name);
+    InputStream resourceAsStream = resolveInputStream();
     if (resourceAsStream == null)
       throw new ResourceNotFoundException(this);
 
     return resourceAsStream;
   }
 
+  private InputStream resolveInputStream() {
+    return base.getResourceAsStream(name);
+  }
+
   @Override
   public String toString() {
+    if (name.startsWith("/"))
+      return "classpath://" + name;
+
     return "classpath://" + base.getPackage().getName().replace('.', '/') + "/" + name;
   }
 
   public File toFile() {
     throw new UnsupportedOperationException("Resource " + toString() + " cannot be converted to a file");
+  }
+
+  @Override
+  public RuntimeException decodeException(IOException e) {
+     throw new FailedToLoadResourceException(e, this);
   }
 }
