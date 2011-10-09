@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright (c) 2011 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved. -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<parent>
 		<artifactId>sticky-root</artifactId>
@@ -56,6 +59,9 @@
 							<exclude>**/*ComponentTest.java</exclude>
 							<exclude>**/*FunctionalTest.java</exclude>
 						</excludes>
+						<systemPropertyVariables>
+							<buildDirectory>${project.build.directory}</buildDirectory>
+						</systemPropertyVariables>
 					</configuration>
 					<executions>
 						<execution>
@@ -87,6 +93,9 @@
 							<include>**/*FunctionalTest.java</include>
 							<include>**/*IntegrationTest.java</include>
 						</includes>
+						<systemPropertyVariables>
+							<buildDirectory>${project.build.directory}</buildDirectory>
+						</systemPropertyVariables>
 					</configuration>
 
 					<executions>
