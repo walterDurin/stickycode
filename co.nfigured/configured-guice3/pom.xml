@@ -10,7 +10,7 @@
 
 	<groupId>co.nfigured</groupId>
 	<artifactId>configured-guice3</artifactId>
-	<version>1.1-SNAPSHOT</version>
+	<version>1.2-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>configured-guice3</name>
