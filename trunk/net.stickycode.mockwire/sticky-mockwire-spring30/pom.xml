@@ -10,7 +10,7 @@
 
 	<groupId>net.stickycode.mockwire</groupId>
 	<artifactId>sticky-mockwire-spring30</artifactId>
-	<version>5.6-SNAPSHOT</version>
+	<version>6.2-SNAPSHOT</version>
 
 	<name>sticky-mockwire-spring30</name>
 	<description>Implementation of mockwire context management using Spring 3.0 as the di container</description>
