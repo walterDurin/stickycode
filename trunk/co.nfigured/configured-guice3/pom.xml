@@ -26,11 +26,6 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>net.stickycode.composite</groupId>
-			<artifactId>sticky-composite-logging-deploy</artifactId>
-			<version>[1.4,2)</version>
-		</dependency>
-		<dependency>
 			<groupId>net.stickycode.scheduled</groupId>
 			<artifactId>sticky-scheduled-guice3</artifactId>
 			<version>[0.6,2)</version>
