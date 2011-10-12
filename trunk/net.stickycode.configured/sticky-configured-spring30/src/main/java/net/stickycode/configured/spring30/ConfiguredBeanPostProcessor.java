@@ -13,18 +13,21 @@
 package net.stickycode.configured.spring30;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 import javax.inject.Inject;
-
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessorAdapter;
 
 import net.stickycode.configured.ConfigurationRepository;
 import net.stickycode.configured.ConfiguredConfiguration;
 import net.stickycode.configured.ConfiguredFieldProcessor;
 import net.stickycode.reflector.Reflector;
 import net.stickycode.stereotype.Configured;
+import net.stickycode.stereotype.PostConfigured;
+import net.stickycode.stereotype.PreConfigured;
 import net.stickycode.stereotype.StickyComponent;
+
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessorAdapter;
 
 @StickyComponent
 public class ConfiguredBeanPostProcessor
@@ -49,6 +52,14 @@ public class ConfiguredBeanPostProcessor
     for (Field field : type.getDeclaredFields())
       if (field.isAnnotationPresent(Configured.class))
         return true;
+    
+    for (Method method : type.getDeclaredMethods()) {
+      if (method.isAnnotationPresent(PreConfigured.class))
+        return true;
+      
+      if (method.isAnnotationPresent(PostConfigured.class))
+        return true;
+    }
 
     return false;
   }
