@@ -12,24 +12,24 @@
  */
 package net.stickycode.configured.spring30;
 
+import static org.mockito.Mockito.when;
+
 import java.beans.Introspector;
+
+import net.stickycode.coercion.Coercions;
+import net.stickycode.coercion.PatternCoercion;
+import net.stickycode.configured.AbstractConfiguredComponentTest;
+import net.stickycode.configured.ConfigurationManifest;
+import net.stickycode.configured.ConfigurationSource;
+import net.stickycode.configured.ConfigurationSystem;
+import net.stickycode.configured.InlineConfigurationRepository;
+import net.stickycode.configured.SimpleNameDotFieldConfigurationKeyBuilder;
 
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.context.support.GenericApplicationContext;
-
-import net.stickycode.coercion.Coercions;
-import net.stickycode.coercion.PatternCoercion;
-import net.stickycode.configured.AbstractConfiguredComponentTest;
-import net.stickycode.configured.ConfigurationSource;
-import net.stickycode.configured.ConfigurationSources;
-import net.stickycode.configured.ConfigurationSystem;
-import net.stickycode.configured.InlineConfigurationRepository;
-import net.stickycode.configured.SimpleNameDotFieldConfigurationKeyBuilder;
-
-import static org.mockito.Mockito.when;
 
 public class ConfiguredComponentTest
     extends AbstractConfiguredComponentTest {
@@ -47,7 +47,7 @@ public class ConfiguredComponentTest
     registerType(c, PatternCoercion.class);
     registerType(c, Coercions.class);
     registerType(c, InlineConfigurationRepository.class);
-    registerType(c, ConfigurationSources.class);
+    registerType(c, ConfigurationManifest.class);
     registerType(c, SimpleNameDotFieldConfigurationKeyBuilder.class);
     registerType(c, ConfigurationSystem.class);
     registerType(c, ConfiguredBeanPostProcessor.class);
