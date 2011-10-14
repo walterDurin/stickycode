@@ -19,8 +19,8 @@ import java.util.Map;
 import net.stickycode.coercion.Coercions;
 import net.stickycode.coercion.PatternCoercion;
 import net.stickycode.coercion.ws.WebServiceCoercion;
+import net.stickycode.configured.ConfigurationManifest;
 import net.stickycode.configured.ConfigurationSource;
-import net.stickycode.configured.ConfigurationSources;
 import net.stickycode.configured.ConfigurationSystem;
 import net.stickycode.configured.InlineConfigurationRepository;
 import net.stickycode.configured.SimpleNameDotFieldConfigurationKeyBuilder;
@@ -180,7 +180,7 @@ public class SpringIsolatedTestManifest
   @Override
   public void registerConfiguationSystem(List<ConfigurationSource> configurationSources) {
     registerType(context, InlineConfigurationRepository.class);
-    registerType(context, ConfigurationSources.class);
+    registerType(context, ConfigurationManifest.class);
     registerType(context, ConfigurationSystem.class);
     registerType(context, SimpleNameDotFieldConfigurationKeyBuilder.class);
     registerType(context, ConfiguredBeanPostProcessor.class);
