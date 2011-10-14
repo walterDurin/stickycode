@@ -9,14 +9,14 @@ public class Dependency
 
   private final String id;
 
-  private final VersionRange version;
+  private final VersionRange range;
 
   public Dependency next;
 
   public Dependency(String id, VersionRange version) {
     super();
     this.id = id;
-    this.version = version;
+    this.range = version;
   }
 
   @Override
@@ -33,12 +33,12 @@ public class Dependency
     return id;
   }
 
-  public VersionRange getVersion() {
-    return version;
+  public VersionRange getRange() {
+    return range;
   }
 
   @Override
   public String toString() {
-    return id + "~" + version;
+    return id + "~" + range;
   }
 }
