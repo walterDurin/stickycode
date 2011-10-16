@@ -30,6 +30,7 @@
 	<modules>
 		<module>sticky-cli</module>
 		<module>sticky-deployer-tomcat6</module>
+		<module>sticky-embedded-tomcat6</module>
 		<module>sticky-deployer-tomcat-1</module>
 	</modules>
 </project>
