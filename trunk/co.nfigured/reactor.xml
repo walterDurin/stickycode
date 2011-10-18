@@ -16,6 +16,6 @@
 	<name>configured-reactor</name>
 	<modules>
 		<module>configured-spring30</module>
-		<module>configured-spring25</module>
+		<module>configured-guice3</module>
 	</modules>
 </project>
