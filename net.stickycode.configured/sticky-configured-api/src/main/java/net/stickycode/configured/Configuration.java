@@ -16,7 +16,7 @@ package net.stickycode.configured;
  * The configuration for a bean in an application.
  */
 public interface Configuration
-    extends Iterable<ConfigurationAttribute> {
+    extends Iterable<ConfigurationAttribute>, ConfigurationKeyElement {
 
   /**
    * Invoke any preconfiguration hooks on the bean.

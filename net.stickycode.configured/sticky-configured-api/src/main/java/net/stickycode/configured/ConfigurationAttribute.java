@@ -22,7 +22,7 @@ import net.stickycode.coercion.CoercionTarget;
  *
  */
 public interface ConfigurationAttribute
-    extends CoercionTarget {
+    extends CoercionTarget, ConfigurationKeyElement {
 
   /**
    * Return true if there was a default value defined at development time.
