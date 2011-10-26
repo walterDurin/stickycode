@@ -17,13 +17,16 @@ package net.stickycode.configured;
  */
 public interface ConfigurationKeyBuilder {
 
+  @Deprecated
+  String buildKey(Configuration configuration, ConfigurationAttribute attribute);
+
   /**
-   * Build the key for looking up the value of an attribute on a configuration.
-   *
-   * @param configuration The parent of the attribute
-   * @param attribute The attribute to build a key for
+   * Build a composite key to identify a configuration, all configuration keys belong to a group and have a name
+   * 
+   * @param group The group of configurations
+   * @param name The name of one element of a configuration group
    * @return The key for the configuration lookup
    */
-  String buildKey(Configuration configuration, ConfigurationAttribute attribute);
+  String build(ConfigurationKeyElement group, ConfigurationKeyElement name);
 
 }
