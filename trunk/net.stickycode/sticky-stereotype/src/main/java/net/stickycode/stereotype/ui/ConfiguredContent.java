@@ -10,7 +10,7 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
  */
-package net.stickycode.stereotype;
+package net.stickycode.stereotype.ui;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -20,12 +20,23 @@ import java.lang.annotation.Target;
 
 
 /**
- * @deprecated See {@link net.stickycode.stereotype.ui.ConfiguredContent}. 
+ * <p>The content of a system is often expected to change at runtime and is not defined by the development team, this annotation is used
+ * to mark a fields as being injected from an external system.</p>
+ *
+ * <p>Content fields must be of type String anything else will error</p>
+ *
+ * <p>If the field is a string then any localization will be carried out by the configuration system</p>
+ *
+ * <h3>TODO</h3>
+ * <p>Allow fields of type LocalizedContent</p>
+ * <p>For LocalizedContent content will be localized by the user associated with the request</p>
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Deprecated
 public @interface ConfiguredContent {
+  /**
+   * Describe the configuration such that someone reading this message could provide appropriate configuration
+   */
   String value() default "";
 }
