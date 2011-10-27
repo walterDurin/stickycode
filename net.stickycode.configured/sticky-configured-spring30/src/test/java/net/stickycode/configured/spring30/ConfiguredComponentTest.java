@@ -22,6 +22,7 @@ import net.stickycode.configured.AbstractConfiguredComponentTest;
 import net.stickycode.configured.ConfigurationManifest;
 import net.stickycode.configured.ConfigurationSource;
 import net.stickycode.configured.ConfigurationSystem;
+import net.stickycode.configured.ConfiguredConfigurationListener;
 import net.stickycode.configured.InlineConfigurationRepository;
 import net.stickycode.configured.SimpleNameDotFieldConfigurationKeyBuilder;
 
@@ -50,6 +51,7 @@ public class ConfiguredComponentTest
     registerType(c, ConfigurationManifest.class);
     registerType(c, SimpleNameDotFieldConfigurationKeyBuilder.class);
     registerType(c, ConfigurationSystem.class);
+    registerType(c, ConfiguredConfigurationListener.class);
     registerType(c, ConfiguredBeanPostProcessor.class);
     registerType(c, AutowiredAnnotationBeanPostProcessor.class);
 
