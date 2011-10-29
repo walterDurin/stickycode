@@ -12,14 +12,7 @@
  */
 package net.stickycode.configured.guice3;
 
-import static org.mockito.Mockito.when;
-
-import java.util.Collections;
-
 import net.stickycode.configured.AbstractConfiguredComponentTest;
-import net.stickycode.configured.ConfigurationSource;
-
-import org.mockito.Mockito;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -34,19 +27,10 @@ public class ConfiguredAutobindingTest
   protected void configure(ConfiguredTestObject target) {
     PackageFilter packageFilter = PackageFilter.create("net.stickycode");
     Module startup = StickyModule.bootstrapModule(packageFilter);
-    Injector injector = Guice.createInjector(startup, StickyModule.keyBuilderModule())
-        .createChildInjector(StickyModule.applicationModule(packageFilter), configurationSourceModule());
+    Injector injector = Guice.createInjector(startup)
+        .createChildInjector(StickyModule.applicationModule(packageFilter));
     injector.injectMembers(target);
     injector.injectMembers(this);
-  }
-
-  private Module configurationSourceModule() {
-    ConfigurationSource configurationSource = Mockito.mock(ConfigurationSource.class);
-    when(configurationSource.hasValue("configuredTestObject.bob")).thenReturn(true);
-    when(configurationSource.hasValue("configuredTestObject.numbers")).thenReturn(true);
-    when(configurationSource.getValue("configuredTestObject.bob")).thenReturn("yay");
-    when(configurationSource.getValue("configuredTestObject.numbers")).thenReturn("1,5,3,7");
-    return new ConfigurationSourceModule(Collections.singletonList(configurationSource));
   }
 
 }

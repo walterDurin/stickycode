@@ -12,55 +12,30 @@
  */
 package net.stickycode.configured.spring30;
 
-import java.beans.Introspector;
-
-import net.stickycode.coercion.Coercions;
-import net.stickycode.coercion.PatternCoercion;
 import net.stickycode.configured.AbstractPrimitiveConfiguratedTest;
-import net.stickycode.configured.ConfigurationManifest;
 import net.stickycode.configured.ConfigurationSource;
-import net.stickycode.configured.ConfigurationSystem;
-import net.stickycode.configured.ConfiguredConfigurationListener;
-import net.stickycode.configured.InlineConfigurationRepository;
-import net.stickycode.configured.SimpleNameDotFieldConfigurationKeyBuilder;
+import net.stickycode.stereotype.StickyComponent;
+import net.stickycode.stereotype.StickyPlugin;
 
-import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
-import org.springframework.beans.factory.support.AbstractBeanDefinition;
-import org.springframework.beans.factory.support.GenericBeanDefinition;
+import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
 import org.springframework.context.support.GenericApplicationContext;
+import org.springframework.core.type.filter.AnnotationTypeFilter;
 
 public class PrimitiveHaveNoDefaultsTest
     extends AbstractPrimitiveConfiguratedTest {
 
   protected void configure(Object instance, ConfigurationSource configurationSource) {
     GenericApplicationContext c = new GenericApplicationContext();
-    c.getBeanFactory().registerSingleton(name(ConfigurationSource.class), configurationSource);
 
-    registerType(c, PatternCoercion.class);
-    registerType(c, Coercions.class);
-    registerType(c, InlineConfigurationRepository.class);
-    registerType(c, ConfigurationManifest.class);
-    registerType(c, SimpleNameDotFieldConfigurationKeyBuilder.class);
-    registerType(c, ConfigurationSystem.class);
-    registerType(c, ConfiguredConfigurationListener.class);
-    registerType(c, ConfiguredBeanPostProcessor.class);
-    registerType(c, AutowiredAnnotationBeanPostProcessor.class);
+    ClassPathBeanDefinitionScanner scanner = new ClassPathBeanDefinitionScanner(c, false);
+    scanner.addIncludeFilter(new AnnotationTypeFilter(StickyComponent.class));
+    scanner.addIncludeFilter(new AnnotationTypeFilter(StickyPlugin.class));
+    scanner.scan("net.stickycode");
 
     c.refresh();
 
     c.getAutowireCapableBeanFactory().autowireBean(instance);
     c.getAutowireCapableBeanFactory().autowireBean(this);
-  }
-
-  public void registerType(GenericApplicationContext c, Class<?> type) {
-    GenericBeanDefinition bd = new GenericBeanDefinition();
-    bd.setBeanClass(type);
-    bd.setAutowireMode(AbstractBeanDefinition.AUTOWIRE_BY_TYPE);
-    c.getDefaultListableBeanFactory().registerBeanDefinition(name(type), bd);
-  }
-
-  private String name(Class<?> type) {
-    return Introspector.decapitalize(type.getSimpleName());
   }
 
 }

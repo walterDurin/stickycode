@@ -14,14 +14,10 @@ package net.stickycode.configured.guice3;
 
 import java.util.logging.LogManager;
 
-import net.stickycode.configured.ConfigurationKeyBuilder;
-import net.stickycode.configured.SimpleNameDotFieldConfigurationKeyBuilder;
-
 import org.slf4j.bridge.SLF4JBridgeHandler;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Module;
-import com.google.inject.Singleton;
 
 import de.devsurf.injection.guice.scanner.PackageFilter;
 import de.devsurf.injection.guice.scanner.StartupModule;
@@ -38,16 +34,16 @@ public class StickyModule {
   static public Module bootstrapModule(PackageFilter... packageFilter) {
     return StartupModule
         .create(ASMClasspathScanner.class, packageFilter)
-        .addFeature(StickyFrameworkStereotypeScannerFeature.class)
         .addFeature(StickyFrameworkPluginMultibindingFeature.class)
+        .addFeature(StickyFrameworkStereotypeScannerFeature.class)
         .disableStartupConfiguration();
   }
 
   static public Module applicationModule(PackageFilter... packageFilter) {
     return StartupModule
         .create(ASMClasspathScanner.class, packageFilter)
-        .addFeature(StickyStereotypeScannerFeature.class)
         .addFeature(StickyPluginMultibindingFeature.class)
+        .addFeature(StickyStereotypeScannerFeature.class)
         .disableStartupConfiguration();
   }
 
@@ -56,7 +52,6 @@ public class StickyModule {
 
       @Override
       protected void configure() {
-        bind(ConfigurationKeyBuilder.class).to(SimpleNameDotFieldConfigurationKeyBuilder.class).in(Singleton.class);
         binder().requireExplicitBindings();
       }
     };
