@@ -45,16 +45,16 @@ public abstract class AbstractPrimitiveConfiguratedTest {
   public void primitivesHaveNoDefaults() {
     configure(new PrimitiveTestObject(), mock(ConfigurationSource.class));
     assertThat(system)
-    .as("Implementors must inject/wire(this) so that the configuration system is available for configuring")
-    .isNotNull();
+        .as("Implementors must inject/wire(this) so that the configuration system is available for configuring")
+        .isNotNull();
   }
 
   @Test(expected = MissingConfigurationException.class)
   public void notConfiguredThrowsANiceException() {
     configure(new NotConfiguredTestObject(), mock(ConfigurationSource.class));
     assertThat(system)
-    .as("Implementors must inject/wire(this) so that the configuration system is available for configuring")
-    .isNotNull();
+        .as("Implementors must inject/wire(this) so that the configuration system is available for configuring")
+        .isNotNull();
     system.configure();
   }
 
