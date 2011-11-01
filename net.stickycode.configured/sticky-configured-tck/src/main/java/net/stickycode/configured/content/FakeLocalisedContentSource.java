@@ -1,4 +1,4 @@
-package net.stickycode.configured;
+package net.stickycode.configured.content;
 
 import java.util.Locale;
 

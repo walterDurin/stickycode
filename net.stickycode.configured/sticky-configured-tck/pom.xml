@@ -40,5 +40,10 @@
 			<artifactId>sticky-configured</artifactId>
 			<version>[3.1,4)</version>
 		</dependency>
+		<dependency>
+			<groupId>net.stickycode.configured</groupId>
+			<artifactId>sticky-configured-content-api</artifactId>
+			<version>1.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 </project>
