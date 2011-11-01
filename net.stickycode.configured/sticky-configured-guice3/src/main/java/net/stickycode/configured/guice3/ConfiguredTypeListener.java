@@ -34,6 +34,7 @@ import com.google.inject.spi.TypeListener;
 @StickyFramework
 public class ConfiguredTypeListener
     implements TypeListener {
+
   private Logger log = LoggerFactory.getLogger(getClass());
 
   @Inject
@@ -43,7 +44,8 @@ public class ConfiguredTypeListener
   public <I> void hear(TypeLiteral<I> type, TypeEncounter<I> encounter) {
     if (typeIsConfigured(type)) {
       if (membersInjector == null)
-        throw new AssertionError("On hearing " + type + " found that " + getClass().getSimpleName() + " was not injected with a " + ConfiguredInjector.class.getSimpleName());
+        throw new AssertionError("On hearing " + type + " found that " + getClass().getSimpleName() + " was not injected with a "
+            + ConfiguredInjector.class.getSimpleName());
 
       encounter.register(membersInjector);
       log.info("encountering {} registering injector {}", type, membersInjector);
@@ -51,18 +53,20 @@ public class ConfiguredTypeListener
   }
 
   private <I> boolean typeIsConfigured(TypeLiteral<I> type) {
-    for (Field field : type.getRawType().getDeclaredFields())
-      if (field.isAnnotationPresent(Configured.class))
-        return true;
+    for (Class<? super I> current = type.getRawType(); current != null; current = current.getSuperclass()) {
+      for (Field field : current.getDeclaredFields())
+        if (field.isAnnotationPresent(Configured.class))
+          return true;
+      
+      for (Method method : current.getDeclaredMethods())
+        if (method.isAnnotationPresent(PostConfigured.class))
+          return true;
+      
+      for (Method method : current.getDeclaredMethods())
+        if (method.isAnnotationPresent(PreConfigured.class))
+          return true;
+    }
     
-    for (Method method : type.getRawType().getDeclaredMethods())
-      if (method.isAnnotationPresent(PostConfigured.class))
-        return true;
-    
-    for (Method method : type.getRawType().getDeclaredMethods())
-      if (method.isAnnotationPresent(PreConfigured.class))
-        return true;
-
     return false;
   }
 }
