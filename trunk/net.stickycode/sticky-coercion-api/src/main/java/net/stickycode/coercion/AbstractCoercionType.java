@@ -13,6 +13,7 @@
 package net.stickycode.coercion;
 
 import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 
 public abstract class AbstractCoercionType
     implements CoercionTarget {
@@ -41,6 +42,16 @@ public abstract class AbstractCoercionType
 
   public AbstractCoercionType getComponentCoercionType() {
     return new CoercionType(resolve(getComponentType()));
+  }
+
+  public AbstractCoercionType[] getComponentCoercionTypes() {
+    Type[] arguments = getGenericType().getActualTypeArguments();
+    AbstractCoercionType[] types = new AbstractCoercionType[arguments.length];
+    for (int i = 0; i < arguments.length; i++) {
+      types[i] = new CoercionType(resolve((Class<?>) arguments[i]));
+
+    }
+    return types;
   }
 
   protected Class<?> resolve(Class<?> componentType) {
