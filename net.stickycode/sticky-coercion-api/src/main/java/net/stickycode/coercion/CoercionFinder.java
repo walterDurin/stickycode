@@ -22,7 +22,7 @@ public interface CoercionFinder {
    * @return The appropriate conversion
    * @throws CoercionNotFoundException if there is no coercion registered that is appropriate for the given target
    */
-  Coercion<?> find(CoercionTarget target)
+  <T> Coercion<T> find(CoercionTarget target)
     throws CoercionNotFoundException;
 
 }

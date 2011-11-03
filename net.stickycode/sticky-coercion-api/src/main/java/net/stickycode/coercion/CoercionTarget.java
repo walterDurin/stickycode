@@ -28,4 +28,6 @@ public interface CoercionTarget {
 
   CoercionTarget getComponentCoercionType();
 
+  CoercionTarget[] getComponentCoercionTypes();
+
 }
