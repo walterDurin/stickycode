@@ -16,20 +16,13 @@ import java.beans.Introspector;
 import java.util.List;
 import java.util.Map;
 
-import net.stickycode.coercion.Coercions;
-import net.stickycode.coercion.PatternCoercion;
-import net.stickycode.coercion.ws.WebServiceCoercion;
-import net.stickycode.configured.ConfigurationManifest;
 import net.stickycode.configured.ConfigurationSource;
-import net.stickycode.configured.ConfigurationSystem;
-import net.stickycode.configured.InlineConfigurationRepository;
-import net.stickycode.configured.SimpleNameDotFieldConfigurationKeyBuilder;
-import net.stickycode.configured.spring30.ConfiguredBeanPostProcessor;
 import net.stickycode.exception.PermanentException;
 import net.stickycode.mockwire.IsolatedTestManifest;
 import net.stickycode.mockwire.MissingBeanException;
 import net.stickycode.mockwire.NonUniqueBeanException;
 import net.stickycode.stereotype.StickyComponent;
+import net.stickycode.stereotype.StickyPlugin;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -140,6 +133,7 @@ public class SpringIsolatedTestManifest
     ClassPathBeanDefinitionScanner scanner = new ClassPathBeanDefinitionScanner(context);
     scanner.setIncludeAnnotationConfig(true);
     scanner.addIncludeFilter(new AnnotationTypeFilter(StickyComponent.class));
+    scanner.addIncludeFilter(new AnnotationTypeFilter(StickyPlugin.class));
     return scanner;
   }
 
@@ -179,14 +173,9 @@ public class SpringIsolatedTestManifest
 
   @Override
   public void registerConfiguationSystem(List<ConfigurationSource> configurationSources) {
-    registerType(context, InlineConfigurationRepository.class);
-    registerType(context, ConfigurationManifest.class);
-    registerType(context, ConfigurationSystem.class);
-    registerType(context, SimpleNameDotFieldConfigurationKeyBuilder.class);
-    registerType(context, ConfiguredBeanPostProcessor.class);
-    registerType(context, PatternCoercion.class);
-    registerType(context, WebServiceCoercion.class);
-    registerType(context, Coercions.class);
+    ClassPathBeanDefinitionScanner scanner = createScanner();
+    scanner.scan("net.stickycode.configured", "net.stickycode.coercion", "net.stickycode.spring30");
+
     for (ConfigurationSource configurationSource : configurationSources) {
       registerBean(name(configurationSource.getClass()), configurationSource, ConfigurationSource.class);
     }
@@ -202,9 +191,9 @@ public class SpringIsolatedTestManifest
   private String name(Class<?> type) {
     return Introspector.decapitalize(type.getSimpleName());
   }
+  
   @Override
   public void configure() {
-    getBeanOfType(ConfigurationSystem.class).configure();
   }
 
 }
