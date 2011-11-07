@@ -109,11 +109,9 @@ import net.stickycode.stereotype.Configured;
 public @interface MockwireConfigured {
 
   /**
-   * Configuration is resolved from the first matching configuration source so Highest will be used first and override any other
-   * sources.
-   *
-   * Scanned sources will be given Average priority.
+   * Configuration is always Application then System then otherwise
    */
+  @Deprecated
   public enum Priority {
     First,
     Fallback,
@@ -129,6 +127,7 @@ public @interface MockwireConfigured {
   /**
    * If environment properties should be used to resolve configured values of beans. Defaults to false
    */
+  @Deprecated
   boolean useEnvironmentProperties() default false;
 
   /**
