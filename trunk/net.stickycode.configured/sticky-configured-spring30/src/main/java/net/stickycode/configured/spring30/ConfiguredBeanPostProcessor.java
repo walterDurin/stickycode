@@ -49,18 +49,19 @@ public class ConfiguredBeanPostProcessor
   }
 
   private boolean typeIsConfigured(Class<?> type) {
-    for (Field field : type.getDeclaredFields())
-      if (field.isAnnotationPresent(Configured.class))
-        return true;
-    
-    for (Method method : type.getDeclaredMethods()) {
-      if (method.isAnnotationPresent(PreConfigured.class))
-        return true;
-      
-      if (method.isAnnotationPresent(PostConfigured.class))
-        return true;
-    }
+    for (Class<?> current = type; current != null; current = current.getSuperclass()) {
+      for (Field field : type.getDeclaredFields())
+        if (field.isAnnotationPresent(Configured.class))
+          return true;
 
+      for (Method method : type.getDeclaredMethods()) {
+        if (method.isAnnotationPresent(PreConfigured.class))
+          return true;
+
+        if (method.isAnnotationPresent(PostConfigured.class))
+          return true;
+      }
+    }
     return false;
   }
 
