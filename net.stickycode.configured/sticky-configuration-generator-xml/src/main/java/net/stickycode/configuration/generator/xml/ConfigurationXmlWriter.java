@@ -35,6 +35,7 @@ public class ConfigurationXmlWriter
       return this;
     }
     
+    @XmlAttribute
     public String getName() {
       return attribute.getName();
     }
@@ -56,7 +57,7 @@ public class ConfigurationXmlWriter
       return this;
     }
 
-    @XmlElement
+    @XmlElement(name="field")
     public List<ConfigurationFieldXml> getFields() {
       return fields;
     }
