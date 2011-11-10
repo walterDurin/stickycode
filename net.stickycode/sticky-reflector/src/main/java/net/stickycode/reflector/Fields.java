@@ -50,4 +50,19 @@ public class Fields {
       throw new TriedToAccessFieldButWasDeniedException(e, field, target);
     }
   }
+
+  /**
+   * Find a declared method without checked exceptions
+   */
+  public static Field find(Class<?> type, String name) {
+    try {
+      return type.getDeclaredField(name);
+    }
+    catch (SecurityException e) {
+      throw new RuntimeException(e);
+    }
+    catch (NoSuchFieldException e) {
+      throw new RuntimeException(e);
+    }
+  }
 }
