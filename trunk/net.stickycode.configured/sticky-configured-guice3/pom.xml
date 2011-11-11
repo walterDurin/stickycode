@@ -50,20 +50,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.google.inject.extensions</groupId>
-			<artifactId>guice-multibindings</artifactId>
-			<version>3.0</version>
-		</dependency>
-		<dependency>
-			<groupId>de.devsurf.injection.guice.scanner</groupId>
-			<artifactId>de.devsurf.injection.guice.scanner.asm</artifactId>
-			<version>[0.8.7]</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>jul-to-slf4j</artifactId>
-			<version>[1.6.1]</version>
+			<groupId>net.stickycode.composite</groupId>
+			<artifactId>sticky-composite-guice3</artifactId>
+			<version>[1.1,2)</version>
 		</dependency>
 
 	</dependencies>
