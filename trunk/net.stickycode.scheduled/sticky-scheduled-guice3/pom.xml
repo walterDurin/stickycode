@@ -10,7 +10,7 @@
 
 	<groupId>net.stickycode.scheduled</groupId>
 	<artifactId>sticky-scheduled-guice3</artifactId>
-	<version>0.8-SNAPSHOT</version>
+	<version>0.9-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>sticky-scheduled-guice3</name>
