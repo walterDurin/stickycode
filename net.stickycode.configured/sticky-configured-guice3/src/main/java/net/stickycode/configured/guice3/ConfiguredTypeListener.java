@@ -18,6 +18,7 @@ import java.lang.reflect.Method;
 import javax.inject.Inject;
 
 import net.stickycode.stereotype.Configured;
+import net.stickycode.stereotype.ConfiguredStrategy;
 import net.stickycode.stereotype.PostConfigured;
 import net.stickycode.stereotype.PreConfigured;
 import net.stickycode.stereotype.StickyComponent;
@@ -48,23 +49,27 @@ public class ConfiguredTypeListener
             + ConfiguredInjector.class.getSimpleName());
 
       encounter.register(membersInjector);
-      log.info("encountering {} registering injector {}", type, membersInjector);
+      log.debug("encountering {} registering injector {}", type, membersInjector);
     }
   }
 
   private <I> boolean typeIsConfigured(TypeLiteral<I> type) {
     for (Class<? super I> current = type.getRawType(); current != null; current = current.getSuperclass()) {
-      for (Field field : current.getDeclaredFields())
+      for (Field field : current.getDeclaredFields()) {
         if (field.isAnnotationPresent(Configured.class))
           return true;
+        
+        if (field.isAnnotationPresent(ConfiguredStrategy.class))
+          return true;
+      }
       
-      for (Method method : current.getDeclaredMethods())
+      for (Method method : current.getDeclaredMethods()) {
         if (method.isAnnotationPresent(PostConfigured.class))
           return true;
-      
-      for (Method method : current.getDeclaredMethods())
+        
         if (method.isAnnotationPresent(PreConfigured.class))
           return true;
+      }
     }
     
     return false;

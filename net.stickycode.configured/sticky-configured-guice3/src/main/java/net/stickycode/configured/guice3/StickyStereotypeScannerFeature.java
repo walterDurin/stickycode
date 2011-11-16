@@ -64,7 +64,7 @@ public class StickyStereotypeScannerFeature
 
   protected BindingStage deriveStage(Class<Object> annotatedClass) {
     BindingStage calculateStage = calculateStage(annotatedClass);
-    log.info("adding {} at {}", annotatedClass.getName(), calculateStage);
+    log.debug("adding {} at {}", annotatedClass.getName(), calculateStage);
     return calculateStage;
   }
 
@@ -96,7 +96,7 @@ public class StickyStereotypeScannerFeature
   @Override
   @SuppressWarnings("unchecked")
   public void process(Class<Object> annotatedClass, Map<String, Annotation> annotations) {
-    log.info("process {} with {}", annotatedClass, annotations);
+    log.debug("process {} with {}", annotatedClass, annotations);
     Class<Object>[] interfaces = (Class<Object>[]) annotatedClass.getInterfaces();
 
     if (interfaces.length == 0) {
