@@ -22,6 +22,7 @@ import net.stickycode.configured.ConfiguredConfiguration;
 import net.stickycode.configured.ConfiguredFieldProcessor;
 import net.stickycode.reflector.Reflector;
 import net.stickycode.stereotype.Configured;
+import net.stickycode.stereotype.ConfiguredStrategy;
 import net.stickycode.stereotype.PostConfigured;
 import net.stickycode.stereotype.PreConfigured;
 import net.stickycode.stereotype.StickyComponent;
@@ -50,9 +51,13 @@ public class ConfiguredBeanPostProcessor
 
   private boolean typeIsConfigured(Class<?> type) {
     for (Class<?> current = type; current != null; current = current.getSuperclass()) {
-      for (Field field : type.getDeclaredFields())
+      for (Field field : type.getDeclaredFields()) {
         if (field.isAnnotationPresent(Configured.class))
           return true;
+        
+        if (field.isAnnotationPresent(ConfiguredStrategy.class))
+          return true;
+      }
 
       for (Method method : type.getDeclaredMethods()) {
         if (method.isAnnotationPresent(PreConfigured.class))
