@@ -12,6 +12,7 @@
  */
 package net.stickycode.coercion;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
@@ -27,6 +28,11 @@ public abstract class AbstractCoercionType
   @Override
   public boolean isArray() {
     return getType().isArray();
+  }
+
+  @Override
+  public boolean hasAnnotation(Class<? extends Annotation> annotationClass) {
+    return false;
   }
 
   @Override

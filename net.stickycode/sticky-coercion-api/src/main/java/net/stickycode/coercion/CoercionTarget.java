@@ -12,11 +12,12 @@
  */
 package net.stickycode.coercion;
 
+import java.lang.annotation.Annotation;
+
 
 /**
  * Contract for something that can be the target of a coercion.
  *
- * A target for coercion is defined by have
  */
 public interface CoercionTarget {
 
@@ -29,5 +30,10 @@ public interface CoercionTarget {
   CoercionTarget getComponentCoercionType();
 
   CoercionTarget[] getComponentCoercionTypes();
+  
+  /**
+   * Return true if this coercion target is annotated with the given metadata
+   */
+  boolean hasAnnotation(Class<? extends Annotation> metadata);
 
 }
