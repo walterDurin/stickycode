@@ -38,7 +38,7 @@ public class Jsr250Module
   }
 
   public static void preDestroy(final Logger log, Injector injector) {
-    log.info("@PreDestroy of {}", injector);
+    log.debug("@PreDestroy of {}", injector);
     Reflector reflector = new Reflector().forEachMethod(new InvokingAnnotatedMethodProcessor(PreDestroy.class));
     for (Entry<Key<?>, Binding<?>> binding : injector.getBindings().entrySet()) {
       Binding<?> value = binding.getValue();
