@@ -17,12 +17,28 @@ import org.slf4j.LoggerFactory;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Module;
+import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import com.google.inject.TypeLiteral;
 import com.google.inject.matcher.Matchers;
 
 public class IsolatedTestModule
     extends AbstractModule {
+
+  private final class InstanceProvider
+      implements Provider {
+
+    private final BeanHolder b;
+
+    private InstanceProvider(BeanHolder b) {
+      this.b = b;
+    }
+
+    @Override
+    public Object get() {
+      return b.getInstance();
+    }
+  }
 
   private Logger log = LoggerFactory.getLogger(getClass());
 
@@ -43,7 +59,7 @@ public class IsolatedTestModule
     for (final BeanHolder b : manifest.getBeans()) {
       TypeLiteral type = TypeLiteral.get(b.getType());
       log.debug("binding type '{}' to instance '{}'", type, b.getInstance());
-      bind(type).toInstance(b.getInstance());
+      bind(type).toProvider(new InstanceProvider(b));
     }
     for (Class type : manifest.getTypes()) {
       log.debug("binding type '{}'", type);
