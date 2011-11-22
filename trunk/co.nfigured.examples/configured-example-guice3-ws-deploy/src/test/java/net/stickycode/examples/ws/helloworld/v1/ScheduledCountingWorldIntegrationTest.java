@@ -32,7 +32,7 @@ public class ScheduledCountingWorldIntegrationTest {
     assertThat(client).isNotNull();
     for (int i = 0; i < 3; i++) {
       int before = client.count();
-      Thread.sleep(2500);
+      Thread.sleep(2200);
       assertThat(client.count()).isGreaterThan(before);
     }
   }

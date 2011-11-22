@@ -10,23 +10,14 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
  */
-package net.stickycode.guice3;
+package net.stickycode.application;
 
-import org.junit.Test;
+import net.stickycode.configured.ConfigurationSource;
+import net.stickycode.configured.source.StickyApplicationConfigurationSource;
+import net.stickycode.stereotype.StickyComponent;
 
-import com.google.inject.Injector;
+public class Application
+    extends StickyApplicationConfigurationSource
+    implements ConfigurationSource {
 
-
-
-public class StickyGuiceContextListenerTest {
-
-  @Test
-  public void sanity() {
-    
-    StickyGuiceContextListener context = new StickyGuiceContextListener();
-    Injector injector = context.getInjector();
-//    context.configure();
-//    context.shutdown(injector);
-    
-  }
 }
