@@ -17,6 +17,7 @@ import java.util.logging.LogManager;
 import javax.inject.Inject;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
 
 import net.stickycode.configured.ConfigurationSystem;
 import net.stickycode.configured.guice3.StickyModule;
@@ -35,13 +36,12 @@ import com.google.inject.Injector;
 import com.google.inject.Module;
 import com.google.inject.Provider;
 import com.google.inject.Stage;
-import com.google.inject.servlet.GuiceServletContextListener;
 import com.google.inject.servlet.ServletModule;
 
 import de.devsurf.injection.guice.scanner.PackageFilter;
 
 public class StickyGuiceContextListener
-    extends GuiceServletContextListener {
+    implements ServletContextListener {
 
   static {
     java.util.logging.Logger util = LogManager.getLogManager().getLogger("");
@@ -50,21 +50,21 @@ public class StickyGuiceContextListener
     SLF4JBridgeHandler.install();
   }
 
+  private final static String INJECTOR_ATTRIBUTE = Injector.class.getName();
+
   private Logger log = LoggerFactory.getLogger(StickyGuiceContextListener.class);
 
   @Inject
   ConfigurationSystem configuration;
 
-  @Override
-  protected Injector getInjector() {
+  protected Injector getInjector(PackageFilter[] packageFilters) {
     log.info("building injector");
     Injector injector = Guice.createInjector(Stage.PRODUCTION,
         StickyModule.bootstrapModule(
             PackageFilter.create("net.stickycode")),
         StickyModule.keyBuilderModule(), cxfModule())
         .createChildInjector(
-            StickyModule.applicationModule(
-                PackageFilter.create("net.stickycode")),
+            StickyModule.applicationModule(packageFilters),
             servletModule()
         );
     injector.injectMembers(this);
@@ -75,10 +75,30 @@ public class StickyGuiceContextListener
   @Override
   public void contextInitialized(ServletContextEvent servletContextEvent) {
     final ServletContext servletContext = servletContextEvent.getServletContext();
-
-    Injector injector = getInjector();
-    servletContext.setAttribute(Injector.class.getName(), injector);
+    createInjector(servletContext);
     configure();
+  }
+
+  protected void createInjector(final ServletContext servletContext) {
+    Injector injector = getInjector(createApplicationPackage(servletContext));
+    servletContext.setAttribute(INJECTOR_ATTRIBUTE, injector);
+  }
+
+  protected PackageFilter[] createApplicationPackage(ServletContext servletContext) {
+    String packageList = servletContext.getInitParameter("sticky-application-packages");
+    if (packageList == null) {
+      log.warn("sticky-application-package was not set, as a result no packages other than core stickycode packages will be scanned");
+      return new PackageFilter[] { PackageFilter.create("net.stickycode") };
+    }
+
+    String[] packages = packageList.split(",");
+    log.debug("scanning {} for components", packages);
+    PackageFilter[] filters = new PackageFilter[packages.length + 1];
+    filters[0] = PackageFilter.create("net.stickycode");
+    for (int i = 0; i < packages.length; i++) {
+      filters[i + 1] = PackageFilter.create(packages[i]);
+    }
+    return filters;
   }
 
   void configure() {
@@ -87,18 +107,18 @@ public class StickyGuiceContextListener
     log.info("configured");
   }
 
-  @Override
   public void contextDestroyed(ServletContextEvent servletContextEvent) {
-    Injector injector = (Injector) servletContextEvent.getServletContext().getAttribute(Injector.class.getName());
+    ServletContext servletContext = servletContextEvent.getServletContext();
+    Injector injector = (Injector) servletContextEvent.getServletContext().getAttribute(INJECTOR_ATTRIBUTE);
+    servletContext.removeAttribute(INJECTOR_ATTRIBUTE);
     shutdown(injector);
-    super.contextDestroyed(servletContextEvent);
   }
 
   void shutdown(Injector injector) {
-     Jsr250Module.preDestroy(log, injector);
+    Jsr250Module.preDestroy(log, injector);
   }
 
-  private Module cxfModule() {
+  protected Module cxfModule() {
     return new AbstractModule() {
 
       @Override
@@ -115,7 +135,7 @@ public class StickyGuiceContextListener
     };
   }
 
-  private ServletModule servletModule() {
+  protected ServletModule servletModule() {
     return new ServletModule() {
 
       @Override
@@ -125,5 +145,5 @@ public class StickyGuiceContextListener
       }
     };
   }
-  
+
 }
