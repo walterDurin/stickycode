@@ -12,21 +12,38 @@
  */
 package net.stickycode.guice3;
 
+import static org.mockito.Mockito.when;
+
+import javax.servlet.ServletContext;
+
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
-import com.google.inject.Injector;
-
-
-
+@RunWith(MockitoJUnitRunner.class)
 public class StickyGuiceContextListenerTest {
 
+  @Mock
+  private ServletContext context;
+
   @Test
-  public void sanity() {
-    
-    StickyGuiceContextListener context = new StickyGuiceContextListener();
-    Injector injector = context.getInjector();
-//    context.configure();
-//    context.shutdown(injector);
-    
+  public void notSet() {
+    StickyGuiceContextListener l = new StickyGuiceContextListener();
+    l.createInjector(context);
+  }
+
+  @Test
+  public void singlePackage() {
+    StickyGuiceContextListener l = new StickyGuiceContextListener();
+    when(context.getInitParameter("sticky-application-packages")).thenReturn("net.stickycode.other");
+    l.createInjector(context);
+  }
+
+  @Test
+  public void multiplePackage() {
+    StickyGuiceContextListener l = new StickyGuiceContextListener();
+    when(context.getInitParameter("sticky-application-packages")).thenReturn("net.stickycode.other,org.mockwire.other");
+    l.createInjector(context);
   }
 }
