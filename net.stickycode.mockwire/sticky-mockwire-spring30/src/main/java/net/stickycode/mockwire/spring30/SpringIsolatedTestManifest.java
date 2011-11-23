@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.Map;
 
 import net.stickycode.configured.ConfigurationSource;
+import net.stickycode.configured.ConfigurationSystem;
+import net.stickycode.configured.spring30.ConfigurationRefresher;
 import net.stickycode.exception.PermanentException;
 import net.stickycode.mockwire.IsolatedTestManifest;
 import net.stickycode.mockwire.MissingBeanException;
@@ -36,6 +38,7 @@ import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
 import org.springframework.context.annotation.CommonAnnotationBeanPostProcessor;
 import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.core.type.filter.AnnotationTypeFilter;
+import org.springframework.core.type.filter.AssignableTypeFilter;
 
 public class SpringIsolatedTestManifest
     implements IsolatedTestManifest {
@@ -87,7 +90,7 @@ public class SpringIsolatedTestManifest
 
   @Override
   public void registerBean(String beanName, Object bean, Class<?> type) {
-    log.info("registering bean '{}' of type '{}'", beanName, type.getName());
+    log.debug("registering bean '{}' of type '{}'", beanName, type.getName());
     context.getBeanFactory().initializeBean(bean, beanName);
     context.getBeanFactory().registerSingleton(beanName, bean);
     // beans that get pushed straight into the context need to be attached to destructive bean post processors
@@ -97,7 +100,7 @@ public class SpringIsolatedTestManifest
 
   @Override
   public void registerType(String beanName, Class<?> type) {
-    log.info("registering definition '{}' for type '{}'", beanName, type.getName());
+    log.debug("registering definition '{}' for type '{}'", beanName, type.getName());
     GenericBeanDefinition bd = new GenericBeanDefinition();
     bd.setBeanClass(type);
     bd.setAutowireMode(AbstractBeanDefinition.AUTOWIRE_BY_TYPE);
@@ -119,7 +122,7 @@ public class SpringIsolatedTestManifest
 
   @Override
   public void scanPackages(String[] scanRoots) {
-    log.info("scanning roots {}", scanRoots);
+    log.debug("scanning roots {}", scanRoots);
     ClassPathBeanDefinitionScanner scanner = createScanner();
     XmlBeanDefinitionReader beanDefinitionReader = createXmlLoader();
     for (String s : scanRoots)
@@ -134,6 +137,7 @@ public class SpringIsolatedTestManifest
     scanner.setIncludeAnnotationConfig(true);
     scanner.addIncludeFilter(new AnnotationTypeFilter(StickyComponent.class));
     scanner.addIncludeFilter(new AnnotationTypeFilter(StickyPlugin.class));
+    scanner.addExcludeFilter(new AssignableTypeFilter(ConfigurationRefresher.class));
     return scanner;
   }
 
@@ -194,6 +198,7 @@ public class SpringIsolatedTestManifest
   
   @Override
   public void configure() {
+    context.getBean(ConfigurationSystem.class).configure();
   }
 
 }
