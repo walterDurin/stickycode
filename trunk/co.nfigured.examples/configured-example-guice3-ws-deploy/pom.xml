@@ -34,7 +34,7 @@
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>maven-jetty-plugin</artifactId>
 				<configuration>
-					<systemPropertiesFile>${basedir}/src/test/resources/net/stickycode/examples/ws/helloworld/v1/configured.properties</systemPropertiesFile>
+					<systemPropertiesFile>${basedir}/src/test/resources/co/nfigured/examples/ws/helloworld/v1/configured.properties</systemPropertiesFile>
 				</configuration>
 			</plugin>
 		</plugins>

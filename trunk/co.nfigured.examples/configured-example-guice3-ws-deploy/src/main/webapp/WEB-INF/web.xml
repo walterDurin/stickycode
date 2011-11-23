@@ -13,6 +13,11 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<listener-class>net.stickycode.guice3.StickyGuiceContextListener</listener-class>
 	</listener>
 
+	<context-param>
+		<param-name>sticky-application-packages</param-name>
+		<param-value>co.nfigured.examples</param-value>
+	</context-param>
+
 	<filter>
 		<filter-name>guiceFilter</filter-name>
 		<filter-class>com.google.inject.servlet.GuiceFilter</filter-class>
