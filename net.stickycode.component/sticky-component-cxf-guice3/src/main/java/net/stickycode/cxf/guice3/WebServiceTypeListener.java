@@ -42,7 +42,7 @@ public class WebServiceTypeListener
         throw new AssertionError("on hearing " + type.getRawType().getName() + " found that " + getClass().getSimpleName() + " was not injected with a " + WebServiceCollector.class.getSimpleName());
       
       encounter.register(collector);
-      log.info("encountering {} registering injector {}", type, collector);
+      log.debug("encountering {} registering injector {}", type, collector);
     }
   }
 
