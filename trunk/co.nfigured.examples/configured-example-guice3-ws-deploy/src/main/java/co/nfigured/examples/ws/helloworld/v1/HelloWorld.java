@@ -10,25 +10,16 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
  */
-package net.stickycode.examples.ws.helloworld.v1;
+package co.nfigured.examples.ws.helloworld.v1;
 
-import net.stickycode.stereotype.Scheduled;
-import net.stickycode.stereotype.StickyComponent;
+import javax.jws.WebService;
 
-@StickyComponent
-public class ScheduledCountingWorld
-    implements CountingWorld {
 
-  private int counter = 10;
+@WebService
+public interface HelloWorld {
   
-  @Override
-  public Integer count() {
-    return counter;
-  }
+  String hello(String name);
   
-  @Scheduled
-  public void increment() {
-    counter++;
-  }
+  Integer count();
 
 }
