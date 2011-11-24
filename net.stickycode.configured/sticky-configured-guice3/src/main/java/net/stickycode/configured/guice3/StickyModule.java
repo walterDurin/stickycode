@@ -21,7 +21,6 @@ import com.google.inject.Module;
 
 import de.devsurf.injection.guice.scanner.PackageFilter;
 import de.devsurf.injection.guice.scanner.StartupModule;
-import de.devsurf.injection.guice.scanner.asm.ASMClasspathScanner;
 
 public class StickyModule {
   static {
@@ -33,7 +32,7 @@ public class StickyModule {
   
   static public Module bootstrapModule(PackageFilter... packageFilter) {
     return StartupModule
-        .create(ASMClasspathScanner.class, packageFilter)
+        .create(StickyClasspathScanner.class, packageFilter)
         .addFeature(StickyFrameworkPluginMultibindingFeature.class)
         .addFeature(StickyFrameworkStereotypeScannerFeature.class)
         .disableStartupConfiguration();
@@ -41,7 +40,7 @@ public class StickyModule {
 
   static public Module applicationModule(PackageFilter... packageFilter) {
     return StartupModule
-        .create(ASMClasspathScanner.class, packageFilter)
+        .create(StickyClasspathScanner.class, packageFilter)
         .addFeature(StickyPluginMultibindingFeature.class)
         .addFeature(StickyStereotypeScannerFeature.class)
         .disableStartupConfiguration();
