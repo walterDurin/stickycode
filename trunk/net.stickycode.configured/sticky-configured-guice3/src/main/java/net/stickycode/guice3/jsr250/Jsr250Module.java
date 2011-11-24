@@ -38,14 +38,17 @@ public class Jsr250Module
   }
 
   public static void preDestroy(final Logger log, Injector injector) {
-    log.debug("@PreDestroy of {}", injector);
     Reflector reflector = new Reflector().forEachMethod(new InvokingAnnotatedMethodProcessor(PreDestroy.class));
     for (Entry<Key<?>, Binding<?>> binding : injector.getBindings().entrySet()) {
       Binding<?> value = binding.getValue();
-      if (((BindingImpl<?>) value).getScoping().equals(Scoping.SINGLETON_ANNOTATION))
+      if (((BindingImpl<?>) value).getScoping().equals(Scoping.SINGLETON_ANNOTATION)) {
+        log.debug("@PreDestroy of {}", binding.getKey());
         reflector.process(binding.getValue().getProvider().get());
-      if (((BindingImpl<?>) value).getScoping().equals(Scoping.SINGLETON_INSTANCE))
+      }
+      if (((BindingImpl<?>) value).getScoping().equals(Scoping.SINGLETON_INSTANCE)) {
+        log.debug("@PreDestroy of {}", binding.getKey());
         reflector.process(binding.getValue().getProvider().get());
+      }
     }
 
     Injector parent = injector.getParent();
