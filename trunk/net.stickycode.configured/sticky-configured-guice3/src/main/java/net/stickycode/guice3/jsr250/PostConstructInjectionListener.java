@@ -19,15 +19,14 @@ import com.google.inject.spi.InjectionListener;
 import net.stickycode.configured.InvokingAnnotatedMethodProcessor;
 import net.stickycode.reflector.Reflector;
 
-
 public class PostConstructInjectionListener
     implements InjectionListener<Object> {
 
   @Override
   public void afterInjection(Object injectee) {
     new Reflector()
-      .forEachMethod(new InvokingAnnotatedMethodProcessor(PostConstruct.class))
-      .process(injectee);
+        .forEachMethod(new InvokingAnnotatedMethodProcessor(PostConstruct.class))
+        .process(injectee);
   }
 
 }
