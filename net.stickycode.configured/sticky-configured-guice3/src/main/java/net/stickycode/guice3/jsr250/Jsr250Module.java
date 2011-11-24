@@ -14,9 +14,6 @@ package net.stickycode.guice3.jsr250;
 
 import java.util.Map.Entry;
 
-import javax.annotation.PreDestroy;
-
-import net.stickycode.configured.InvokingAnnotatedMethodProcessor;
 import net.stickycode.reflector.Reflector;
 
 import org.slf4j.Logger;
@@ -38,15 +35,13 @@ public class Jsr250Module
   }
 
   public static void preDestroy(final Logger log, Injector injector) {
-    Reflector reflector = new Reflector().forEachMethod(new InvokingAnnotatedMethodProcessor(PreDestroy.class));
+    Reflector reflector = new Reflector().forEachMethod(new PredestroyInvokingAnnotatedMethodProcessor());
     for (Entry<Key<?>, Binding<?>> binding : injector.getBindings().entrySet()) {
       Binding<?> value = binding.getValue();
       if (((BindingImpl<?>) value).getScoping().equals(Scoping.SINGLETON_ANNOTATION)) {
-        log.debug("@PreDestroy of {}", binding.getKey());
         reflector.process(binding.getValue().getProvider().get());
       }
       if (((BindingImpl<?>) value).getScoping().equals(Scoping.SINGLETON_INSTANCE)) {
-        log.debug("@PreDestroy of {}", binding.getKey());
         reflector.process(binding.getValue().getProvider().get());
       }
     }

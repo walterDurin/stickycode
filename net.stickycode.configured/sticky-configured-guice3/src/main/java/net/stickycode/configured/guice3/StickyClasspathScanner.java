@@ -40,8 +40,6 @@ public class StickyClasspathScanner
 
   private List<Pattern> patterns = new ArrayList<Pattern>();
 
-  private int count;
-
   private Set<String> visited;
 
   private AnnotationCollector collector;
@@ -194,7 +192,6 @@ public class StickyClasspathScanner
   private void _visitJar(JarFile jarFile) throws IOException {
     Enumeration<JarEntry> jarEntries = jarFile.entries();
     for (JarEntry jarEntry = null; jarEntries.hasMoreElements();) {
-      count++;
       jarEntry = jarEntries.nextElement();
       String name = jarEntry.getName();
 
@@ -208,7 +205,6 @@ public class StickyClasspathScanner
   }
 
   private void visitClass(InputStream in) throws IOException {
-    count++;
     ClassReader reader = new ClassReader(new BufferedInputStream(in));
     reader.accept(collector, AnnotationCollector.ASM_FLAGS);
   }
