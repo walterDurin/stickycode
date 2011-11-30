@@ -22,7 +22,7 @@ import java.lang.annotation.Target;
  * This stereotype is used to identify components that make up the StickyCode framework. 
  * 
  * <p>In particular Guice which does not have dependency resolution requires that framework elements are set up before use.
- * This annotation allows idenfication of the framework for use in the parent injector.
+ * This annotation allows identification of the framework for use in the parent injector.
  * </p>
  */
 @Target(ElementType.TYPE)
