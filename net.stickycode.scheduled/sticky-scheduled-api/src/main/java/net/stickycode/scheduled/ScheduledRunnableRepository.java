@@ -12,6 +12,9 @@
  */
 package net.stickycode.scheduled;
 
+import net.stickycode.stereotype.StickyFramework;
+
+@StickyFramework
 public interface ScheduledRunnableRepository
     extends Iterable<ScheduledRunnable> {
 
