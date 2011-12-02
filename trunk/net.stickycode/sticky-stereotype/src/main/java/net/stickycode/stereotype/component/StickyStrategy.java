@@ -20,13 +20,13 @@ import java.lang.annotation.Target;
 import net.stickycode.stereotype.StickyPlugin;
 
 /**
- * This stereotype marks a {@link StickyPlugin} as being an extension.
+ * This stereotype marks a component as being a strategy being a type of plugin.
 
  * It could be used to carry out context validation to ensure the pattern is being used appropriately.
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @StickyPlugin
-public @interface StickyExtension {
+public @interface StickyStrategy {
 
 }
