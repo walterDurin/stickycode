@@ -10,7 +10,7 @@
 
 	<groupId>net.stickycode</groupId>
 	<artifactId>sticky-metadata-reflective</artifactId>
-	<version>1.1-SNAPSHOT</version>
+	<version>1.2-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>sticky-metadata-reflective</name>
