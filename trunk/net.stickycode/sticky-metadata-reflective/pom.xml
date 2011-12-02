@@ -29,7 +29,7 @@
 		<dependency>
 			<groupId>net.stickycode</groupId>
 			<artifactId>sticky-metadata-api</artifactId>
-			<version>1.1-SNAPSHOT</version>
+			<version>[1.1,2)</version>
 		</dependency>
 		<dependency>
 			<groupId>net.stickycode</groupId>
@@ -39,7 +39,7 @@
 		<dependency>
 			<groupId>net.stickycode.composite</groupId>
 			<artifactId>sticky-composite-unittest</artifactId>
-			<version>1.7</version>
+			<version>[1.7,2)</version>
 		</dependency>
 	</dependencies>
 </project>
