@@ -66,7 +66,7 @@ import java.lang.annotation.Target;
  * </pre>
  *
  */
-@Target(ElementType.FIELD)
+@Target({ElementType.FIELD, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface Configured {
