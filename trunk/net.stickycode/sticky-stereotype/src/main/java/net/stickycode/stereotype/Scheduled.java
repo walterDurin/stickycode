@@ -44,7 +44,7 @@ import java.lang.annotation.Target;
  * In order to ensure consistency across environments the schedule should always be defined by the environment, never by the code.
  * </p>
  */
-@Target(ElementType.METHOD)
+@Target({ ElementType.METHOD, ElementType.ANNOTATION_TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface Scheduled {
