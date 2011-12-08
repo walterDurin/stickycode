@@ -12,9 +12,17 @@
  */
 package net.stickycode.scheduled;
 
+/**
+ * Contract for objects that can be run on a schedule. The scheduling system will invoke the run method as defined
+ * by the {@link Schedule} returned by {@link #getSchedule()}.
+ */
 public interface ScheduledRunnable
     extends Runnable {
-  
+
+  /**
+   * Return the schedule with which the runnable should be executed. This is called once for each configuration cycle.
+   *
+   */
   Schedule getSchedule();
 
 }
