@@ -25,4 +25,11 @@
 		<url>http://code.google.com/p/stickycode/source/browse/#svn/trunk/net.stickycode/sticky-metadata-api</url>
 	</scm>
 	
+	<dependencies>
+		<dependency>
+			<groupId>net.stickycode</groupId>
+			<artifactId>sticky-stereotype</artifactId>
+			<version>[1.9,2)</version>
+		</dependency>
+	</dependencies>
 </project>
