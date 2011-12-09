@@ -29,16 +29,7 @@ public class AnnotatedFieldSettingProcessor
 
   @Override
   public void processField(Object target, Field field) {
-    field.setAccessible(true);
-    try {
-      field.set(target, values.get(field.getType()));
-    }
-    catch (IllegalArgumentException e) {
-      throw new RuntimeException(e);
-    }
-    catch (IllegalAccessException e) {
-      throw new RuntimeException(e);
-    }
+    Fields.set(target, field, values.get(field.getType()));
   }
 
 }
