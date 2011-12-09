@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright (c) 2010 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved. -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<parent>
 		<groupId>net.stickycode.parent</groupId>
-		<artifactId>sticky-jar</artifactId>
-		<version>1.19</version>
+		<artifactId>sticky-api</artifactId>
+		<version>1.6</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
@@ -17,14 +20,14 @@
 	<description>Simple reflective bean processing support</description>
 
 	<inceptionYear>2010</inceptionYear>
-		<url>http://www.StickyCode.net/sticky-reflector/</url>
+	<url>http://www.StickyCode.net/sticky-reflector/</url>
 
 	<scm>
 		<connection>scm:svn:http://stickycode.googlecode.com/svn/trunk/net.stickycode/sticky-reflector</connection>
 		<developerConnection>scm:svn:https://stickycode.googlecode.com/svn/trunk/net.stickycode/sticky-reflector</developerConnection>
 		<url>http://code.google.com/p/stickycode/source/browse/#svn/trunk/net.stickycode/sticky-reflector</url>
 	</scm>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>net.stickycode</groupId>
@@ -32,4 +35,17 @@
 			<version>[1.6,2)</version>
 		</dependency>
 	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>clirr-maven-plugin</artifactId>
+				<configuration>
+					<comparisonVersion>1.1</comparisonVersion>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
 </project>
