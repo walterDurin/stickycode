@@ -32,6 +32,10 @@ public abstract class AbstractConfiguredComponentTest {
     @Configured
     List<Integer> numbers;
   }
+  
+  public class InheritedConfiguredTestObject extends ConfiguredTestObject {
+    
+  }
 
   public AbstractConfiguredComponentTest() {
     super();
@@ -48,6 +52,16 @@ public abstract class AbstractConfiguredComponentTest {
   @Test
   public void verifySystemConfigured() {
     ConfiguredTestObject instance = new ConfiguredTestObject();
+    verify(instance);
+  }
+  
+  @Test
+  public void configuredInheritance() {
+    ConfiguredTestObject instance = new InheritedConfiguredTestObject();
+    verify(instance);
+  }
+
+  private void verify(ConfiguredTestObject instance) {
     configure(instance);
 
     assertThat(system)
