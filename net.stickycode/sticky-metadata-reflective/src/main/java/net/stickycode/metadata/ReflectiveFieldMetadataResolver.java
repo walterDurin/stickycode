@@ -12,25 +12,16 @@ public class ReflectiveFieldMetadataResolver
     this.field = method;
   }
 
+  @SuppressWarnings("unchecked")
   @Override
   public boolean metaAnnotatedWith(Class<? extends Annotation> annotation) {
-    if (field.isAnnotationPresent(annotation))
-      return true;
-
-    for (Annotation a : field.getAnnotations()) {
-      if (a.annotationType().isAnnotationPresent(annotation))
-        return true;
-    }
-
-    return false;
+    return new MetaAnnotatedElementPredicate(annotation).apply(field);
   }
 
+  @SuppressWarnings("unchecked")
   @Override
   public boolean annotatedWith(Class<? extends Annotation> annotation) {
-    if (field.isAnnotationPresent(annotation))
-      return true;
-
-    return false;
+    return new AnnotatedElementPredicate(annotation).apply(field);
   }
 
 }

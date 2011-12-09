@@ -1,13 +1,17 @@
 package net.stickycode.metadata;
 
 import static org.fest.assertions.Assertions.assertThat;
+import net.stickycode.stereotype.StickyComponent;
 import net.stickycode.stereotype.StickyFramework;
+import net.stickycode.stereotype.StickyPlugin;
+import net.stickycode.stereotype.component.StickyExtension;
+import net.stickycode.stereotype.component.StickyRepository;
 
 import org.junit.Test;
 
 public class ReflectiveTypeAnnotationResolverTest {
 
-  @TypeMarker
+  @StickyComponent
   public interface AnnotatedContract {
   }
 
@@ -19,32 +23,40 @@ public class ReflectiveTypeAnnotationResolverTest {
       extends WithAnnotatedContract {
   }
 
-  @TypeMarker
+  @StickyComponent
   public class WithDirectContractAnnotation {
   }
 
   @Test
   public void annotated() {
-    assertThat(type(AnnotatedContract.class).metaAnnotatedWith(StickyFramework.class)).isFalse();
-    assertThat(type(AnnotatedContract.class).metaAnnotatedWith(TypeMarker.class)).isTrue();
+    assertThat(type(AnnotatedContract.class).annotatedWith(StickyPlugin.class)).isFalse();
+    assertThat(type(AnnotatedContract.class).annotatedWith(StickyExtension.class)).isFalse();
+    assertThat(type(AnnotatedContract.class).annotatedWith(StickyRepository.class)).isFalse();
+    assertThat(type(AnnotatedContract.class).annotatedWith(StickyComponent.class)).isTrue();
   }
 
   @Test
   public void contract() {
-    assertThat(type(WithAnnotatedContract.class).metaAnnotatedWith(StickyFramework.class)).isFalse();
-    assertThat(type(WithAnnotatedContract.class).metaAnnotatedWith(TypeMarker.class)).isTrue();
+    assertThat(type(WithAnnotatedContract.class).annotatedWith(StickyPlugin.class)).isFalse();
+    assertThat(type(WithAnnotatedContract.class).annotatedWith(StickyExtension.class)).isFalse();
+    assertThat(type(WithAnnotatedContract.class).annotatedWith(StickyRepository.class)).isFalse();
+    assertThat(type(WithAnnotatedContract.class).annotatedWith(StickyComponent.class)).isTrue();
   }
 
   @Test
   public void direct() {
-    assertThat(type(WithDirectContractAnnotation.class).metaAnnotatedWith(StickyFramework.class)).isFalse();
-    assertThat(type(WithDirectContractAnnotation.class).metaAnnotatedWith(TypeMarker.class)).isTrue();
+    assertThat(type(WithDirectContractAnnotation.class).annotatedWith(StickyFramework.class)).isFalse();
+    assertThat(type(WithDirectContractAnnotation.class).annotatedWith(StickyPlugin.class)).isFalse();
+    assertThat(type(WithDirectContractAnnotation.class).annotatedWith(StickyExtension.class)).isFalse();
+    assertThat(type(WithDirectContractAnnotation.class).annotatedWith(StickyComponent.class)).isTrue();
   }
 
   @Test
   public void inheritedContract() {
-    assertThat(type(WithInheritedAnnotatedContract.class).metaAnnotatedWith(StickyFramework.class)).isFalse();
-    assertThat(type(WithInheritedAnnotatedContract.class).metaAnnotatedWith(TypeMarker.class)).isTrue();
+    assertThat(type(WithInheritedAnnotatedContract.class).annotatedWith(StickyFramework.class)).isFalse();
+    assertThat(type(WithInheritedAnnotatedContract.class).annotatedWith(StickyPlugin.class)).isFalse();
+    assertThat(type(WithInheritedAnnotatedContract.class).annotatedWith(StickyExtension.class)).isFalse();
+    assertThat(type(WithInheritedAnnotatedContract.class).annotatedWith(StickyComponent.class)).isTrue();
   }
 
   private MetadataResolver type(Class<?> type) {
