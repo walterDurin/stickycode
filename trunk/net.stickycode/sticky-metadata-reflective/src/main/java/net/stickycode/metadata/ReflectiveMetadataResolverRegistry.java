@@ -12,18 +12,23 @@ public class ReflectiveMetadataResolverRegistry
     implements MetadataResolverRegistry {
 
   @Override
-  public MetadataResolver method(Method method) {
+  public MetadataResolver is(Method method) {
     return new ReflectiveMethodMetadataResolver(method);
   }
 
   @Override
-  public MetadataResolver field(Field field) {
+  public MetadataResolver is(Field field) {
     return new ReflectiveFieldMetadataResolver(field);
   }
 
   @Override
   public MetadataResolver is(Class<?> annotatedClass) {
     return new ReflectiveTypeMetadataResolver(annotatedClass);
+  }
+
+  @Override
+  public ElementMetadataResolver does(Class<?> type) {
+    return new ReflectiveElementMetadataResolver(type);
   }
 
 }

@@ -1,10 +1,12 @@
 package net.stickycode.metadata;
 
+import net.stickycode.stereotype.StickyComponent;
+
 import org.junit.Test;
 
 public class ReflectiveTypeMetadataResolverTest {
 
-  @AnnotatedTypeMarker
+  @StickyComponent
   public interface MetaAnnotatedContract {
   }
 
@@ -16,12 +18,12 @@ public class ReflectiveTypeMetadataResolverTest {
       extends WithMetaAnnotatedContract {
   }
 
-  @AnnotatedTypeMarker
+  @StickyComponent
   public class WithDirectContractAnnotation {
   }
 
   @Test
   public void fluent() {
-    new ReflectiveMetadataResolverRegistry().is(MetaAnnotatedContract.class).metaAnnotatedWith(TypeMarker.class);
+    new ReflectiveMetadataResolverRegistry().is(MetaAnnotatedContract.class).metaAnnotatedWith(StickyComponent.class);
   }
 }
