@@ -13,9 +13,7 @@
 package net.stickycode.configured.guice3;
 
 import java.lang.annotation.Annotation;
-import java.util.Map;
 
-import net.stickycode.stereotype.StickyFramework;
 import net.stickycode.stereotype.StickyPlugin;
 
 import org.slf4j.Logger;
@@ -26,7 +24,6 @@ import com.google.inject.Singleton;
 import com.google.inject.binder.ScopedBindingBuilder;
 import com.google.inject.multibindings.Multibinder;
 
-import de.devsurf.injection.guice.install.InstallationContext.BindingStage;
 import de.devsurf.injection.guice.install.bindjob.BindingJob;
 import de.devsurf.injection.guice.install.bindjob.MultiBindingJob;
 
@@ -37,18 +34,13 @@ public class StickyFrameworkPluginMultibindingFeature
   private Logger log = LoggerFactory.getLogger(getClass());
 
   @Override
-  public BindingStage accept(Class<Object> annotatedClass, Map<String, Annotation> annotations) {
-    if (!annotatedClass.isAnnotationPresent(StickyFramework.class))
-      return BindingStage.IGNORE;
-    
-    if (annotatedClass.isAnnotationPresent(StickyPlugin.class))
-      return BindingStage.BINDING;
+  protected boolean isFrameworkComponent(Class<Object> annotatedClass) {
+    return !super.isFrameworkComponent(annotatedClass);
+  }
 
-    for (Annotation annotation : annotatedClass.getAnnotations())
-      if (annotation.annotationType().isAnnotationPresent(StickyPlugin.class))
-        return BindingStage.BINDING;
-
-    return BindingStage.IGNORE;
+  @Override
+  protected Class<? extends Annotation> getComponentAnnotation() {
+    return StickyPlugin.class;
   }
 
   @Override
@@ -77,10 +69,10 @@ public class StickyFrameworkPluginMultibindingFeature
     }
     else {
       log.debug("Ignoring Multi-BindingJob \"" + job.toString()
-            + "\", because it was already bound.", new Exception("Ignoring Multi-BindingJob \"" + job.toString()
-              + "\", because it was already bound."));
+          + "\", because it was already bound.", new Exception("Ignoring Multi-BindingJob \"" + job.toString()
+          + "\", because it was already bound."));
       log.info("Ignoring Multi-BindingJob \"" + job.toString()
-              + "\", because it was already bound.");
+          + "\", because it was already bound.");
     }
   }
 }

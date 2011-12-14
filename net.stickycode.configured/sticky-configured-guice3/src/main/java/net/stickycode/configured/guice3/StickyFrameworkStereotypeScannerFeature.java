@@ -12,33 +12,15 @@
  */
 package net.stickycode.configured.guice3;
 
-import java.lang.annotation.Annotation;
-import java.util.Map;
-
-import net.stickycode.stereotype.StickyFramework;
-
 import com.google.inject.Singleton;
-
-import de.devsurf.injection.guice.install.InstallationContext.BindingStage;
 
 @Singleton
 public class StickyFrameworkStereotypeScannerFeature
     extends StickyStereotypeScannerFeature {
-  
+
   @Override
-  public BindingStage accept(Class<Object> annotatedClass, Map<String, Annotation> annotations) {
-    if (!annotatedClass.isAnnotationPresent(StickyFramework.class))
-      return BindingStage.IGNORE;
-
-    if (annotatedClass.isAnnotationPresent(getComponentAnnotation()))
-      return deriveStage(annotatedClass);
-
-    for (Annotation annotation : annotatedClass.getAnnotations()) {
-      if (annotation.annotationType().isAnnotationPresent(getComponentAnnotation()))
-        return deriveStage(annotatedClass);
-    }
-
-    return BindingStage.IGNORE;
+  protected boolean isFrameworkComponent(Class<Object> annotatedClass) {
+    return !super.isFrameworkComponent(annotatedClass);
   }
- 
+
 }
