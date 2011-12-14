@@ -14,15 +14,22 @@ package net.stickycode.configured.guice3;
 
 import java.util.logging.LogManager;
 
+import net.stickycode.metadata.MetadataResolverRegistry;
+import net.stickycode.metadata.ReflectiveMetadataResolverRegistry;
+
 import org.slf4j.bridge.SLF4JBridgeHandler;
 
 import com.google.inject.AbstractModule;
+import com.google.inject.Binder;
 import com.google.inject.Module;
+import com.google.inject.multibindings.Multibinder;
 
+import de.devsurf.injection.guice.scanner.ClasspathScanner;
 import de.devsurf.injection.guice.scanner.PackageFilter;
 import de.devsurf.injection.guice.scanner.StartupModule;
+import de.devsurf.injection.guice.scanner.features.ScannerFeature;
 
-public class StickyModule {
+public class StickyModule extends StartupModule {
   static {
     java.util.logging.Logger util = LogManager.getLogManager().getLogger("");
     for (java.util.logging.Handler handler : util.getHandlers())
@@ -31,16 +38,15 @@ public class StickyModule {
   }
   
   static public Module bootstrapModule(PackageFilter... packageFilter) {
-    return StartupModule
-        .create(StickyClasspathScanner.class, packageFilter)
+    return new StickyModule(StickyClasspathScanner.class, packageFilter)
         .addFeature(StickyFrameworkPluginMultibindingFeature.class)
         .addFeature(StickyFrameworkStereotypeScannerFeature.class)
         .disableStartupConfiguration();
   }
 
   static public Module applicationModule(PackageFilter... packageFilter) {
-    return StartupModule
-        .create(StickyClasspathScanner.class, packageFilter)
+    return 
+        new StickyModule(StickyClasspathScanner.class, packageFilter)
         .addFeature(StickyPluginMultibindingFeature.class)
         .addFeature(StickyStereotypeScannerFeature.class)
         .disableStartupConfiguration();
@@ -54,6 +60,24 @@ public class StickyModule {
         binder().requireExplicitBindings();
       }
     };
+  }
+
+  public StickyModule(Class<? extends ClasspathScanner> scanner, PackageFilter... filter) {
+    super(scanner, filter);
+  }
+
+  @Override
+  protected Multibinder<ScannerFeature> bindFeatures(Binder binder) {
+    Multibinder<ScannerFeature> listeners = Multibinder.newSetBinder(binder,
+      ScannerFeature.class);
+
+    for (Class<? extends ScannerFeature> listener : _features) {
+      listeners.addBinding().to(listener);
+    }
+    
+    binder.bind(MetadataResolverRegistry.class).to(ReflectiveMetadataResolverRegistry.class);
+
+    return listeners;
   }
 
 }

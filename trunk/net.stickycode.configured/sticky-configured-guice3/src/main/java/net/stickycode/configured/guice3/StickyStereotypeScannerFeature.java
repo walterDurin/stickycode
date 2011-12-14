@@ -18,7 +18,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import net.stickycode.configured.ConfigurationRepository;
+import javax.inject.Inject;
+
+import net.stickycode.metadata.MetadataResolverRegistry;
 import net.stickycode.stereotype.StickyComponent;
 import net.stickycode.stereotype.StickyFramework;
 import net.stickycode.stereotype.component.StickyRepository;
@@ -30,7 +32,6 @@ import com.google.inject.MembersInjector;
 import com.google.inject.Scopes;
 import com.google.inject.Singleton;
 import com.google.inject.matcher.Matchers;
-import com.google.inject.spi.InjectionListener;
 import com.google.inject.spi.TypeListener;
 
 import de.devsurf.injection.guice.install.InstallationContext.BindingStage;
@@ -42,20 +43,41 @@ public class StickyStereotypeScannerFeature
 
   private Logger log = LoggerFactory.getLogger(getClass());
 
+  @Inject
+  MetadataResolverRegistry metadataResolver;
+
   @Override
   public BindingStage accept(Class<Object> annotatedClass, Map<String, Annotation> annotations) {
-    if (annotatedClass.isAnnotationPresent(StickyFramework.class))
+    if (isFrameworkComponent(annotatedClass))
       return BindingStage.IGNORE;
-    
-    if (annotatedClass.isAnnotationPresent(getComponentAnnotation()))
+
+    if (metadataResolver.is(annotatedClass).metaAnnotatedWith(getComponentAnnotation()))
       return deriveStage(annotatedClass);
 
-    for (Annotation annotation : annotatedClass.getAnnotations()) {
-      if (annotation.annotationType().isAnnotationPresent(getComponentAnnotation()))
-        return deriveStage(annotatedClass);
-    }
-
     return BindingStage.IGNORE;
+  }
+
+  protected boolean isFrameworkComponent(Class<Object> annotatedClass) {
+    return metadataResolver.is(annotatedClass).metaAnnotatedWith(StickyFramework.class);
+    // if (annotatedClass.isAnnotationPresent(StickyFramework.class))
+    // return true;
+    //
+    // for (Class<?> type = annotatedClass; type != null; type = type.getSuperclass())
+    // for (Class<?> contract : type.getInterfaces()) {
+    // if (contract.isAnnotationPresent(StickyFramework.class))
+    // return true;
+    //
+    // if (contract.isAssignableFrom(MembersInjector.class))
+    // return true;
+    //
+    // if (contract.isAssignableFrom(TypeListener.class))
+    // return true;
+    //
+    // if (contract.isAssignableFrom(InjectionListener.class))
+    // return true;
+    // }
+    //
+    // return false;
   }
 
   protected Class<? extends Annotation> getComponentAnnotation() {
@@ -70,33 +92,16 @@ public class StickyStereotypeScannerFeature
 
   private BindingStage calculateStage(Class<Object> annotatedClass) {
     for (Class<?> contract : annotatedClass.getInterfaces()) {
-      if (contract.isAssignableFrom(ConfigurationRepository.class))
-        return BindingStage.BOOT_BEFORE;
-
-      if (contract.isAssignableFrom(MembersInjector.class))
-        return BindingStage.BOOT;
-      
-      if (contract.isAssignableFrom(InjectionListener.class))
-        return BindingStage.BOOT;
-
-      if (contract.isAssignableFrom(TypeListener.class))
-        return BindingStage.BOOT_POST;
-
-      if (annotatedClass.isAnnotationPresent(StickyRepository.class))
-        return BindingStage.BOOT_BEFORE;
-        
-      String packageName = contract.getName();
-      if (packageName.startsWith("net.stickycode.scheduled.ScheduledRunnableRepository"))
+      if (contract.isAnnotationPresent(StickyRepository.class))
         return BindingStage.BOOT_BEFORE;
     }
 
-    return BindingStage.BINDING;
+    return BindingStage.BOOT;
   }
 
   @Override
   @SuppressWarnings("unchecked")
   public void process(Class<Object> annotatedClass, Map<String, Annotation> annotations) {
-    log.debug("process {} with {}", annotatedClass, annotations);
     Class<Object>[] interfaces = (Class<Object>[]) annotatedClass.getInterfaces();
 
     if (interfaces.length == 0) {
@@ -108,9 +113,9 @@ public class StickyStereotypeScannerFeature
       }
       interfaces = interfaceCollection.toArray(new Class[interfaceCollection.size()]);
     }
-    
+
     bind(annotatedClass, null, Scopes.SINGLETON);
-    
+
     for (Class<Object> interf : interfaces) {
       if (interf.isAssignableFrom(TypeListener.class))
         bindListener(annotatedClass);

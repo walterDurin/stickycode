@@ -41,6 +41,10 @@ public class ConfiguredModuleTest
     when(configurationSource.hasValue("configuredTestObject.numbers")).thenReturn(true);
     when(configurationSource.getValue("configuredTestObject.bob")).thenReturn("yay");
     when(configurationSource.getValue("configuredTestObject.numbers")).thenReturn("1,5,3,7");
+    when(configurationSource.hasValue("inheritedConfiguredTestObject.bob")).thenReturn(true);
+    when(configurationSource.hasValue("inheritedConfiguredTestObject.numbers")).thenReturn(true);
+    when(configurationSource.getValue("inheritedConfiguredTestObject.bob")).thenReturn("yay");
+    when(configurationSource.getValue("inheritedConfiguredTestObject.numbers")).thenReturn("1,5,3,7");
     return new ConfigurationSourceModule(Collections.singletonList(configurationSource));
   }
 
