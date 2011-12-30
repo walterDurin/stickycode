@@ -22,6 +22,7 @@ import net.stickycode.exception.PermanentException;
  * All coercion failures are permanent as coercions should not rely on any other systems so all failures will recur.
  */
 @SuppressWarnings("serial")
+@Deprecated
 public abstract class AbstractFailedToCoerceValueException
     extends PermanentException {
 

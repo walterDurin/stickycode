@@ -12,28 +12,47 @@
  */
 package net.stickycode.coercion;
 
-import java.lang.annotation.Annotation;
-
+import java.util.Collection;
+import java.util.Map;
 
 /**
  * Contract for something that can be the target of a coercion.
- *
+ * 
  */
 public interface CoercionTarget {
 
+  /**
+   * Return the type for the target to be coerced
+   */
   Class<?> getType();
 
+  /**
+   * Is the underlying target an array
+   */
   boolean isArray();
 
-  Class<?> getComponentType();
-
-  CoercionTarget getComponentCoercionType();
-
-  CoercionTarget[] getComponentCoercionTypes();
-  
   /**
-   * Return true if this coercion target is annotated with the given metadata
+   * Does the target have components, this is true of any container e.g. {@link Collection}, {@link Map}
+   * 
    */
-  boolean hasAnnotation(Class<? extends Annotation> metadata);
+  boolean hasComponents();
 
+  /**
+   * Return the {@link CoercionTarget}s for the components.
+   * 
+   * For a collection this would return a single {@link CoercionTarget} for the element contained.
+   * 
+   * For a map you would get one for the key and one for the value.
+   */
+  CoercionTarget[] getComponentCoercionTypes();
+
+  /**
+   * Return true if this target is a primitive type
+   */
+  boolean isPrimitive();
+
+  /**
+   * If this target represents a primitive type return the boxing type for it
+   */
+  Class<?> boxedType();
 }
