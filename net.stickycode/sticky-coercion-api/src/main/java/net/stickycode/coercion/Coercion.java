@@ -13,25 +13,37 @@
 package net.stickycode.coercion;
 
 /**
- * Contract for a converter of strings to a define type.
- *
+ * Contract for a converter of strings to a defined type.
+ * 
  * @param <T> The type that can be converted to
  */
 public interface Coercion<T> {
 
   /**
    * Coerce the given string value into the type represented by this coercion.
-   *
+   * 
    * @param value The string value to convert. WILL NOT be null.
    * @return A non null string value
-   * @throws A subtype of {@link AbstractFailedToCoerceValueException} if the value was not valid
    */
-  T coerce(CoercionTarget type, String value)
-      throws AbstractFailedToCoerceValueException;
+  T coerce(CoercionTarget type, String value);
 
   /**
    * Return true if this coercion is applicable for the given target type
    */
   boolean isApplicableTo(CoercionTarget type);
 
+  /**
+   * For some coercions a default value on the coercion itself makes sense.
+   */
+  boolean hasDefaultValue();
+
+  /**
+   * In the case where there is not value already set and a String value for coercion cannot be found then this will be used.
+   */
+  T getDefaultValue();
+
+  /**
+   * Description of the coercion useful for logging
+   */
+  String toString();
 }
