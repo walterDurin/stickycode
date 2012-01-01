@@ -12,9 +12,12 @@
  */
 package net.stickycode.configured;
 
+import net.stickycode.stereotype.StickyFramework;
+
 /**
  * A repository of application {@link Configuration}'s.
  */
+@StickyFramework
 public interface ConfigurationRepository
     extends Iterable<Configuration> {
 
