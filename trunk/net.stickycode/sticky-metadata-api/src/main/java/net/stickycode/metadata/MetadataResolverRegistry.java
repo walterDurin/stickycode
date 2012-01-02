@@ -1,5 +1,6 @@
 package net.stickycode.metadata;
 
+import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
@@ -84,5 +85,14 @@ public interface MetadataResolverRegistry {
    * </ol>
    */
   ElementMetadataResolver does(Class<?> type);
+
+  /**
+   * return a resolver for the given annotation element that can resolve annotations on
+   * <ol>
+   * <li>the element itself</li>
+   * <li>any of the super elements</li>
+   * </ol>
+   */
+  MetadataResolver is(AnnotatedElement annotatedElement);
 
 }

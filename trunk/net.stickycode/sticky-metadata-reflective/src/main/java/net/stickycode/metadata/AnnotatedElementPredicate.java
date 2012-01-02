@@ -32,6 +32,10 @@ public class AnnotatedElementPredicate
   public boolean apply(Field field) {
     return isAnnotated(field);
   }
+  
+  public boolean apply(AnnotatedElement element) {
+    return isAnnotated(element);
+  }
 
   private boolean isAnnotated(AnnotatedElement element) {
     for (Class<? extends Annotation> a : annotations) {

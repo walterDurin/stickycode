@@ -1,5 +1,7 @@
 package net.stickycode.coercion.target;
 
+import java.lang.reflect.AnnotatedElement;
+
 import net.stickycode.coercion.CoercionTarget;
 import net.stickycode.coercion.Primitives;
 
@@ -66,7 +68,17 @@ public class PrimitiveResolvingCoercionTarget
   public Class<?> boxedType() {
     return Primitives.resolvePrimitive(type);
   }
+  
+  @Override
+  public boolean canBeAnnotated() {
+    return true;
+  }
 
+  @Override
+  public AnnotatedElement getAnnotatedElement() {
+    return getType();
+  }
+  
   @Override
   public String toString() {
     if (isPrimitive())

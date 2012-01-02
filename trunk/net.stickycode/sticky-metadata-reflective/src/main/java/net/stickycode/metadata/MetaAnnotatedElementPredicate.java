@@ -33,6 +33,10 @@ public class MetaAnnotatedElementPredicate
     return isMetaAnnotated(field);
   }
 
+  public boolean apply(AnnotatedElement annotatedElement) {
+    return isMetaAnnotated(annotatedElement);
+  }
+
   private boolean isMetaAnnotated(AnnotatedElement element) {
     for (Class<? extends Annotation> a : annotations) {
       if (element.isAnnotationPresent(a))
@@ -45,4 +49,5 @@ public class MetaAnnotatedElementPredicate
     }
     return false;
   }
+
 }

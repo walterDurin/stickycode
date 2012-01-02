@@ -1,5 +1,6 @@
 package net.stickycode.metadata;
 
+import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
@@ -29,6 +30,11 @@ public class ReflectiveMetadataResolverRegistry
   @Override
   public ElementMetadataResolver does(Class<?> type) {
     return new ReflectiveElementMetadataResolver(type);
+  }
+
+  @Override
+  public MetadataResolver is(AnnotatedElement annotatedElement) {
+    return new ReflectiveAnnotatedElementMetadataResolver(annotatedElement);
   }
 
 }
