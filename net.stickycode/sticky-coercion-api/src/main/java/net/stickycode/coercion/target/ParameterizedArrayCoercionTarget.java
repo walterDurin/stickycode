@@ -1,5 +1,6 @@
 package net.stickycode.coercion.target;
 
+import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.GenericArrayType;
 
 import net.stickycode.coercion.CoercionTarget;
@@ -68,5 +69,14 @@ public class ParameterizedArrayCoercionTarget
   public Class<?> boxedType() {
     throw new UnsupportedOperationException("No boxed type here, move along please");
   }
+  
+  @Override
+  public boolean canBeAnnotated() {
+    return false;
+  }
 
+  @Override
+  public AnnotatedElement getAnnotatedElement() {
+    throw new UnsupportedOperationException("Arrays cannot be annotated directly");
+  }
 }

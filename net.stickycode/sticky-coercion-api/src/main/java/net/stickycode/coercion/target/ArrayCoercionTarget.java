@@ -1,5 +1,7 @@
 package net.stickycode.coercion.target;
 
+import java.lang.reflect.AnnotatedElement;
+
 import net.stickycode.coercion.CoercionTarget;
 
 public class ArrayCoercionTarget
@@ -73,6 +75,16 @@ public class ArrayCoercionTarget
   @Override
   public String toString() {
     return "COercionTarget{" + type.getSimpleName() + "}";
+  }
+
+  @Override
+  public boolean canBeAnnotated() {
+    return false;
+  }
+
+  @Override
+  public AnnotatedElement getAnnotatedElement() {
+    throw new UnsupportedOperationException("Arrays cannot be annotated directly");
   }
 
 }

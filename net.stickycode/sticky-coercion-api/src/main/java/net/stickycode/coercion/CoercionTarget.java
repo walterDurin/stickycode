@@ -12,6 +12,7 @@
  */
 package net.stickycode.coercion;
 
+import java.lang.reflect.AnnotatedElement;
 import java.util.Collection;
 import java.util.Map;
 
@@ -55,4 +56,8 @@ public interface CoercionTarget {
    * If this target represents a primitive type return the boxing type for it
    */
   Class<?> boxedType();
+  
+  boolean canBeAnnotated();
+  
+  AnnotatedElement getAnnotatedElement();
 }

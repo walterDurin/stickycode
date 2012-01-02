@@ -1,5 +1,6 @@
 package net.stickycode.coercion.target;
 
+import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Arrays;
@@ -80,5 +81,14 @@ public class ParameterizedCoercionTarget
   public Class<?> boxedType() {
     throw new UnsupportedOperationException("No boxed type here, move along please");
   }
+  
+  @Override
+  public boolean canBeAnnotated() {
+    return true;
+  }
 
+  @Override
+  public AnnotatedElement getAnnotatedElement() {
+    return getType();
+  }
 }
