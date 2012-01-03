@@ -31,8 +31,10 @@
 		<module>sticky-stereotype</module>
 		<module>sticky-exception</module>
 		<module>sticky-coercion-api</module>
+		<module>sticky-metadata-api</module>
 		<module>sticky-reflector</module>
 		<module>sticky-coercion</module>
+		<module>sticky-metadata-reflective</module>
 		<module>sticky-resource</module>
 	</modules>
 </project>
