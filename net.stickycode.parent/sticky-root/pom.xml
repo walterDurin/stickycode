@@ -28,19 +28,19 @@
 			<uniqueVersion>false</uniqueVersion>
 			<name>Sticky Releases</name>
 			<id>sticky-releases</id>
-			<url>https://nexus.stickycode.net/content/repositories/releases</url>
+			<url>https://releases.stickycode.net</url>
 		</repository>
 		<snapshotRepository>
 			<uniqueVersion>true</uniqueVersion>
 			<name>Sticky Snapshots</name>
 			<id>sticky-snapshots</id>
-			<url>https://nexus.stickycode.net/content/repositories/snapshots</url>
+			<url>https://snapshots.stickycode.net</url>
 		</snapshotRepository>
 	</distributionManagement>
 
 	<scm>
 		<connection>scm:svn:http://stickycode.googlecode.com/svn/trunk/net.stickycode.parent/sticky-root/</connection>
-		<developerConnection>scm:svn:https://stickycode.googlecode.com/svn/trunk/net.stickycode.parent/sticky-root/</developerConnection>
+		<developerConnection>scm:svn:${sticky.source.url}/trunk/net.stickycode.parent/sticky-root/</developerConnection>
 		<url>http://code.google.com/p/stickycode/source/browse/#svn/trunk/net.stickycode.parent/sticky-root</url>
 	</scm>
 
@@ -100,7 +100,7 @@ version=1
 					<artifactId>maven-release-plugin</artifactId>
 					<version>2.2.1</version>
 					<configuration>
-						<tagBase>https://stickycode.googlecode.com/svn/tags/${project.groupId}</tagBase>
+						<tagBase>${sticky.source.url}/tags/${project.groupId}</tagBase>
 						<goals>enforcer:enforce deploy</goals>
 						<preparationGoals>enforcer:enforce clean verify</preparationGoals>
 
@@ -209,6 +209,7 @@ version=1
 		<project.build.sourceEncoding>US-ASCII</project.build.sourceEncoding>
 		<target.dir>target</target.dir>
 		<output.basedir>${basedir}</output.basedir>
+		<sticky.source.url>http://source.stickycode.net</sticky.source.url>
 	</properties>
 
 	<profiles>
@@ -228,11 +229,6 @@ version=1
 
 		<profile>
 			<id>using-ramdisk</id>
-			<activation>
-				<property>
-					<name>ramdisk.path</name>
-				</property>
-			</activation>
 			<properties>
 				<output.basedir>${ramdisk.path}/${project.groupId}/${project.artifactId}</output.basedir>
 			</properties>
