@@ -7,7 +7,7 @@
 
 	<groupId>net.stickycode.parent</groupId>
 	<artifactId>sticky-root</artifactId>
-	<version>1.21-SNAPSHOT</version>
+	<version>1.22-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>sticky-root</name>
@@ -40,7 +40,7 @@
 
 	<scm>
 		<connection>scm:svn:http://stickycode.googlecode.com/svn/trunk/net.stickycode.parent/sticky-root/</connection>
-		<developerConnection>scm:svn:${sticky.source.url}/trunk/net.stickycode.parent/sticky-root/</developerConnection>
+		<developerConnection>scm:svn:http://source.stickycode.net/trunk/net.stickycode.parent/sticky-root/</developerConnection>
 		<url>http://code.google.com/p/stickycode/source/browse/#svn/trunk/net.stickycode.parent/sticky-root</url>
 	</scm>
 
