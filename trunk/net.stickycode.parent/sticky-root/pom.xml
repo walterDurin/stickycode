@@ -28,13 +28,13 @@
 			<uniqueVersion>false</uniqueVersion>
 			<name>Sticky Releases</name>
 			<id>sticky-releases</id>
-			<url>https://releases.stickycode.net</url>
+			<url>http://releases.stickycode.net</url>
 		</repository>
 		<snapshotRepository>
 			<uniqueVersion>true</uniqueVersion>
 			<name>Sticky Snapshots</name>
 			<id>sticky-snapshots</id>
-			<url>https://snapshots.stickycode.net</url>
+			<url>http://snapshots.stickycode.net</url>
 		</snapshotRepository>
 	</distributionManagement>
 
