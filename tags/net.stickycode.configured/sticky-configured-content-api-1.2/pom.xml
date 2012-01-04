@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (c) 2011 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved. -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<parent>
+		<groupId>net.stickycode.parent</groupId>
+		<artifactId>sticky-api</artifactId>
+		<version>1.7</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>net.stickycode.configured</groupId>
+	<artifactId>sticky-configured-content-api</artifactId>
+	<version>1.2</version>
+	<packaging>jar</packaging>
+
+	<name>sticky-configured-content-api</name>
+	<description>Taking the configuration of Content out of applications, using the same principles that underly dependency injection</description>
+	<inceptionYear>2008</inceptionYear>
+	<url>http://www.StickyCode.net/configured/sticky-configured-content-api/</url>
+
+	<scm>
+		<connection>scm:svn:http://source.stickycode.net/tags/net.stickycode.configured/sticky-configured-content-api-1.2</connection>
+		<developerConnection>scm:svn:http://source.stickycode.net/tags/net.stickycode.configured/sticky-configured-content-api-1.2</developerConnection>
+		<url>scm:svn:http://source.stickycode.net/tags/net.stickycode.configured/sticky-configured-content-api-1.2</url>
+	</scm>
+
+	<dependencies>
+		<dependency>
+			<groupId>net.stickycode.configured</groupId>
+			<artifactId>sticky-configured-api</artifactId>
+			<version>[2.2,3)</version>
+		</dependency>
+		<dependency>
+			<groupId>net.stickycode</groupId>
+			<artifactId>sticky-stereotype</artifactId>
+			<version>[1.9,2)</version>
+		</dependency>
+	</dependencies>
+        <build>
+                <plugins>
+                        <plugin>
+                                <groupId>org.codehaus.mojo</groupId>
+                                <artifactId>clirr-maven-plugin</artifactId>
+                                <configuration>
+                                        <comparisonVersion>1.1</comparisonVersion>
+                                </configuration>
+                        </plugin>
+                </plugins>
+        </build>
+</project>
