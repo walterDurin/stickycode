@@ -12,6 +12,7 @@
  */
 package net.stickycode.configured.guice3;
 
+import net.stickycode.bootstrap.guice3.StickyModule;
 import net.stickycode.configured.AbstractConfiguredComponentTest;
 
 import com.google.inject.Guice;
