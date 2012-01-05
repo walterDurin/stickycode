@@ -10,18 +10,18 @@
 
 	<groupId>net.stickycode.configured</groupId>
 	<artifactId>sticky-configured</artifactId>
-	<version>3.5</version>
+	<version>3.6-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>sticky-configured</name>
+	<name>sticky-configured-3</name>
 	<description>Taking the configuration out of applications, using the same principles that underly dependency injection</description>
 	<inceptionYear>2008</inceptionYear>
 	<url>http://www.StickyCode.net/configured/sticky-configured/</url>
 
 	<scm>
-		<connection>scm:svn:http://stickycode.googlecode.com/svn/tags/net.stickycode.configured/sticky-configured-3.5</connection>
-		<developerConnection>scm:svn:https://stickycode.googlecode.com/svn/tags/net.stickycode.configured/sticky-configured-3.5</developerConnection>
-		<url>http://code.google.com/p/stickycode/source/browse/#svn/tags/net.stickycode.configured/sticky-configured-3.5</url>
+		<connection>scm:svn:http://stickycode.googlecode.com/svn/trunk/net.stickycode.configured/sticky-configured-3</connection>
+		<developerConnection>scm:svn:https://stickycode.googlecode.com/svn/trunk/net.stickycode.configured/sticky-configured-3</developerConnection>
+		<url>http://code.google.com/p/stickycode/source/browse/#svn/trunk/net.stickycode.configured/sticky-configured-3</url>
 	</scm>
 
 	<dependencies>
