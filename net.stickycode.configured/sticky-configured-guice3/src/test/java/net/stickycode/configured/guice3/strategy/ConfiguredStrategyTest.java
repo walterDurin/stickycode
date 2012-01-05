@@ -3,7 +3,7 @@ package net.stickycode.configured.guice3.strategy;
 import java.lang.reflect.Type;
 import java.util.Set;
 
-import net.stickycode.configured.guice3.StickyModule;
+import net.stickycode.bootstrap.guice3.StickyModule;
 import net.stickycode.configured.strategy.AbstractConfiguredStrategyTest;
 
 import com.google.inject.AbstractModule;
