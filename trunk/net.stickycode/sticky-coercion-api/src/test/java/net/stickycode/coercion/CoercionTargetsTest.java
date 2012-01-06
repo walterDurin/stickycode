@@ -2,16 +2,19 @@ package net.stickycode.coercion;
 
 import static org.fest.assertions.Assertions.assertThat;
 
+import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
 
 import net.stickycode.coercion.target.CoercionTargets;
+import net.stickycode.coercion.target.CoercionTargetsDoesNotRecogniseTypeException;
 import net.stickycode.reflector.Fields;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
 
+@SuppressWarnings("unused")
 public class CoercionTargetsTest {
 
   @Rule
@@ -90,6 +93,11 @@ public class CoercionTargetsTest {
     assertThat(target.getComponentCoercionTypes()).hasSize(1);
     assertThat(target.getComponentCoercionTypes()).containsOnly(
         CoercionTargets.find(Fields.find(getClass(), "plainOldList")));
+  }
+  
+  @Test(expected=CoercionTargetsDoesNotRecogniseTypeException.class)
+  public void unknownGenerics() {
+    CoercionTargets.find(new Type() {});
   }
 
   private CoercionTarget fieldTarget() {

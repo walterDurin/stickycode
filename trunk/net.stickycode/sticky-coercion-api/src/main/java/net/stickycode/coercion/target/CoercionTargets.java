@@ -3,6 +3,7 @@ package net.stickycode.coercion.target;
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Field;
 import java.lang.reflect.GenericArrayType;
+import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
@@ -35,11 +36,15 @@ public class CoercionTargets {
     if (genericType instanceof GenericArrayType)
       return new ParameterizedArrayCoercionTarget((GenericArrayType)genericType);
     
-    throw new RuntimeException("Dont' know how to deal with generic type " + genericType);
+    throw new CoercionTargetsDoesNotRecogniseTypeException(genericType);
   }
 
   public static CoercionTarget find(Field f) {
     return find(f.getGenericType(), f);
+  }
+  
+  public static CoercionTarget find(Method m) {
+    return find(m.getGenericReturnType(), m);
   }
 
 }
