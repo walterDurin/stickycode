@@ -9,9 +9,11 @@ public class PrimitiveResolvingCoercionTarget
     implements CoercionTarget {
 
   private final Class<?> type;
+  private AnnotatedElement annotatedElement;
 
-  public PrimitiveResolvingCoercionTarget(Class<?> type) {
+  public PrimitiveResolvingCoercionTarget(Class<?> type, AnnotatedElement element) {
     this.type = type;
+    this.annotatedElement = element;
   }
 
   @Override
@@ -71,12 +73,12 @@ public class PrimitiveResolvingCoercionTarget
   
   @Override
   public boolean canBeAnnotated() {
-    return true;
+    return annotatedElement != null;
   }
 
   @Override
   public AnnotatedElement getAnnotatedElement() {
-    return getType();
+    return annotatedElement;
   }
   
   @Override
