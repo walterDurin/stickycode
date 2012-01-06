@@ -11,9 +11,11 @@ public class ParameterizedCoercionTarget
     implements CoercionTarget {
 
   private ParameterizedType parameterizedType;
+  private AnnotatedElement annotatedElement;
 
-  public ParameterizedCoercionTarget(ParameterizedType genericType) {
+  public ParameterizedCoercionTarget(ParameterizedType genericType, AnnotatedElement element) {
     this.parameterizedType = genericType;
+    this.annotatedElement = element;
   }
 
   @Override
@@ -84,11 +86,11 @@ public class ParameterizedCoercionTarget
   
   @Override
   public boolean canBeAnnotated() {
-    return true;
+    return annotatedElement != null;
   }
 
   @Override
   public AnnotatedElement getAnnotatedElement() {
-    return getType();
+    return annotatedElement;
   }
 }
