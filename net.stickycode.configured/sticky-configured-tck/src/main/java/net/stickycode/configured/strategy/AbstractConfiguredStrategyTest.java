@@ -6,6 +6,7 @@ import java.lang.reflect.Field;
 
 import javax.inject.Inject;
 
+import net.stickycode.coercion.target.CoercionTargets;
 import net.stickycode.configured.ConfigurationSystem;
 import net.stickycode.configured.ConfiguredField;
 import net.stickycode.configured.strategy.ConfiguredStrategyCoercion;
@@ -21,6 +22,7 @@ public abstract class AbstractConfiguredStrategyTest {
   }
 
   protected abstract void configure(WithStrategy instance);
+  protected abstract void configure(ConfiguredStrategyCoercion instance);
 
   public static class YesStrategy
       implements Strategy {
@@ -56,9 +58,9 @@ public abstract class AbstractConfiguredStrategyTest {
   @Test
   public void applicable() throws SecurityException, NoSuchFieldException {
     Field field = WithStrategy.class.getDeclaredField("strategy");
-    ConfiguredField target = new ConfiguredField(new WithStrategy(), field);
-    assertThat(target.hasAnnotation(ConfiguredStrategy.class));
-    assertThat(new ConfiguredStrategyCoercion().isApplicableTo(target)).isTrue();
+    ConfiguredStrategyCoercion configuredStrategyCoercion = new ConfiguredStrategyCoercion();
+    configure(configuredStrategyCoercion);
+    assertThat(configuredStrategyCoercion.isApplicableTo(CoercionTargets.find(field))).isTrue();
   }
 
   @Test
