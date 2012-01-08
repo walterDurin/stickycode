@@ -5,6 +5,7 @@ import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.core.type.filter.AnnotationTypeFilter;
 
 import net.stickycode.configured.strategy.AbstractConfiguredStrategyTest;
+import net.stickycode.configured.strategy.ConfiguredStrategyCoercion;
 import net.stickycode.stereotype.StickyComponent;
 import net.stickycode.stereotype.StickyPlugin;
 
@@ -14,6 +15,15 @@ public class ConfiguredStrategyTest
 
   @Override
   protected void configure(WithStrategy instance) {
+    GenericApplicationContext c = createContext();
+
+    c.getAutowireCapableBeanFactory().autowireBean(this);
+    c.getAutowireCapableBeanFactory().autowireBean(instance);
+
+    system.configure();
+  }
+
+  private GenericApplicationContext createContext() {
     GenericApplicationContext c = new GenericApplicationContext();
 
     ClassPathBeanDefinitionScanner scanner = new ClassPathBeanDefinitionScanner(c, false);
@@ -25,11 +35,13 @@ public class ConfiguredStrategyTest
     c.getBeanFactory().registerSingleton("noStrategy", new NoStrategy());
 
     c.refresh();
-    
-    c.getAutowireCapableBeanFactory().autowireBean(this);
-    c.getAutowireCapableBeanFactory().autowireBean(instance);
-    
-    system.configure();
+    return c;
+  }
+
+  @Override
+  protected void configure(ConfiguredStrategyCoercion instance) {
+    GenericApplicationContext context = createContext();
+    context.getAutowireCapableBeanFactory().autowireBean(instance);
   }
 
 }
