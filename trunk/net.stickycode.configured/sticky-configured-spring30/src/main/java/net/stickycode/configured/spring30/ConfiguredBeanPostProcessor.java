@@ -12,14 +12,12 @@
  */
 package net.stickycode.configured.spring30;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-
 import javax.inject.Inject;
 
 import net.stickycode.configured.ConfigurationRepository;
 import net.stickycode.configured.ConfiguredConfiguration;
 import net.stickycode.configured.ConfiguredFieldProcessor;
+import net.stickycode.metadata.MetadataResolverRegistry;
 import net.stickycode.reflector.Reflector;
 import net.stickycode.stereotype.Configured;
 import net.stickycode.stereotype.ConfiguredStrategy;
@@ -37,6 +35,9 @@ public class ConfiguredBeanPostProcessor
   @Inject
   private ConfigurationRepository configurationRepository;
 
+  @Inject
+  MetadataResolverRegistry metdataResolverRegistry;
+
   @Override
   public boolean postProcessAfterInstantiation(Object bean, String beanName) throws BeansException {
     if (typeIsConfigured(bean.getClass())) {
@@ -50,23 +51,17 @@ public class ConfiguredBeanPostProcessor
   }
 
   private boolean typeIsConfigured(Class<?> type) {
-    for (Class<?> current = type; current != null; current = current.getSuperclass()) {
-      for (Field field : type.getDeclaredFields()) {
-        if (field.isAnnotationPresent(Configured.class))
-          return true;
-        
-        if (field.isAnnotationPresent(ConfiguredStrategy.class))
-          return true;
-      }
+    if (metdataResolverRegistry
+        .does(type)
+        .haveAnyFieldsMetaAnnotatedWith(Configured.class, ConfiguredStrategy.class))
+      return true;
 
-      for (Method method : type.getDeclaredMethods()) {
-        if (method.isAnnotationPresent(PreConfigured.class))
-          return true;
+    if (metdataResolverRegistry
+        .does(type)
+        .haveAnyMethodsMetaAnnotatedWith(PreConfigured.class, PostConfigured.class))
+      return true;
 
-        if (method.isAnnotationPresent(PostConfigured.class))
-          return true;
-      }
-    }
+
     return false;
   }
 
