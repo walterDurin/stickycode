@@ -12,12 +12,6 @@
  */
 package net.stickycode.configured.guice3;
 
-import com.google.inject.AbstractModule;
-import com.google.inject.Singleton;
-import com.google.inject.TypeLiteral;
-import com.google.inject.matcher.Matchers;
-import com.google.inject.multibindings.Multibinder;
-
 import net.stickycode.coercion.Coercion;
 import net.stickycode.coercion.CoercionFinder;
 import net.stickycode.coercion.Coercions;
@@ -29,6 +23,12 @@ import net.stickycode.configured.ConfigurationSystem;
 import net.stickycode.configured.ConfiguredConfigurationListener;
 import net.stickycode.configured.InlineConfigurationRepository;
 import net.stickycode.configured.SimpleNameDotFieldConfigurationKeyBuilder;
+
+import com.google.inject.AbstractModule;
+import com.google.inject.Singleton;
+import com.google.inject.TypeLiteral;
+import com.google.inject.matcher.Matchers;
+import com.google.inject.multibindings.Multibinder;
 
 public class ConfiguredModule
     extends AbstractModule {
@@ -51,10 +51,10 @@ public class ConfiguredModule
 
   // XXX So coercion needs to be '' not '<?>' as there is no way that I could figure
   // out how to actually get guice to multibind to a set of Coercion<?>
+  @SuppressWarnings("rawtypes")
   private void bindCoercions() {
-    // TypeLiteral<Coercion<?>> t = new CoercionTypeLiteral();
-    TypeLiteral<Coercion> type = TypeLiteral.get(Coercion.class);
-    Multibinder<Coercion> extensions = Multibinder.newSetBinder(binder(), type);
+    TypeLiteral<Coercion> literal = TypeLiteral.get(Coercion.class);
+    Multibinder<Coercion> extensions = Multibinder.newSetBinder(binder(), literal);
     extensions.addBinding().to(PatternCoercion.class);
     bind(CoercionFinder.class).to(Coercions.class);
   }

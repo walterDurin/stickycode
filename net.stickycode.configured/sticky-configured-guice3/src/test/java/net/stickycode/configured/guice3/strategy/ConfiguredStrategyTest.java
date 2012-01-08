@@ -5,6 +5,7 @@ import java.util.Set;
 
 import net.stickycode.bootstrap.guice3.StickyModule;
 import net.stickycode.configured.strategy.AbstractConfiguredStrategyTest;
+import net.stickycode.configured.strategy.ConfiguredStrategyCoercion;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
@@ -21,14 +22,27 @@ public class ConfiguredStrategyTest
 
   @Override
   protected void configure(WithStrategy instance) {
-    PackageFilter packageFilter = PackageFilter.create("net.stickycode");
-    Module startup = StickyModule.bootstrapModule(packageFilter);
-    Injector injector = Guice.createInjector(startup)
-        .createChildInjector(StickyModule.applicationModule(packageFilter), stategies());
+    Injector injector = createInjector();
 
     injector.injectMembers(this);
     injector.injectMembers(instance);
     system.configure();
+  }
+
+  @Override
+  protected void configure(ConfiguredStrategyCoercion instance) {
+    Injector injector = createInjector();
+
+    injector.injectMembers(this);
+    injector.injectMembers(instance);
+  }
+
+  private Injector createInjector() {
+    PackageFilter packageFilter = PackageFilter.create("net.stickycode");
+    Module startup = StickyModule.bootstrapModule(packageFilter);
+    Injector injector = Guice.createInjector(startup)
+        .createChildInjector(StickyModule.applicationModule(packageFilter), stategies());
+    return injector;
   }
 
   @SuppressWarnings("unchecked")
