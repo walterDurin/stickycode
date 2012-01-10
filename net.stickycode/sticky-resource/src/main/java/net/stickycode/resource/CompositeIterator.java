@@ -4,13 +4,13 @@ import java.util.Iterator;
 
 // TODO generalise
 public class CompositeIterator
-    implements Iterator<Resource> {
+    implements Iterator<ResourceReference> {
 
-  private Iterator<Resources> resourcesIterator;
+  private Iterator<ResourceReferences> resourcesIterator;
 
-  private Iterator<Resource> current;
+  private Iterator<ResourceReference> current;
 
-  public CompositeIterator(Iterator<Resources> iterator) {
+  public CompositeIterator(Iterator<ResourceReferences> iterator) {
     this.resourcesIterator = iterator;
   }
 
@@ -28,7 +28,7 @@ public class CompositeIterator
   }
 
   @Override
-  public Resource next() {
+  public ResourceReference next() {
     return current.next();
   }
 

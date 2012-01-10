@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class ClasspathResource
-    implements Resource {
+    implements ResourceReference {
 
   @SuppressWarnings("rawtypes")
   private final Class base;

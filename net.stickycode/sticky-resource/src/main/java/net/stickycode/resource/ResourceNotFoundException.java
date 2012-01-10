@@ -6,11 +6,11 @@ import net.stickycode.exception.PermanentException;
 public class ResourceNotFoundException
     extends PermanentException {
 
-  public ResourceNotFoundException(Resource resource) {
+  public ResourceNotFoundException(ResourceReference resource) {
     super("Resource not found at '{}'", resource.toString());
   }
 
-  public ResourceNotFoundException(Throwable e, Resource resource) {
+  public ResourceNotFoundException(Throwable e, ResourceReference resource) {
     super(e, "Resource not found at '{}'", resource.toString());
   }
 }

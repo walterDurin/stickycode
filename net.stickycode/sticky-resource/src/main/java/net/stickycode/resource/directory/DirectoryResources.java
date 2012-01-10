@@ -7,14 +7,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import net.stickycode.resource.Resource;
+import net.stickycode.resource.ResourceReference;
 import net.stickycode.resource.ResourceType;
-import net.stickycode.resource.Resources;
+import net.stickycode.resource.ResourceReferences;
 
 public class DirectoryResources
-    extends Resources {
+    extends ResourceReferences {
 
-  private final List<Resource> resources = new ArrayList<Resource>();
+  private final List<ResourceReference> resources = new ArrayList<ResourceReference>();
 
   private final File baseDirectory;
 
@@ -40,7 +40,7 @@ public class DirectoryResources
   }
 
   @Override
-  public Iterator<Resource> iterator() {
+  public Iterator<ResourceReference> iterator() {
     return resources.iterator();
   }
 

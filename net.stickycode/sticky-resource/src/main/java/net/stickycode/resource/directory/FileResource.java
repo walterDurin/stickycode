@@ -8,11 +8,11 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import net.stickycode.resource.FailedToLoadResourceException;
-import net.stickycode.resource.Resource;
+import net.stickycode.resource.ResourceReference;
 import net.stickycode.resource.ResourceNotFoundException;
 
 public class FileResource
-    implements Resource {
+    implements ResourceReference {
 
   private final File file;
 

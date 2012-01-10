@@ -22,7 +22,7 @@ public class FailedToLoadResourceException
     extends PermanentException {
   
 
-  public FailedToLoadResourceException(IOException e, Resource resource) {
+  public FailedToLoadResourceException(IOException e, ResourceReference resource) {
     super(e, "Failed to load resource {}", resource);
   }
 

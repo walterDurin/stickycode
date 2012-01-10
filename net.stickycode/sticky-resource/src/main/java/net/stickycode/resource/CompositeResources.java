@@ -5,12 +5,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class CompositeResources
-    extends Resources {
+    extends ResourceReferences {
 
-  private List<Resources> resources = new LinkedList<Resources>();
+  private List<ResourceReferences> resources = new LinkedList<ResourceReferences>();
 
   @Override
-  public Iterator<Resource> iterator() {
+  public Iterator<ResourceReference> iterator() {
     return new CompositeIterator(resources.iterator());
   }
 
@@ -19,7 +19,7 @@ public class CompositeResources
     return null;
   }
 
-  public void add(Resources r) {
+  public void add(ResourceReferences r) {
     resources.add(r);
   }
 
