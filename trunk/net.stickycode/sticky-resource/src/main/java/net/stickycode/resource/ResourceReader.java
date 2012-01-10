@@ -25,11 +25,11 @@ public class ResourceReader {
 
   private Logger log = LoggerFactory.getLogger(ResourceReader.class);
 
-  private final Resource resource;
+  private final ResourceReference resource;
 
   private final Charset charset;
 
-  public ResourceReader(Resource resource) {
+  public ResourceReader(ResourceReference resource) {
     this.resource = resource;
     this.charset = Charset.forName("UTF-8");
   }

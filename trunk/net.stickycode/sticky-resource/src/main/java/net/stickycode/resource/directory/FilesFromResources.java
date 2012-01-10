@@ -3,8 +3,8 @@ package net.stickycode.resource.directory;
 import java.io.File;
 import java.util.Iterator;
 
-import net.stickycode.resource.Resource;
-import net.stickycode.resource.Resources;
+import net.stickycode.resource.ResourceReference;
+import net.stickycode.resource.ResourceReferences;
 
 public class FilesFromResources
     implements Iterable<File> {
@@ -12,9 +12,9 @@ public class FilesFromResources
   public class FileIterator
       implements Iterator<File> {
 
-    private final Iterator<Resource> delegate;
+    private final Iterator<ResourceReference> delegate;
 
-    public FileIterator(Iterator<Resource> delegate) {
+    public FileIterator(Iterator<ResourceReference> delegate) {
       super();
       this.delegate = delegate;
     }
@@ -35,9 +35,9 @@ public class FilesFromResources
     }
   }
 
-  private final Resources resources;
+  private final ResourceReferences resources;
 
-  public FilesFromResources(Resources resources) {
+  public FilesFromResources(ResourceReferences resources) {
     super();
     this.resources = resources;
   }
