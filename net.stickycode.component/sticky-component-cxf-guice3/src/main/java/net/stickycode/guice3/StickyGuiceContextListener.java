@@ -15,9 +15,9 @@ package net.stickycode.guice3;
 import java.util.logging.LogManager;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
 
 import net.stickycode.configured.ConfigurationSystem;
 import net.stickycode.configured.guice3.StickyModule;
@@ -36,12 +36,14 @@ import com.google.inject.Injector;
 import com.google.inject.Module;
 import com.google.inject.Provider;
 import com.google.inject.Stage;
+import com.google.inject.servlet.ExplicitBindingsFixitModule;
+import com.google.inject.servlet.GuiceServletContextListener;
 import com.google.inject.servlet.ServletModule;
 
 import de.devsurf.injection.guice.scanner.PackageFilter;
 
 public class StickyGuiceContextListener
-    implements ServletContextListener {
+    extends GuiceServletContextListener {
 
   static {
     java.util.logging.Logger util = LogManager.getLogManager().getLogger("");
@@ -50,12 +52,31 @@ public class StickyGuiceContextListener
     SLF4JBridgeHandler.install();
   }
 
-  private final static String INJECTOR_ATTRIBUTE = Injector.class.getName();
-
   private Logger log = LoggerFactory.getLogger(StickyGuiceContextListener.class);
 
   @Inject
-  ConfigurationSystem configuration;
+  private ConfigurationSystem configuration;
+
+  @Inject
+  private Injector injector;
+
+  private PackageFilter[] packageFilters;
+
+  @Override
+  public void contextInitialized(ServletContextEvent servletContextEvent) {
+    ServletContext servletContext = servletContextEvent.getServletContext();
+    // save the packages to scan from servlet init params
+    // so we can create the injector from them
+    // it seems a bit short sighted that the getInjector template method does not pass in the context
+    initialisePackagesToScan(servletContext);
+    super.contextInitialized(servletContextEvent);
+    configure();
+  }
+
+  @Override
+  protected Injector getInjector() {
+    return getInjector(packageFilters);
+  }
 
   protected Injector getInjector(PackageFilter[] packageFilters) {
     log.info("building injector");
@@ -65,6 +86,7 @@ public class StickyGuiceContextListener
         StickyModule.keyBuilderModule(), cxfModule())
         .createChildInjector(
             StickyModule.applicationModule(packageFilters),
+            new ExplicitBindingsFixitModule(),
             servletModule()
         );
     injector.injectMembers(this);
@@ -72,27 +94,19 @@ public class StickyGuiceContextListener
     return injector;
   }
 
-  @Override
-  public void contextInitialized(ServletContextEvent servletContextEvent) {
-    final ServletContext servletContext = servletContextEvent.getServletContext();
-    createInjector(servletContext);
-    configure();
-  }
-
-  protected void createInjector(final ServletContext servletContext) {
-    Injector injector = getInjector(createApplicationPackage(servletContext));
-    servletContext.setAttribute(INJECTOR_ATTRIBUTE, injector);
+  protected void initialisePackagesToScan(ServletContext servletContext) {
+    packageFilters = createApplicationPackage(servletContext);
   }
 
   protected PackageFilter[] createApplicationPackage(ServletContext servletContext) {
     String packageList = servletContext.getInitParameter("sticky-application-packages");
     if (packageList == null) {
-      log.warn("sticky-application-package was not set, as a result no packages other than core stickycode packages will be scanned");
+      log.warn("Only scanning from root net.stickycode. Set sticky-application-package to include the other scan roots for your application");
       return new PackageFilter[] { PackageFilter.create("net.stickycode") };
     }
 
     String[] packages = packageList.split(",");
-    log.debug("scanning {} for components", packages);
+    log.info("scanning for these roots {} for components", packages);
     PackageFilter[] filters = new PackageFilter[packages.length + 1];
     filters[0] = PackageFilter.create("net.stickycode");
     for (int i = 0; i < packages.length; i++) {
@@ -102,15 +116,13 @@ public class StickyGuiceContextListener
   }
 
   void configure() {
-    log.info("configuring");
+    log.info("context is initialised now configuring application");
     configuration.configure();
-    log.info("configured");
+    log.info("configuration has been completed");
   }
 
   public void contextDestroyed(ServletContextEvent servletContextEvent) {
-    ServletContext servletContext = servletContextEvent.getServletContext();
-    Injector injector = (Injector) servletContextEvent.getServletContext().getAttribute(INJECTOR_ATTRIBUTE);
-    servletContext.removeAttribute(INJECTOR_ATTRIBUTE);
+    super.contextDestroyed(servletContextEvent);
     shutdown(injector);
   }
 
@@ -123,14 +135,14 @@ public class StickyGuiceContextListener
 
       @Override
       protected void configure() {
-        bind(StickyCxfServlet.class).asEagerSingleton();
+        bind(StickyCxfServlet.class).in(Singleton.class);
         bind(Bus.class).toProvider(new Provider<Bus>() {
 
           @Override
           public Bus get() {
             return BusFactory.newInstance().createBus();
           }
-        }).asEagerSingleton();
+        }).in(Singleton.class);
       }
     };
   }

@@ -55,7 +55,7 @@
 		<dependency>
 			<groupId>net.stickycode.configured</groupId>
 			<artifactId>sticky-configured-guice3</artifactId>
-			<version>[1.7,2)</version>
+			<version>[1.12,2)</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.inject.extensions</groupId>
