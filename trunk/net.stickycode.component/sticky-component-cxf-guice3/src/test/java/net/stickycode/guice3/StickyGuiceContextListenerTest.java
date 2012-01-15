@@ -15,9 +15,11 @@ package net.stickycode.guice3;
 import static org.mockito.Mockito.when;
 
 import javax.servlet.ServletContext;
+import javax.servlet.ServletContextEvent;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
@@ -27,23 +29,36 @@ public class StickyGuiceContextListenerTest {
   @Mock
   private ServletContext context;
 
+  @InjectMocks
+  StickyGuiceContextListener l = new StickyGuiceContextListener();
+
+  @Mock
+  private ServletContextEvent event;
+
   @Test
   public void notSet() {
-    StickyGuiceContextListener l = new StickyGuiceContextListener();
-    l.createInjector(context);
+    l.initialisePackagesToScan(context);
+    l.getInjector();
   }
 
   @Test
   public void singlePackage() {
-    StickyGuiceContextListener l = new StickyGuiceContextListener();
     when(context.getInitParameter("sticky-application-packages")).thenReturn("net.stickycode.other");
-    l.createInjector(context);
+    l.initialisePackagesToScan(context);
+    l.getInjector();
   }
 
   @Test
   public void multiplePackage() {
-    StickyGuiceContextListener l = new StickyGuiceContextListener();
     when(context.getInitParameter("sticky-application-packages")).thenReturn("net.stickycode.other,org.mockwire.other");
-    l.createInjector(context);
+    l.initialisePackagesToScan(context);
+    l.getInjector();
+  }
+  
+  @Test
+  public void init() {
+    when(event.getServletContext()).thenReturn(context);
+    when(context.getInitParameter("sticky-application-packages")).thenReturn("net.stickycode.other,org.mockwire.other");
+    l.contextInitialized(event);
   }
 }
