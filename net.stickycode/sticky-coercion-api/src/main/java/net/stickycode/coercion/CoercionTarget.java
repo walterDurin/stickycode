@@ -56,8 +56,13 @@ public interface CoercionTarget {
    * If this target represents a primitive type return the boxing type for it
    */
   Class<?> boxedType();
-  
+
   boolean canBeAnnotated();
-  
+
   AnnotatedElement getAnnotatedElement();
+
+  /**
+   * Return the owning type of the target, for a method this is the class the method was found on similarly for fields.
+   */
+  Class<?> getOwner();
 }
