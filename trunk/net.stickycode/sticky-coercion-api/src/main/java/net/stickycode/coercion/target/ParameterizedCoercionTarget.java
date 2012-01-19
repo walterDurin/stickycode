@@ -12,10 +12,12 @@ public class ParameterizedCoercionTarget
 
   private ParameterizedType parameterizedType;
   private AnnotatedElement annotatedElement;
+  private Class<?> owner;
 
-  public ParameterizedCoercionTarget(ParameterizedType genericType, AnnotatedElement element) {
+  public ParameterizedCoercionTarget(ParameterizedType genericType, AnnotatedElement element, Class<?> owner) {
     this.parameterizedType = genericType;
     this.annotatedElement = element;
+    this.owner = owner;
   }
 
   @Override
@@ -92,5 +94,10 @@ public class ParameterizedCoercionTarget
   @Override
   public AnnotatedElement getAnnotatedElement() {
     return annotatedElement;
+  }
+
+  @Override
+  public Class<?> getOwner() {
+    return owner;
   }
 }

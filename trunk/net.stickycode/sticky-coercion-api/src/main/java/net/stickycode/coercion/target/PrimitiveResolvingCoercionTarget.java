@@ -9,11 +9,16 @@ public class PrimitiveResolvingCoercionTarget
     implements CoercionTarget {
 
   private final Class<?> type;
+
   private AnnotatedElement annotatedElement;
 
-  public PrimitiveResolvingCoercionTarget(Class<?> type, AnnotatedElement element) {
+  private final Class<?> owner;
+
+  public PrimitiveResolvingCoercionTarget(Class<?> type, AnnotatedElement annotatedElement, Class<?> owner) {
+    super();
     this.type = type;
-    this.annotatedElement = element;
+    this.annotatedElement = annotatedElement;
+    this.owner = owner;
   }
 
   @Override
@@ -70,7 +75,7 @@ public class PrimitiveResolvingCoercionTarget
   public Class<?> boxedType() {
     return Primitives.resolvePrimitive(type);
   }
-  
+
   @Override
   public boolean canBeAnnotated() {
     return annotatedElement != null;
@@ -80,7 +85,12 @@ public class PrimitiveResolvingCoercionTarget
   public AnnotatedElement getAnnotatedElement() {
     return annotatedElement;
   }
-  
+
+  @Override
+  public Class<?> getOwner() {
+    return owner;
+  }
+
   @Override
   public String toString() {
     if (isPrimitive())

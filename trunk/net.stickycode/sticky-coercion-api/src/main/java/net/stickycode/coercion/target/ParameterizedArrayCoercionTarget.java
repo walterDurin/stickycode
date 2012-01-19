@@ -79,4 +79,9 @@ public class ParameterizedArrayCoercionTarget
   public AnnotatedElement getAnnotatedElement() {
     throw new UnsupportedOperationException("Arrays cannot be annotated directly");
   }
+
+  @Override
+  public Class<?> getOwner() {
+    throw new UnsupportedOperationException("Owner not implemented");
+  }
 }

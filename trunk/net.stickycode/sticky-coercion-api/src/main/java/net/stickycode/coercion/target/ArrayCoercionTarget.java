@@ -8,13 +8,15 @@ public class ArrayCoercionTarget
     implements CoercionTarget {
 
   private final Class<?> type;
+  private final Class<?> owner;
 
-  public ArrayCoercionTarget(Class<?> type) {
+  public ArrayCoercionTarget(Class<?> type, Class<?> owner) {
     super();
     if (!type.isArray())
       throw new ArrayCoercionTargetsMustTargetArraysException(type);
 
     this.type = type;
+    this.owner = owner;
   }
 
   @Override
@@ -85,6 +87,11 @@ public class ArrayCoercionTarget
   @Override
   public AnnotatedElement getAnnotatedElement() {
     throw new UnsupportedOperationException("Arrays cannot be annotated directly");
+  }
+
+  @Override
+  public Class<?> getOwner() {
+    return owner;
   }
 
 }
