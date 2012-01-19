@@ -10,7 +10,7 @@
 
 	<groupId>net.stickycode.mockwire</groupId>
 	<artifactId>sticky-mockwire-api</artifactId>
-	<version>5.6-SNAPSHOT</version>
+	<version>6.1-SNAPSHOT</version>
 
 	<name>sticky-mockwire-api</name>
 	<description>Metadata and interfaces for providing a mechnism for using a test class as the manifest for isolating the context of a test. Thereby using the same di mechanism you would expect in production but fully controlled to isolate the variable under test.</description>
@@ -27,12 +27,12 @@
 		<dependency>
 			<groupId>net.stickycode</groupId>
 			<artifactId>sticky-stereotype</artifactId>
-			<version>[1.5,2)</version>
+			<version>[1.13,2)</version>
 		</dependency>
 		<dependency>
 			<groupId>net.stickycode.configured</groupId>
 			<artifactId>sticky-configured-api</artifactId>
-			<version>[2.2,3)</version>
+			<version>[3.1,4)</version>
 		</dependency>
 	</dependencies>
 </project>
