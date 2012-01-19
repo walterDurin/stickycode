@@ -12,8 +12,8 @@
  */
 package net.stickycode.mockwire.guice3;
 
-import static net.stickycode.configured.guice3.StickyModule.bootstrapModule;
-import static net.stickycode.configured.guice3.StickyModule.keyBuilderModule;
+import static net.stickycode.bootstrap.guice3.StickyModule.bootstrapModule;
+import static net.stickycode.bootstrap.guice3.StickyModule.keyBuilderModule;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +21,7 @@ import java.util.List;
 import net.stickycode.configured.ConfigurationSource;
 import net.stickycode.configured.ConfigurationSystem;
 import net.stickycode.configured.guice3.ConfigurationSourceModule;
-import net.stickycode.configured.guice3.StickyModule;
+import net.stickycode.bootstrap.guice3.StickyModule;
 import net.stickycode.guice3.jsr250.Jsr250Module;
 import net.stickycode.mockwire.IsolatedTestManifest;
 import net.stickycode.mockwire.MissingBeanException;
@@ -123,9 +123,10 @@ public class GuiceIsolatedTestManifest
     this.configurationSources = configurationSources;
     if (packageFilters == null)
       packageFilters = new ArrayList<PackageFilter>();
-     packageFilters.add(PackageFilter.create("net.stickycode.coercion"));
-     packageFilters.add(PackageFilter.create("net.stickycode.configured"));
-     packageFilters.add(PackageFilter.create("net.stickycode.guice3"));
+    packageFilters.add(PackageFilter.create("net.stickycode.coercion"));
+    packageFilters.add(PackageFilter.create("net.stickycode.configured"));
+    packageFilters.add(PackageFilter.create("net.stickycode.guice3"));
+    packageFilters.add(PackageFilter.create("net.stickycode.metadata"));
   }
 
   @Override
