@@ -127,6 +127,7 @@ public class GuiceIsolatedTestManifest
     packageFilters.add(PackageFilter.create("net.stickycode.configured"));
     packageFilters.add(PackageFilter.create("net.stickycode.guice3"));
     packageFilters.add(PackageFilter.create("net.stickycode.metadata"));
+    packageFilters.add(PackageFilter.create("net.stickycode.resource"));
   }
 
   @Override
