@@ -178,7 +178,13 @@ public class SpringIsolatedTestManifest
   @Override
   public void registerConfiguationSystem(List<ConfigurationSource> configurationSources) {
     ClassPathBeanDefinitionScanner scanner = createScanner();
-    scanner.scan("net.stickycode.configured", "net.stickycode.coercion", "net.stickycode.spring30", "net.stickycode.metadata");
+    scanner.scan(
+        "net.stickycode.configured",
+        "net.stickycode.coercion",
+        "net.stickycode.spring30",
+        "net.stickycode.resource",
+        "net.stickycode.metadata"
+        );
 
     for (ConfigurationSource configurationSource : configurationSources) {
       registerBean(name(configurationSource.getClass()), configurationSource, ConfigurationSource.class);
@@ -195,7 +201,7 @@ public class SpringIsolatedTestManifest
   private String name(Class<?> type) {
     return Introspector.decapitalize(type.getSimpleName());
   }
-  
+
   @Override
   public void configure() {
     context.getBean(ConfigurationSystem.class).configure();
