@@ -45,5 +45,10 @@
 			<artifactId>sticky-resource-api</artifactId>
 			<version>[1,2)</version>
 		</dependency>
+		<dependency>
+			<groupId>net.stickycode</groupId>
+			<artifactId>sticky-coercion-api</artifactId>
+			<version>[3.3,4)</version>
+		</dependency>
 	</dependencies>
 </project>

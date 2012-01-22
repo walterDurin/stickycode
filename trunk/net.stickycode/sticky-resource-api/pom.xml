@@ -43,6 +43,11 @@
 			<version>[1.7,2)</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>net.stickycode</groupId>
+			<artifactId>sticky-coercion-api</artifactId>
+			<version>[3.3,4)</version>
+		</dependency>
 	</dependencies>
 <!--
 	<build>

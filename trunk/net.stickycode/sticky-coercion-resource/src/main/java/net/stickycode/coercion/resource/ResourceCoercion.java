@@ -26,30 +26,9 @@ public class ResourceCoercion
   @Override
   public Resource<Object> coerce(CoercionTarget type, String value) {
     ResourceSpecification specification = new ResourceSpecification(type.getOwner(), value);
-    // if protocol is classpath
-    // ResourceReference = new ClasspathResourceReference(root, specification.getUri());
     ResourceProtocol protocol = protocols.find(specification.getProtocol());
-    // if scheme is ondemand or default
-    // return new OndemandResource<String>(reference);
-    ResourceCodec<?> codec = codecs.find(type.getComponentCoercionTypes()[0].getType());
-    Object object = codec.load(protocol.getInputStream(specification));
+    ResourceCodec<?> codec = codecs.find(type.getComponentCoercionTypes()[0]);
     return new SingletonResource<Object>(codec, protocol, specification);
-    // ResourceFactory factory = factories.find(type, specification);
-    // return factory.create(reference);
-    // return new Resource<Object>() {
-    //
-    // @Override
-    // public Object get() {
-    // return "hmm";
-    // }
-    //
-    // };
-    // ResourceType resourceType = ResourceTypes.find(type.getComponentCoercionTypes()[0]);
-    // int firstColon = value.indexOf(':');
-    // if (firstColon == -1)
-    // return (ResourceLoader<T>) new StringResourceLoader(new ClasspathResource(type.getOwner(), value));
-    //
-    // return null;//factory.create(value);
   }
 
   @Override
