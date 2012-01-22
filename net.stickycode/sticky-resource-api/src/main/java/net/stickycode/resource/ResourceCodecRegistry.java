@@ -1,9 +1,11 @@
 package net.stickycode.resource;
 
+import net.stickycode.coercion.CoercionTarget;
+
 
 
 public interface ResourceCodecRegistry {
 
-  ResourceCodec<?> find(Class<?> class1);
+  ResourceCodec<?> find(CoercionTarget coercionTarget);
 
 }

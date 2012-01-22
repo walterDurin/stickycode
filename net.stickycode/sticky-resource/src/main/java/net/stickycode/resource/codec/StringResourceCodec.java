@@ -7,19 +7,22 @@ import java.io.OutputStream;
 import java.io.Reader;
 import java.nio.charset.Charset;
 
+import net.stickycode.coercion.CoercionTarget;
 import net.stickycode.resource.ResourceCodec;
 import net.stickycode.stereotype.Configured;
+import net.stickycode.stereotype.component.StickyExtension;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@StickyExtension
 public class StringResourceCodec
     implements ResourceCodec<String> {
 
   private Logger log = LoggerFactory.getLogger(getClass());
-  
+
   @Configured
-  private int bufferSize = 2048;
+  private Integer bufferSize = 2048;
 
   @Override
   public String load(InputStream in) {
@@ -56,19 +59,24 @@ public class StringResourceCodec
     int count = reader.read(buffer);
     if (count < bufferSize)
       return new String(buffer, 0, count);
-    
+
     StringBuilder out = new StringBuilder();
-    
+
     while (count > 0) {
       out.append(buffer, 0, count);
       count = reader.read(buffer);
     }
-    
+
     return out.toString();
   }
 
   protected void append(StringBuilder out, String line) {
     out.append("\n").append(line);
+  }
+
+  @Override
+  public boolean isApplicableTo(CoercionTarget type) {
+    return type.getType().isAssignableFrom(String.class);
   }
 
 }
