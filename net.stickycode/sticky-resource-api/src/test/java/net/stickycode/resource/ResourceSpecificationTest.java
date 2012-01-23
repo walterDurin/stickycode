@@ -25,8 +25,10 @@ public class ResourceSpecificationTest {
   public void classpath() {
     assertThat(new ResourceSpecification(getClass(), "a").getProtocol()).isEqualTo("classpath");
     assertThat(new ResourceSpecification(getClass(), "a").getPath()).isEqualTo("a");
+    assertThat(new ResourceSpecification(getClass(), "::a").getPath()).isEqualTo("a");
     assertThat(new ResourceSpecification(getClass(), "classpath://a").getProtocol()).isEqualTo("classpath");
     assertThat(new ResourceSpecification(getClass(), "classpath://a").getPath()).isEqualTo("a");
+    assertThat(new ResourceSpecification(getClass(), "::classpath://a").getPath()).isEqualTo("a");
   }
 
   @Test
