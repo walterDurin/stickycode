@@ -13,5 +13,5 @@ public interface ResourceCodec<T> {
   void store(T resource, OutputStream target);
 
   boolean isApplicableTo(CoercionTarget type);
-
+  
 }
