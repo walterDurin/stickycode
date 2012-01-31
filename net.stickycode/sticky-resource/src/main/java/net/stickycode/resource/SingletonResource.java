@@ -7,8 +7,9 @@ public class SingletonResource<T>
 
   private T loadedResource;
 
+  @SuppressWarnings("unchecked")
   public SingletonResource(ResourceCodec<?> codec, ResourceProtocol protocol, ResourceSpecification specification) {
-    this.loadedResource = (T) codec.load(protocol.getInputStream(specification));
+    this.loadedResource = (T) codec.load(protocol.getInputStream(specification), specification.getResourceTarget());
   }
 
   @Override

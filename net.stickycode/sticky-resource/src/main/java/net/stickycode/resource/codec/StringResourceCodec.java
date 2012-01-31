@@ -25,12 +25,12 @@ public class StringResourceCodec
   private Integer bufferSize = 2048;
 
   @Override
-  public String load(InputStream in) {
+  public String load(InputStream in, CoercionTarget target) {
     return asString(in);
   }
 
   @Override
-  public void store(String resource, OutputStream out) {
+  public void store(CoercionTarget sourceType, String resource, OutputStream out) {
     throw new UnsupportedOperationException("Not implemented");
   }
 

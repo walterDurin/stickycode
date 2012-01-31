@@ -13,18 +13,14 @@ public class StickyResourceCodecRegistry
 
   @SuppressWarnings("rawtypes")
   @Inject
-  private Set<ResourceCodecFactory> codecFactories;
-
-  @SuppressWarnings("rawtypes")
-  @Inject
   private Set<ResourceCodec> codecs;
 
   @Override
   public ResourceCodec<?> find(CoercionTarget type) {
-    for (ResourceCodecFactory<?> r : codecFactories) {
-      if (r.isApplicableTo(type))
-        return r.create(type);
-    }
+//    for (ResourceCodecFactory<?> r : codecFactories) {
+//      if (r.isApplicableTo(type))
+//        return r.create(type);
+//    }
     for (ResourceCodec<?> r : codecs) {
       if (r.isApplicableTo(type))
         return r;
