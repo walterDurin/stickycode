@@ -14,7 +14,7 @@ public class PropertiesResourceCodec
     implements ResourceCodec<Properties> {
 
   @Override
-  public Properties load(InputStream input) {
+  public Properties load(InputStream input, CoercionTarget targetType) {
     try {
       Properties p = new Properties();
       p.load(input);
@@ -26,7 +26,7 @@ public class PropertiesResourceCodec
   }
 
   @Override
-  public void store(Properties resource, OutputStream outputStream) {
+  public void store(CoercionTarget sourceType, Properties resource, OutputStream outputStream) {
     try {
       resource.store(outputStream, getClass().getName());
     }

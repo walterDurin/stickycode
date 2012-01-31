@@ -3,7 +3,7 @@ package net.stickycode.resource.codec;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import javax.xml.bind.JAXBContext;
+import javax.inject.Inject;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
@@ -12,49 +12,55 @@ import javax.xml.transform.stream.StreamSource;
 
 import net.stickycode.coercion.CoercionTarget;
 import net.stickycode.resource.ResourceCodec;
+import net.stickycode.stereotype.component.StickyExtension;
+import net.stickycode.xml.jaxb.JaxbFactory;
 
-public class JaxbResourceCodec
-    implements ResourceCodec<Object> {
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-  private JAXBContext context;
+@StickyExtension
+public class JaxbResourceCodec<T>
+    implements ResourceCodec<T> {
 
-  private Class<?> type;
+  private Logger log = LoggerFactory.getLogger(getClass());
 
-  public JaxbResourceCodec(Class<?> type) {
-    this.type = type;
-    try {
-      this.context = JAXBContext.newInstance(type);
-    }
-    catch (JAXBException e) {
-      throw new RuntimeException(e);
-    }
-  }
+  @Inject
+  private JaxbFactory jaxbFactory;
 
   @Override
-  public void store(Object resource, OutputStream outputStream) {
+  public void store(CoercionTarget sourceType, T resource, OutputStream outputStream) {
     try {
-      Marshaller m = context.createMarshaller();
+      log.debug("storing {} of type {}", resource, sourceType);
+      Marshaller m = jaxbFactory.createMarshaller(sourceType);
       m.marshal(resource, outputStream);
     }
     catch (JAXBException e) {
-      throw new RuntimeException(e);
+      throw new ResourceEncodingFailureException(e, sourceType, this);
     }
   }
 
   @Override
-  public Object load(InputStream source) {
+  public T load(InputStream source, CoercionTarget resourceTarget) {
+    log.debug("loading {}", resourceTarget);
+    @SuppressWarnings("unchecked")
+    Class<T> type = (Class<T>) resourceTarget.getType();
     try {
-      Unmarshaller u = context.createUnmarshaller();
+      Unmarshaller u = jaxbFactory.createUnmarshaller(resourceTarget);
       return u.unmarshal(new StreamSource(source), type).getValue();
     }
     catch (JAXBException e) {
-      throw new RuntimeException(e);
+      throw new ResourceDecodingFailureException(e, type, this);
     }
   }
 
   @Override
   public boolean isApplicableTo(CoercionTarget type) {
     return type.getType().isAnnotationPresent(XmlRootElement.class);
+  }
+
+  @Override
+  public String toString() {
+    return getClass().getSimpleName();
   }
 
 }

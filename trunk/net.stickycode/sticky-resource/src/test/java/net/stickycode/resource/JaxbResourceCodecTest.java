@@ -1,4 +1,4 @@
-package net.stickycode.resource;
+ package net.stickycode.resource;
 
 import static org.fest.assertions.Assertions.assertThat;
 
@@ -8,18 +8,16 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import net.stickycode.coercion.CoercionTarget;
 import net.stickycode.coercion.target.CoercionTargets;
-import net.stickycode.resource.codec.JaxbElementResourceCodec;
+import net.stickycode.resource.codec.JaxbResourceCodec;
 import net.stickycode.resource.codec.ResourceDecodingFailureException;
 import net.stickycode.resource.codec.ResourceEncodingFailureException;
 import net.stickycode.xml.jaxb.JaxbFactory;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -27,17 +25,10 @@ import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
-public class JaxbElementResourceCodecTest {
+public class JaxbResourceCodecTest {
 
-  @XmlType
-  public static class Bean {
-
-    @XmlAttribute(required = true)
-    String field;
-  }
-
-  @XmlType(namespace = "xxx")
-  public static class NamespacedBean {
+  @XmlRootElement
+  public static class RootBean {
 
     @XmlElement(required = true)
     String field;
@@ -47,38 +38,29 @@ public class JaxbElementResourceCodecTest {
   JaxbFactory factory = new JaxbFactory();
 
   @InjectMocks
-  JaxbElementResourceCodec<Object> codec = new JaxbElementResourceCodec<Object>();
+  JaxbResourceCodec<Object> codec = new JaxbResourceCodec<Object>();
 
   private Charset charset = Charset.forName("UTF-8");
 
   @Test
-  public void cycleBean() {
-    Bean bean = new Bean();
+  public void cycleRootBean() {
+    RootBean bean = new RootBean();
     bean.field = "blah";
-    Bean rehydrated = cycle(bean, Bean.class);
-    assertThat(rehydrated.field).isEqualTo("blah");
-  }
-
-  @Test
-  @Ignore("Namespacing is hard... come back to it")
-  public void cycleNamespaceBean() {
-    NamespacedBean bean = new NamespacedBean();
-    bean.field = "blah";
-    NamespacedBean rehydrated = cycle(bean, NamespacedBean.class);
+    RootBean rehydrated = cycle(bean, RootBean.class);
     assertThat(rehydrated.field).isEqualTo("blah");
   }
 
   @Test(expected = ResourceEncodingFailureException.class)
   public void invalidBeanEncoding() {
-    Bean bean = new Bean();
-    Bean rehydrated = cycle(bean, Bean.class);
+    RootBean bean = new RootBean();
+    RootBean rehydrated = cycle(bean, RootBean.class);
     assertThat(rehydrated.field).isEqualTo("blah");
   }
 
   @Test(expected = ResourceDecodingFailureException.class)
   public void invalidBeanDecoding() {
-    load(Bean.class, new ByteArrayInputStream(
-        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><bean/>".getBytes(charset)));
+    RootBean rehydrated = load(RootBean.class, new ByteArrayInputStream(
+        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><rootBean/>".getBytes(charset)));
   }
 
   @SuppressWarnings("unchecked")
