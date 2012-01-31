@@ -1,23 +1,20 @@
 package net.stickycode.resource;
 
+import net.stickycode.coercion.CoercionTarget;
+
 public class ResourceSpecification {
 
   private String path;
 
   private String protocol;
 
-  private String type;
+  private CoercionTarget target;
 
-  /**
-   * The context the resource is being used in. Relevant mostly for classloading
-   */
-  private Class<?> context;
-
-  public ResourceSpecification(Class<?> context, String value) {
+  public ResourceSpecification(CoercionTarget context, String value) {
     if (null == context)
-      throw new NullPointerException("Resource specificiations must have a context");
+      throw new NullPointerException("Resource specificiations must have a target");
 
-    this.context = context;
+    this.target = context;
     
     if (null == value)
       throw new NullPointerException("Resource specifications cannot be null");
@@ -59,7 +56,12 @@ public class ResourceSpecification {
   }
 
   public Class<?> getContext() {
-    return context;
+    return target.getOwner();
+  }
+  
+  public CoercionTarget getResourceTarget() {
+    // there is always one, Resource<T>
+    return target.getComponentCoercionTypes()[0];
   }
 
 }
