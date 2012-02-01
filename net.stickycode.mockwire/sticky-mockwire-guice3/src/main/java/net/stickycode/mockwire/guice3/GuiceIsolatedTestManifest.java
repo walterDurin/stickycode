@@ -123,11 +123,7 @@ public class GuiceIsolatedTestManifest
     this.configurationSources = configurationSources;
     if (packageFilters == null)
       packageFilters = new ArrayList<PackageFilter>();
-    packageFilters.add(PackageFilter.create("net.stickycode.coercion"));
-    packageFilters.add(PackageFilter.create("net.stickycode.configured"));
-    packageFilters.add(PackageFilter.create("net.stickycode.guice3"));
-    packageFilters.add(PackageFilter.create("net.stickycode.metadata"));
-    packageFilters.add(PackageFilter.create("net.stickycode.resource"));
+    packageFilters.add(PackageFilter.create("net.stickycode"));
   }
 
   @Override
