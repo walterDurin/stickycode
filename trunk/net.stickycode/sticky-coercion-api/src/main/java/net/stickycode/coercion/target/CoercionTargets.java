@@ -26,7 +26,7 @@ public class CoercionTargets {
     return find(genericType, null, null);
   }
 
-  private static CoercionTarget find(Type genericType, AnnotatedElement element, Class<?> owner) {
+  static CoercionTarget find(Type genericType, AnnotatedElement element, Class<?> owner) {
     if (genericType instanceof Class)
       return find((Class<?>) genericType, element, owner);
 

@@ -11,7 +11,9 @@ public class ParameterizedCoercionTarget
     implements CoercionTarget {
 
   private ParameterizedType parameterizedType;
+
   private AnnotatedElement annotatedElement;
+
   private Class<?> owner;
 
   public ParameterizedCoercionTarget(ParameterizedType genericType, AnnotatedElement element, Class<?> owner) {
@@ -40,7 +42,7 @@ public class ParameterizedCoercionTarget
     Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();
     CoercionTarget[] targets = new CoercionTarget[actualTypeArguments.length];
     for (int i = 0; i < targets.length; i++) {
-      targets[i] = CoercionTargets.find(actualTypeArguments[i]);
+      targets[i] = CoercionTargets.find(actualTypeArguments[i], annotatedElement, owner);
     }
     return targets;
   }
@@ -85,7 +87,7 @@ public class ParameterizedCoercionTarget
   public Class<?> boxedType() {
     throw new UnsupportedOperationException("No boxed type here, move along please");
   }
-  
+
   @Override
   public boolean canBeAnnotated() {
     return annotatedElement != null;
@@ -100,4 +102,10 @@ public class ParameterizedCoercionTarget
   public Class<?> getOwner() {
     return owner;
   }
+
+  @Override
+  public String toString() {
+    return getClass().getSimpleName() + "{" + annotatedElement + " on " + owner.getSimpleName() + "}";
+  }
+
 }
