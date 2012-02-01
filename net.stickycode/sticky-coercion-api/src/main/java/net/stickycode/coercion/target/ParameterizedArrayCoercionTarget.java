@@ -84,4 +84,10 @@ public class ParameterizedArrayCoercionTarget
   public Class<?> getOwner() {
     throw new UnsupportedOperationException("Owner not implemented");
   }
+  
+  @Override
+  public String toString() {
+    return getClass().getSimpleName() + "{" + type + "}";
+  }
+
 }

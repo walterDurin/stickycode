@@ -76,7 +76,7 @@ public class ArrayCoercionTarget
   
   @Override
   public String toString() {
-    return "COercionTarget{" + type.getSimpleName() + "}";
+    return getClass().getSimpleName() + "{" + type.getSimpleName() + "}";
   }
 
   @Override
