@@ -6,12 +6,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.nio.charset.Charset;
-import java.nio.charset.CharsetDecoder;
 
 import javax.inject.Inject;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import net.stickycode.configured.Configuration;
 import net.stickycode.configured.ConfigurationAttribute;
@@ -20,6 +16,9 @@ import net.stickycode.configured.ConfigurationListener;
 import net.stickycode.configured.ConfigurationRepository;
 import net.stickycode.stereotype.Configured;
 import net.stickycode.stereotype.StickyComponent;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @StickyComponent
 public class PropertiesConfigurationGenerator
@@ -94,7 +93,7 @@ public class PropertiesConfigurationGenerator
   }
 
   private void appendBeanName(BufferedWriter writer, Configuration bean) throws IOException {
-    writer.append("# ").append(bean.getName()).append(" (").append(bean.getType().getName()).append(")");
+    writer.append("# Bean ").append(bean.getName()).append(" (").append(bean.getType().getName()).append(")");
     writer.newLine();
   }
 

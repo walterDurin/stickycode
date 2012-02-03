@@ -3,6 +3,7 @@ package net.stickycode.configuration.properties;
 import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
+import java.beans.Introspector;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,6 +16,7 @@ import java.util.List;
 import net.stickycode.configured.Configuration;
 import net.stickycode.configured.ConfigurationAttribute;
 import net.stickycode.configured.ConfigurationRepository;
+import net.stickycode.configured.ConfiguredBeanProcessor;
 import net.stickycode.configured.ConfiguredConfiguration;
 import net.stickycode.configured.ConfiguredField;
 import net.stickycode.configured.SimpleNameDotFieldConfigurationKeyBuilder;
@@ -103,7 +105,7 @@ public class PropertiesConfigurationGeneratorTest {
   }
 
   private ConfiguredConfiguration configuration(ConfigurationAttribute... attributes) {
-    ConfiguredConfiguration configuration = new ConfiguredConfiguration(this);
+    ConfiguredConfiguration configuration = new ConfiguredConfiguration(this, Introspector.decapitalize(getClass().getSimpleName()));
     for (ConfigurationAttribute a : attributes) {
       configuration.addAttribute(a);
     }
