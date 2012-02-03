@@ -2,7 +2,6 @@ package net.stickycode.configuration.properties;
 
 import java.nio.charset.Charset;
 
-import net.stickycode.coercion.AbstractFailedToCoerceValueException;
 import net.stickycode.coercion.Coercion;
 import net.stickycode.coercion.CoercionTarget;
 import net.stickycode.stereotype.component.StickyExtension;
@@ -12,7 +11,7 @@ public class CharacterSetCoercion
     implements Coercion<Charset> {
 
   @Override
-  public Charset coerce(CoercionTarget target, String characterSetName) throws AbstractFailedToCoerceValueException {
+  public Charset coerce(CoercionTarget target, String characterSetName) {
     if (Charset.isSupported(characterSetName))
       return Charset.forName(characterSetName);
 
@@ -22,6 +21,16 @@ public class CharacterSetCoercion
   @Override
   public boolean isApplicableTo(CoercionTarget target) {
     return Charset.class.isAssignableFrom(target.getType());
+  }
+
+  @Override
+  public boolean hasDefaultValue() {
+    return true;
+  }
+
+  @Override
+  public Charset getDefaultValue() {
+    return Charset.defaultCharset();
   }
 
 }
