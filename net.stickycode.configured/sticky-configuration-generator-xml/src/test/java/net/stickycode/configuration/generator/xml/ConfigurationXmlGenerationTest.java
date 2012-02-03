@@ -26,7 +26,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 @RunWith(MockitoJUnitRunner.class)
 public class ConfigurationXmlGenerationTest {
 
-  String value;
+  String value = "default";
 
   @Mock
   private ConfigurationRepository configuration;
@@ -52,7 +52,7 @@ public class ConfigurationXmlGenerationTest {
   }
 
   @Test
-  @Ignore("Borked")
+  @Ignore
   public void beanWithOneField() {
     when(configuration.iterator()).thenReturn(iterator(field()));
     assertThat(xml())
@@ -76,7 +76,7 @@ public class ConfigurationXmlGenerationTest {
   private Iterator<Configuration> iterator(ConfigurationAttribute... attributes) {
     List<Configuration> list = new ArrayList<Configuration>();
     ConfiguredConfiguration configuration = new ConfiguredConfiguration(this);
-    for (ConfigurationAttribute a : configuration) {
+    for (ConfigurationAttribute a : attributes) {
       configuration.addAttribute(a);
     }
     list.add(configuration);

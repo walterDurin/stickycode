@@ -1,23 +1,12 @@
 package net.stickycode.configuration.generator.xml;
 
 import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
 
 import javax.inject.Inject;
-import javax.xml.bind.JAXB;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 
-import net.stickycode.configured.Configuration;
-import net.stickycode.configured.ConfigurationAttribute;
 import net.stickycode.configured.ConfigurationListener;
 import net.stickycode.configured.ConfigurationRepository;
 import net.stickycode.stereotype.StickyPlugin;
@@ -25,78 +14,6 @@ import net.stickycode.stereotype.StickyPlugin;
 @StickyPlugin
 public class ConfigurationXmlWriter
     implements ConfigurationListener {
-  
-  static class ConfigurationFieldXml {
-
-    private ConfigurationAttribute attribute;
-
-    public ConfigurationFieldXml withAttribute(ConfigurationAttribute a) {
-      this.attribute = a;
-      return this;
-    }
-    
-    @XmlAttribute
-    public String getName() {
-      return attribute.getName();
-    }
-
-  }
-
-  static class ConfigurationBeanXml {
-
-    private Configuration configuration;
-    private List<ConfigurationFieldXml> fields;
-    
-    public ConfigurationBeanXml withConfiguation(Configuration c) {
-      this.configuration = c;
-      List<ConfigurationFieldXml> f = new ArrayList<ConfigurationXmlWriter.ConfigurationFieldXml>();
-      for (ConfigurationAttribute a : c) {
-        f.add(new ConfigurationFieldXml().withAttribute(a));
-      }
-      fields = f;
-      return this;
-    }
-
-    @XmlElement(name="field")
-    public List<ConfigurationFieldXml> getFields() {
-      return fields;
-    }
-
-    @XmlAttribute
-    public String getType() {
-      return configuration.getType().getName();
-    }
-
-    @XmlAttribute
-    public String getName() {
-      return configuration.getName();
-    }
-
-  }
-
-  @XmlRootElement(name = "sticky")
-  static class ConfigurationXml {
-
-    @XmlAttribute
-    private Date generatedAt = new Date();
-    
-    private ConfigurationRepository repository;
-
-    public ConfigurationXml withConfiguration(ConfigurationRepository repository) {
-      this.repository = repository;
-      return this;
-    }
-
-    @XmlElement(name = "bean")
-    public List<ConfigurationBeanXml> getBeans() {
-      List<ConfigurationBeanXml> beans = new LinkedList<ConfigurationXmlWriter.ConfigurationBeanXml>();
-      for (Configuration c : repository) {
-        beans.add(new ConfigurationBeanXml().withConfiguation(c));
-      }
-      return beans;
-    }
-
-  }
 
   @Inject
   private ConfigurationRepository repository;

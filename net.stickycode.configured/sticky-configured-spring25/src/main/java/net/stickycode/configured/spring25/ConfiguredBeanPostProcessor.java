@@ -12,47 +12,52 @@
  */
 package net.stickycode.configured.spring25;
 
-import java.lang.reflect.Field;
-
 import javax.inject.Inject;
+
+import net.stickycode.configured.ConfigurationRepository;
+import net.stickycode.configured.ConfiguredBeanProcessor;
+import net.stickycode.configured.ConfiguredConfiguration;
+import net.stickycode.configured.ConfiguredFieldProcessor;
+import net.stickycode.metadata.MetadataResolverRegistry;
+import net.stickycode.reflector.Reflector;
+import net.stickycode.stereotype.Configured;
+import net.stickycode.stereotype.ConfiguredStrategy;
+import net.stickycode.stereotype.PostConfigured;
+import net.stickycode.stereotype.PreConfigured;
+import net.stickycode.stereotype.StickyComponent;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessorAdapter;
 
-import net.stickycode.configured.ConfigurationRepository;
-import net.stickycode.configured.ConfiguredConfiguration;
-import net.stickycode.configured.ConfiguredFieldProcessor;
-import net.stickycode.reflector.Reflector;
-import net.stickycode.stereotype.Configured;
-import net.stickycode.stereotype.StickyComponent;
-
-/**
- * Registers fields marked as configured for configuration
- */
 @StickyComponent
 public class ConfiguredBeanPostProcessor
     extends InstantiationAwareBeanPostProcessorAdapter {
 
   @Inject
-  private ConfigurationRepository configurationRepository;
+  private ConfiguredBeanProcessor processor;
+
+  @Inject
+  MetadataResolverRegistry metdataResolverRegistry;
 
   @Override
   public boolean postProcessAfterInstantiation(Object bean, String beanName) throws BeansException {
     if (typeIsConfigured(bean.getClass())) {
-      ConfiguredConfiguration configuration = new ConfiguredConfiguration(bean);
-      new Reflector()
-          .forEachField(new ConfiguredFieldProcessor(configuration))
-          .process(bean);
-      configurationRepository.register(configuration);
+      processor.process(bean);
     }
-
     return true;
   }
 
   private boolean typeIsConfigured(Class<?> type) {
-    for (Field field : type.getDeclaredFields())
-      if (field.isAnnotationPresent(Configured.class))
-        return true;
+    if (metdataResolverRegistry
+        .does(type)
+        .haveAnyFieldsMetaAnnotatedWith(Configured.class, ConfiguredStrategy.class))
+      return true;
+
+    if (metdataResolverRegistry
+        .does(type)
+        .haveAnyMethodsMetaAnnotatedWith(PreConfigured.class, PostConfigured.class))
+      return true;
+
 
     return false;
   }

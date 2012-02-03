@@ -12,15 +12,12 @@
  */
 package net.stickycode.configured.guice3;
 
-import com.google.inject.Inject;
-import com.google.inject.MembersInjector;
-
-import net.stickycode.configured.ConfigurationRepository;
-import net.stickycode.configured.ConfiguredConfiguration;
-import net.stickycode.configured.ConfiguredFieldProcessor;
-import net.stickycode.reflector.Reflector;
+import net.stickycode.configured.ConfiguredBeanProcessor;
 import net.stickycode.stereotype.StickyComponent;
 import net.stickycode.stereotype.StickyFramework;
+
+import com.google.inject.Inject;
+import com.google.inject.MembersInjector;
 
 @StickyComponent
 @StickyFramework
@@ -28,15 +25,11 @@ public class ConfiguredInjector
     implements MembersInjector<Object> {
 
   @Inject
-  private ConfigurationRepository configurationRepository;
+  private ConfiguredBeanProcessor processor;
 
   @Override
   public void injectMembers(Object instance) {
-    ConfiguredConfiguration configuration = new ConfiguredConfiguration(instance);
-    new Reflector()
-        .forEachField(new ConfiguredFieldProcessor(configuration))
-        .process(instance);
-    configurationRepository.register(configuration);
+    processor.process(instance);
   }
 
 }

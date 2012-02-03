@@ -15,6 +15,7 @@ package net.stickycode.configured.spring30;
 import javax.inject.Inject;
 
 import net.stickycode.configured.ConfigurationRepository;
+import net.stickycode.configured.ConfiguredBeanProcessor;
 import net.stickycode.configured.ConfiguredConfiguration;
 import net.stickycode.configured.ConfiguredFieldProcessor;
 import net.stickycode.metadata.MetadataResolverRegistry;
@@ -33,7 +34,7 @@ public class ConfiguredBeanPostProcessor
     extends InstantiationAwareBeanPostProcessorAdapter {
 
   @Inject
-  private ConfigurationRepository configurationRepository;
+  private ConfiguredBeanProcessor processor;
 
   @Inject
   MetadataResolverRegistry metdataResolverRegistry;
@@ -41,11 +42,7 @@ public class ConfiguredBeanPostProcessor
   @Override
   public boolean postProcessAfterInstantiation(Object bean, String beanName) throws BeansException {
     if (typeIsConfigured(bean.getClass())) {
-      ConfiguredConfiguration configuration = new ConfiguredConfiguration(bean);
-      new Reflector()
-          .forEachField(new ConfiguredFieldProcessor(configuration))
-          .process(bean);
-      configurationRepository.register(configuration);
+      processor.process(bean);
     }
     return true;
   }
@@ -60,7 +57,6 @@ public class ConfiguredBeanPostProcessor
         .does(type)
         .haveAnyMethodsMetaAnnotatedWith(PreConfigured.class, PostConfigured.class))
       return true;
-
 
     return false;
   }
