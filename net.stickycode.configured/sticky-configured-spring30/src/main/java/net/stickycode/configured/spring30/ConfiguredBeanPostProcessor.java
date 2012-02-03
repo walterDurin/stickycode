@@ -14,12 +14,8 @@ package net.stickycode.configured.spring30;
 
 import javax.inject.Inject;
 
-import net.stickycode.configured.ConfigurationRepository;
 import net.stickycode.configured.ConfiguredBeanProcessor;
-import net.stickycode.configured.ConfiguredConfiguration;
-import net.stickycode.configured.ConfiguredFieldProcessor;
 import net.stickycode.metadata.MetadataResolverRegistry;
-import net.stickycode.reflector.Reflector;
 import net.stickycode.stereotype.Configured;
 import net.stickycode.stereotype.ConfiguredStrategy;
 import net.stickycode.stereotype.PostConfigured;
