@@ -61,5 +61,17 @@ public interface ConfigurationAttribute
    * Return the metadata required to coerce this attribute
    */
   CoercionTarget getCoercionTarget();
+  
+  /**
+   * Return true if this attribute can be updated, i.e. setValue can be called.
+   * 
+   * You might use this as false for attributes that start with a known value and cannot be updated.
+   */
+  boolean canBeUpdated();
+
+  /**
+   * Return true if this attribute has a value, either a default value or one thats been set
+   */
+  boolean hasValue();
 
 }
