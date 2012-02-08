@@ -94,10 +94,11 @@ public class CoercionTargetsTest {
     assertThat(target.getComponentCoercionTypes()).containsOnly(
         CoercionTargets.find(Fields.find(getClass(), "plainOldList")));
   }
-  
-  @Test(expected=CoercionTargetsDoesNotRecogniseTypeException.class)
+
+  @Test(expected = CoercionTargetsDoesNotRecogniseTypeException.class)
   public void unknownGenerics() {
-    CoercionTargets.find(new Type() {});
+    CoercionTargets.find(new Type() {
+    }, null);
   }
 
   private CoercionTarget fieldTarget() {

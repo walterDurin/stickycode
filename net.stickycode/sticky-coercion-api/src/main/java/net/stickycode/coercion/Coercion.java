@@ -30,7 +30,7 @@ public interface Coercion<T> {
   /**
    * Return true if this coercion is applicable for the given target type
    */
-  boolean isApplicableTo(CoercionTarget type);
+  boolean isApplicableTo(CoercionTarget target);
 
   /**
    * For some coercions a default value on the coercion itself makes sense.
@@ -40,7 +40,7 @@ public interface Coercion<T> {
   /**
    * In the case where there is not value already set and a String value for coercion cannot be found then this will be used.
    */
-  T getDefaultValue();
+  T getDefaultValue(CoercionTarget target);
 
   /**
    * Description of the coercion useful for logging

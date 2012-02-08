@@ -10,8 +10,14 @@ public class ParameterizedArrayCoercionTarget
 
   private final GenericArrayType type;
 
-  public ParameterizedArrayCoercionTarget(GenericArrayType genericType) {
+  private Class<?> owner;
+
+  private CoercionTarget parent;
+
+  public ParameterizedArrayCoercionTarget(GenericArrayType genericType, Class<?> owner, CoercionTarget parent) {
+    this.owner = owner;
     this.type = genericType;
+    this.parent = parent;
   }
 
   @Override
@@ -26,7 +32,7 @@ public class ParameterizedArrayCoercionTarget
 
   @Override
   public CoercionTarget[] getComponentCoercionTypes() {
-    return new CoercionTarget[] { CoercionTargets.find(type.getGenericComponentType()) };
+    return new CoercionTarget[] { CoercionTargets.find(type.getGenericComponentType(), owner) };
   }
 
   @Override
@@ -55,21 +61,21 @@ public class ParameterizedArrayCoercionTarget
       if (other.type != null)
         return false;
     }
-    
-    return CoercionTargets.find(type.getGenericComponentType()).equals(
-        CoercionTargets.find(other.type.getGenericComponentType()));
+
+    return CoercionTargets.find(type.getGenericComponentType(), owner).equals(
+        CoercionTargets.find(other.type.getGenericComponentType(), owner));
   }
-  
+
   @Override
   public boolean isPrimitive() {
     return false;
   }
-  
+
   @Override
   public Class<?> boxedType() {
     throw new UnsupportedOperationException("No boxed type here, move along please");
   }
-  
+
   @Override
   public boolean canBeAnnotated() {
     return false;
@@ -82,12 +88,22 @@ public class ParameterizedArrayCoercionTarget
 
   @Override
   public Class<?> getOwner() {
-    throw new UnsupportedOperationException("Owner not implemented");
+    return owner;
   }
-  
+
   @Override
   public String toString() {
     return getClass().getSimpleName() + "{" + type + "}";
+  }
+
+  @Override
+  public CoercionTarget getParent() {
+    return parent;
+  }
+
+  @Override
+  public boolean hasParent() {
+    return parent != null;
   }
 
 }

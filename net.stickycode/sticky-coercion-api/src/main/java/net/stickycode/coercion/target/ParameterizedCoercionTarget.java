@@ -8,28 +8,16 @@ import java.util.Arrays;
 import net.stickycode.coercion.CoercionTarget;
 
 public class ParameterizedCoercionTarget
-    implements CoercionTarget {
+    extends AbstractCoercionTarget {
 
   private ParameterizedType parameterizedType;
 
   private AnnotatedElement annotatedElement;
 
-  private Class<?> owner;
-
-  public ParameterizedCoercionTarget(ParameterizedType genericType, AnnotatedElement element, Class<?> owner) {
+  public ParameterizedCoercionTarget(ParameterizedType genericType, AnnotatedElement element, Class<?> owner, CoercionTarget parent) {
+    super((Class<?>) genericType.getRawType(), owner, parent);
     this.parameterizedType = genericType;
     this.annotatedElement = element;
-    this.owner = owner;
-  }
-
-  @Override
-  public Class<?> getType() {
-    return (Class<?>) parameterizedType.getRawType();
-  }
-
-  @Override
-  public boolean isArray() {
-    return false;
   }
 
   @Override
@@ -42,7 +30,7 @@ public class ParameterizedCoercionTarget
     Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();
     CoercionTarget[] targets = new CoercionTarget[actualTypeArguments.length];
     for (int i = 0; i < targets.length; i++) {
-      targets[i] = CoercionTargets.find(actualTypeArguments[i], annotatedElement, owner);
+      targets[i] = CoercionTargets.find((Class<?>)parameterizedType.getRawType(), actualTypeArguments[i], annotatedElement, owner, parent);
     }
     return targets;
   }
@@ -79,16 +67,6 @@ public class ParameterizedCoercionTarget
   }
 
   @Override
-  public boolean isPrimitive() {
-    return false;
-  }
-
-  @Override
-  public Class<?> boxedType() {
-    throw new UnsupportedOperationException("No boxed type here, move along please");
-  }
-
-  @Override
   public boolean canBeAnnotated() {
     return annotatedElement != null;
   }
@@ -96,11 +74,6 @@ public class ParameterizedCoercionTarget
   @Override
   public AnnotatedElement getAnnotatedElement() {
     return annotatedElement;
-  }
-
-  @Override
-  public Class<?> getOwner() {
-    return owner;
   }
 
   @Override

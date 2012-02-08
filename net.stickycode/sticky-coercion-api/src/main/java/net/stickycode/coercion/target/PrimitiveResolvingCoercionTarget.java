@@ -6,39 +6,13 @@ import net.stickycode.coercion.CoercionTarget;
 import net.stickycode.coercion.Primitives;
 
 public class PrimitiveResolvingCoercionTarget
-    implements CoercionTarget {
-
-  private final Class<?> type;
+    extends AbstractCoercionTarget {
 
   private AnnotatedElement annotatedElement;
 
-  private final Class<?> owner;
-
-  public PrimitiveResolvingCoercionTarget(Class<?> type, AnnotatedElement annotatedElement, Class<?> owner) {
-    super();
-    this.type = type;
+  public PrimitiveResolvingCoercionTarget(Class<?> type, AnnotatedElement annotatedElement, Class<?> owner, CoercionTarget parent) {
+    super(type, owner, parent);
     this.annotatedElement = annotatedElement;
-    this.owner = owner;
-  }
-
-  @Override
-  public Class<?> getType() {
-    return type;
-  }
-
-  @Override
-  public boolean isArray() {
-    return false;
-  }
-
-  @Override
-  public boolean hasComponents() {
-    return false;
-  }
-
-  @Override
-  public CoercionTarget[] getComponentCoercionTypes() {
-    throw new UnsupportedOperationException("There are no components on " + getClass());
   }
 
   @Override
@@ -84,11 +58,6 @@ public class PrimitiveResolvingCoercionTarget
   @Override
   public AnnotatedElement getAnnotatedElement() {
     return annotatedElement;
-  }
-
-  @Override
-  public Class<?> getOwner() {
-    return owner;
   }
 
   @Override
