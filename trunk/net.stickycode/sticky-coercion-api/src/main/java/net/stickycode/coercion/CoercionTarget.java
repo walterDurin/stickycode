@@ -65,4 +65,9 @@ public interface CoercionTarget {
    * Return the owning type of the target, for a method this is the class the method was found on similarly for fields.
    */
   Class<?> getOwner();
+
+  CoercionTarget getParent();
+
+  boolean hasParent();
+
 }
