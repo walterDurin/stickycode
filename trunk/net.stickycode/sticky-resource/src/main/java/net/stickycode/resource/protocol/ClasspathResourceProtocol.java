@@ -2,32 +2,38 @@ package net.stickycode.resource.protocol;
 
 import java.io.InputStream;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import net.stickycode.resource.ResourceLocation;
 import net.stickycode.resource.ResourceNotFoundException;
 import net.stickycode.resource.ResourceProtocol;
-import net.stickycode.resource.ResourceSpecification;
 import net.stickycode.stereotype.component.StickyExtension;
 
 @StickyExtension
 public class ClasspathResourceProtocol
     implements ResourceProtocol {
 
+  private Logger log = LoggerFactory.getLogger(getClass());
+
   @Override
-  public InputStream getInputStream(ResourceSpecification resource) {
-    assert resource.getContext() != null;
-    
-    InputStream stream = resource.getContext().getResourceAsStream(resource.getPath());
+  public InputStream getInputStream(ResourceLocation resource) {
+    Class<?> base = resource.getResourceTarget().getOwner();
+
+    String path = resource.getPath();
+    log.debug("loading resource {}", path);
+    InputStream stream = base.getResourceAsStream(path);
     if (stream == null)
-      throw new ResourceNotFoundException(createPath(resource));
+      throw new ResourceNotFoundException(createPath(path, base));
 
     return stream;
   }
 
-  private String createPath(ResourceSpecification resource) {
-    String path = resource.getPath();
+  private String createPath(String path, Class<?> base) {
     if (path.startsWith("/"))
       return "classpath://" + path;
 
-    return "classpath://" + resource.getContext().getPackage().getName().replace('.', '/') + "/" + path;
+    return "classpath://" + base.getPackage().getName().replace('.', '/') + "/" + path;
   }
 
   @Override
