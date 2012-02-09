@@ -29,7 +29,7 @@ public class CharacterSetCoercion
   }
 
   @Override
-  public Charset getDefaultValue() {
+  public Charset getDefaultValue(CoercionTarget target) {
     return Charset.defaultCharset();
   }
 
