@@ -4,7 +4,7 @@ import java.io.InputStream;
 
 public interface ResourceProtocol {
 
-  InputStream getInputStream(ResourceSpecification resource)
+  InputStream getInputStream(ResourceLocation resourceLocation)
       throws ResourceNotFoundException;
 
   boolean canResolve(String protocol);
