@@ -8,11 +8,13 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import net.stickycode.coercion.target.CoercionTargets;
 import net.stickycode.configured.Configuration;
 import net.stickycode.configured.ConfigurationAttribute;
 import net.stickycode.configured.ConfigurationRepository;
@@ -94,7 +96,8 @@ public class PropertiesConfigurationGeneratorTest {
   }
 
   private ConfigurationAttribute field(String fieldName) {
-    return new ConfiguredField(this, Fields.find(getClass(), fieldName));
+    Field find = Fields.find(getClass(), fieldName);
+    return new ConfiguredField(this, find, CoercionTargets.find(find));
   }
 
   private Iterator<Configuration> iterator(ConfigurationAttribute... attributes) {
