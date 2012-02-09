@@ -41,7 +41,7 @@ public class JaxbResourceCodec<T>
 
   @Override
   public T load(InputStream source, CoercionTarget resourceTarget) {
-    log.debug("loading {}", resourceTarget);
+    log.debug("loading {} from {}", resourceTarget);
     @SuppressWarnings("unchecked")
     Class<T> type = (Class<T>) resourceTarget.getType();
     try {

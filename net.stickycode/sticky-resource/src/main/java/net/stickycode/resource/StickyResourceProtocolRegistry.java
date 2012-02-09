@@ -18,6 +18,9 @@ public class StickyResourceProtocolRegistry
 
   @Override
   public ResourceProtocol find(String protocol) {
+    if (protocol == null)
+      throw new NullPointerException("Null protocols names makes not sense");
+    
     for (ResourceProtocol p : protocols) {
       if (p.canResolve(protocol))
         return p;

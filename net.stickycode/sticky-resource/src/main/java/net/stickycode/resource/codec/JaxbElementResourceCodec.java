@@ -9,7 +9,6 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.namespace.QName;
 import javax.xml.transform.stream.StreamSource;
@@ -107,6 +106,9 @@ public class JaxbElementResourceCodec<T>
   @Override
   public boolean isApplicableTo(CoercionTarget type) {
     if (type.getType().isAnnotationPresent(XmlType.class))
+      return true;
+    
+    if (type.getType().isAssignableFrom(JAXBElement.class))
       return true;
 
     return false;
