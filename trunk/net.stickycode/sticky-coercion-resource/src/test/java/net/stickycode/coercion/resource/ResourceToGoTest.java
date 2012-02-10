@@ -7,7 +7,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import net.stickycode.mockwire.MockwireConfigured;
 import net.stickycode.mockwire.junit4.MockwireRunner;
-import net.stickycode.resource.Resource;
 import net.stickycode.stereotype.Configured;
 
 import org.junit.Test;
@@ -15,9 +14,9 @@ import org.junit.runner.RunWith;
 
 @RunWith(MockwireRunner.class)
 @MockwireConfigured({
-    "configuredResourceTest.bean=bean.xml"
+    "resourceToGoTest.bean.uri=bean.xml"
 })
-public class ConfiguredResourceTest {
+public class ResourceToGoTest {
 
   @XmlRootElement
   public static class Bean {
@@ -27,10 +26,11 @@ public class ConfiguredResourceTest {
   }
 
   @Configured
-  Resource<Bean> bean;
+  ResourceToGo<Bean> bean;
 
   @Test
   public void configured() {
+    assertThat(bean).isNotNull();
     assertThat(bean.get().value).isEqualTo("loaded");
   }
 }

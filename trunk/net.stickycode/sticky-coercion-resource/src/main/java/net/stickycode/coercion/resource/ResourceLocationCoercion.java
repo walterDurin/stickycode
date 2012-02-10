@@ -7,18 +7,15 @@ import javax.inject.Inject;
 
 import net.stickycode.coercion.AbstractNoDefaultCoercion;
 import net.stickycode.coercion.CoercionTarget;
-import net.stickycode.resource.Resource;
-import net.stickycode.resource.ResourceCodec;
 import net.stickycode.resource.ResourceCodecRegistry;
 import net.stickycode.resource.ResourceLocation;
 import net.stickycode.resource.ResourceProtocol;
 import net.stickycode.resource.ResourceProtocolRegistry;
-import net.stickycode.resource.SingletonResource;
 import net.stickycode.stereotype.component.StickyExtension;
 
 @StickyExtension
-public class ResourceCoercion
-    extends AbstractNoDefaultCoercion<Resource<Object>> {
+public class ResourceLocationCoercion
+    extends AbstractNoDefaultCoercion<UriResourceLocation> {
 
   @Inject
   ResourceProtocolRegistry protocols;
@@ -27,12 +24,10 @@ public class ResourceCoercion
   ResourceCodecRegistry codecs;
 
   @Override
-  public Resource<Object> coerce(CoercionTarget type, String value) {
-    URI uri = uri(value);
-    ResourceProtocol protocol = protocols.find(uri.getScheme());
-    ResourceLocation location = new UriResourceLocation(type.getComponentCoercionTypes()[0], protocol, uri);
-    ResourceCodec<?> codec = codecs.find(type);
-    return new SingletonResource<Object>(codec, location);
+  public UriResourceLocation coerce(CoercionTarget type, String value) {
+    URI url = uri(value);
+    ResourceProtocol protocol = protocols.find(url.getScheme());
+    return new UriResourceLocation(type.getParent().getComponentCoercionTypes()[0], protocol, url);
   }
 
   private URI uri(String value) {
@@ -49,7 +44,7 @@ public class ResourceCoercion
 
   @Override
   public boolean isApplicableTo(CoercionTarget type) {
-    return type.getType().isAssignableFrom(Resource.class);
+    return type.getType().isAssignableFrom(ResourceLocation.class);
   }
 
 }

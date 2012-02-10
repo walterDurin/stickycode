@@ -44,7 +44,7 @@ public class ResourceCoercionComponentTest {
   @Test
   public void jaxbResource() {
     CoercionTarget target = target("bean");
-    Bean bean = (Bean)coercion.coerce(target, "::classpath://bean.xml").get();
+    Bean bean = (Bean)coercion.coerce(target, "classpath://bean.xml").get();
     assertThat(bean.value).isEqualTo("loaded");
   }
   

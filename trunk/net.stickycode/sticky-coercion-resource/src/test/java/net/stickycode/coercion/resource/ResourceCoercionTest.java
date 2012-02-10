@@ -32,26 +32,26 @@ public class ResourceCoercionTest {
 
   @Test
   public void loadedResource() {
-    Resource<Object> actual = coercion.coerce(target(), "::stringResource.txt");
+    Resource<Object> actual = coercion.coerce(target(), "stringResource.txt");
     assertThat(actual.get()).isEqualTo("hmm");
     assertThat(actual.get()).isSameAs(actual.get());
   }
 
   @Test
   public void classpathResource() {
-    assertThat(coercion.coerce(target(), "::classpath://stringResource.txt").get()).isEqualTo("hmm");
+    assertThat(coercion.coerce(target(), "classpath://stringResource.txt").get()).isEqualTo("hmm");
   }
 
   @Test
   public void classpathWithSlashResource() {
-    assertThat(coercion.coerce(target(), "::classpath:///net/stickycode/coercion/resource/stringResource.txt").get()).isEqualTo(
+    assertThat(coercion.coerce(target(), "classpath:///net/stickycode/coercion/resource/stringResource.txt").get()).isEqualTo(
         "hmm");
   }
 
   // resource:type:protocol:uri
   @Test
   public void cachedHttpResource() {
-    assertThat(coercion.coerce(target(), "::dummy://blah").get()).isEqualTo("hmm");
+    assertThat(coercion.coerce(target(), "dummy://blah").get()).isEqualTo("blah");
   }
 
   private CoercionTarget target() {
