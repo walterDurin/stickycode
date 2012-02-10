@@ -17,9 +17,6 @@ package net.stickycode.configured;
  */
 public interface ConfigurationKeyBuilder {
 
-  @Deprecated
-  String buildKey(Configuration configuration, ConfigurationAttribute attribute);
-
   /**
    * Build a composite key to identify a configuration, all configuration keys belong to a group and have a name
    * 
