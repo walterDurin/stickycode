@@ -10,7 +10,7 @@
 
 	<groupId>org.mockwire</groupId>
 	<artifactId>mockwire-spring30</artifactId>
-	<version>5.2-SNAPSHOT</version>
+	<version>6.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>mockwire-spring30</name>
@@ -33,17 +33,17 @@
 		<dependency>
 			<groupId>net.stickycode.mockwire</groupId>
 			<artifactId>sticky-mockwire</artifactId>
-			<version>[6.1,7)</version>
+			<version>[7.1,8)</version>
 		</dependency>
 		<dependency>
 			<groupId>net.stickycode.mockwire</groupId>
 			<artifactId>sticky-mockwire-spring30</artifactId>
-			<version>[6.1,7)</version>
+			<version>[7.1,8)</version>
 		</dependency>
 		<dependency>
 			<groupId>net.stickycode.mockwire</groupId>
 			<artifactId>sticky-mockwire-mockito</artifactId>
-			<version>[3.2,4)</version>
+			<version>[4.1,5)</version>
 		</dependency>
 	</dependencies>
 </project>
