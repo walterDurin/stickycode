@@ -4,7 +4,7 @@ import java.util.Set;
 
 import javax.inject.Inject;
 
-import net.stickycode.resource.ProtocolNotResolvableException;
+import net.stickycode.resource.ResourceProtocolNotResolvableException;
 import net.stickycode.resource.ResourceProtocol;
 import net.stickycode.resource.ResourceProtocolRegistry;
 import net.stickycode.stereotype.component.StickyRepository;
@@ -26,7 +26,7 @@ public class StickyResourceProtocolRegistry
         return p;
     }
     
-    throw new ProtocolNotResolvableException(protocol, protocols);
+    throw new ResourceProtocolNotResolvableException(protocol, protocols);
   }
 
 }
