@@ -2,6 +2,7 @@ package net.stickycode.resource;
 
 public interface ResourceProtocolRegistry {
 
-  ResourceProtocol find(String protocol);
+  ResourceProtocol find(String protocol)
+      throws ResourceProtocolNotResolvableException;
 
 }
