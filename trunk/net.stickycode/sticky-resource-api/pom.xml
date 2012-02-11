@@ -48,6 +48,11 @@
 			<artifactId>sticky-coercion-api</artifactId>
 			<version>[3.3,4)</version>
 		</dependency>
+		<dependency>
+			<groupId>net.stickycode</groupId>
+			<artifactId>sticky-stereotype</artifactId>
+			<version>[1.16,2)</version>
+		</dependency>
 	</dependencies>
 <!--
 	<build>
