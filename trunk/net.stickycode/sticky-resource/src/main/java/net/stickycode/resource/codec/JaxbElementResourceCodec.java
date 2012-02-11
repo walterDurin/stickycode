@@ -18,14 +18,9 @@ import net.stickycode.resource.ResourceCodec;
 import net.stickycode.stereotype.component.StickyExtension;
 import net.stickycode.xml.jaxb.JaxbFactory;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 @StickyExtension
 public class JaxbElementResourceCodec<T>
     implements ResourceCodec<T> {
-
-  private Logger log = LoggerFactory.getLogger(getClass());
 
   @Inject
     private JaxbFactory jaxbFactory;
