@@ -41,7 +41,7 @@ public interface Content {
   String get();
 
   /**
-   * Return the same thing as {@link #get()}, just means you know if you log of use content in a string context it behave somewhat
+   * Return the same thing as {@link #get()}, just means you know if you log or use content in a string context it behave somewhat
    * like a string.
    */
   String toString();
