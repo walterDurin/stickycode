@@ -30,31 +30,6 @@ public class JaxbElementResourceCodec<T>
   @Inject
     private JaxbFactory jaxbFactory;
 
-//  private void generateSchema() throws IOException, SAXException {
-//    ByteArrayOutputStream element = new ByteArrayOutputStream();
-//    element.write(elementSchema());
-//
-//    LocalResolver resolver = new LocalResolver();
-//    context.generateSchema(resolver);
-//
-//    SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-//    sf.setErrorHandler(new StrictErrorHandler<T>());
-//    sf.setResourceResolver(resolver);
-//    this.schema = sf.newSchema(new StreamSource(new ByteArrayInputStream(element.toByteArray()), "internal"));
-//  }
-//
-//  private byte[] elementSchema() throws UnsupportedEncodingException {
-//    return ("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
-//        + "<xs:schema version=\"1.0\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">\n\n"
-//        + "  <xs:include schemaLocation=\"schema1.xsd\" />\n"
-//        + "  <xs:element name=\"bean\" type=\"bean\" />\n"
-//        + "</xs:schema>").getBytes("UTF-8");
-//  }
-//
-//  private String namespace() {
-//    return namespace(type.getAnnotation(XmlType.class));
-//  }
-
   @Override
   public void store(CoercionTarget sourceType, T resource, OutputStream outputStream) {
     Class<?> type = sourceType.getType();
