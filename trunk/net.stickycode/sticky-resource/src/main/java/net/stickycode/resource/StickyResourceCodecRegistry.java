@@ -22,17 +22,16 @@ public class StickyResourceCodecRegistry
 
   @Override
   public <T> ResourceCodec<T> find(CoercionTarget target) {
-    CoercionTarget componentTarget = target.getComponentCoercionTypes()[0];
-    log.info("find a codec for {}", componentTarget);
-    ResourceCodec<T> lookup = lookup(target, componentTarget);
+    log.info("find a codec for {}", target);
+    ResourceCodec<T> lookup = lookup(target);
     log.info("found {}", lookup);
     return lookup;
   }
 
   @SuppressWarnings("unchecked")
-  private <T> ResourceCodec<T> lookup(CoercionTarget target, CoercionTarget componentTarget) {
+  private <T> ResourceCodec<T> lookup(CoercionTarget target) {
     for (ResourceCodec<?> r : codecs) {
-      if (r.isApplicableTo(componentTarget))
+      if (r.isApplicableTo(target))
         return (ResourceCodec<T>) r;
     }
 
