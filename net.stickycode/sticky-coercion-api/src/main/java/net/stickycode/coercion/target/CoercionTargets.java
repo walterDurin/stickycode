@@ -26,7 +26,7 @@ public class CoercionTargets {
   public static CoercionTarget find(Type genericType, Class<?> owner) {
     return find(null, genericType, null, owner, null);
   }
-  
+
   public static CoercionTarget find(Class<?> type, Type genericType) {
     return find(type, genericType, type, type, null);
   }
@@ -48,7 +48,8 @@ public class CoercionTargets {
     throw new CoercionTargetsDoesNotRecogniseTypeException(genericType);
   }
 
-  private static CoercionTarget resolveTypeVariable(@SuppressWarnings("rawtypes") TypeVariable genericType, AnnotatedElement element, Class<?> owner,
+  private static CoercionTarget resolveTypeVariable(@SuppressWarnings("rawtypes") TypeVariable genericType,
+      AnnotatedElement element, Class<?> owner,
       CoercionTarget parent) {
     if (parent == null)
       throw new ParentCoercionTargetsAreRequiredToResolveTypeVariables(genericType, owner);
@@ -58,6 +59,13 @@ public class CoercionTargets {
         if (parent.getType().equals(i.getGenericDeclaration()))
           return find(parent.getComponentCoercionTypes()[0].getType(), element, owner, null);
       }
+
+    for (Class<?> ip : ((Class<?>)genericType.getGenericDeclaration()).getInterfaces())
+      if (parent.getType().equals(ip))
+        for (TypeVariable<?> i : ip.getTypeParameters()) {
+          if (parent.getType().equals(i.getGenericDeclaration()))
+            return find(parent.getComponentCoercionTypes()[0].getType(), element, owner, null);
+        }
 
     throw new CoercionTargetsDoesNotRecogniseTypeException(genericType);
   }
