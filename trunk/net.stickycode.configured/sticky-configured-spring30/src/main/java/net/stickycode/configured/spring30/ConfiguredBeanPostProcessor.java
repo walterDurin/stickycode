@@ -17,6 +17,7 @@ import javax.inject.Inject;
 import net.stickycode.configured.ConfiguredBeanProcessor;
 import net.stickycode.metadata.MetadataResolverRegistry;
 import net.stickycode.stereotype.Configured;
+import net.stickycode.stereotype.ConfiguredComponent;
 import net.stickycode.stereotype.ConfiguredStrategy;
 import net.stickycode.stereotype.PostConfigured;
 import net.stickycode.stereotype.PreConfigured;
@@ -44,6 +45,9 @@ public class ConfiguredBeanPostProcessor
   }
 
   private boolean typeIsConfigured(Class<?> type) {
+    if (metdataResolverRegistry.is(type).metaAnnotatedWith(ConfiguredComponent.class))
+      return false;
+
     if (metdataResolverRegistry
         .does(type)
         .haveAnyFieldsMetaAnnotatedWith(Configured.class, ConfiguredStrategy.class))
