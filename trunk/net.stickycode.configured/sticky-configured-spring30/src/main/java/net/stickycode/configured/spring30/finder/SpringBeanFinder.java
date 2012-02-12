@@ -26,6 +26,9 @@ public class SpringBeanFinder
     catch (NoSuchBeanDefinitionException e) {
       try {
         Map<String, T> beans = context.getBeansOfType(type);
+        if (beans.values().isEmpty())
+          throw new BeanNotFoundException(e, type);
+
         throw new BeanNotFoundException(type, beans.values());
       }
       catch (NoSuchBeanDefinitionException e2) {
