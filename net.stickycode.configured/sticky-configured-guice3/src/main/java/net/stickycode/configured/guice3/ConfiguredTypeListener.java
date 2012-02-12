@@ -12,12 +12,11 @@
  */
 package net.stickycode.configured.guice3;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-
 import javax.inject.Inject;
 
+import net.stickycode.metadata.MetadataResolverRegistry;
 import net.stickycode.stereotype.Configured;
+import net.stickycode.stereotype.ConfiguredComponent;
 import net.stickycode.stereotype.ConfiguredStrategy;
 import net.stickycode.stereotype.PostConfigured;
 import net.stickycode.stereotype.PreConfigured;
@@ -41,9 +40,12 @@ public class ConfiguredTypeListener
   @Inject
   private ConfiguredInjector membersInjector;
 
+  @Inject
+  MetadataResolverRegistry metdataResolverRegistry;
+
   @Override
   public <I> void hear(TypeLiteral<I> type, TypeEncounter<I> encounter) {
-    if (typeIsConfigured(type)) {
+    if (typeIsConfigured(type.getRawType())) {
       if (membersInjector == null)
         throw new AssertionError("On hearing " + type + " found that " + getClass().getSimpleName() + " was not injected with a "
             + ConfiguredInjector.class.getSimpleName());
@@ -53,25 +55,20 @@ public class ConfiguredTypeListener
     }
   }
 
-  private <I> boolean typeIsConfigured(TypeLiteral<I> type) {
-    for (Class<? super I> current = type.getRawType(); current != null; current = current.getSuperclass()) {
-      for (Field field : current.getDeclaredFields()) {
-        if (field.isAnnotationPresent(Configured.class))
-          return true;
-        
-        if (field.isAnnotationPresent(ConfiguredStrategy.class))
-          return true;
-      }
-      
-      for (Method method : current.getDeclaredMethods()) {
-        if (method.isAnnotationPresent(PostConfigured.class))
-          return true;
-        
-        if (method.isAnnotationPresent(PreConfigured.class))
-          return true;
-      }
-    }
-    
+  private boolean typeIsConfigured(Class<?> type) {
+    if (metdataResolverRegistry.is(type).metaAnnotatedWith(ConfiguredComponent.class))
+      return false;
+
+    if (metdataResolverRegistry
+        .does(type)
+        .haveAnyFieldsMetaAnnotatedWith(Configured.class, ConfiguredStrategy.class))
+      return true;
+
+    if (metdataResolverRegistry
+        .does(type)
+        .haveAnyMethodsMetaAnnotatedWith(PreConfigured.class, PostConfigured.class))
+      return true;
+
     return false;
   }
 }
