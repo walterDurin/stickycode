@@ -30,8 +30,7 @@ public abstract class AbstractBeanFinderTest {
     getFinder().find(getClass());
   }
 
-  @Test
-  // (expected = BeanNotFoundException.class)
+  @Test(expected = BeanNotFoundException.class)
   public void tooMany() {
     getFinder().find(TooMany.class);
   }
