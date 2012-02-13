@@ -14,13 +14,13 @@ package net.stickycode.configured.guice3;
 
 import java.util.Collections;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-import com.google.inject.ProvisionException;
-
 import net.stickycode.configured.AbstractPrimitiveConfiguratedTest;
 import net.stickycode.configured.ConfigurationSource;
 import net.stickycode.exception.PermanentException;
+
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import com.google.inject.ProvisionException;
 
 public class PrimitiveHaveNoDefaultsTest
     extends AbstractPrimitiveConfiguratedTest {
@@ -33,7 +33,7 @@ public class PrimitiveHaveNoDefaultsTest
     }
     catch (ProvisionException e) {
       if (e.getCause() instanceof PermanentException)
-        throw (PermanentException)e.getCause();
+        throw (PermanentException) e.getCause();
 
       throw e;
     }

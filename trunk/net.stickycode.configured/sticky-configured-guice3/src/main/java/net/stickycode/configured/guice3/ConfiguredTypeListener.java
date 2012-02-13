@@ -56,6 +56,9 @@ public class ConfiguredTypeListener
   }
 
   private boolean typeIsConfigured(Class<?> type) {
+    if (metdataResolverRegistry == null)
+      return false;
+
     if (metdataResolverRegistry.is(type).metaAnnotatedWith(ConfiguredComponent.class))
       return false;
 
