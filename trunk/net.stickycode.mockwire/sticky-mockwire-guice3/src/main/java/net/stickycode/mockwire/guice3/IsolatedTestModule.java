@@ -74,6 +74,7 @@ public class IsolatedTestModule
     }
   }
 
+  @SuppressWarnings({ "rawtypes", "unchecked" })
   private void bindSuperType(Class type, Class superClass) {
     if (superClass != null && !superClass.equals(Object.class)) {
       bind(superClass).to(type).in(Singleton.class);
