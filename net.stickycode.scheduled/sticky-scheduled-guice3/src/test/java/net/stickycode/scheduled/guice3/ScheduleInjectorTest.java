@@ -13,16 +13,24 @@
 package net.stickycode.scheduled.guice3;
 
 import static org.mockito.Mockito.verify;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 import net.stickycode.configured.ConfigurationRepository;
 import net.stickycode.configured.ConfiguredConfiguration;
 import net.stickycode.scheduled.ScheduledMethodInvoker;
+import net.stickycode.scheduled.ScheduledMethodInvokerFactory;
 import net.stickycode.scheduled.ScheduledRunnableRepository;
+import net.stickycode.scheduled.SimpleScheduledInvokerFactory;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Matchers;
 import org.mockito.Mock;
+import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -33,6 +41,9 @@ public class ScheduleInjectorTest {
 
   @Mock
   ScheduledRunnableRepository schedulingSystem;
+  
+  @Spy
+  Set<ScheduledMethodInvokerFactory> factories = new HashSet<ScheduledMethodInvokerFactory>(Arrays.asList(new SimpleScheduledInvokerFactory()));
 
   @InjectMocks
   ScheduledInjector injector = new ScheduledInjector();
