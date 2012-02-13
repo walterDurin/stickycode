@@ -33,14 +33,14 @@ public class ScheduledBeanPostProcessor
 
   @Inject
   private ConfigurationRepository configurationRepository;
-  
+
   @Inject
   private ScheduledRunnableRepository schedulingSystem;
 
   @Override
   public boolean postProcessAfterInstantiation(Object bean, String beanName) throws BeansException {
     if (typeHasSchedules(bean.getClass())) {
-      ConfiguredConfiguration configuration = new ConfiguredConfiguration(bean);
+      ConfiguredConfiguration configuration = new ConfiguredConfiguration(bean, beanName);
       new Reflector()
           .forEachMethod(new ScheduledMethodProcessor(schedulingSystem, configuration))
           .process(bean);
@@ -50,7 +50,7 @@ public class ScheduledBeanPostProcessor
   }
 
   private boolean typeHasSchedules(Class<?> type) {
-    for (Method method: type.getDeclaredMethods())
+    for (Method method : type.getDeclaredMethods())
       if (method.isAnnotationPresent(Scheduled.class))
         return true;
 
