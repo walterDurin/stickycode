@@ -1,7 +1,9 @@
 package net.stickycode.configured.finder;
 
+import net.stickycode.stereotype.StickyFramework;
 
 
+@StickyFramework
 public interface BeanFinder {
   
   /**
