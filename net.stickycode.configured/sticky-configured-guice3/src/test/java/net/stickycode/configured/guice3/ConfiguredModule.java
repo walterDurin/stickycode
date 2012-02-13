@@ -23,6 +23,12 @@ import net.stickycode.configured.ConfigurationSystem;
 import net.stickycode.configured.ConfiguredConfigurationListener;
 import net.stickycode.configured.InlineConfigurationRepository;
 import net.stickycode.configured.SimpleNameDotFieldConfigurationKeyBuilder;
+import net.stickycode.configured.finder.BeanFinder;
+import net.stickycode.configured.guice3.finder.GuiceBeanFinder;
+import net.stickycode.metadata.MetadataResolver;
+import net.stickycode.metadata.MetadataResolverRegistry;
+import net.stickycode.metadata.ReflectiveElementMetadataResolver;
+import net.stickycode.metadata.ReflectiveMetadataResolverRegistry;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Singleton;
@@ -43,6 +49,8 @@ public class ConfiguredModule
     bind(ConfiguredInjector.class).in(Singleton.class);
     bind(ConfigurationKeyBuilder.class).to(SimpleNameDotFieldConfigurationKeyBuilder.class).in(Singleton.class);
     bind(ConfigurationRepository.class).to(InlineConfigurationRepository.class).in(Singleton.class);
+    bind(MetadataResolverRegistry.class).to(ReflectiveMetadataResolverRegistry.class);
+    bind(BeanFinder.class).to(GuiceBeanFinder.class);
     bindCoercions();
     ConfiguredTypeListener listener = new ConfiguredTypeListener();
     requestInjection(listener);
