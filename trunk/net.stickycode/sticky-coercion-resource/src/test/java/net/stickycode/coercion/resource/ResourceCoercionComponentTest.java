@@ -14,7 +14,7 @@ import net.stickycode.mockwire.MockwireConfigured;
 import net.stickycode.mockwire.MockwireContainment;
 import net.stickycode.mockwire.junit4.MockwireRunner;
 import net.stickycode.reflector.Fields;
-import net.stickycode.resource.Resource;
+import net.stickycode.stereotype.resource.Resource;
 
 import org.fest.assertions.MapAssert;
 import org.junit.Test;
@@ -32,11 +32,11 @@ public class ResourceCoercionComponentTest {
       private String value;
   }
 
-  private Resource<String> stringResource;
+  private String stringResource;
 
-  private Resource<Properties> propertiesResource;
+  private Properties propertiesResource;
 
-  private Resource<Bean> bean;
+  private Bean bean;
 
   @Inject
   private ResourceCoercion coercion;
@@ -44,14 +44,14 @@ public class ResourceCoercionComponentTest {
   @Test
   public void jaxbResource() {
     CoercionTarget target = target("bean");
-    Bean bean = (Bean)coercion.coerce(target, "classpath://bean.xml").get();
+    Bean bean = (Bean)coercion.coerce(target, "classpath://bean.xml");
     assertThat(bean.value).isEqualTo("loaded");
   }
   
   @Test
   public void propertiesResource() {
     CoercionTarget target = target("propertiesResource");
-    Properties bean = (Properties)coercion.coerce(target, "some.properties").get();
+    Properties bean = (Properties)coercion.coerce(target, "some.properties");
     assertThat(bean).includes(MapAssert.entry("a", "b"));
   }
 
