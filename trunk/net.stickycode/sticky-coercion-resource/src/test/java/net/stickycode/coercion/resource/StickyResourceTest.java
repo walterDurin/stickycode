@@ -15,7 +15,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(MockwireRunner.class)
 @MockwireConfigured({
-    "resourceToGoTest.bean.uri=bean.xml"
+    "stickyResourceTest.bean.uri=bean.xml"
 })
 public class StickyResourceTest {
 
