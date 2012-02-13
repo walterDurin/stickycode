@@ -12,9 +12,16 @@
  */
 package net.stickycode.scheduled.guice3;
 
+import java.beans.Introspector;
+import java.lang.reflect.Method;
+import java.util.Set;
+
 import net.stickycode.configured.ConfigurationRepository;
 import net.stickycode.configured.ConfiguredConfiguration;
 import net.stickycode.reflector.Reflector;
+import net.stickycode.reflector.predicate.MethodPredicate;
+import net.stickycode.reflector.predicate.PredicateReflector;
+import net.stickycode.scheduled.ScheduledMethodInvokerFactory;
 import net.stickycode.scheduled.ScheduledMethodProcessor;
 import net.stickycode.scheduled.ScheduledRunnableRepository;
 import net.stickycode.stereotype.StickyComponent;
@@ -32,14 +39,43 @@ public class ScheduledInjector
   private ConfigurationRepository configurationRepository;
 
   @Inject
-  private ScheduledRunnableRepository schedulingSystem;
+  private ScheduledRunnableRepository scheduledRunnableRepository;
+
+  @Inject
+  private Set<ScheduledMethodInvokerFactory> invokerFactories;
+
+  private class Invokable
+      implements MethodPredicate {
+
+    @Override
+    public boolean apply(Method method) {
+      for (ScheduledMethodInvokerFactory factory : invokerFactories) {
+        if (factory.canInvoke(method))
+          return true;
+      }
+
+      return false;
+    }
+  }
+
+  public boolean isApplicable(Class<?> type) {
+    return new PredicateReflector().given(type).areAnyMethods(new Invokable());
+  }
 
   @Override
   public void injectMembers(Object instance) {
-    ConfiguredConfiguration configuration = new ConfiguredConfiguration(instance);
+    ConfiguredConfiguration configuration = new ConfiguredConfiguration(instance, Introspector.decapitalize(instance.getClass()
+        .getSimpleName()));
+
+    ScheduledMethodProcessor scheduledMethodProcessor = new ScheduledMethodProcessor()
+        .withInvokers(invokerFactories)
+        .withSchedulingSystem(scheduledRunnableRepository)
+        .withConfiguration(configuration);
+
     new Reflector()
-        .forEachMethod(new ScheduledMethodProcessor(schedulingSystem, configuration))
+        .forEachMethod(scheduledMethodProcessor)
         .process(instance);
+
     configurationRepository.register(configuration);
   }
 

@@ -13,15 +13,13 @@
 package net.stickycode.scheduled.guice3;
 
 import static de.devsurf.injection.guice.scanner.PackageFilter.create;
-import static net.stickycode.configured.guice3.StickyModule.bootstrapModule;
-import static net.stickycode.configured.guice3.StickyModule.keyBuilderModule;
 import static org.mockito.Mockito.when;
 
 import java.util.Collections;
 
+import net.stickycode.bootstrap.guice3.StickyModule;
 import net.stickycode.configured.ConfigurationSource;
 import net.stickycode.configured.guice3.ConfigurationSourceModule;
-import net.stickycode.configured.guice3.StickyModule;
 import net.stickycode.scheduled.SchedulingSystem;
 
 import org.mockito.Mockito;
@@ -37,8 +35,8 @@ public class ConfiguredAutobindingTest
   @Override
   protected void configure(ScheduleTestObject instance) {
     Injector injector = Guice.createInjector(
-        bootstrapModule(create("net.stickycode")),
-        keyBuilderModule())
+        StickyModule.bootstrapModule(create("net.stickycode")),
+        StickyModule.keyBuilderModule())
         .createChildInjector(
             StickyModule.applicationModule(create("net.stickycode")),
             schedulingSystemModule(),

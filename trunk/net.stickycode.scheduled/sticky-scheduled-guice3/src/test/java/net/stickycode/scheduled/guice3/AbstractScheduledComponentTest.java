@@ -35,7 +35,7 @@ public abstract class AbstractScheduledComponentTest {
   
   @Inject
   SchedulingSystem scheduling;
-
+  
   @Test
   public void verifyScheduling() {
     ScheduleTestObject instance = new ScheduleTestObject();

@@ -12,11 +12,8 @@
  */
 package net.stickycode.scheduled.guice3;
 
-import java.lang.reflect.Method;
-
 import javax.inject.Inject;
 
-import net.stickycode.stereotype.Scheduled;
 import net.stickycode.stereotype.StickyComponent;
 import net.stickycode.stereotype.StickyFramework;
 
@@ -39,20 +36,14 @@ public class ScheduledTypeListener
 
   @Override
   public <I> void hear(TypeLiteral<I> type, TypeEncounter<I> encounter) {
-    if (typeIsScheduled(type)) {
-      if (membersInjector == null)
-        throw new AssertionError("on hearing " + type.getRawType().getName() + " found that " + getClass().getSimpleName() + " was not injected with a " + ScheduledInjector.class.getSimpleName());
+    if (membersInjector == null) {
+      log.debug("ignoring {} for scheduling as members injector not injected yet, perhaps you need a child injector", type);
+      return;
+    }
 
+    if (membersInjector.isApplicable(type.getRawType())) {
       encounter.register(membersInjector);
       log.info("encountering {} registering injector {}", type, membersInjector);
     }
-  }
-
-  private <I> boolean typeIsScheduled(TypeLiteral<I> type) {
-    for (Method method : type.getRawType().getDeclaredMethods())
-      if (method.isAnnotationPresent(Scheduled.class))
-        return true;
-
-    return false;
   }
 }
