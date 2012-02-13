@@ -32,7 +32,7 @@ public class ResourceCodecCoecion<T>
 
   @Override
   public ResourceCodec<T> getDefaultValue(CoercionTarget target) {
-    return codecs.find(target);
+    return codecs.find(target.getComponentCoercionTypes()[0]);
   }
 
 }

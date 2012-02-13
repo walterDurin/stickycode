@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import net.stickycode.mockwire.MockwireConfigured;
 import net.stickycode.mockwire.junit4.MockwireRunner;
 import net.stickycode.stereotype.Configured;
+import net.stickycode.stereotype.resource.Resource;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,7 +27,7 @@ public class ResourceToGoTest {
   }
 
   @Configured
-  ResourceToGo<Bean> bean;
+  Resource<Bean> bean;
 
   @Test
   public void configured() {

@@ -10,7 +10,6 @@ import net.stickycode.mockwire.MockwireConfigured;
 import net.stickycode.mockwire.MockwireContainment;
 import net.stickycode.mockwire.junit4.MockwireRunner;
 import net.stickycode.reflector.Fields;
-import net.stickycode.resource.Resource;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,38 +19,37 @@ import org.junit.runner.RunWith;
 @MockwireConfigured({})
 public class ResourceCoercionTest {
 
-  private Resource<String> blah;
+  private String blah;
 
   @Inject
   private ResourceCoercion coercion;
 
   @Test
   public void defaultClasspath() {
-    assertThat(coercion.coerce(target(), "stringResource.txt").get()).isEqualTo("hmm");
+    assertThat(coercion.coerce(target(), "stringResource.txt")).isEqualTo("hmm");
   }
 
   @Test
   public void loadedResource() {
-    Resource<Object> actual = coercion.coerce(target(), "stringResource.txt");
-    assertThat(actual.get()).isEqualTo("hmm");
-    assertThat(actual.get()).isSameAs(actual.get());
+    Object actual = coercion.coerce(target(), "stringResource.txt");
+    assertThat(actual).isEqualTo("hmm");
   }
 
   @Test
   public void classpathResource() {
-    assertThat(coercion.coerce(target(), "classpath://stringResource.txt").get()).isEqualTo("hmm");
+    assertThat(coercion.coerce(target(), "classpath://stringResource.txt")).isEqualTo("hmm");
   }
 
   @Test
   public void classpathWithSlashResource() {
-    assertThat(coercion.coerce(target(), "classpath:///net/stickycode/coercion/resource/stringResource.txt").get()).isEqualTo(
+    assertThat(coercion.coerce(target(), "classpath:///net/stickycode/coercion/resource/stringResource.txt")).isEqualTo(
         "hmm");
   }
 
   // resource:type:protocol:uri
   @Test
   public void cachedHttpResource() {
-    assertThat(coercion.coerce(target(), "dummy://blah").get()).isEqualTo("blah");
+    assertThat(coercion.coerce(target(), "dummy://blah")).isEqualTo("blah");
   }
 
   private CoercionTarget target() {
