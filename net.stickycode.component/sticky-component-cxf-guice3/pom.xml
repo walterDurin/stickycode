@@ -10,7 +10,7 @@
 
 	<groupId>net.stickycode.component</groupId>
 	<artifactId>sticky-component-cxf-guice3</artifactId>
-	<version>2.1-SNAPSHOT</version>
+	<version>2.2-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>sticky-component-cxf-guice3</name>
