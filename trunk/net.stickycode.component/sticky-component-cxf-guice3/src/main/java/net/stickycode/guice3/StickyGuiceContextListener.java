@@ -19,8 +19,8 @@ import javax.inject.Singleton;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 
+import net.stickycode.bootstrap.guice3.StickyModule;
 import net.stickycode.configured.ConfigurationSystem;
-import net.stickycode.configured.guice3.StickyModule;
 import net.stickycode.cxf.guice3.StickyCxfServlet;
 import net.stickycode.guice3.jsr250.Jsr250Module;
 
