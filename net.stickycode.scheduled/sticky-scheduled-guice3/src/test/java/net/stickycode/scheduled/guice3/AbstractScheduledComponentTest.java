@@ -50,6 +50,7 @@ public abstract class AbstractScheduledComponentTest {
     assertThat(configurations).hasSize(1);
     Configuration c = configurations.iterator().next();
     assertThat(c).hasSize(1);
+    
   }
 
 }

@@ -10,20 +10,19 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
  */
-package net.stickycode.scheduled.guice3;
+package net.stickycode.scheduled;
 
+import static org.fest.assertions.Assertions.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import net.stickycode.configured.ConfigurationRepository;
-import net.stickycode.configured.ConfiguredConfiguration;
-import net.stickycode.scheduled.ScheduledMethodInvoker;
-import net.stickycode.scheduled.ScheduledMethodInvokerFactory;
-import net.stickycode.scheduled.ScheduledRunnableRepository;
-import net.stickycode.scheduled.SimpleScheduledInvokerFactory;
+import net.stickycode.coercion.CoercionTarget;
+import net.stickycode.configured.ConfiguredBeanProcessor;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,26 +33,29 @@ import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ScheduleInjectorTest {
+public class ScheduledBeanProcessorTest {
 
   @Mock
-  ConfigurationRepository repository;
+  ConfiguredBeanProcessor beanProcessor;
 
   @Mock
   ScheduledRunnableRepository schedulingSystem;
-  
+
   @Spy
-  Set<ScheduledMethodInvokerFactory> factories = new HashSet<ScheduledMethodInvokerFactory>(Arrays.asList(new SimpleScheduledInvokerFactory()));
+  Set<ScheduledMethodInvokerFactory> factories = new HashSet<ScheduledMethodInvokerFactory>(
+      Arrays.asList(new SimpleScheduledInvokerFactory()));
 
   @InjectMocks
-  ScheduledInjector injector = new ScheduledInjector();
+  ScheduledBeanProcessor injector = new ScheduledBeanProcessor();
 
   @Test
   public void scheduled() throws InterruptedException {
     ScheduleTestObject schedule = new ScheduleTestObject();
-    injector.injectMembers(schedule);
+    assertThat(injector.isSchedulable(schedule.getClass())).isTrue();
+
+    injector.process(schedule);
 
     verify(schedulingSystem).schedule(Matchers.any(ScheduledMethodInvoker.class));
-    verify(repository).register(Matchers.any(ConfiguredConfiguration.class));
+    verify(beanProcessor).process(any(ScheduleTestObject.class), eq("scheduleTestObject.runIt"), eq((CoercionTarget) null));
   }
 }

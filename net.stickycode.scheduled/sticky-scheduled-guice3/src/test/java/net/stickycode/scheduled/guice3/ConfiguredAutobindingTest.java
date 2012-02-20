@@ -57,8 +57,8 @@ public class ConfiguredAutobindingTest
 
   private Module configurationSourceModule() {
     ConfigurationSource configurationSource = Mockito.mock(ConfigurationSource.class);
-    when(configurationSource.hasValue("scheduleTestObject.runIt")).thenReturn(true);
-    when(configurationSource.getValue("scheduleTestObject.runIt")).thenReturn("every 2 seconds");
+    when(configurationSource.hasValue("scheduleTestObject.runIt.schedule")).thenReturn(true);
+    when(configurationSource.getValue("scheduleTestObject.runIt.schedule")).thenReturn("every 2 seconds");
     return new ConfigurationSourceModule(Collections.singletonList(configurationSource));
   }
 

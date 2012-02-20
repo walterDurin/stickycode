@@ -20,6 +20,6 @@ public interface ScheduledMethodInvokerFactory {
   /**
    * Create a scheduled runnable that will be used to invoke {@code method} on target with the given {@link Schedule schedule}
    */
-  ScheduledRunnable create(Object target, Method method, Schedule schedule);
+  ScheduledRunnable create(Object target, Method method);
 
 }
