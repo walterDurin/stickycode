@@ -12,16 +12,9 @@
  */
 package net.stickycode.scheduled.spring30;
 
-import java.lang.reflect.Method;
-
 import javax.inject.Inject;
 
-import net.stickycode.configured.ConfigurationRepository;
-import net.stickycode.configured.ConfiguredConfiguration;
-import net.stickycode.reflector.Reflector;
-import net.stickycode.scheduled.ScheduledMethodProcessor;
-import net.stickycode.scheduled.ScheduledRunnableRepository;
-import net.stickycode.stereotype.Scheduled;
+import net.stickycode.scheduled.ScheduledBeanProcessor;
 import net.stickycode.stereotype.StickyComponent;
 
 import org.springframework.beans.BeansException;
@@ -32,29 +25,14 @@ public class ScheduledBeanPostProcessor
     extends InstantiationAwareBeanPostProcessorAdapter {
 
   @Inject
-  private ConfigurationRepository configurationRepository;
-
-  @Inject
-  private ScheduledRunnableRepository schedulingSystem;
+  private ScheduledBeanProcessor processor;
 
   @Override
   public boolean postProcessAfterInstantiation(Object bean, String beanName) throws BeansException {
-    if (typeHasSchedules(bean.getClass())) {
-      ConfiguredConfiguration configuration = new ConfiguredConfiguration(bean, beanName);
-      new Reflector()
-          .forEachMethod(new ScheduledMethodProcessor(schedulingSystem, configuration))
-          .process(bean);
-      configurationRepository.register(configuration);
-    }
+    if (processor.isSchedulable(bean.getClass()))
+      processor.process(bean);
+    
     return true;
-  }
-
-  private boolean typeHasSchedules(Class<?> type) {
-    for (Method method : type.getDeclaredMethods())
-      if (method.isAnnotationPresent(Scheduled.class))
-        return true;
-
-    return false;
   }
 
 }
