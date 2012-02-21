@@ -15,11 +15,8 @@
 	<import
 		resource="classpath:META-INF/cxf/cxf-servlet.xml" />
 		
-	<bean
-		class="net.stickycode.configured.SimpleNameDotFieldConfigurationKeyBuilder" />
-		
 	<context:component-scan
-		base-package="net.stickycode"
+		base-package="net.stickycode,co.nfigured.example"
 		use-default-filters="false"
 		annotation-config="true">
 		<context:include-filter

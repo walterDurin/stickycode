@@ -15,7 +15,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 
 	<context-param>
 		<param-name>sticky-application-packages</param-name>
-		<param-value>co.nfigured.examples</param-value>
+		<param-value>co.nfigured.example</param-value>
 	</context-param>
 
 	<filter>
