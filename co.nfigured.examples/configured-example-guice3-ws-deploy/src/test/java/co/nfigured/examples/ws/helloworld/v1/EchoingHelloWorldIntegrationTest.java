@@ -20,7 +20,7 @@ import net.stickycode.stereotype.Configured;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import co.nfigured.examples.ws.helloworld.v1.HelloWorld;
+import co.nfigured.example.helloworld.v1.HelloWorld;
 
 @RunWith(MockwireRunner.class)
 @MockwireConfigured
