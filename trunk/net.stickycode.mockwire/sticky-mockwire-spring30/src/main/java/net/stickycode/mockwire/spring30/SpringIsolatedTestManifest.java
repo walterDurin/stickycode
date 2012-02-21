@@ -179,7 +179,11 @@ public class SpringIsolatedTestManifest
   public void registerConfiguationSystem(List<ConfigurationSource> configurationSources) {
     ClassPathBeanDefinitionScanner scanner = createScanner();
     scanner.scan(
-        "net.stickycode"
+        "net.stickycode.configured",
+        "net.stickycode.mockwire",
+        "net.stickycode.spring30",
+        "net.stickycode.coercion",
+        "net.stickycode.metadata"
         );
 
     for (ConfigurationSource configurationSource : configurationSources) {
