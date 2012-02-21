@@ -16,6 +16,7 @@ import static net.stickycode.bootstrap.guice3.StickyModule.bootstrapModule;
 import static net.stickycode.bootstrap.guice3.StickyModule.keyBuilderModule;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import net.stickycode.configured.ConfigurationSource;
@@ -123,7 +124,15 @@ public class GuiceIsolatedTestManifest
     this.configurationSources = configurationSources;
     if (packageFilters == null)
       packageFilters = new ArrayList<PackageFilter>();
-    packageFilters.add(PackageFilter.create("net.stickycode"));
+    for (String p : Arrays.asList("net.stickycode.configured",
+        "net.stickycode.resource",
+        "net.stickycode.mockwire",
+        "net.stickycode.guice3",
+        "net.stickycode.coercion",
+        "net.stickycode.metadata"
+        )) {
+      packageFilters.add(PackageFilter.create(p));
+    }
   }
 
   @Override
