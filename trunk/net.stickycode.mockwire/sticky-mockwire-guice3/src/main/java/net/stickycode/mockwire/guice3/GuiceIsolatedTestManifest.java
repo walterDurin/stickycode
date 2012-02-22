@@ -124,15 +124,20 @@ public class GuiceIsolatedTestManifest
     this.configurationSources = configurationSources;
     if (packageFilters == null)
       packageFilters = new ArrayList<PackageFilter>();
-    for (String p : Arrays.asList("net.stickycode.configured",
+    
+    for (String p : configuredDependencies()) {
+      packageFilters.add(PackageFilter.create(p));
+    }
+  }
+
+  private List<String> configuredDependencies() {
+    return Arrays.asList("net.stickycode.configured",
         "net.stickycode.resource",
         "net.stickycode.mockwire",
         "net.stickycode.guice3",
         "net.stickycode.coercion",
         "net.stickycode.metadata"
-        )) {
-      packageFilters.add(PackageFilter.create(p));
-    }
+        );
   }
 
   @Override
