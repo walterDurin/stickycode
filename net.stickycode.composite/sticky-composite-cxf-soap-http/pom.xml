@@ -9,27 +9,37 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>net.stickycode.composite</groupId>
-	<artifactId>sticky-composite-cxf-soap-unittest</artifactId>
-	<version>1.2-SNAPSHOT</version>
+	<artifactId>sticky-composite-cxf-soap-http</artifactId>
+	<version>1.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>sticky-composite-cxf-soap-unittest</name>
-	<description>Composition of dependencies for using cxf for unitteting soapful websevices</description>
-	<url>http://www.StickyCode.net/composite/sticky-composite-cxf-soap-unittest/</url>
+	<name>sticky-composite-cxf-soap-http</name>
+	<description>Composition of dependencies for using cxf for soapful websevices</description>
+	<url>http://www.StickyCode.net/composite/sticky-composite-cxf-soap-http/</url>
 	<inceptionYear>2007</inceptionYear>
 
 	<scm>
-		<connection>scm:svn:http://stickycode.googlecode.com/svn/trunk/net.stickycode.composite/sticky-composite-cxf-soap-unittest</connection>
-		<developerConnection>scm:svn:https://stickycode.googlecode.com/svn/trunk/net.stickycode.composite/sticky-composite-cxf-soap-unittest</developerConnection>
-		<url>http://code.google.com/p/stickycode/source/browse/#svn/trunk/net.stickycode.composite/sticky-composite-cxf-soap-unittest</url>
+		<connection>scm:svn:http://stickycode.googlecode.com/svn/trunk/net.stickycode.composite/sticky-composite-cxf-soap-http</connection>
+		<developerConnection>scm:svn:https://stickycode.googlecode.com/svn/trunk/net.stickycode.composite/sticky-composite-cxf-soap-http</developerConnection>
+		<url>http://code.google.com/p/stickycode/source/browse/#svn/trunk/net.stickycode.composite/sticky-composite-cxf-soap-http</url>
 	</scm>
 
 	<dependencies>
-
-
+		<dependency>
+			<groupId>net.stickycode.composite</groupId>
+			<artifactId>sticky-composite-logging-api</artifactId>
+			<version>[1.2,2)</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jul-to-slf4j</artifactId>
+			<version>[1.6.1]</version>
+		</dependency>		
+		
 		<dependency>
 			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-transports-local</artifactId>
+			<artifactId>cxf-rt-transports-http</artifactId>
 			<version>[2.5.2]</version>
 			<exclusions>
 				<exclusion>
@@ -66,6 +76,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+
 		<dependency>
 			<groupId>net.stickycode.composite</groupId>
 			<artifactId>sticky-composite-cxf-soap</artifactId>
