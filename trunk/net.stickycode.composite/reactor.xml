@@ -15,11 +15,13 @@
 
 	<name>composite-reactor</name>
 	<modules>
-		<module>sticky-composite-cxf-soap</module>
 		<module>sticky-composite-logging-api</module>
 		<module>sticky-composite-logging-deploy</module>
 		<module>sticky-composite-spring25</module>
 		<module>sticky-composite-spring30</module>
 		<module>sticky-composite-unittest</module>
+		<module>sticky-composite-cxf-soap</module>
+		<module>sticky-composite-cxf-soap-unittest</module>
+		<module>sticky-composite-cxf-soap-http</module>
 	</modules>
 </project>
