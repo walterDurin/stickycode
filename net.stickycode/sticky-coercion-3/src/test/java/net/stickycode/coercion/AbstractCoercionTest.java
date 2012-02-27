@@ -153,7 +153,13 @@ public abstract class AbstractCoercionTest {
 
   @SuppressWarnings("unchecked")
   private ArrayCoercion arrayCoercion() {
-    return new ArrayCoercion(Arrays.asList(coercion()));
+    return new ArrayCoercion(new CoercionFinder() {
+      
+      @Override
+      public Coercion<?> find(CoercionTarget target) throws CoercionNotFoundException {
+        return coercion();
+      }
+    });
   }
 
 }

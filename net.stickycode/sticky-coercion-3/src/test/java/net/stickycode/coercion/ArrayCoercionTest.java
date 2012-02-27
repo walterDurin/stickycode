@@ -67,8 +67,6 @@ public class ArrayCoercionTest {
 
   @SuppressWarnings("unchecked")
   private ArrayCoercion coercion() {
-    return new ArrayCoercion(Arrays.asList(
-        new StringCoercion(),
-        new StringConstructorCoercion()));
+    return new ArrayCoercion(new Coercions());
   }
 }
