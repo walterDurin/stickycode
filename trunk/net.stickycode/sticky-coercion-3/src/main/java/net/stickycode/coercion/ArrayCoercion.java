@@ -18,9 +18,9 @@ import java.util.List;
 public class ArrayCoercion
     implements Coercion<Object> {
 
-  private final List<? extends Coercion<?>> componentCoercions;
+  private final CoercionFinder componentCoercions;
 
-  public ArrayCoercion(List<? extends Coercion<?>> componentCoercions) {
+  public ArrayCoercion(CoercionFinder componentCoercions) {
     super();
     this.componentCoercions = componentCoercions;
   }
@@ -49,12 +49,7 @@ public class ArrayCoercion
 
   private Coercion<?> findComponentCoercion(CoercionTarget target) {
     CoercionTarget t = target.getComponentCoercionType();
-    for (Coercion<?> c : componentCoercions) {
-      if (c.isApplicableTo(t))
-        return c;
-    }
-
-    return null;
+    return componentCoercions.find(t);
   }
 
   @Override
