@@ -7,6 +7,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import net.stickycode.stereotype.StickyComponent;
+import net.stickycode.stereotype.StickyPlugin;
 
 
 /**
@@ -66,12 +67,12 @@ import net.stickycode.stereotype.StickyComponent;
 @Target(ElementType.TYPE)
 public @interface MockwireContainment {
   /**
-   * The list of paths to build the context from
+   * The list of paths to build the context from, the default is the package of the annotated class
    */
   String[] value() default {};
 
   /**
-   * Identify components marked with these annotations
+   * Identify components (meta-)annotated with these markers
    */
-  Class<? extends Annotation>[] componentMarkers() default {StickyComponent.class};
+  Class<? extends Annotation>[] componentMarkers() default {StickyComponent.class, StickyPlugin.class};
 }
