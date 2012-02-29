@@ -13,6 +13,7 @@
 package net.stickycode.mockwire.configured;
 
 import static org.fest.assertions.Assertions.assertThat;
+import net.stickycode.mockwire.MockwireConfigured;
 import net.stickycode.mockwire.UnderTest;
 import net.stickycode.mockwire.junit4.MockwireRunner;
 
@@ -20,6 +21,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(MockwireRunner.class)
+@MockwireConfigured
 public class InlineConfiguredTest {
 
   @UnderTest("a=inline")

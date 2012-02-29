@@ -124,7 +124,7 @@ public class GuiceIsolatedTestManifest
     this.configurationSources = configurationSources;
     if (packageFilters == null)
       packageFilters = new ArrayList<PackageFilter>();
-    
+
     for (String p : configuredDependencies()) {
       packageFilters.add(PackageFilter.create(p));
     }
@@ -143,6 +143,11 @@ public class GuiceIsolatedTestManifest
   @Override
   public void configure() {
     injector.getInstance(ConfigurationSystem.class).configure();
+  }
+
+  @Override
+  public void initialiseFramework(List<String> frameworkPackages) {
+    scanPackages(frameworkPackages.toArray(new String[0]));
   }
 
 }

@@ -74,4 +74,6 @@ public interface IsolatedTestManifest extends ParameterSource {
    */
   void configure();
 
+  void initialiseFramework(List<String> frameworkPackages);
+
 }
