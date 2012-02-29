@@ -36,8 +36,15 @@ public class ConfiguredTest {
     ConfiguredObject configured;
   }
 
+  @MockwireConfigured
   public class InlineConfigured {
 
+    @UnderTest("a=inline")
+    ConfiguredObject configured;
+  }
+  
+  public class InlineConfiguredNeedsFeature {
+    
     @UnderTest("a=inline")
     ConfiguredObject configured;
   }
@@ -61,5 +68,11 @@ public class ConfiguredTest {
     InlineConfigured testInstance = new InlineConfigured();
     Mockwire.isolate(testInstance);
     assertThat(testInstance.configured.a).isEqualTo("inline");
+  }
+  
+  @Test(expected=MockwireConfiguredIsRequiredToTestConfiguredCodeException.class)
+  public void checkInlineConfigurationExcepts() {
+    InlineConfiguredNeedsFeature testInstance = new InlineConfiguredNeedsFeature();
+    Mockwire.isolate(testInstance);
   }
 }

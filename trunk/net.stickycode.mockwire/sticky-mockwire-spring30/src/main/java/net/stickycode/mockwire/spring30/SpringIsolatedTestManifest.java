@@ -177,15 +177,6 @@ public class SpringIsolatedTestManifest
 
   @Override
   public void registerConfiguationSystem(List<ConfigurationSource> configurationSources) {
-    ClassPathBeanDefinitionScanner scanner = createScanner();
-    scanner.scan(
-        "net.stickycode.configured",
-        "net.stickycode.mockwire",
-        "net.stickycode.spring30",
-        "net.stickycode.coercion",
-        "net.stickycode.metadata"
-        );
-
     for (ConfigurationSource configurationSource : configurationSources) {
       registerBean(name(configurationSource.getClass()), configurationSource, ConfigurationSource.class);
     }
@@ -205,6 +196,12 @@ public class SpringIsolatedTestManifest
   @Override
   public void configure() {
     context.getBean(ConfigurationSystem.class).configure();
+  }
+
+  @Override
+  public void initialiseFramework(List<String> frameworkPackages) {
+    ClassPathBeanDefinitionScanner scanner = createScanner();
+    scanner.scan(frameworkPackages.toArray(new String[0]));
   }
 
 }
