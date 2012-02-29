@@ -21,7 +21,7 @@ import net.stickycode.reflector.Reflector;
 
 public class MockwireFieldInjector
     implements MembersInjector<Object> {
-
+  
   private final MethodFactoryDependencies valueCollector;
 
   public MockwireFieldInjector(MethodFactoryDependencies valueCollector) {
