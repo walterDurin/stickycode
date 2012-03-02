@@ -31,26 +31,11 @@
 			<scope>test</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>2.5</version>
-		</dependency>
 
 		<dependency>
 			<groupId>net.stickycode.component</groupId>
 			<artifactId>sticky-component-cxf</artifactId>
 			<version>[3.1,4)</version>
-		</dependency>
-		<dependency>
-			<groupId>net.stickycode</groupId>
-			<artifactId>sticky-stereotype</artifactId>
-			<version>[1.16,2)</version>
-		</dependency>
-		<dependency>
-			<groupId>net.stickycode</groupId>
-			<artifactId>sticky-exception</artifactId>
-			<version>[1.6,2)</version>
 		</dependency>
 		<dependency>
 			<groupId>net.stickycode.configured</groupId>
@@ -61,6 +46,11 @@
 			<groupId>com.google.inject.extensions</groupId>
 			<artifactId>guice-servlet</artifactId>
 			<version>3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>net.stickycode.composite</groupId>
+			<artifactId>sticky-composite-cxf-soap-http</artifactId>
+			<version>[1.1,2)</version>
 		</dependency>
 	</dependencies>
 </project>
