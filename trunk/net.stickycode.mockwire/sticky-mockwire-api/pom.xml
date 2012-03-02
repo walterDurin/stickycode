@@ -27,12 +27,12 @@
 		<dependency>
 			<groupId>net.stickycode</groupId>
 			<artifactId>sticky-stereotype</artifactId>
-			<version>[1.13,2)</version>
+			<version>[1.16,2)</version>
 		</dependency>
 		<dependency>
 			<groupId>net.stickycode.configured</groupId>
 			<artifactId>sticky-configured-api</artifactId>
-			<version>[3.1,4)</version>
+			<version>[3.4,4)</version>
 		</dependency>
 	</dependencies>
 </project>
