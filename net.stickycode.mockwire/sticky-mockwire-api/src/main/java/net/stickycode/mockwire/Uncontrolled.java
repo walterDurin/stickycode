@@ -94,6 +94,42 @@ import net.stickycode.stereotype.Configured;
  *     ConfiguredConcreteClass configured;
  *  }
  * </pre>
+ * 
+ * <h3>Method factory example</h3>
+ * <p>
+ * In the following example <code>ConcreteClass</code> will be registered into a singleton in the isolated test context created
+ * by <code>Mockwire.isolate()</code>.
+ * </p>
+ * <pre>
+ *  &#064;RunWith(MockwireRunner.class)
+ *  public class MockwireTest {
+ *
+ *  &#064;Uncontrolled("value=true")
+ *  ConfiguredConcreteClass uncontrolledAndConfigured() {
+ *    return new ConfiguredConcreteClass();
+ *  }
+ *  
+ *  &#064;UnderTest
+ *  ConcreteClass underTest;
+ *
+ *  &#064;Test
+ *  public void testBless() {
+ *    assertThat(context.hasBeanOfType(ConfiguredConcreteClass.class)).isTrue();
+ *    assertThat(context.hasBeanOfType(ConcreteClass.class)).isTrue();
+ *    assertThat(underTest).isNotNull();
+ *    assertThat(underTest.configured).isTrue();
+ *  }
+ *
+ *  static class ConfiguredConcreteClass {
+ *    &#064;Configured
+ *    Boolean value;
+ *  }
+ *  
+ *  static class ConcreteClass {
+ *     &#064;Inject
+ *     ConfiguredConcreteClass configured;
+ *  }
+ * </pre>
  */
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)

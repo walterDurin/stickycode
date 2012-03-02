@@ -24,7 +24,7 @@ import static org.fest.assertions.Assertions.assertThat;
 @RunWith(MockwireRunner.class)
 public class DependentMethodBlessingTest {
 
-  // TODO this should work being non-static but guice2 insists on the static
+  // TODO this should work being non-static but guice insists on the static
   static public class AutowirableWithAutowirable {
     AutowirableWithMockable autowirableWithMockable;
 
@@ -33,7 +33,7 @@ public class DependentMethodBlessingTest {
     }
   }
 
-  // TODO this should work being non-static but guice2 insists on the static
+  // TODO this should work being non-static but guice insists on the static
   static public class AutowirableWithMockable {
     Mockable mockable;
 
@@ -51,12 +51,12 @@ public class DependentMethodBlessingTest {
 	@Inject
 	AutowirableWithAutowirable nested;
 
-	@UnderTest
+	@Uncontrolled
   public AutowirableWithMockable factory(Mockable mockable) {
     return new AutowirableWithMockable(mockable);
   }
 
-	@UnderTest
+	@Uncontrolled
 	public AutowirableWithAutowirable dependency(AutowirableWithMockable autowirable) {
 	  return new AutowirableWithAutowirable(autowirable);
 	}
