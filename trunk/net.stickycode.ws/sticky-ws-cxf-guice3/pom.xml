@@ -8,19 +8,19 @@
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>net.stickycode.component</groupId>
-	<artifactId>sticky-component-cxf-guice3</artifactId>
-	<version>2.2-SNAPSHOT</version>
+	<groupId>net.stickycode.ws</groupId>
+	<artifactId>sticky-ws-cxf-guice3</artifactId>
+	<version>2.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>sticky-component-cxf-guice3</name>
-	<url>http://www.StickyCode.net/component/sticky-component-cxf-guice3/</url>
+	<name>sticky-ws-cxf-guice3</name>
+	<url>http://www.StickyCode.net/ws/sticky-ws-cxf-guice3/</url>
 	<inceptionYear>2011</inceptionYear>
 
 	<scm>
-		<connection>scm:svn:http://stickycode.googlecode.com/svn/trunk/net.stickycode.component/sticky-component-cxf-guice3</connection>
-		<developerConnection>scm:svn:https://stickycode.googlecode.com/svn/trunk/net.stickycode.component/sticky-component-cxf-guice3</developerConnection>
-		<url>http://code.google.com/p/stickycode/source/browse/#svn/trunk/net.stickycode.component/sticky-component-cxf-guice3</url>
+		<connection>scm:svn:http://stickycode.googlecode.com/svn/trunk/net.stickycode.ws/sticky-ws-cxf-guice3</connection>
+		<developerConnection>scm:svn:https://stickycode.googlecode.com/svn/trunk/net.stickycode.ws/sticky-ws-cxf-guice3</developerConnection>
+		<url>http://code.google.com/p/stickycode/source/browse/#svn/trunk/net.stickycode.ws/sticky-ws-cxf-guice3</url>
 	</scm>
 
 	<dependencies>
@@ -33,8 +33,8 @@
 
 
 		<dependency>
-			<groupId>net.stickycode.component</groupId>
-			<artifactId>sticky-component-cxf</artifactId>
+			<groupId>net.stickycode.ws</groupId>
+			<artifactId>sticky-ws-cxf</artifactId>
 			<version>[3.1,4)</version>
 		</dependency>
 		<dependency>
@@ -45,7 +45,7 @@
 		<dependency>
 			<groupId>com.google.inject.extensions</groupId>
 			<artifactId>guice-servlet</artifactId>
-			<version>3.0</version>
+			<version>[3.0]</version>
 		</dependency>
 		<dependency>
 			<groupId>net.stickycode.composite</groupId>

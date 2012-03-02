@@ -8,20 +8,20 @@
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>net.stickycode.component</groupId>
-	<artifactId>sticky-component-cxf-spring30</artifactId>
-	<version>2.2-SNAPSHOT</version>
+	<groupId>net.stickycode.ws</groupId>
+	<artifactId>sticky-ws-cxf-spring30</artifactId>
+	<version>2.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>sticky-component-cxf-spring30</name>
-	<description>Web Service registration component support for spring30</description>
-	<url>http://www.StickyCode.net/component/sticky-component-cxf-spring30/</url>
+	<name>sticky-ws-cxf-spring30</name>
+	<description>Web Service registration ws support for spring30</description>
+	<url>http://www.StickyCode.net/ws/sticky-ws-cxf-spring30/</url>
 	<inceptionYear>2009</inceptionYear>
 
 	<scm>
-		<connection>scm:svn:http://stickycode.googlecode.com/svn/trunk/net.stickycode.component/sticky-component-adapter-spring30</connection>
-		<developerConnection>scm:svn:https://stickycode.googlecode.com/svn/trunk/net.stickycode.component/sticky-component-adapter-spring30</developerConnection>
-		<url>http://code.google.com/p/stickycode/source/browse/#svn/trunk/net.stickycode.component/sticky-component-adapter-spring30</url>
+		<connection>scm:svn:http://stickycode.googlecode.com/svn/trunk/net.stickycode.ws/sticky-ws-adapter-spring30</connection>
+		<developerConnection>scm:svn:https://stickycode.googlecode.com/svn/trunk/net.stickycode.ws/sticky-ws-adapter-spring30</developerConnection>
+		<url>http://code.google.com/p/stickycode/source/browse/#svn/trunk/net.stickycode.ws/sticky-ws-adapter-spring30</url>
 	</scm>
 
 	<dependencies>
@@ -39,14 +39,14 @@
 		</dependency>
 
 		<dependency>
-			<groupId>net.stickycode.component</groupId>
-			<artifactId>sticky-component-cxf</artifactId>
+			<groupId>net.stickycode.ws</groupId>
+			<artifactId>sticky-ws-cxf</artifactId>
 			<version>[5.1,6)</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
-			<version>[3.0.5.RELEASE]</version>
+			<version>[3.0.6.RELEASE]</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>commons-logging</artifactId>
