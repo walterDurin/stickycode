@@ -30,6 +30,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
+import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.beans.factory.xml.ResourceEntityResolver;
@@ -52,10 +53,13 @@ public class SpringIsolatedTestManifest
 
     context = new GenericApplicationContext();
 
-    MockwireFieldInjectionAnnotationBeanPostProcessor blessInjector = new MockwireFieldInjectionAnnotationBeanPostProcessor();
-    blessInjector.setBeanFactory(context.getDefaultListableBeanFactory());
+    MockwireFieldInjectingBeanPostProcessor blessInjector = new MockwireFieldInjectingBeanPostProcessor(new SpringValueSource(context));
     context.getBeanFactory().addBeanPostProcessor(blessInjector);
 
+    AutowiredAnnotationBeanPostProcessor inject = new AutowiredAnnotationBeanPostProcessor();
+    inject.setBeanFactory(context.getDefaultListableBeanFactory());
+    context.getBeanFactory().addBeanPostProcessor(inject);
+    
     CommonAnnotationBeanPostProcessor commonPostProcessor = new CommonAnnotationBeanPostProcessor();
     commonPostProcessor.setBeanFactory(context.getDefaultListableBeanFactory());
     context.getBeanFactory().addBeanPostProcessor(commonPostProcessor);

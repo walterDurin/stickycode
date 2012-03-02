@@ -12,16 +12,14 @@
  */
 package net.stickycode.mockwire.guice3;
 
-import com.google.inject.MembersInjector;
-
-import net.stickycode.mockwire.Controlled;
-import net.stickycode.mockwire.UnderTest;
-import net.stickycode.reflector.AnnotatedFieldSettingProcessor;
+import net.stickycode.mockwire.MockwireInjectingFieldProcessor;
 import net.stickycode.reflector.Reflector;
+
+import com.google.inject.MembersInjector;
 
 public class MockwireFieldInjector
     implements MembersInjector<Object> {
-  
+
   private final MethodFactoryDependencies valueCollector;
 
   public MockwireFieldInjector(MethodFactoryDependencies valueCollector) {
@@ -32,8 +30,8 @@ public class MockwireFieldInjector
   public void injectMembers(Object instance) {
     new Reflector()
         .forEachField(
-            new AnnotatedFieldSettingProcessor(valueCollector,
-                UnderTest.class, Controlled.class))
+            new MockwireInjectingFieldProcessor(valueCollector)
+        )
         .process(instance);
   }
 }
