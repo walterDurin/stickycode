@@ -12,21 +12,32 @@
  */
 package net.stickycode.mockwire;
 
-import net.stickycode.mockwire.inheritance.InheritanceTest;
+import static org.fest.assertions.Assertions.assertThat;
 
+import javax.inject.Inject;
+
+import net.stickycode.mockwire.junit4.MockwireRunner;
+
+import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
 
-@RunWith(Suite.class)
-@SuiteClasses({
-    FieldBlessingTest.class,
-    FieldMockingTest.class,
-    MethodBlessingTest.class,
-    UnderTestMethodFactoryTest.class,
-    UnblessableTypesTest.class,
-    InheritanceTest.class,
-    DependentMethodBlessingTest.class })
-public class MockwireTck {
+@RunWith(MockwireRunner.class)
+public class UnderTestMethodFactoryTest {
 
+  @Inject
+  private Autowirable injected;
+
+  @UnderTest
+  public Autowirable factory() {
+    return new Autowirable();
+  }
+
+  @Inject
+  IsolatedTestManifest context;
+
+  @Test
+  public void underTest() {
+    assertThat(context.hasRegisteredType(Autowirable.class)).isTrue();
+    assertThat(injected).isNotNull();
+  }
 }
