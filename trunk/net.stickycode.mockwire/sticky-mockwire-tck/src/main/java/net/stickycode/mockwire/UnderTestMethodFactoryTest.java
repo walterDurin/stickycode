@@ -27,7 +27,7 @@ public class UnderTestMethodFactoryTest {
   @Inject
   private Autowirable injected;
 
-  @UnderTest
+  @Uncontrolled
   public Autowirable factory() {
     return new Autowirable();
   }
