@@ -42,7 +42,7 @@ monitoring, management and more</description>
 		<dependency>
 			<groupId>net.stickycode.composite</groupId>
 			<artifactId>sticky-composite-cxf-soap</artifactId>
-			<version>[4.1,5)</version>
+			<version>[5.1,6)</version>
 		</dependency>
 		<dependency>
 			<groupId>net.stickycode</groupId>
