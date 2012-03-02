@@ -27,7 +27,7 @@
 		<dependency>
 			<groupId>net.stickycode.mockwire</groupId>
 			<artifactId>sticky-mockwire</artifactId>
-			<version>[7.1,8)</version>
+			<version>[7.2,8)</version>
 		</dependency>
 		<dependency>
 			<groupId>net.stickycode.composite</groupId>
