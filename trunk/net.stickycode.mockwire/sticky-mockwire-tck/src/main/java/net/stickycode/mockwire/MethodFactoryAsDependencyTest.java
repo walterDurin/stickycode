@@ -20,29 +20,35 @@ import org.junit.runner.RunWith;
 import net.stickycode.mockwire.junit4.MockwireRunner;
 
 import static org.fest.assertions.Assertions.assertThat;
-import static org.mockito.Mockito.when;
 
 @RunWith(MockwireRunner.class)
-public class FieldMockingTest {
+public class MethodFactoryAsDependencyTest {
 
   @Controlled
-  private Mockable mockable;
+  Mockable mockable;
 
-  @Inject
-  private Mockable injected;
+	@UnderTest
+	AutowirableWithDependencies underTest;
 
-  @Inject
-  IsolatedTestManifest context;
+	@Inject
+	Autowirable nested;
 
-  @Test
-  public void atMock() {
-    // XXX assertThat(context.hasRegisteredType(Mockable.class)).isTrue();
-    assertThat(injected).isNotNull();
-    assertThat(mockable).isNotNull();
+	@Uncontrolled
+  public Autowirable factory() {
+    return new Autowirable();
   }
 
-  public void verifyMock() {
-    when(injected.callme()).thenReturn(true);
-    assertThat(injected.callme()).isEqualTo(true);
-  }
+	@Inject
+	IsolatedTestManifest context;
+
+	@Test
+	public void underTest() {
+	  assertThat(context.hasRegisteredType(AutowirableWithDependencies.class)).isTrue();
+	  assertThat(context.hasRegisteredType(Mockable.class)).isTrue();
+	  assertThat(context.hasRegisteredType(Autowirable.class)).isTrue();
+	  
+	  assertThat(underTest).isNotNull();
+	  assertThat(mockable).isNotNull();
+	  assertThat(nested).isNotNull();
+	}
 }
