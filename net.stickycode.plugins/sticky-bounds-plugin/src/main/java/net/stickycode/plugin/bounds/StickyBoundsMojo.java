@@ -77,6 +77,7 @@ public class StickyBoundsMojo
 
   public void execute() {
     Document pom = load();
+    boolean changed = false;
 
     for (Dependency dependency : project.getDependencies()) {
       String version = dependency.getVersion();
@@ -93,10 +94,16 @@ public class StickyBoundsMojo
         if (!newVersion.equals(version)) {
           getLog().info("Updating " + artifact.toString() + " to " + newVersion);
           update(pom, artifact, newVersion);
+          changed |= true;
         }
       }
     }
 
+    if (changed)
+      writeChanges(pom);
+  }
+
+  private void writeChanges(Document pom) {
     Serializer serializer = createSerialiser();
     try {
       serializer.write(pom);
