@@ -11,7 +11,7 @@ if (!pomFile.exists())
 
 String pom = FileUtils.fileRead( pomFile, "UTF-8" ).trim();
 
-if (pom.contains("[1.10,2)"))
+if (pom.contains(">[1.10,2)<"))
 	return true;
 	
 System.err.println("Expected version to be [1.10,2)");
