@@ -90,11 +90,13 @@ public class StickyBoundsMojo
             version);
         Version highestVersion = highestVersion(version, artifact);
         String newVersion = "[" + highestVersion.toString() + "," + versionMatch.group(1) + ")";
-        getLog().info("Updating " + artifact.toString() + " to " + newVersion);
-        update(pom, artifact, newVersion);
+        if (!newVersion.equals(version)) {
+          getLog().info("Updating " + artifact.toString() + " to " + newVersion);
+          update(pom, artifact, newVersion);
+        }
       }
     }
-    
+
     Serializer serializer = createSerialiser();
     try {
       serializer.write(pom);
