@@ -26,20 +26,20 @@ public class StickyBoundsMojoIntegrationTest {
     Document pom = new Builder().build(new File(new File("src/it/reflector"), "pom.xml"));
     Artifact artifact = new DefaultArtifact(
         "net.stickycode",
-        "sticky-reflector",
+        "sticky-coercion",
         "jar",
         "",
-        "[1.1,2)");
+        "[3.1,4)");
 
-    new StickyBoundsMojo().update(pom, artifact, "[1.10,2)");
+    new StickyBoundsMojo().update(pom, artifact, "[3.6,4)");
     XPathContext context = new XPathContext("mvn", "http://maven.apache.org/POM/4.0.0");
 
     Nodes versions = pom.query("//mvn:version", context);
     assertThat(versions.size()).isEqualTo(3);
-    Nodes nodes = pom.query("//mvn:version[text()='[1.10,2)']", context);
+    Nodes nodes = pom.query("//mvn:version[text()='[3.6,4)']", context);
     assertThat(nodes.size()).isEqualTo(1);
     Node node = nodes.get(0);
-    assertThat(node.getValue()).isEqualTo("[1.10,2)");
+    assertThat(node.getValue()).isEqualTo("[3.6,4)");
   }
 
   @Test
