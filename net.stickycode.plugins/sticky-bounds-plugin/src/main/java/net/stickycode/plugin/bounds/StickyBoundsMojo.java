@@ -82,7 +82,6 @@ public class StickyBoundsMojo
       String version = dependency.getVersion();
       Matcher versionMatch = range.matcher(version);
       if (versionMatch.matches()) {
-        getLog().info(dependency.toString());
         Artifact artifact = new DefaultArtifact(
             dependency.getGroupId(),
             dependency.getArtifactId(),
@@ -91,6 +90,7 @@ public class StickyBoundsMojo
             version);
         Version highestVersion = highestVersion(version, artifact);
         String newVersion = "[" + highestVersion.toString() + "," + versionMatch.group(1) + ")";
+        getLog().info("Updating " + artifact.toString() + " to " + newVersion);
         update(pom, artifact, newVersion);
       }
     }
@@ -106,7 +106,8 @@ public class StickyBoundsMojo
 
   private Serializer createSerialiser() {
     try {
-      return new Serializer(new FileOutputStream(project.getFile()), "UTF-8");
+      Serializer serializer = new StickySerializer(new FileOutputStream(project.getFile()), "UTF-8");
+      return serializer;
     }
     catch (UnsupportedEncodingException e) {
       throw new RuntimeException(e);
@@ -120,7 +121,6 @@ public class StickyBoundsMojo
     VersionRangeRequest request = new VersionRangeRequest(artifact, repositories, null);
     VersionRangeResult v = resolve(request);
     Version highestVersion = v.getHighestVersion();
-    getLog().info("Resolving " + artifact.toString() + " with " + highestVersion.toString());
     return highestVersion;
   }
 
