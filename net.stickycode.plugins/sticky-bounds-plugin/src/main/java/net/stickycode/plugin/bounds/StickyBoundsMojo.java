@@ -65,7 +65,7 @@ public class StickyBoundsMojo
    */
   private RepositorySystemSession session;
 
-  private Pattern range = Pattern.compile("\\[[0-9.A-Za-z]+,([0-9]+\\))");
+  private Pattern range = Pattern.compile("\\[[0-9.A-Za-z]+,([0-9]+)\\)");
 
   /**
    * The project's remote repositories to use for the resolution.

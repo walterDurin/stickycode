@@ -7,6 +7,7 @@ import java.io.IOException;
 
 import nu.xom.Builder;
 import nu.xom.Document;
+import nu.xom.Node;
 import nu.xom.Nodes;
 import nu.xom.ParsingException;
 import nu.xom.ValidityException;
@@ -15,7 +16,6 @@ import nu.xom.XPathContext;
 import org.junit.Test;
 import org.sonatype.aether.artifact.Artifact;
 import org.sonatype.aether.util.artifact.DefaultArtifact;
-import org.sonatype.aether.version.Version;
 
 public class StickyBoundsMojoIntegrationTest {
 
@@ -34,7 +34,10 @@ public class StickyBoundsMojoIntegrationTest {
 
     Nodes versions = pom.query("//mvn:version", context);
     assertThat(versions.size()).isEqualTo(3);
-    assertThat(pom.query("//mvn:version[text()='[1.10,2)']", context).size()).isEqualTo(1);
+    Nodes nodes = pom.query("//mvn:version[text()='[1.10,2)']", context);
+    assertThat(nodes.size()).isEqualTo(1);
+    Node node = nodes.get(0);
+    assertThat(node.getValue()).isEqualTo("[1.10,2)");
     //
     // MavenCli maven = new MavenCli();
     // maven.setLocalRepositoryDirectory(new File("src/it/repo"));
