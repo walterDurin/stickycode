@@ -20,8 +20,11 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.mockwire</groupId>
+			<!--
+			<artifactId>mockwire-guice3</artifactId>
+			-->
 			<artifactId>mockwire-spring30</artifactId>
-			<version>[6.1,7)</version>
+			<version>[1,7)</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -31,16 +34,33 @@
 			<version>[1.16,2)</version>
 		</dependency>
 
-		 <dependency>
-		 	<groupId>net.stickycode.ws</groupId>
-		 	<artifactId>sticky-ws</artifactId>
-		 	<version>1.1-SNAPSHOT</version>
-		 </dependency>
 
 		 <dependency>
 		 	<groupId>net.stickycode.composite</groupId>
 		 	<artifactId>sticky-composite-cxf-soap-unittest</artifactId>
 		 	<version>[1.1,2)</version>
+		 </dependency>
+		 <dependency>
+		 	<groupId>net.stickycode.ws</groupId>
+		 	<artifactId>sticky-ws-cxf</artifactId>
+		 	<version>3.1-SNAPSHOT</version>
+		 </dependency>
+		 <dependency>
+		 	<groupId>net.stickycode.ws</groupId>
+			<!--
+		 	<artifactId>sticky-ws-cxf-guice3</artifactId>
+			-->
+		 	<artifactId>sticky-ws-cxf-spring30</artifactId>
+		 	<version>[1,5)</version>
+		 	<scope>test</scope>
+		 </dependency>
+		 <dependency>
+		 	<groupId>net.stickycode.configured</groupId>
+			<!--
+		 	<artifactId>sticky-ws-cxf-guice3</artifactId>
+			-->
+		 	<artifactId>sticky-configured</artifactId>
+		 	<version>[1,5)</version>
 		 </dependency>
 	</dependencies>
 </project>
