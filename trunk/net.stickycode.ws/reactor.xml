@@ -16,6 +16,7 @@
 	<name>sticky-ws-reactor</name>
 	<modules>
 		<module>sticky-ws-cxf</module>
+		<module>sticky-ws-testutils</module>
 		<module>sticky-ws-cxf-guice3</module>
 		<module>sticky-ws-cxf-spring30</module>
 	</modules>

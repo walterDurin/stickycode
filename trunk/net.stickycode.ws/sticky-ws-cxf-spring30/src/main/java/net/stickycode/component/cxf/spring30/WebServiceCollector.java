@@ -3,8 +3,8 @@ package net.stickycode.component.cxf.spring30;
 import javax.inject.Inject;
 import javax.jws.WebService;
 
-import net.stickycode.component.cxf.WebServiceExposureRepository;
 import net.stickycode.stereotype.StickyComponent;
+import net.stickycode.ws.cxf.WebServiceExposureRepository;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;

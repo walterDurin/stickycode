@@ -15,9 +15,9 @@ package net.stickycode.cxf.guice3;
 import javax.inject.Inject;
 import javax.jws.WebService;
 
-import net.stickycode.component.cxf.WebServiceExposureRepository;
 import net.stickycode.stereotype.StickyComponent;
 import net.stickycode.stereotype.StickyFramework;
+import net.stickycode.ws.cxf.WebServiceExposureRepository;
 
 import com.google.inject.spi.InjectionListener;
 
