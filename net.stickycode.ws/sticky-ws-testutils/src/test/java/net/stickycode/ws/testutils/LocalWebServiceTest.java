@@ -4,11 +4,9 @@ import static org.fest.assertions.Assertions.assertThat;
 import net.stickycode.mockwire.MockwireConfigured;
 import net.stickycode.mockwire.MockwireContainment;
 import net.stickycode.mockwire.Uncontrolled;
-import net.stickycode.mockwire.UnderTest;
 import net.stickycode.mockwire.junit4.MockwireRunner;
 import net.stickycode.stereotype.Configured;
 import net.stickycode.ws.testutils.v1.Example;
-import net.stickycode.ws.testutils.v1.RealExample;
 
 import org.apache.cxf.Bus;
 import org.apache.cxf.BusFactory;
@@ -16,7 +14,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(MockwireRunner.class)
-@MockwireContainment//("net.stickycode.ws.testutils")
+@MockwireContainment("net.stickycode.ws")
 @MockwireConfigured("localWebServiceTest.example=local://")
 public class LocalWebServiceTest {
 

@@ -31,10 +31,12 @@ public class LocalWebServiceCoercion
     
     Class<?> contract = type.getComponentCoercionTypes()[0].getType();
     Object implementor = finder.find(contract);
+    String address = value + "sticky/"+ namingStrategy.deriveAddress(implementor, contract);
+
     Endpoint endpoint = Endpoint.create(implementor);
-    endpoint.publish(value + namingStrategy.deriveAddress(implementor, contract));
+    endpoint.publish(address);
     
-    Object client = webServiceCoercion.coerce(type.getComponentCoercionTypes()[0], value);
+    Object client = webServiceCoercion.coerce(type.getComponentCoercionTypes()[0], address);
     return new LocalWebService(endpoint, client);
   }
 
