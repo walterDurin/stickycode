@@ -10,7 +10,7 @@
 
 	<groupId>net.stickycode.plugins</groupId>
 	<artifactId>sticky-bounds-plugin</artifactId>
-	<version>1.8-SNAPSHOT</version>
+	<version>1.9-SNAPSHOT</version>
 	<packaging>maven-plugin</packaging>
 
 	<name>sticky-bounds-plugin</name>
@@ -54,6 +54,7 @@
 			<artifactId>xom</artifactId>
 			<version>1.2.5</version>
 		</dependency>
+
 	</dependencies>
 
 	<build>
