@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright (c) 2011 RedEngine Ltd, http://www.redengine.co.nz. All rights 
-	reserved. -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<!-- Copyright (c) 2011 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved. -->
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
 	<modelVersion>4.0.0</modelVersion>
 
@@ -40,7 +39,8 @@
 
 	<scm>
 		<connection>scm:svn:http://stickycode.googlecode.com/svn/trunk/net.stickycode.parent/sticky-root/</connection>
-		<developerConnection>scm:svn:http://source.stickycode.net/trunk/net.stickycode.parent/sticky-root/</developerConnection>
+		<developerConnection>scm:svn:http://source.stickycode.net/trunk/net.stickycode.parent/sticky-root/
+		</developerConnection>
 		<url>http://code.google.com/p/stickycode/source/browse/#svn/trunk/net.stickycode.parent/sticky-root</url>
 	</scm>
 
@@ -77,6 +77,10 @@
 		</developer>
 	</developers>
 
+	<prerequisites>
+		<maven>3.0.3</maven>
+	</prerequisites>
+
 	<build>
 		<directory>${output.basedir}/${target.dir}</directory>
 		<outputDirectory>${output.basedir}/${target.dir}/classes</outputDirectory>
@@ -87,7 +91,7 @@
 				<plugin>
 					<groupId>net.stickycode.plugins</groupId>
 					<artifactId>sticky-bounds-plugin</artifactId>
-					<version>1.8</version>
+					<version>1.9</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -103,7 +107,7 @@
 						<preparationGoals>sticky-bounds:update enforcer:enforce clean verify</preparationGoals>
 						<goals>enforcer:enforce deploy</goals>
 
-						<!-- Remote tagging is just a dumb idea it violates the whole point 
+						<!-- Remote tagging is just a dumb idea it violates the whole point
 							of tagging a known quantity -->
 						<remoteTagging>false</remoteTagging>
 						<suppressCommitBeforeTag>true</suppressCommitBeforeTag>
@@ -140,6 +144,11 @@
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>3.0</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-javadoc-plugin</artifactId>
 					<version>2.8.1</version>
 				</plugin>
@@ -162,16 +171,14 @@
 					<configuration>
 						<rules>
 							<requireReleaseDeps>
-								<message>No SNAPSHOTs allowed in depedency tree or parents
-									allowed when releasing!</message>
+								<message>No SNAPSHOTs allowed in depedency tree or parents allowed when releasing!</message>
 								<failWhenParentIsSnapshot>true</failWhenParentIsSnapshot>
 								<searchTransitive>true</searchTransitive>
 							</requireReleaseDeps>
 
 							<!-- Don't allow accidental inclusion of commons logging or log4j -->
 							<bannedDependencies>
-								<message>Please ensure you exclude all dependencies on logging
-									implementations</message>
+								<message>Please ensure you exclude all dependencies on logging implementations</message>
 								<excludes>
 									<exclude>commons-logging</exclude>
 									<exclude>commons-logging-api</exclude>
@@ -199,12 +206,8 @@
 	</build>
 
 	<properties>
-		<!-- Because UTF-8 is nice but not everywhere, it causes problems with 
-			different editors and windows editors in particular wanting to put BOM's 
-			in when UTF-8 should NOT have them. -->
-		<!-- Appropriate encodings for other characters can be used that will be 
-			rendered properly at the UI layer. e.g. #&x123; for the dagger character 
-			in an html source file will be rendered fine in the browser. -->
+		<!-- Because UTF-8 is nice but not everywhere, it causes problems with different editors and windows editors in particular wanting to put BOM's	in when UTF-8 should NOT have them. -->
+		<!-- Appropriate encodings for other characters can be used that will be rendered properly at the UI layer. e.g. #&x123; for the dagger character in an html source file will be rendered fine in the browser. -->
 		<project.build.sourceEncoding>US-ASCII</project.build.sourceEncoding>
 		<target.dir>target</target.dir>
 		<output.basedir>${basedir}</output.basedir>
@@ -213,8 +216,7 @@
 
 	<profiles>
 		<profile>
-			<!-- Make sure eclipse outputs to a different directory otherwise the 
-				builders will clash with command line. -->
+			<!-- Make sure eclipse outputs to a different directory otherwise the builders will clash with command line. -->
 			<id>running-in-eclipse</id>
 			<activation>
 				<property>
