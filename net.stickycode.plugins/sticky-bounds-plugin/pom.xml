@@ -23,7 +23,11 @@
 		<developerConnection>scm:svn:https://stickycode.googlecode.com/svn/trunk/net.stickycode.plugins/sticky-wait-plugin</developerConnection>
 		<url>http://code.google.com/p/stickycode/source/browse/#svn/trunk/net.stickycode.plugins/sticky-wait-plugin</url>
 	</scm>
-
+	
+	<prerequisites>
+		<maven>3.0.3</maven>
+	</prerequisites>
+	
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.maven</groupId>
