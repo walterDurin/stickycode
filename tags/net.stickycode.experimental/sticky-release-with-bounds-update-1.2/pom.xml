@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>net.stickycode.parent</groupId>
+		<artifactId>sticky-jar</artifactId>
+		<version>1.20</version>
+	</parent>
+
+	<groupId>net.stickycode.experimental</groupId>
+	<artifactId>sticky-release-with-bounds-update</artifactId>
+	<version>1.2</version>
+	<packaging>jar</packaging>
+	
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<artifactId>maven-release-plugin</artifactId>
+					<configuration>
+						<preparationGoals>enforcer:enforce clean sticky-bounds:update verify</preparationGoals>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>net.stickycode</groupId>
+			<artifactId>sticky-stereotype</artifactId>
+			<version>[1.16,2)</version>
+		</dependency>
+	</dependencies>
+
+
+  <scm>
+    <connection>scm:svn:http://source.stickycode.net/tags/net.stickycode.experimental/sticky-release-with-bounds-update-1.2</connection>
+    <developerConnection>scm:svn:http://source.stickycode.net/tags/net.stickycode.experimental/sticky-release-with-bounds-update-1.2</developerConnection>
+    <url>scm:svn:http://source.stickycode.net/tags/net.stickycode.experimental/sticky-release-with-bounds-update-1.2</url>
+  </scm>
+</project>
