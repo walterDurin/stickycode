@@ -21,6 +21,7 @@ import nu.xom.XPathContext;
 
 import org.apache.maven.model.Dependency;
 import org.apache.maven.plugin.AbstractMojo;
+import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.project.MavenProject;
 import org.sonatype.aether.RepositorySystem;
 import org.sonatype.aether.RepositorySystemSession;
@@ -133,8 +134,10 @@ public class StickyBoundsMojo
   private Version highestVersion(String version, Artifact artifact) {
     VersionRangeRequest request = new VersionRangeRequest(artifact, repositories, null);
     VersionRangeResult v = resolve(request);
-    Version highestVersion = v.getHighestVersion();
-    return highestVersion;
+    if (v.getExceptions().isEmpty())
+      return v.getHighestVersion();
+    
+    throw new RuntimeException("Failed to resolve " + artifact.toString(), v.getExceptions().get(0));
   }
 
   void update(Document pom, Artifact artifact, String newVersion) {
