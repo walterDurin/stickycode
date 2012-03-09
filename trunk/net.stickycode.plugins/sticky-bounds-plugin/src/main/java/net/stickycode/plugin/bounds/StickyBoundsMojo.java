@@ -91,16 +91,12 @@ public class StickyBoundsMojo
             dependency.getClassifier(),
             version);
         Version highestVersion = highestVersion(version, artifact);
-        if (highestVersion != null) {
-          String newVersion = "[" + highestVersion.toString() + "," + versionMatch.group(1) + ")";
-          if (!newVersion.equals(version)) {
-            getLog().info("Updating " + artifact.toString() + " to " + newVersion);
-            update(pom, artifact, newVersion);
-            changed |= true;
-          }
+        String newVersion = "[" + highestVersion.toString() + "," + versionMatch.group(1) + ")";
+        if (!newVersion.equals(version)) {
+          getLog().info("Updating " + artifact.toString() + " to " + newVersion);
+          update(pom, artifact, newVersion);
+          changed |= true;
         }
-        else
-          getLog().info("Not updating " + artifact.toString());
       }
     }
 
@@ -134,10 +130,10 @@ public class StickyBoundsMojo
   private Version highestVersion(String version, Artifact artifact) {
     VersionRangeRequest request = new VersionRangeRequest(artifact, repositories, null);
     VersionRangeResult v = resolve(request);
-    if (v.getExceptions().isEmpty())
-      return v.getHighestVersion();
-    
-    throw new RuntimeException("Failed to resolve " + artifact.toString(), v.getExceptions().get(0));
+    if (v.getHighestVersion() == null)
+      throw new RuntimeException("Failed to resolve " + artifact.toString(), v.getExceptions().get(0));
+
+    return v.getHighestVersion();
   }
 
   void update(Document pom, Artifact artifact, String newVersion) {
