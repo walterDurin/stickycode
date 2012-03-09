@@ -111,7 +111,8 @@ public class GuiceIsolatedTestManifest
 
   @Override
   public void shutdown() {
-    Jsr250Module.preDestroy(log, injector);
+    if (injector != null)
+      Jsr250Module.preDestroy(log, injector);
   }
 
   @Override
