@@ -13,7 +13,7 @@
 	<version>1.7-SNAPSHOT</version>
 	<packaging>maven-plugin</packaging>
 
-	<name>sticky-bound-plugin</name>
+	<name>sticky-bounds-plugin</name>
 	<description>A maven plugin to update version range bounds</description>
 	<inceptionYear>2012</inceptionYear>
 	<url>http://www.StickyCode.net/plugins/sticky-bounds-plugin</url>
