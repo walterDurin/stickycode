@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>net.stickycode.parent</groupId>
 		<artifactId>sticky-jar</artifactId>
-		<version>1.20</version>
+		<version>1.21</version>
 	</parent>
 
 	<artifactId>sticky-war</artifactId>
@@ -47,7 +47,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-war-plugin</artifactId>
-					<version>2.1.1</version>
+					<version>2.2</version>
 					<configuration>
 						<archiveClasses>true</archiveClasses>
 						<classifier>application</classifier>
