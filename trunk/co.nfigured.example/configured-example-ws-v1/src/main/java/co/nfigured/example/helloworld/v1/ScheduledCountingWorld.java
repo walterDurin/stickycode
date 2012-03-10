@@ -20,15 +20,28 @@ public class ScheduledCountingWorld
     implements CountingWorld {
 
   private int counter = 10;
-  
+
+  private boolean incrementing = true;
+
   @Override
   public Integer count() {
     return counter;
   }
-  
+
   @Scheduled
   public void increment() {
-    counter++;
+    if (incrementing)
+      counter++;
+  }
+
+  @Override
+  public void stop() {
+    incrementing = false;
+  }
+
+  @Override
+  public void start() {
+    incrementing = true;
   }
 
 }
