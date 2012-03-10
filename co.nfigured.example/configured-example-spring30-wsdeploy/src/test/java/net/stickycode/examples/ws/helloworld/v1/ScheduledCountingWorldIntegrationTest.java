@@ -39,4 +39,14 @@ public class ScheduledCountingWorldIntegrationTest {
     }
   }
   
+//  @Test
+//  public 
+//    client.stop();
+//    
+//    int fixed = client.count();
+//    for (int i = 0; i < 3; i++) {
+//      assertThat(client.count()).isEqualTo(fixed);
+//    
+//  }
+  
 }
