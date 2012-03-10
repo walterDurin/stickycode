@@ -18,5 +18,9 @@ import javax.jws.WebService;
 public interface CountingWorld {
 
   Integer count();
+  
+  void stop();
+  
+  void start();
 
 }
