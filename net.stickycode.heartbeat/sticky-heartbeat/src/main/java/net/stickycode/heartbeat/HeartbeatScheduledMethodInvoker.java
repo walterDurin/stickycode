@@ -1,17 +1,16 @@
 package net.stickycode.heartbeat;
 
+import java.beans.Introspector;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+
+import net.stickycode.scheduled.Schedule;
+import net.stickycode.scheduled.ScheduledRunnable;
+import net.stickycode.stereotype.Configured;
 
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.stickycode.heartbeat.Heartbeat;
-import net.stickycode.scheduled.Schedule;
-import net.stickycode.scheduled.ScheduleConfiguration;
-import net.stickycode.scheduled.ScheduledMethodInvoker;
-import net.stickycode.scheduled.ScheduledRunnable;
 
 public class HeartbeatScheduledMethodInvoker
     implements ScheduledRunnable, Heartbeat {
@@ -22,7 +21,8 @@ public class HeartbeatScheduledMethodInvoker
 
   private Object target;
 
-  private ScheduleConfiguration schedule;
+  @Configured
+  private Schedule schedule;
 
   private DateTime lastAttempt;
 
@@ -30,14 +30,13 @@ public class HeartbeatScheduledMethodInvoker
 
   private DateTime lastFailure;
 
-  private Boolean alive;
+  private Boolean alive = true;
 
   private Object $this = new Object();
 
-  public HeartbeatScheduledMethodInvoker(Method method, Object target, ScheduleConfiguration schedule) {
+  public HeartbeatScheduledMethodInvoker(Method method, Object target) {
     this.method = method;
     this.target = target;
-    this.schedule = schedule;
   }
 
   @Override
@@ -65,12 +64,17 @@ public class HeartbeatScheduledMethodInvoker
   }
 
   public Schedule getSchedule() {
-    return schedule.getSchedule();
+    return schedule;
   }
 
   @Override
   public boolean isAlive() {
     return alive;
+  }
+
+  @Override
+  public String getLabel() {
+    return Introspector.decapitalize(target.getClass().getSimpleName()) + "." + method.getName();
   }
 
 }
