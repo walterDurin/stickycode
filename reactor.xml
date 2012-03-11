@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>net.stickycode.parent</groupId>
 		<artifactId>sticky-root</artifactId>
-		<version>1.22</version>
+		<version>1.24</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
@@ -18,7 +18,7 @@
 		<module>net.stickycode.parent/reactor.xml</module>
 		<module>net.stickycode.composite/reactor.xml</module>
 		<module>net.stickycode/reactor.xml</module>
-		<module>net.stickycode.component/reactor.xml</module>
+		<module>net.stickycode.ws/reactor.xml</module>
 		<module>net.stickycode.configured/reactor.xml</module>
 		<module>net.stickycode.scheduled/reactor.xml</module>
 		<module>co.nfigured/reactor.xml</module>
