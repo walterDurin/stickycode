@@ -21,7 +21,7 @@ import net.stickycode.exception.NullParameterException;
 import static org.fest.assertions.Assertions.assertThat;
 
 
-public class ParameterResolverTest {
+public class QuotedParameterResolverTest {
 
   @Test(expected=NullParameterException.class)
   public void nullMessageExcepts() {
@@ -32,7 +32,7 @@ public class ParameterResolverTest {
   public void emptyMessageExcepts() {
     ParameterResolver.resolve("");
   }
-
+ 
   @Test(expected=InvalidParameterException.class)
   public void noPlaceHolderForArgumentExcepts() {
     ParameterResolver.resolve("a message with no placeholders", "a");
@@ -40,45 +40,45 @@ public class ParameterResolverTest {
 
   @Test(expected=InvalidParameterException.class)
   public void throwableArgumentsExceptAsItsACommonMistake() {
-    ParameterResolver.resolve("placeholder and throwable argument {}", new RuntimeException());
+    ParameterResolver.resolve("placeholder and throwable argument ''", new RuntimeException());
   }
 
   @Test
   public void onePlaceHolderOneArgument() {
-    assertThat(ParameterResolver.resolve("{}", "a")).isEqualTo("a");
+    assertThat(ParameterResolver.resolve("''", "a")).isEqualTo("'a'");
   }
 
   @Test
   public void twoPlaceHolderTwoArgument() {
-    assertThat(ParameterResolver.resolve("{}{}", "a", "b")).isEqualTo("ab");
-    assertThat(ParameterResolver.resolve("z{}z{}z", "a", "b")).isEqualTo("zazbz");
+    assertThat(ParameterResolver.resolve("''''", "a", "b")).isEqualTo("'a''b'");
+    assertThat(ParameterResolver.resolve("z''z''z", "a", "b")).isEqualTo("z'a'z'b'z");
   }
 
   @Test
   public void checkThatPartialPlaceHoldersDontCauseIssues() {
-    assertThat(ParameterResolver.resolve("z} {} {z{}z", "a", "b")).isEqualTo("z} a {zbz");
-    assertThat(ParameterResolver.resolve("}{")).isEqualTo("}{");
-    assertThat(ParameterResolver.resolve("z} \\{\\} {z{}z", "a")).isEqualTo("z} \\{\\} {zaz");
+    assertThat(ParameterResolver.resolve("z' '' 'z''z", "a", "b")).isEqualTo("z' 'a' 'z'b'z");
+    assertThat(ParameterResolver.resolve("'")).isEqualTo("'");
+    assertThat(ParameterResolver.resolve("z' \\'\\' 'z''z", "a")).isEqualTo("z' \\'\\' 'z'a'z");
   }
 
   @Test(expected=NullParameterException.class)
   public void checkThatNullParametersExcept() {
-    ParameterResolver.resolve("{}", (Object[])null);
+    ParameterResolver.resolve("''", (Object[])null);
   }
 
   @Test(expected=NullParameterException.class)
   public void checkThatANullParameterExcepts() {
-    ParameterResolver.resolve("{}", new Object[] {null});
+    ParameterResolver.resolve("''", new Object[] {null});
   }
 
   @Test(expected=TooManyArgumentsException.class)
   public void tooManyArguments() {
-    ParameterResolver.resolve("{}", "a", "b");
+    ParameterResolver.resolve("''", "a", "b");
   }
 
   @Test(expected=TooManyPlaceHoldersException.class)
   public void tooManyPlaceHolders() {
-    ParameterResolver.resolve("{} {}", "b");
+    ParameterResolver.resolve("'' ''", "b");
   }
 
 }
