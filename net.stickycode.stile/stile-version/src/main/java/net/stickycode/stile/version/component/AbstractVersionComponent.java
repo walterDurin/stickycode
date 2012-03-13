@@ -13,7 +13,6 @@
 package net.stickycode.stile.version.component;
 
 import static net.stickycode.exception.Preconditions.notNull;
-import net.stickycode.util.Linked;
 
 public abstract class AbstractVersionComponent
     implements Comparable<AbstractVersionComponent>, Linked<AbstractVersionComponent> {
