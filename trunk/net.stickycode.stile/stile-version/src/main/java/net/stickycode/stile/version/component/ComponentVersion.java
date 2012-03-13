@@ -15,7 +15,6 @@ package net.stickycode.stile.version.component;
 import java.util.Iterator;
 
 import net.stickycode.stile.version.Version;
-import net.stickycode.util.LinkedIterator;
 
 public class ComponentVersion
     implements Iterable<AbstractVersionComponent>, Version {
