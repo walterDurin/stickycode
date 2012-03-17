@@ -108,7 +108,9 @@ import net.stickycode.mockwire.feature.MockwireScan;
 @MockwireScan({
   "net.stickycode.configured", 
   "net.stickycode.metadata", 
-  "net.stickycode.coercion"
+  "net.stickycode.coercion",
+  "net.stickycode.resource",
+  "net.stickycode.xml.jaxb"
   })
 public @interface MockwireConfigured {
 
