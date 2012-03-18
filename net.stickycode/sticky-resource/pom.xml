@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright (c) 2010 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved. -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<parent>
 		<groupId>net.stickycode.parent</groupId>
 		<artifactId>sticky-jar</artifactId>
@@ -15,8 +15,16 @@
 
 	<name>sticky-resource</name>
 	<description>A clean resource implementation</description>
+	<url>http://www.StickyCode.net/sticky-resource/</url>
 
 	<inceptionYear>2011</inceptionYear>
+
+	<scm>
+		<connection>scm:svn:http://stickycode.googlecode.com/svn/trunk/net.stickycode/sticky-resource</connection>
+		<developerConnection>scm:svn:https://stickycode.googlecode.com/svn/trunk/net.stickycode/sticky-resource</developerConnection>
+		<url>http://code.google.com/p/stickycode/source/browse/#svn/trunk/net.stickycode/sticky-resource</url>
+	</scm>
+	
 	<dependencies>
 		<dependency>
 			<groupId>net.stickycode.composite</groupId>
@@ -24,17 +32,13 @@
 			<version>[1.7,2)</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>net.stickycode.composite</groupId>
+			<artifactId>sticky-composite-logging-deploy</artifactId>
+			<version>[1.4,2)</version>
+			<scope>test</scope>
+		</dependency>
 
-		<dependency>
-			<groupId>net.stickycode</groupId>
-			<artifactId>sticky-stereotype</artifactId>
-			<version>[1.16,2)</version>
-		</dependency>
-		<dependency>
-			<groupId>net.stickycode</groupId>
-			<artifactId>sticky-exception</artifactId>
-			<version>[1.7,2)</version>
-		</dependency>
 		<dependency>
 			<groupId>net.stickycode.composite</groupId>
 			<artifactId>sticky-composite-logging-api</artifactId>
@@ -46,31 +50,9 @@
 			<version>[1.5,2)</version>
 		</dependency>
 		<dependency>
-			<groupId>net.stickycode</groupId>
-			<artifactId>sticky-coercion-api</artifactId>
-			<version>[3.7,4)</version>
-		</dependency>
-		<dependency>
 			<groupId>net.stickycode.composite</groupId>
-			<artifactId>sticky-composite-logging-deploy</artifactId>
-			<version>1.4</version>
-			<scope>test</scope>
+			<artifactId>sticky-composite-jaxb22</artifactId>
+			<version>[1.1,2)</version>
 		</dependency>
-		<dependency>
-			<groupId>org.apache.ws.xmlschema</groupId>
-			<artifactId>xmlschema-core</artifactId>
-			<version>2.0.1</version>
-			</dependency>
-		<dependency>
-			<groupId>com.sun.xml.bind</groupId>
-			<artifactId>jaxb-impl</artifactId>
-			<version>2.2.5-b10</version>
-		</dependency>
-		<dependency>
-			<groupId>javax.xml.bind</groupId>
-			<artifactId>jaxb-api</artifactId>
-			<version>2.2.6</version>
-		</dependency>
-
 	</dependencies>
 </project>
