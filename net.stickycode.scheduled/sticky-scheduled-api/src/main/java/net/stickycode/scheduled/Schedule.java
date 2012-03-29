@@ -31,10 +31,16 @@ public interface Schedule {
 
   /**
    * The units to use when interpreting the Period and initial delay
+   * 
    * @return the units of this schedule
    */
   TimeUnit getUnits();
 
   String toString();
+
+  /**
+   * Return true if this schedule is disabled or scheduled off
+   */
+  boolean isEnabled();
 
 }
