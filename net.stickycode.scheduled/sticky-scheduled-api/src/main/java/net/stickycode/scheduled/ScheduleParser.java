@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011 RedEngine Ltd, http://www.RedEngine.co.nz. All rights reserved.
+ * Copyright (c) 2012 RedEngine Ltd, http://www.RedEngine.co.nz. All rights reserved.
  *
  * This program is licensed to you under the Apache License Version 2.0,
  * and you may not use this file except in compliance with the Apache License Version 2.0.
@@ -12,10 +12,19 @@
  */
 package net.stickycode.scheduled;
 
-public interface SchedulingSystem {
 
-  void start();
-  
-  void stop();
+/**
+ * The contract for parsers that can create schedules from schedule specifications
+ */
+public interface ScheduleParser {
 
+  /**
+   * @return true if the given specification is parseable by this parser
+   */
+  boolean matches(String specification);
+
+  /**
+   * @returns the Schedule as parsed from the given specification
+   */
+  Schedule parse(String specification);
 }

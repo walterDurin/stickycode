@@ -20,11 +20,9 @@ import java.util.Collections;
 import net.stickycode.bootstrap.guice3.StickyModule;
 import net.stickycode.configured.ConfigurationSource;
 import net.stickycode.configured.guice3.ConfigurationSourceModule;
-import net.stickycode.scheduled.SchedulingSystem;
 
 import org.mockito.Mockito;
 
-import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
@@ -39,20 +37,9 @@ public class ConfiguredAutobindingTest
         StickyModule.keyBuilderModule())
         .createChildInjector(
             StickyModule.applicationModule(create("net.stickycode")),
-            schedulingSystemModule(),
             configurationSourceModule());
     injector.injectMembers(instance);
     injector.injectMembers(this);
-  }
-
-  private Module schedulingSystemModule() {
-    return new AbstractModule() {
-
-      @Override
-      protected void configure() {
-        bind(SchedulingSystem.class).toInstance(Mockito.mock(SchedulingSystem.class));
-      }
-    };
   }
 
   private Module configurationSourceModule() {
