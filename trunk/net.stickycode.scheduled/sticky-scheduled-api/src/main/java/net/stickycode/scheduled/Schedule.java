@@ -36,8 +36,6 @@ public interface Schedule {
    */
   TimeUnit getUnits();
 
-  String toString();
-
   /**
    * Return true if this schedule is disabled or scheduled off
    */

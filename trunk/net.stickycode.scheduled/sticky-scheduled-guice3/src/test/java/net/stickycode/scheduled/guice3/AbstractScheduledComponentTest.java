@@ -19,7 +19,6 @@ import javax.inject.Inject;
 import net.stickycode.configured.Configuration;
 import net.stickycode.configured.ConfigurationRepository;
 import net.stickycode.configured.ConfigurationSystem;
-import net.stickycode.scheduled.SchedulingSystem;
 
 import org.junit.Test;
 
@@ -32,9 +31,6 @@ public abstract class AbstractScheduledComponentTest {
 
   @Inject
   ConfigurationSystem system;
-  
-  @Inject
-  SchedulingSystem scheduling;
   
   @Test
   public void verifyScheduling() {

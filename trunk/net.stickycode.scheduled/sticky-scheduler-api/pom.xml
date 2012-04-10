@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (c) 2011 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved. -->
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<parent>
+		<groupId>net.stickycode.parent</groupId>
+		<artifactId>sticky-api</artifactId>
+		<version>1.8</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>net.stickycode.scheduled</groupId>
+	<artifactId>sticky-scheduler-api</artifactId>
+	<version>1.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>sticky-scheduler-api</name>
+	<description>Defining contracts for executing jobs in the background</description>
+	<inceptionYear>2008</inceptionYear>
+	<url>http://www.StickyCode.net/scheduled/sticky-scheduler-api/</url>
+
+	<scm>
+		<connection>scm:svn:http://stickycode.googlecode.com/svn/trunk/net.stickycode.scheduled/sticky-scheduler-api</connection>
+		<developerConnection>scm:svn:https://stickycode.googlecode.com/svn/trunk/net.stickycode.scheduled/sticky-scheduler-api</developerConnection>
+		<url>http://code.google.com/p/stickycode/source/browse/#svn/trunk/net.stickycode.scheduled/sticky-scheduler-api</url>
+	</scm>
+
+	<dependencies>
+		<dependency>
+			<groupId>net.stickycode</groupId>
+			<artifactId>sticky-stereotype</artifactId>
+			<version>[1.16,2)</version>
+		</dependency>
+	</dependencies>
+	<!--
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>clirr-maven-plugin</artifactId>
+				<configuration>
+					<comparisonVersion>1.2</comparisonVersion>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	-->
+</project>

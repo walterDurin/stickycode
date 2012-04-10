@@ -14,10 +14,16 @@ package net.stickycode.scheduled;
 
 import net.stickycode.stereotype.StickyFramework;
 
+/**
+ * A repository for holding scheduled runnable instances that can be scheduled
+ */
 @StickyFramework
 public interface ScheduledRunnableRepository
     extends Iterable<ScheduledRunnable> {
 
+  /**
+   * Add the given scheduled runnable to this iteration
+   */
   void schedule(ScheduledRunnable scheduledRunnable);
 
 }
