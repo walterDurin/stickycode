@@ -28,13 +28,13 @@
 		<dependency>
 			<groupId>net.stickycode.scheduled</groupId>
 			<artifactId>sticky-scheduler-single</artifactId>
-			<version>[2.1,4)</version>
+			<version>[2.2,3)</version>
 		</dependency>
 
 		<dependency>
 			<groupId>net.stickycode.scheduled</groupId>
 			<artifactId>sticky-scheduled-spring30</artifactId>
-			<version>[2.2,4)</version>
+			<version>[2.3,3)</version>
 		</dependency>
 		<dependency>
 			<groupId>net.stickycode.configured</groupId>
