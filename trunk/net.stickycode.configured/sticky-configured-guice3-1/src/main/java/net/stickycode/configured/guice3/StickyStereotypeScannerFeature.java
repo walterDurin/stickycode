@@ -13,12 +13,17 @@
 package net.stickycode.configured.guice3;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import javax.inject.Provider;
+
+import net.stickycode.bootstrap.guice3.ProviderClassBindingJob;
 import net.stickycode.configured.ConfigurationRepository;
+import net.stickycode.reflector.Methods;
 import net.stickycode.stereotype.StickyComponent;
 import net.stickycode.stereotype.StickyFramework;
 import net.stickycode.stereotype.component.StickyRepository;
@@ -27,13 +32,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.inject.MembersInjector;
+import com.google.inject.Scope;
 import com.google.inject.Scopes;
 import com.google.inject.Singleton;
+import com.google.inject.TypeLiteral;
+import com.google.inject.binder.ScopedBindingBuilder;
 import com.google.inject.matcher.Matchers;
 import com.google.inject.spi.InjectionListener;
 import com.google.inject.spi.TypeListener;
 
 import de.devsurf.injection.guice.install.InstallationContext.BindingStage;
+import de.devsurf.injection.guice.install.bindjob.BindingJob;
 import de.devsurf.injection.guice.scanner.features.BindingScannerFeature;
 
 @Singleton
@@ -46,7 +55,7 @@ public class StickyStereotypeScannerFeature
   public BindingStage accept(Class<Object> annotatedClass, Map<String, Annotation> annotations) {
     if (annotatedClass.isAnnotationPresent(StickyFramework.class))
       return BindingStage.IGNORE;
-    
+
     if (annotatedClass.isAnnotationPresent(getComponentAnnotation()))
       return deriveStage(annotatedClass);
 
@@ -75,7 +84,7 @@ public class StickyStereotypeScannerFeature
 
       if (contract.isAssignableFrom(MembersInjector.class))
         return BindingStage.BOOT;
-      
+
       if (contract.isAssignableFrom(InjectionListener.class))
         return BindingStage.BOOT;
 
@@ -84,7 +93,7 @@ public class StickyStereotypeScannerFeature
 
       if (annotatedClass.isAnnotationPresent(StickyRepository.class))
         return BindingStage.BOOT_BEFORE;
-        
+
       String packageName = contract.getName();
       if (packageName.startsWith("net.stickycode.scheduled.ScheduledRunnableRepository"))
         return BindingStage.BOOT_BEFORE;
@@ -97,26 +106,66 @@ public class StickyStereotypeScannerFeature
   @SuppressWarnings("unchecked")
   public void process(Class<Object> annotatedClass, Map<String, Annotation> annotations) {
     log.debug("process {} with {}", annotatedClass, annotations);
-    Class<Object>[] interfaces = (Class<Object>[]) annotatedClass.getInterfaces();
+    List<Class<?>> interfaces = collectInterfaces(annotatedClass);
 
-    if (interfaces.length == 0) {
-      List<Class<?>> interfaceCollection = new ArrayList<Class<?>>();
-      Class<? super Object> parent = annotatedClass.getSuperclass();
-      while (parent != null && !parent.equals(Object.class)) {
-        Collections.addAll(interfaceCollection, parent.getInterfaces());
-        parent = parent.getSuperclass();
-      }
-      interfaces = interfaceCollection.toArray(new Class[interfaceCollection.size()]);
-    }
-    
     bind(annotatedClass, null, Scopes.SINGLETON);
-    
-    for (Class<Object> interf : interfaces) {
+
+    for (Class<?> interf : interfaces) {
       if (interf.isAssignableFrom(TypeListener.class))
         bindListener(annotatedClass);
       else
         if (!interf.isAssignableFrom(MembersInjector.class))
-          bind(annotatedClass, interf, (Annotation) null, Scopes.SINGLETON);
+          if (Provider.class.isAssignableFrom(interf))
+            bindProviderWorkaround((Class<Object>) annotatedClass, null);
+          else
+            bind(annotatedClass, (Class<Object>) interf, (Annotation) null, Scopes.SINGLETON);
+    }
+  }
+
+  /**
+   * This nasty code is to workaround the bug fixed by (NOTE its says closed but its not fixed yet) in javac. Without these casts
+   * javac will fail while ecj will be fine.
+   */
+  private void bindProviderWorkaround(Class<Object> annotatedClass, Object object) {
+    Class<Object> annotatedClass2 = annotatedClass;
+    if (annotatedClass2 instanceof Class)
+      bindProvider((Class<? extends Provider<Object>>) (Object) annotatedClass2, null);
+  }
+
+  private List<Class<?>> collectInterfaces(Class<Object> annotatedClass) {
+    List<Class<?>> interfaces = new ArrayList<Class<?>>();
+    for (Class<?> class1 : annotatedClass.getInterfaces()) {
+      interfaces.add(class1);
+      processInterface(class1, interfaces);
+    }
+    log.debug("found {} with {}", annotatedClass, interfaces);
+    return interfaces;
+  }
+
+  private <Y, T extends Provider<Y>> void bindProvider(Class<T> providerClass, Scope scope) {
+    BindingJob job = new ProviderClassBindingJob(scope, providerClass.getName());
+    if (!tracer.contains(job)) {
+      synchronized (_binder) {
+        Method m = Methods.find(providerClass, "get");
+        // ParameterizedType t = Types.providerOf();
+        TypeLiteral<T> tl = (TypeLiteral<T>) TypeLiteral.get(providerClass);
+        ScopedBindingBuilder scopedBuilder = _binder.bind((Class<Y>) m.getReturnType())
+            .toProvider(tl);
+        if (scope != null) {
+          scopedBuilder.in(scope);
+        }
+      }
+      tracer.add(job);
+    }
+    else {
+      log.info("ignoring {}", job);
+    }
+  }
+
+  private void processInterface(Class<?> target, List<Class<?>> interfaces) {
+    for (Class<?> class1 : target.getInterfaces()) {
+      interfaces.add(class1);
+      processInterface(class1, interfaces);
     }
   }
 
