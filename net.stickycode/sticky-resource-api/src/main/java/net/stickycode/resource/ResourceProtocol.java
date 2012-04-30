@@ -1,6 +1,7 @@
 package net.stickycode.resource;
 
 import java.io.InputStream;
+import java.io.OutputStream;
 
 public interface ResourceProtocol {
 
@@ -8,5 +9,7 @@ public interface ResourceProtocol {
       throws ResourceNotFoundException;
 
   boolean canResolve(String protocol);
+
+  OutputStream getOutputStream(ResourceLocation uriResourceLocation);
 
 }
