@@ -1,9 +1,9 @@
 package net.stickycode.resource;
 
 import java.io.InputStream;
+import java.io.OutputStream;
 
 import net.stickycode.coercion.CoercionTarget;
-
 
 public interface ResourceLocation {
 
@@ -11,7 +11,8 @@ public interface ResourceLocation {
 
   InputStream getInputStream();
 
-  String getPath();
+  OutputStream getOutputStream();
 
+  String getPath();
 
 }
