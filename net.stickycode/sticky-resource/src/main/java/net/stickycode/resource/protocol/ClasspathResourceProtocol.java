@@ -1,6 +1,7 @@
 package net.stickycode.resource.protocol;
 
 import java.io.InputStream;
+import java.io.OutputStream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,6 +40,12 @@ public class ClasspathResourceProtocol
   @Override
   public boolean canResolve(String protocol) {
     return "classpath".equals(protocol);
+  }
+
+  @Override
+  public OutputStream getOutputStream(ResourceLocation uriResourceLocation) {
+    // TODO should this check if the classpath is a filesystem, and if so allow updates
+    throw new UnsupportedOperationException("Classpath resources cannot be written");
   }
 
 }
