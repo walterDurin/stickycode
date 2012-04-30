@@ -16,5 +16,9 @@ public class SingletonResource<T>
   public T get() {
     return loadedResource;
   }
+  
+  public void set(T value) {
+    throw new UnsupportedOperationException("A singleton resource cannot be updated");
+  }
 
 }

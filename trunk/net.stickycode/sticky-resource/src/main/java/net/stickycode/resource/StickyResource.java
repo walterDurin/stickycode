@@ -1,9 +1,6 @@
 package net.stickycode.resource;
 
-import net.stickycode.resource.ResourceCodec;
-import net.stickycode.resource.ResourceLocation;
 import net.stickycode.stereotype.Configured;
-import net.stickycode.stereotype.ConfiguredComponent;
 import net.stickycode.stereotype.StickyComponent;
 import net.stickycode.stereotype.resource.Resource;
 
@@ -29,6 +26,10 @@ public class StickyResource<T>
       throw new RuntimeException();
 
     return codec.load(uri.getInputStream(), uri.getResourceTarget());
+  }
+  
+  public void set(T value) {
+    codec.store(uri.getResourceTarget(), value, uri.getOutputStream());
   }
 
 }
