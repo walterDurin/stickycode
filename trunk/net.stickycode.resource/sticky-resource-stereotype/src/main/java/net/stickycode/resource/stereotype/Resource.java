@@ -1,4 +1,4 @@
-package net.stickycode.stereotype.resource;
+package net.stickycode.resource.stereotype;
 
 import net.stickycode.stereotype.ConfiguredComponent;
 
