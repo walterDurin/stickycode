@@ -98,7 +98,7 @@ public class CoercionTargetsTest {
   @Test(expected = CoercionTargetsDoesNotRecogniseTypeException.class)
   public void unknownGenerics() {
     CoercionTargets.find(new Type() {
-    }, null);
+    }, null, "none");
   }
 
   private CoercionTarget fieldTarget() {

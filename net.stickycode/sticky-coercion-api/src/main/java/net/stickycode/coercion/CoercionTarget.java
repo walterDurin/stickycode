@@ -70,4 +70,6 @@ public interface CoercionTarget {
 
   boolean hasParent();
 
+  String getName();
+
 }

@@ -14,8 +14,8 @@ public class ParameterizedCoercionTarget
 
   private AnnotatedElement annotatedElement;
 
-  public ParameterizedCoercionTarget(ParameterizedType genericType, AnnotatedElement element, Class<?> owner, CoercionTarget parent) {
-    super((Class<?>) genericType.getRawType(), owner, parent);
+  public ParameterizedCoercionTarget(ParameterizedType genericType, AnnotatedElement element, Class<?> owner, CoercionTarget parent, String name) {
+    super((Class<?>) genericType.getRawType(), owner, parent, name);
     this.parameterizedType = genericType;
     this.annotatedElement = element;
   }
@@ -30,7 +30,7 @@ public class ParameterizedCoercionTarget
     Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();
     CoercionTarget[] targets = new CoercionTarget[actualTypeArguments.length];
     for (int i = 0; i < targets.length; i++) {
-      targets[i] = CoercionTargets.find((Class<?>)parameterizedType.getRawType(), actualTypeArguments[i], annotatedElement, owner, parent);
+      targets[i] = CoercionTargets.find((Class<?>)parameterizedType.getRawType(), actualTypeArguments[i], annotatedElement, owner, parent, getName());
     }
     return targets;
   }

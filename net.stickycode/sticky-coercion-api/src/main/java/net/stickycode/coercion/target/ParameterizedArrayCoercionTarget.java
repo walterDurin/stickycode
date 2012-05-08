@@ -13,11 +13,14 @@ public class ParameterizedArrayCoercionTarget
   private Class<?> owner;
 
   private CoercionTarget parent;
+  
+  private final String name;
 
-  public ParameterizedArrayCoercionTarget(GenericArrayType genericType, Class<?> owner, CoercionTarget parent) {
+  public ParameterizedArrayCoercionTarget(GenericArrayType genericType, Class<?> owner, CoercionTarget parent, String name) {
     this.owner = owner;
     this.type = genericType;
     this.parent = parent;
+    this.name = name;
   }
 
   @Override
@@ -32,7 +35,7 @@ public class ParameterizedArrayCoercionTarget
 
   @Override
   public CoercionTarget[] getComponentCoercionTypes() {
-    return new CoercionTarget[] { CoercionTargets.find(type.getGenericComponentType(), owner) };
+    return new CoercionTarget[] { CoercionTargets.find(type.getGenericComponentType(), owner, name) };
   }
 
   @Override
@@ -62,8 +65,8 @@ public class ParameterizedArrayCoercionTarget
         return false;
     }
 
-    return CoercionTargets.find(type.getGenericComponentType(), owner).equals(
-        CoercionTargets.find(other.type.getGenericComponentType(), owner));
+    return CoercionTargets.find(type.getGenericComponentType(), owner, name).equals(
+        CoercionTargets.find(other.type.getGenericComponentType(), owner, name));
   }
 
   @Override
@@ -104,6 +107,10 @@ public class ParameterizedArrayCoercionTarget
   @Override
   public boolean hasParent() {
     return parent != null;
+  }
+
+  public String getName() {
+    return name;
   }
 
 }
