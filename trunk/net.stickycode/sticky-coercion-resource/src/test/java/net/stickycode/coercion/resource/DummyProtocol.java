@@ -2,6 +2,7 @@ package net.stickycode.coercion.resource;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 
 import net.stickycode.resource.ResourceLocation;
@@ -26,6 +27,11 @@ public class DummyProtocol
     catch (UnsupportedEncodingException e) {
       throw new RuntimeException(e);
     }
+  }
+
+  @Override
+  public OutputStream getOutputStream(ResourceLocation uriResourceLocation) {
+    throw new UnsupportedOperationException("Dummy protocol does not support writing");
   }
 
 }

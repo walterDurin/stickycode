@@ -3,6 +3,7 @@ package net.stickycode.coercion.resource;
 import static net.stickycode.exception.Preconditions.notNull;
 
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URI;
 
 import net.stickycode.coercion.CoercionTarget;
@@ -40,6 +41,11 @@ public class UriResourceLocation
   @Override
   public InputStream getInputStream() {
     return protocol.getInputStream(this);
+  }
+  
+  @Override
+  public OutputStream getOutputStream() {
+    return protocol.getOutputStream(this);
   }
 
   @Override
