@@ -15,6 +15,7 @@ import net.stickycode.stereotype.ConfiguredComponent;
  * </pre>
  */
 @ConfiguredComponent
+@Deprecated
 public interface Resource<T> {
 
   /**
