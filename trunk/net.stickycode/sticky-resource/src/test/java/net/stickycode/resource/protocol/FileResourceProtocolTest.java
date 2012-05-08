@@ -14,6 +14,7 @@ import java.io.OutputStreamWriter;
 
 import net.stickycode.resource.ResourceLocation;
 import net.stickycode.resource.ResourceNotFoundException;
+import net.stickycode.resource.ResourcePathNotFoundForWriteException;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

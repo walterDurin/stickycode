@@ -7,8 +7,10 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import net.stickycode.resource.ResourceAuthorisationFailureException;
 import net.stickycode.resource.ResourceLocation;
 import net.stickycode.resource.ResourceNotFoundException;
+import net.stickycode.resource.ResourcePathNotFoundForWriteException;
 import net.stickycode.resource.ResourceProtocol;
 
 public class FileResourceProtocol
