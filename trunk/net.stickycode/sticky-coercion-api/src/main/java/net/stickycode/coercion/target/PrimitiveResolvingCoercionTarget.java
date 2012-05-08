@@ -10,8 +10,8 @@ public class PrimitiveResolvingCoercionTarget
 
   private AnnotatedElement annotatedElement;
 
-  public PrimitiveResolvingCoercionTarget(Class<?> type, AnnotatedElement annotatedElement, Class<?> owner, CoercionTarget parent) {
-    super(type, owner, parent);
+  public PrimitiveResolvingCoercionTarget(Class<?> type, AnnotatedElement annotatedElement, Class<?> owner, CoercionTarget parent, String name) {
+    super(type, owner, parent, name);
     this.annotatedElement = annotatedElement;
   }
 

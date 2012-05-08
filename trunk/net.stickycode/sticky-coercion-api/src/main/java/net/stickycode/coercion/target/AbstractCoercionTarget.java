@@ -1,5 +1,6 @@
 package net.stickycode.coercion.target;
 
+import static net.stickycode.exception.Preconditions.notBlank;
 import static net.stickycode.exception.Preconditions.notNull;
 
 import java.lang.reflect.AnnotatedElement;
@@ -14,12 +15,15 @@ public abstract class AbstractCoercionTarget
   protected final Class<?> owner;
 
   protected final CoercionTarget parent;
+  
+  private final String name;
 
-  public AbstractCoercionTarget(Class<?> type, Class<?> owner, CoercionTarget parent) {
+  public AbstractCoercionTarget(Class<?> type, Class<?> owner, CoercionTarget parent, String name) {
     super();
     this.type = notNull(type, "All coercion targets must have a type");
     this.owner = notNull(owner, "All coercion targets must have an owner");
     this.parent = parent;
+    this.name = notBlank(name, "A conercion target name cannot be blank");
   }
 
   @Override
@@ -80,6 +84,10 @@ public abstract class AbstractCoercionTarget
   @Override
   public String toString() {
     return getClass().getSimpleName() + "{" + type.getSimpleName() + "}";
+  }
+
+  public String getName() {
+    return name;
   }
 
 }

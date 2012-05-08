@@ -5,8 +5,8 @@ import net.stickycode.coercion.CoercionTarget;
 public class ArrayCoercionTarget
     extends AbstractCoercionTarget {
 
-  public ArrayCoercionTarget(Class<?> type, Class<?> owner, CoercionTarget parent) {
-    super(type, owner, parent);
+  public ArrayCoercionTarget(Class<?> type, Class<?> owner, CoercionTarget parent, String name) {
+    super(type, owner, parent, name);
     if (!type.isArray())
       throw new ArrayCoercionTargetsMustTargetArraysException(type);
   }
