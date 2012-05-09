@@ -63,6 +63,7 @@ public class JaxbElementResourceCodec<T>
 
   @Override
   public T load(InputStream source, CoercionTarget resourceTarget) {
+    @SuppressWarnings("unchecked")
     Class<T> type = (Class<T>) resourceTarget.getType();
     try {
       Unmarshaller u = jaxbFactory.createUnmarshaller(resourceTarget);

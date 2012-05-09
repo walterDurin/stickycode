@@ -24,7 +24,7 @@
 		<developerConnection>scm:svn:https://stickycode.googlecode.com/svn/trunk/net.stickycode.resource/sticky-resource</developerConnection>
 		<url>http://code.google.com/p/stickycode/source/browse/#svn/trunk/net.stickycode.resource/sticky-resource</url>
 	</scm>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>net.stickycode.composite</groupId>
@@ -39,6 +39,11 @@
 			<scope>test</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>net.stickycode.resource</groupId>
+			<artifactId>sticky-resource-stereotype</artifactId>
+			<version>[1.1,2)</version>
+		</dependency>
 		<dependency>
 			<groupId>net.stickycode.composite</groupId>
 			<artifactId>sticky-composite-logging-api</artifactId>
