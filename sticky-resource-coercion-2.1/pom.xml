@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (c) 2010 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved. -->
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<parent>
+		<groupId>net.stickycode.parent</groupId>
+		<artifactId>sticky-jar</artifactId>
+		<version>1.21</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>net.stickycode.resource</groupId>
+	<artifactId>sticky-resource-coercion</artifactId>
+	<version>2.1</version>
+	<packaging>jar</packaging>
+
+	<name>sticky-resource-coercion</name>
+	<description>Resource support for coercion</description>
+	<inceptionYear>2012</inceptionYear>
+	<url>http://www.StickyCode.net/sticky-coercion-resource/</url>
+
+	<scm>
+		<connection>scm:svn:http://source.stickycode.net/tags/net.stickycode.resource/sticky-resource-coercion-2.1</connection>
+		<developerConnection>scm:svn:http://source.stickycode.net/tags/net.stickycode.resource/sticky-resource-coercion-2.1</developerConnection>
+		<url>scm:svn:http://source.stickycode.net/tags/net.stickycode.resource/sticky-resource-coercion-2.1</url>
+	</scm>
+
+	<dependencies>
+		<dependency>
+			<groupId>net.stickycode</groupId>
+			<artifactId>sticky-coercion</artifactId>
+			<version>[4.9,5)</version>
+		</dependency>
+		<dependency>
+			<groupId>net.stickycode.resource</groupId>
+			<artifactId>sticky-resource</artifactId>
+			<version>[2.2,3)</version>
+		</dependency>
+		<dependency>
+			<groupId>net.stickycode</groupId>
+			<artifactId>sticky-reflector</artifactId>
+			<version>[1.10,2)</version>
+		</dependency>
+		<dependency>
+			<groupId>net.stickycode.composite</groupId>
+			<artifactId>sticky-composite-logging-api</artifactId>
+			<version>[1.4,2)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mockwire</groupId>
+			<!--
+			<artifactId>mockwire-guice3</artifactId>
+			<version>[2.1,3)</version>
+			-->
+			<artifactId>mockwire-spring30</artifactId>
+			<version>[6.4,7)</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+</project>
