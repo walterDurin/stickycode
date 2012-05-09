@@ -11,7 +11,7 @@
 
 	<groupId>net.stickycode.resource</groupId>
 	<artifactId>sticky-resource-stereotype</artifactId>
-	<version>1.3-SNAPSHOT</version>
+	<version>1.4-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>sticky-resource-stereotype</name>
