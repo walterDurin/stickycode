@@ -1,6 +1,7 @@
 package net.stickycode.resource;
 
-import net.stickycode.stereotype.resource.Resource;
+import net.stickycode.resource.stereotype.Resource;
+
 
 public class SingletonResource<T>
     implements Resource<T> {

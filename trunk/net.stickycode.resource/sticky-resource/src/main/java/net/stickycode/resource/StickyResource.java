@@ -1,10 +1,9 @@
 package net.stickycode.resource;
 
+import net.stickycode.resource.stereotype.Resource;
 import net.stickycode.stereotype.Configured;
 import net.stickycode.stereotype.StickyComponent;
-import net.stickycode.stereotype.resource.Resource;
 
-//@ConfiguredComponent
 @StickyComponent
 public class StickyResource<T>
     implements Resource<T> {
