@@ -14,14 +14,14 @@ package net.stickycode.configured.guice3;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 import javax.inject.Provider;
 
-import net.stickycode.bootstrap.guice3.ProviderClassBindingJob;
 import net.stickycode.configured.ConfigurationRepository;
 import net.stickycode.reflector.Methods;
 import net.stickycode.stereotype.StickyComponent;
@@ -105,10 +105,11 @@ public class StickyStereotypeScannerFeature
   @Override
   @SuppressWarnings("unchecked")
   public void process(Class<Object> annotatedClass, Map<String, Annotation> annotations) {
-    log.debug("process {} with {}", annotatedClass, annotations);
     List<Class<?>> interfaces = collectInterfaces(annotatedClass);
 
-    bind(annotatedClass, null, Scopes.SINGLETON);
+    Scope scope = deriveScope(interfaces);
+
+    bind(annotatedClass, null, scope);
 
     for (Class<?> interf : interfaces) {
       if (interf.isAssignableFrom(TypeListener.class))
@@ -116,12 +117,30 @@ public class StickyStereotypeScannerFeature
       else
         if (!interf.isAssignableFrom(MembersInjector.class))
           if (Provider.class.isAssignableFrom(interf))
-            bindProviderWorkaround((Class<Object>) annotatedClass, null);
+            bindProviderWorkaround((Class<Object>) annotatedClass, Scopes.NO_SCOPE);
           else
-            bind(annotatedClass, (Class<Object>) interf, (Annotation) null, Scopes.SINGLETON);
+            bind(annotatedClass, (Class<Object>) interf, (Annotation) null, scope);
     }
+
+    if (!Provider.class.isAssignableFrom(annotatedClass) && !MembersInjector.class.isAssignableFrom(annotatedClass))
+      for (Class<?> blah = annotatedClass; blah != null; blah = blah.getSuperclass())
+        for (Type type : blah.getGenericInterfaces()) {
+          if (type instanceof ParameterizedType) {
+            bindParameterizedType(annotatedClass, type);
+          }
+        }
+
+  }
+  
+  @SuppressWarnings({ "rawtypes", "unchecked" })
+  protected void bindParameterizedType(Class<?> annotatedClass, Type type) {
+    // if the type is parameterised and not multibound then there will only be one instance, 
+    // so there is no need to bind to the generic interface
   }
 
+  private Scope deriveScope(List<Class<?>> interfaces) {
+    return Scopes.SINGLETON;
+  }
   /**
    * This nasty code is to workaround the bug fixed by (NOTE its says closed but its not fixed yet) in javac. Without these casts
    * javac will fail while ecj will be fine.

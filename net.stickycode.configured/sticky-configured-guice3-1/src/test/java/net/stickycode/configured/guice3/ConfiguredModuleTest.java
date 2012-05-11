@@ -12,18 +12,18 @@
  */
 package net.stickycode.configured.guice3;
 
+import static org.mockito.Mockito.when;
+
 import java.util.Collections;
+
+import net.stickycode.configured.AbstractConfiguredComponentTest;
+import net.stickycode.configured.ConfigurationSource;
 
 import org.mockito.Mockito;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
-
-import net.stickycode.configured.AbstractConfiguredComponentTest;
-import net.stickycode.configured.ConfigurationSource;
-
-import static org.mockito.Mockito.when;
 
 public class ConfiguredModuleTest
     extends AbstractConfiguredComponentTest {
