@@ -3,15 +3,14 @@ package net.stickycode.stereotype.resource;
 import net.stickycode.stereotype.ConfiguredComponent;
 
 /**
- * Interface used to mark of point where an external resource should be injected.
+ * Deprecated as the Resource stereotype is a separate project to separate concerns.
  * 
  * <pre>
- * &#064;Configured
- * private Resource<String> helpText;
- * 
- * &#064;Configured
- * private Resource<Properties> decodeMappings;
- * 
+ * &lt;dependency&gt;
+ * &lt;groupId&gt;net.stickycode.resource&lt;/groupId&gt;
+ * &lt;artifactId&gt;sticky-resource-stereotype&lt;/artifactId&gt;
+ * &lt;version&gt;[1,2)&lt;/version&gt;
+ * &lt;/dependency&gt;
  * </pre>
  */
 @ConfiguredComponent
