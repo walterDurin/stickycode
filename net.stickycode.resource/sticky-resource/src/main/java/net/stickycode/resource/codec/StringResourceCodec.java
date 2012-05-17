@@ -79,4 +79,9 @@ public class StringResourceCodec
     return type.getType().isAssignableFrom(String.class);
   }
 
+  @Override
+  public String getDefaultFileSuffix() {
+    return ".txt";
+  }
+
 }

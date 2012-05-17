@@ -63,4 +63,9 @@ public class JaxbResourceCodec<T>
     return getClass().getSimpleName();
   }
 
+  @Override
+  public String getDefaultFileSuffix() {
+    return ".xml";
+  }
+
 }

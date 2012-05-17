@@ -12,7 +12,9 @@ import net.stickycode.resource.ResourceLocation;
 import net.stickycode.resource.ResourceNotFoundException;
 import net.stickycode.resource.ResourcePathNotFoundForWriteException;
 import net.stickycode.resource.ResourceProtocol;
+import net.stickycode.stereotype.component.StickyExtension;
 
+@StickyExtension
 public class FileResourceProtocol
     implements ResourceProtocol {
 
@@ -33,12 +35,12 @@ public class FileResourceProtocol
   }
 
   private String resolvePath(ResourceLocation resourceLocation) {
-    return resourceLocation.getPath().substring("file://".length());
+    return resourceLocation.getPath();
   }
 
   @Override
   public boolean canResolve(String protocol) {
-    return protocol.startsWith("file://");
+    return protocol.startsWith("file");
   }
 
   @Override

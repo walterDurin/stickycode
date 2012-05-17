@@ -40,4 +40,9 @@ public class PropertiesResourceCodec
     return type.getType().isAssignableFrom(Properties.class);
   }
 
+  @Override
+  public String getDefaultFileSuffix() {
+    return ".properties";
+  }
+
 }

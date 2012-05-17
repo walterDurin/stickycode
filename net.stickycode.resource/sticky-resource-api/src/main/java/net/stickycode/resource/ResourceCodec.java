@@ -10,10 +10,25 @@ import net.stickycode.coercion.CoercionTarget;
  */
 public interface ResourceCodec<T> {
 
+  /**
+   * Load a T from a stream using the given type information
+   */
   T load(InputStream source, CoercionTarget targetType);
 
+  /**
+   * Store a T to the stream using the given type information
+   */
   void store(CoercionTarget sourceType, T resource, OutputStream target);
 
+  /**
+   * @return true if this codec is applicable for the given type.
+   */
   boolean isApplicableTo(CoercionTarget type);
+
+  /**
+   * The common suffix for files this codec can process.
+   * e.g. String codecs would have a suffix of .txt, Xml codecs a suffix of .xml
+   */
+  String getDefaultFileSuffix();
 
 }
