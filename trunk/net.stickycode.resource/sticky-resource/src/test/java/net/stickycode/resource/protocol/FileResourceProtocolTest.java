@@ -31,22 +31,20 @@ public class FileResourceProtocolTest {
 
   @Test
   public void matching() {
-    assertThat(protocol.canResolve("file://")).isTrue();
-    assertThat(protocol.canResolve("file:///")).isTrue();
-    assertThat(protocol.canResolve("file://to/some/path")).isTrue();
-    assertThat(protocol.canResolve("file:to/some/path")).isFalse();
-    assertThat(protocol.canResolve("folder:to/some/path")).isFalse();
+    assertThat(protocol.canResolve("file")).isTrue();
+    assertThat(protocol.canResolve("http")).isFalse();
+    assertThat(protocol.canResolve("folder")).isFalse();
   }
 
   @Test(expected = ResourceNotFoundException.class)
   public void notExists() {
-    when(location.getPath()).thenReturn("file://src/test/resources/nonexistant");
+    when(location.getPath()).thenReturn("src/test/resources/nonexistant");
     protocol.getInputStream(location);
   }
 
   @Test
   public void readable() throws IOException {
-    when(location.getPath()).thenReturn("file://src/test/resources/sampleStream.txt");
+    when(location.getPath()).thenReturn("src/test/resources/sampleStream.txt");
     InputStream in = protocol.getInputStream(location);
     BufferedReader reader = new BufferedReader(new InputStreamReader(in));
     assertThat(reader.readLine()).isEqualTo("sample text in a file");
@@ -56,7 +54,7 @@ public class FileResourceProtocolTest {
   @Test
   public void writable() throws IOException {
     File file = File.createTempFile("sampleStream", ".txt");
-    when(location.getPath()).thenReturn("file://" + file.getAbsolutePath());
+    when(location.getPath()).thenReturn(file.getAbsolutePath());
     OutputStream out = protocol.getOutputStream(location);
     BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
     String message = "written to resource location " + file.getAbsolutePath();
@@ -71,7 +69,7 @@ public class FileResourceProtocolTest {
 
   @Test(expected = ResourcePathNotFoundForWriteException.class)
   public void notWritable() throws IOException {
-    when(location.getPath()).thenReturn("file:///some/random/path/file.txt");
+    when(location.getPath()).thenReturn("/some/random/path/file.txt");
     OutputStream out = protocol.getOutputStream(location);
     BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
     String message = "should never go anywhere";

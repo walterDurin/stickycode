@@ -90,4 +90,9 @@ public class JaxbElementResourceCodec<T>
     return getClass().getSimpleName();
   }
 
+  @Override
+  public String getDefaultFileSuffix() {
+    return ".xml";
+  }
+
 }
