@@ -12,50 +12,58 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 
+import net.stickycode.mockwire.Controlled;
+import net.stickycode.mockwire.Uncontrolled;
+import net.stickycode.mockwire.UnderTest;
+import net.stickycode.mockwire.junit4.MockwireRunner;
 import net.stickycode.resource.ResourceLocation;
 import net.stickycode.resource.ResourceNotFoundException;
 import net.stickycode.resource.ResourcePathNotFoundForWriteException;
+import net.stickycode.resource.ResourceResolutionFailedException;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(MockwireRunner.class)
 public class HttpResourceProtocolTest {
 
-  @Mock
+  @Controlled
   ResourceLocation location;
 
-  HttpResourceProtocol protocol = new HttpResourceProtocol();
+  @UnderTest
+  HttpResourceProtocol protocol;
+  
+  @Uncontrolled
+  HttpClientComponent component;
 
   @Test
   public void matching() {
-    assertThat(protocol.canResolve("http://")).isTrue();
-    assertThat(protocol.canResolve("http:///")).isTrue();
-    assertThat(protocol.canResolve("http://to/some/path")).isTrue();
-    assertThat(protocol.canResolve("http:to/some/path")).isFalse();
-  }
-  
-  @Test
-  public void notMatching() {
-    assertThat(protocol.canResolve("folder:to/some/path")).isFalse();
-    assertThat(protocol.canResolve("file:to/some/path")).isFalse();
-    assertThat(protocol.canResolve("classpath:to/some/path")).isFalse();
-    assertThat(protocol.canResolve(":to/some/path")).isFalse();
-    assertThat(protocol.canResolve("://to/some/path")).isFalse();
-    assertThat(protocol.canResolve("ftp://to/some/path")).isFalse();
+    assertThat(protocol.canResolve("http")).isTrue();
   }
 
-  @Test(expected = ResourceNotFoundException.class)
+  @Test
+  public void notMatching() {
+    assertThat(protocol.canResolve("file")).isFalse();
+    assertThat(protocol.canResolve("blah")).isFalse();
+    assertThat(protocol.canResolve("folder")).isFalse();
+    assertThat(protocol.canResolve("classpath")).isFalse();
+  }
+
+  @Test(expected = ResourceResolutionFailedException.class)
   public void notExists() {
-    when(location.getPath()).thenReturn("http://src/test/resources/nonexistant");
+    when(location.getPath()).thenReturn("xyu.sdfa.doesnotexistoiasdpf");
     protocol.getInputStream(location);
   }
 
+  @Test(expected = ResourceNotFoundException.class)
+  public void notFound() throws IOException {
+    when(location.getPath()).thenReturn("localhost/not/here.html");
+    InputStream in = protocol.getInputStream(location);
+  }
+  
   @Test
   public void readable() throws IOException {
-    when(location.getPath()).thenReturn("http://src/test/resources/sampleStream.txt");
+    when(location.getPath()).thenReturn("www.redengine.co.nz/index.html");
     InputStream in = protocol.getInputStream(location);
     BufferedReader reader = new BufferedReader(new InputStreamReader(in));
     assertThat(reader.readLine()).isEqualTo("sample text in a http");
