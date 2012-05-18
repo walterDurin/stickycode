@@ -131,16 +131,17 @@ public class StickyStereotypeScannerFeature
         }
 
   }
-  
+
   @SuppressWarnings({ "rawtypes", "unchecked" })
   protected void bindParameterizedType(Class<?> annotatedClass, Type type) {
-    // if the type is parameterised and not multibound then there will only be one instance, 
+    // if the type is parameterised and not multibound then there will only be one instance,
     // so there is no need to bind to the generic interface
   }
 
   private Scope deriveScope(List<Class<?>> interfaces) {
     return Scopes.SINGLETON;
   }
+
   /**
    * This nasty code is to workaround the bug fixed by (NOTE its says closed but its not fixed yet) in javac. Without these casts
    * javac will fail while ecj will be fine.
@@ -153,10 +154,12 @@ public class StickyStereotypeScannerFeature
 
   private List<Class<?>> collectInterfaces(Class<Object> annotatedClass) {
     List<Class<?>> interfaces = new ArrayList<Class<?>>();
-    for (Class<?> class1 : annotatedClass.getInterfaces()) {
-      interfaces.add(class1);
-      processInterface(class1, interfaces);
-    }
+    for (Class<?> base = annotatedClass; base != null; base = base.getSuperclass())
+      for (Class<?> class1 : base.getInterfaces()) {
+        interfaces.add(class1);
+        processInterface(class1, interfaces);
+      }
+    
     log.debug("found {} with {}", annotatedClass, interfaces);
     return interfaces;
   }
