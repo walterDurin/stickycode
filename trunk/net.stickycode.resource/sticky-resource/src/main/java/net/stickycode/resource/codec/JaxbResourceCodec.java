@@ -4,7 +4,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import javax.inject.Inject;
+import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.JAXBPermission;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -32,6 +34,7 @@ public class JaxbResourceCodec<T>
     try {
       log.debug("storing {} of type {}", resource, sourceType);
       Marshaller m = jaxbFactory.createMarshaller(sourceType);
+      m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
       m.marshal(resource, outputStream);
     }
     catch (JAXBException e) {
