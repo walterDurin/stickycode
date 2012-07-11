@@ -21,7 +21,16 @@
 			<version>[6.1,7)</version>
 			<scope>test</scope>
 		</dependency>
-
+<dependency>
+    <groupId>com.sun.jersey</groupId>
+    <artifactId>jersey-json</artifactId>
+    <version>1.13-b01</version>
+</dependency>
+<dependency>
+    <groupId>com.sun.jersey</groupId>
+    <artifactId>jersey-servlet</artifactId>
+    <version>1.13-b01</version>
+</dependency>
 		<dependency>
 			<groupId>co.nfigured.example</groupId>
 			<artifactId>configured-example-api-v1</artifactId>
