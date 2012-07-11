@@ -12,6 +12,9 @@
  */
 package co.nfigured.example.helloworld.v1;
 
+import javax.inject.Inject;
+import javax.inject.Provider;
+
 import net.stickycode.stereotype.Configured;
 import net.stickycode.stereotype.component.StickyService;
 
@@ -24,6 +27,9 @@ public class EchoingHelloWorld
   
   @Configured
   Integer startIndex;
+  
+  @Inject
+  Provider<Stuff> bob;
 
   @Override
   public String hello(String name) {
