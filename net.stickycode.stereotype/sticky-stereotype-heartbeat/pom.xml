@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (c) 2012 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved. -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<parent>
+		<groupId>net.stickycode.parent</groupId>
+		<artifactId>sticky-api</artifactId>
+		<version>1.8</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>net.stickycode.stereotype</groupId>
+	<artifactId>sticky-stereotype-heartbeat</artifactId>
+	<version>1.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>sticky-heartbean-stereotype</name>
+	<inceptionYear>2012</inceptionYear>
+	<url>http://www.StickyCode.net/sticky-heartbeat-stereotype/</url>
+
+	<scm>
+		<connection>scm:svn:http://stickycode.googlecode.com/svn/trunk/net.stickycode.heartbeat/sticky-heartbeat-stereotype</connection>
+		<developerConnection>scm:svn:https://stickycode.googlecode.com/svn/trunk/net.stickycode.heartbeat/sticky-heartbeat-stereotype</developerConnection>
+		<url>http://code.google.com/p/stickycode/source/browse/#svn/trunk/net.stickycode.heartbeat/sticky-heartbeat-stereotype</url>
+	</scm>
+
+	<dependencies>
+		<dependency>
+			<groupId>net.stickycode</groupId>
+			<artifactId>sticky-stereotype</artifactId>
+			<version>[1.17,2)</version>
+		</dependency>
+		<dependency>
+			<groupId>net.stickycode.composite</groupId>
+			<artifactId>sticky-composite-datetime</artifactId>
+			<version>[1,2)</version>
+		</dependency>
+	</dependencies>
+
+	<description>Metadata and types used for invocation and recording of configured heartbeats</description>
+</project>
