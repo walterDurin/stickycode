@@ -14,14 +14,14 @@
 	<version>1.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>sticky-heartbean-stereotype</name>
+	<name>sticky-stereotype-heartbeat</name>
 	<inceptionYear>2012</inceptionYear>
-	<url>http://www.StickyCode.net/sticky-heartbeat-stereotype/</url>
+	<url>http://www.StickyCode.net/sticky-stereotype-heartbeat/</url>
 
 	<scm>
-		<connection>scm:svn:http://stickycode.googlecode.com/svn/trunk/net.stickycode.heartbeat/sticky-heartbeat-stereotype</connection>
-		<developerConnection>scm:svn:https://stickycode.googlecode.com/svn/trunk/net.stickycode.heartbeat/sticky-heartbeat-stereotype</developerConnection>
-		<url>http://code.google.com/p/stickycode/source/browse/#svn/trunk/net.stickycode.heartbeat/sticky-heartbeat-stereotype</url>
+		<connection>scm:svn:http://stickycode.googlecode.com/svn/trunk/net.stickycode.heartbeat/sticky-stereotype-heartbeat</connection>
+		<developerConnection>scm:svn:https://stickycode.googlecode.com/svn/trunk/net.stickycode.heartbeat/sticky-stereotype-heartbeat</developerConnection>
+		<url>http://code.google.com/p/stickycode/source/browse/#svn/trunk/net.stickycode.heartbeat/sticky-stereotype-heartbeat</url>
 	</scm>
 
 	<dependencies>
