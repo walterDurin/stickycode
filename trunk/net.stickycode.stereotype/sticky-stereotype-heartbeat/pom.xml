@@ -14,6 +14,7 @@
 	<version>1.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
+
 	<name>sticky-stereotype-heartbeat</name>
 	<inceptionYear>2012</inceptionYear>
 	<url>http://www.StickyCode.net/sticky-stereotype-heartbeat/</url>
