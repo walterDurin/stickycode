@@ -53,6 +53,16 @@ public class StickyBootstrapTest {
   }
 
   @Test
+  public void cycle() {
+    SystemStub cycle = new SystemStub("cycle");
+    StickySystem cycle2 = new SystemStub("cycle2").dependsOn(cycle);
+    cycle.dependsOn(cycle2);
+    assertThat(ordered(cycle, cycle2)).containsExactly(cycle, cycle2);
+    assertThat(ordered(cycle2, cycle)).containsExactly(cycle2, cycle);
+    assertThat(ordered(cycle2, base, cycle)).containsExactly(cycle2, base, cycle);
+  }
+
+  @Test
   public void before() {
     assertThat(ordered(beforeAll, beforeAll2))
         .containsExactly(beforeAll, beforeAll2);
@@ -73,7 +83,7 @@ public class StickyBootstrapTest {
   @Test
   public void shutdownBeforeAllx2() {
     assertThat(shutdownOrder(base, usedByBase, beforeAll2, usesBase, beforeAll))
-        .containsExactly(usesBase, base, usedByBase, beforeAll2, beforeAll);
+        .containsExactly(usesBase, base, usedByBase, beforeAll, beforeAll2);
   }
 
   private List<StickySystem> ordered(StickySystem... base2) {
