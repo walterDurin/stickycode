@@ -35,8 +35,8 @@
 				<configuration>
 					<comparisonVersion>1.2</comparisonVersion>
 				</configuration>
--->
 			</plugin>
+-->
 		</plugins>
 	</build>
 	<dependencies>
