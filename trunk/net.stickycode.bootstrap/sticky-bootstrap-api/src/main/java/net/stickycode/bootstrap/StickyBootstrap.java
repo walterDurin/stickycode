@@ -30,7 +30,7 @@ public class StickyBootstrap {
   @Inject
   public StickyBootstrap(Set<StickySystem> subsystems) {
     this.systems = orderByDependency(subsystems);
-    log.info("bootstrap order {}");
+    log.info("bootstrap order {}", systems);
   }
 
   private List<StickySystem> orderByDependency(Set<StickySystem> subsystems) {
@@ -40,7 +40,7 @@ public class StickyBootstrap {
   }
 
   /**
-   * Sort algorithm that
+   * A stable Sort algorithm that
    * <ol>
    * <li>starts at the head
    * <li>
@@ -53,7 +53,7 @@ public class StickyBootstrap {
    * <li>repeat for next element</li>
    * </ol>
    * 
-   * A form of selection sort, the sets will always be small so efficiency not a big deal over simplicity.
+   * A form of selection sort, the sets will always be small so efficiency is not a big deal over the simplicity.
    */
   private void sort(LinkedList<StickySystem> order) {
     if (order.isEmpty())
