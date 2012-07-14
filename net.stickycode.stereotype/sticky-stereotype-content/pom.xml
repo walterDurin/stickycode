@@ -10,11 +10,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>net.stickycode.stereotype</groupId>
-	<artifactId>sticky-stereotype-content-1</artifactId>
+	<artifactId>sticky-stereotype-content</artifactId>
 	<version>1.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>sticky-stereotype-content</name>
+	<name>sticky-stereotype-content-1</name>
 	<description>Class, Field and Method metadata used to remove boilerplate code for construction, configuration, scheduling, monitoring, management and more</description>
 	<inceptionYear>2008</inceptionYear>
 	<url>http://www.StickyCode.net/sticky-stereotype-content/</url>
