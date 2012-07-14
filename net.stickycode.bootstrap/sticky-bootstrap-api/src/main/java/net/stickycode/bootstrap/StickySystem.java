@@ -1,35 +1,54 @@
 package net.stickycode.bootstrap;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+public abstract class StickySystem {
 
-import javax.inject.Inject;
-
-import net.stickycode.stereotype.StickyComponent;
-
-@StickyComponent
-public class StickySystem {
-
-  private List<StickySubsystem> subsystems;
-  
-  @Inject
-  public StickySystem(Set<StickySubsystem> subsystems) {
-    this.subsystems = new ArrayList<StickySubsystem>(subsystems);
-    Collections.sort(this.subsystems, new SubsystemDependencyComparator());
+  @Override
+  public String toString() {
+    return getLabel();
   }
   
+  public abstract String getLabel();
+  
+  public abstract Package getPackage();
+
+  /**
+   * Start the system, validating and verifying the environment is ok.
+   */
   public void start() {
-    for (StickySubsystem subsystem : subsystems) {
-      subsystem.start();
-    }
   }
-  
+
+  /**
+   * Complete any existing activities but reject any new activities.
+   * 
+   * e.g. stop scheduled jobs
+   */
+  public void pause() {
+  }
+
+  /**
+   * Restart activities stopped by a pause
+   */
+  public void unpause() {
+  }
+
+  /**
+   * Complete any existing activities and shutdown down all resources.
+   */
   public void shutdown() {
-    for (StickySubsystem subsystem : subsystems) {
-      subsystem.shutdown();
-    }
   }
-  
+
+  /**
+   * @return true if this subsystem uses the given system
+   */
+  public boolean uses(StickySystem system) {
+    return false;
+  }
+
+  /**
+   * @return true if the this subsystem is used by the given system
+   */
+  public boolean isUsedBy(StickySystem system) {
+    return false;
+  }
+
 }
