@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright (c) 2010 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved. -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
 	<parent>
 		<groupId>net.stickycode.parent</groupId>
@@ -11,7 +11,7 @@
 
 	<groupId>net.stickycode.bootstrap</groupId>
 	<artifactId>sticky-bootstrap-api</artifactId>
-	<version>1.2-SNAPSHOT</version>
+	<version>1.2</version>
 	<packaging>jar</packaging>
 
 	<name>sticky-bootstrap-api</name>
@@ -20,20 +20,22 @@
 	<url>http://www.StickyCode.net/sticky-bootstrap-api/</url>
 
 	<scm>
-		<connection>scm:svn:http://stickycode.googlecode.com/svn/trunk/net.stickycode.bootstrap/sticky-bootstrap-api</connection>
-		<developerConnection>scm:svn:https://stickycode.googlecode.com/svn/trunk/net.stickycode.bootstrap/sticky-bootstrap-api</developerConnection>
-		<url>http://code.google.com/p/stickycode/source/browse/#svn/trunk/net.stickycode.bootstrap/sticky-bootstrap-api</url>
+		<connection>scm:svn:http://source.stickycode.net/tags/net.stickycode.bootstrap/sticky-bootstrap-api-1.2</connection>
+		<developerConnection>scm:svn:http://source.stickycode.net/tags/net.stickycode.bootstrap/sticky-bootstrap-api-1.2</developerConnection>
+		<url>scm:svn:http://source.stickycode.net/tags/net.stickycode.bootstrap/sticky-bootstrap-api-1.2</url>
 	</scm>
 
 
 	<build>
 		<plugins>
+<!--
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>clirr-maven-plugin</artifactId>
 				<configuration>
 					<comparisonVersion>1.2</comparisonVersion>
 				</configuration>
+-->
 			</plugin>
 		</plugins>
 	</build>
@@ -41,7 +43,7 @@
 		<dependency>
 			<groupId>net.stickycode</groupId>
 			<artifactId>sticky-stereotype</artifactId>
-			<version>[1.13,2)</version>
+			<version>[1.17,2)</version>
 		</dependency>
 		<dependency>
 			<groupId>net.stickycode.composite</groupId>
