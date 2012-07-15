@@ -10,24 +10,33 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
  */
-package net.stickycode.stereotype;
+package net.stickycode.stereotype.content;
 
+import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-/**
- * INTERNAL USE ONLY, this stereotype is used to identify components that make up the StickyCode framework and may disappear at any
- * time.
- * 
- * <p>
- * In particular Guice which does not have dependency resolution requires that framework elements are set up before use. This
- * annotation allows identification of the framework for use in the parent injector.
- * </p>
- */
-@Target(ElementType.TYPE)
-@Retention(RetentionPolicy.RUNTIME)
-public @interface StickyFramework {
 
+/**
+ * <p>The content of a system is often expected to change at runtime and is not defined by the development team, this annotation is used
+ * to mark a fields as being injected from an external system.</p>
+ *
+ * <p>Content fields must be of type String anything else will error</p>
+ *
+ * <p>If the field is a string then any localization will be carried out by the configuration system</p>
+ *
+ * <h3>TODO</h3>
+ * <p>Allow fields of type LocalizedContent</p>
+ * <p>For LocalizedContent content will be localized by the user associated with the request</p>
+ */
+@Target(ElementType.FIELD)
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+public @interface ConfiguredContent {
+  /**
+   * Describe the configuration such that someone reading this message could provide appropriate configuration
+   */
+  String value() default "";
 }

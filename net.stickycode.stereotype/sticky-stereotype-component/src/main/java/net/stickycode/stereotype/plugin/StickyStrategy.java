@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2010 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved.
+ * Copyright (c) 2011 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved.
  *
  * This program is licensed to you under the Apache License Version 2.0,
  * and you may not use this file except in compliance with the Apache License Version 2.0.
@@ -10,24 +10,23 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
  */
-package net.stickycode.stereotype;
+package net.stickycode.stereotype.plugin;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import net.stickycode.stereotype.StickyPlugin;
+
 /**
- * INTERNAL USE ONLY, this stereotype is used to identify components that make up the StickyCode framework and may disappear at any
- * time.
- * 
- * <p>
- * In particular Guice which does not have dependency resolution requires that framework elements are set up before use. This
- * annotation allows identification of the framework for use in the parent injector.
- * </p>
+ * This stereotype marks a component as being a strategy being a type of plugin.
+
+ * It could be used to carry out context validation to ensure the pattern is being used appropriately.
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface StickyFramework {
+@StickyPlugin
+public @interface StickyStrategy {
 
 }

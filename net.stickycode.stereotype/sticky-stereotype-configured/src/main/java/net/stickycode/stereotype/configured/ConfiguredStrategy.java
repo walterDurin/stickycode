@@ -10,24 +10,20 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
  */
-package net.stickycode.stereotype;
+package net.stickycode.stereotype.configured;
 
+import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-/**
- * INTERNAL USE ONLY, this stereotype is used to identify components that make up the StickyCode framework and may disappear at any
- * time.
- * 
- * <p>
- * In particular Guice which does not have dependency resolution requires that framework elements are set up before use. This
- * annotation allows identification of the framework for use in the parent injector.
- * </p>
- */
-@Target(ElementType.TYPE)
+@Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface StickyFramework {
-
+@Documented
+public @interface ConfiguredStrategy {
+  /**
+   * Describe the configuration such that someone reading this message could provide appropriate configuration
+   */
+  String value() default "";
 }
