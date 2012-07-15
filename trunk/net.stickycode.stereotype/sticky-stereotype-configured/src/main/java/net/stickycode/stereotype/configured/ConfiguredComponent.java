@@ -10,24 +10,24 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
  */
-package net.stickycode.stereotype;
+package net.stickycode.stereotype.configured;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+
 /**
- * INTERNAL USE ONLY, this stereotype is used to identify components that make up the StickyCode framework and may disappear at any
- * time.
+ * This stereotype marks a component as being configured, essentially a tuple for configuration.
  * 
- * <p>
- * In particular Guice which does not have dependency resolution requires that framework elements are set up before use. This
- * annotation allows identification of the framework for use in the parent injector.
- * </p>
+ * This marker is on significant when the marked type is a target of {@link Configured}. 
+ * 
+ * The configuration system will create an instance of the marked type and scan it for {@link Configured} and express those as Configuration of the system.
+ *
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface StickyFramework {
+public @interface ConfiguredComponent {
 
 }
