@@ -34,9 +34,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>javax.inject</groupId>
-			<artifactId>javax.inject</artifactId>
-			<version>1</version>
+			<groupId>net.stickycode.stereotype</groupId>
+			<artifactId>sticky-stereotype-configured</artifactId>
+			<version>[2,3)</version>
 		</dependency>
 	</dependencies>
 
