@@ -17,6 +17,7 @@
 	<name>sticky-stereotype-heartbeat-1</name>
 	<inceptionYear>2012</inceptionYear>
 	<url>http://www.StickyCode.net/sticky-stereotype-heartbeat/</url>
+	<description>Metadata and types used for invocation and recording of configured heartbeats</description>
 
 	<scm>
 		<connection>scm:svn:http://stickycode.googlecode.com/svn/trunk/net.stickycode.heartbeat/sticky-stereotype-heartbeat</connection>
@@ -26,9 +27,9 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>net.stickycode</groupId>
-			<artifactId>sticky-stereotype</artifactId>
-			<version>[1.17,2)</version>
+			<groupId>net.stickycode.stereotype</groupId>
+			<artifactId>sticky-stereotype-scheduled</artifactId>
+			<version>[2,3)</version>
 		</dependency>
 		<dependency>
 			<groupId>net.stickycode.composite</groupId>
@@ -37,5 +38,4 @@
 		</dependency>
 	</dependencies>
 
-	<description>Metadata and types used for invocation and recording of configured heartbeats</description>
 </project>
