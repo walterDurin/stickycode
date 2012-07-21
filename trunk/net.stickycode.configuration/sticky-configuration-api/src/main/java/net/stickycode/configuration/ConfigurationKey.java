@@ -2,6 +2,6 @@ package net.stickycode.configuration;
 
 public interface ConfigurationKey {
 
-  String join(String string);
+  String join(String delimeter);
 
 }

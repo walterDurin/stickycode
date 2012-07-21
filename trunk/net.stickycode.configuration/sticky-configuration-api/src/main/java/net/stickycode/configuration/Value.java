@@ -4,4 +4,6 @@ public interface Value {
 
   String get();
 
+  boolean hasPrecedence(Value v);
+
 }
