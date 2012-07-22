@@ -1,12 +1,12 @@
 package net.stickycode.configuration;
 
 
-public interface ConfigurationValues
+public interface ResolvedConfiguration
 {
 
   String getValue();
 
-  void add(Value value);
+  void add(ConfigurationValue value);
 
   /**
    * @return true if this configuration values has at least one value provided by a configuration source.
