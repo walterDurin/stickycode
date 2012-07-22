@@ -17,6 +17,6 @@ package net.stickycode.configuration;
  */
 public interface ConfigurationSource {
 
-  void apply(ConfigurationKey key, ConfigurationValues values);
+  void apply(ConfigurationKey key, ResolvedConfiguration values);
 
 }

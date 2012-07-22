@@ -12,8 +12,10 @@
  */
 package net.stickycode.configured;
 
+import net.stickycode.bootstrap.ComponentContainer;
+import net.stickycode.coercion.CoercionFinder;
 import net.stickycode.coercion.CoercionTarget;
-import net.stickycode.configuration.ConfigurationKey;
+import net.stickycode.configuration.ConfigurationTarget;
 
 /**
  * A configured attribute of a bean.
@@ -23,14 +25,14 @@ import net.stickycode.configuration.ConfigurationKey;
  * 
  */
 public interface ConfigurationAttribute
-    extends ConfigurationKeyElement, ConfigurationKey {
+    extends ConfigurationKeyElement, ConfigurationTarget {
 
   /**
    * Return true if there was a default value defined at development time.
    * 
    * @return true if there is a default value for the attribute
    */
-  boolean hasDefaultValue();
+  boolean hasDefaultValue(); 
 
   /**
    * The default value of the attribute as defined at development time.
@@ -74,5 +76,11 @@ public interface ConfigurationAttribute
    * Return true if this attribute has a value, either a default value or one thats been set
    */
   boolean hasValue();
+
+  void applyCoercion(CoercionFinder coercions);
+
+  void update();
+
+  void invertControl(ComponentContainer container);
 
 }
