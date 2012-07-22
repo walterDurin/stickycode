@@ -11,13 +11,13 @@ import java.util.Set;
 import javax.inject.Inject;
 
 import net.stickycode.stereotype.StickyComponent;
-import net.stickycode.stereotype.component.StickyExtension;
+import net.stickycode.stereotype.StickyPlugin;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * The Bootstrap for the StickyCode systems, which are defined by being beans annotated by {@link StickyExtension} and implementing
+ * The Bootstrap for the StickyCode systems, which are defined by being beans annotated by {@link StickyPlugin} and implementing
  * {@link StickySystem}.
  */
 @StickyComponent
