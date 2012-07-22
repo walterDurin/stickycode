@@ -4,8 +4,8 @@ import static org.fest.assertions.Assertions.assertThat;
 import net.stickycode.stereotype.StickyComponent;
 import net.stickycode.stereotype.StickyFramework;
 import net.stickycode.stereotype.StickyPlugin;
-import net.stickycode.stereotype.component.StickyExtension;
 import net.stickycode.stereotype.component.StickyRepository;
+import net.stickycode.stereotype.plugin.StickyExtension;
 
 import org.junit.Test;
 
