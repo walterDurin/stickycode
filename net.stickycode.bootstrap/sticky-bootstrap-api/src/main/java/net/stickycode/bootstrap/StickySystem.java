@@ -1,54 +1,41 @@
 package net.stickycode.bootstrap;
 
-public abstract class StickySystem {
+public interface StickySystem {
 
-  @Override
-  public String toString() {
-    return getLabel();
-  }
-  
-  public abstract String getLabel();
-  
-  public abstract Package getPackage();
+  String getLabel();
+
+  Package getPackage();
 
   /**
    * Start the system, validating and verifying the environment is ok.
    */
-  public void start() {
-  }
+  void start();
 
   /**
    * Complete any existing activities but reject any new activities.
    * 
    * e.g. stop scheduled jobs
    */
-  public void pause() {
-  }
+  void pause();
 
   /**
    * Restart activities stopped by a pause
    */
-  public void unpause() {
-  }
+  void unpause();
 
   /**
    * Complete any existing activities and shutdown down all resources.
    */
-  public void shutdown() {
-  }
+  void shutdown();
 
   /**
    * @return true if this subsystem uses the given system
    */
-  public boolean uses(StickySystem system) {
-    return false;
-  }
+  boolean uses(StickySystem system);
 
   /**
    * @return true if the this subsystem is used by the given system
    */
-  public boolean isUsedBy(StickySystem system) {
-    return false;
-  }
+  boolean isUsedBy(StickySystem system);
 
 }

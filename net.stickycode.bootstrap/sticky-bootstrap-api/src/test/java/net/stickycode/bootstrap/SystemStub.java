@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 class SystemStub
-    extends StickySystem {
+    extends AbstractStickySystem {
 
   private String label;
 
