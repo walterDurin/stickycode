@@ -5,7 +5,7 @@
 	<parent>
 		<artifactId>sticky-root</artifactId>
 		<groupId>net.stickycode.parent</groupId>
-		<version>1.24</version>
+		<version>1.25</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
@@ -39,7 +39,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
-					<version>2.4</version>
+					<version>2.5.1</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
