@@ -118,7 +118,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
-					<version>2.3.2</version>
+					<version>2.5.1</version>
 					<configuration>
 						<encoding>UTF-8</encoding>
 						<source>1.6</source>
@@ -145,7 +145,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-site-plugin</artifactId>
-					<version>3.0</version>
+					<version>3.1</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -160,13 +160,13 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-clean-plugin</artifactId>
-					<version>2.4.1</version>
+					<version>2.5</version>
 				</plugin>
 
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-enforcer-plugin</artifactId>
-					<version>1.0.1</version>
+					<version>1.1.1</version>
 					<!-- Invocation is defined by the release plugin goal set hence no executions -->
 					<configuration>
 						<rules>
