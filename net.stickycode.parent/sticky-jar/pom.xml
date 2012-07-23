@@ -11,7 +11,7 @@
 
 	<groupId>net.stickycode.parent</groupId>
 	<artifactId>sticky-jar</artifactId>
-	<version>1.23-SNAPSHOT</version>
+	<version>1.24-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>sticky-jar</name>
