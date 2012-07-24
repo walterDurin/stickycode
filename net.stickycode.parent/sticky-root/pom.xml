@@ -112,7 +112,7 @@
 						<remoteTagging>false</remoteTagging>
 						<suppressCommitBeforeTag>true</suppressCommitBeforeTag>
 
-						<scmCommentPrefix>Releasing ${project.artifactId} at ${project.version}, </scmCommentPrefix>
+						<scmCommentPrefix>Releasing ${project.artifactId} at ${project.version} to tag @{project.version}, </scmCommentPrefix>
 					</configuration>
 				</plugin>
 				<plugin>
