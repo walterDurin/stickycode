@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>net.stickycode.parent</groupId>
 		<artifactId>sticky-jar</artifactId>
-		<version>1.22</version>
+		<version>1.23</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
@@ -13,7 +13,7 @@
 	<version>2.2-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>sticky-composite-unittest</name>
+	<name>sticky-composite-unittest-2</name>
 	<description>Composition of artifacts used for Unit testing of Sticky projects</description>
 	<url>http://www.StickyCode.net/composite/sticky-composite-unittest</url>
 	<inceptionYear>2007</inceptionYear>
