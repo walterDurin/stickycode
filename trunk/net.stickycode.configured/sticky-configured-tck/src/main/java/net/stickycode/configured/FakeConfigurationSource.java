@@ -1,37 +1,45 @@
 package net.stickycode.configured;
 
+import net.stickycode.configuration.ConfigurationKey;
+import net.stickycode.configuration.ConfigurationSource;
+import net.stickycode.configuration.ConfigurationValue;
+import net.stickycode.configuration.ResolvedConfiguration;
 import net.stickycode.stereotype.StickyPlugin;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @StickyPlugin
 public class FakeConfigurationSource
     implements ConfigurationSource {
 
-  private Logger log = LoggerFactory.getLogger(getClass());
-  
   @Override
-  public boolean hasValue(String key) {
-    log.debug("has value {}", key);
-    if (key.endsWith(".bob"))
-      return true;
+  public void apply(ConfigurationKey key, ResolvedConfiguration values) {
+    String joined = key.join(".");
+    if (joined.endsWith("bob"))
+      values.add(new ConfigurationValue() {
 
-    if (key.endsWith(".numbers"))
-      return true;
+        @Override
+        public boolean hasPrecedence(ConfigurationValue v) {
+          return false;
+        }
 
-    return false;
-  }
+        @Override
+        public String get() {
+          return "yay";
+        }
+      });
+    else
+      if (joined.endsWith("numbers"))
+        values.add(new ConfigurationValue() {
 
-  @Override
-  public String getValue(String key) throws ConfigurationNotFoundException {
-    if (key.endsWith(".bob"))
-      return "yay";
+          @Override
+          public boolean hasPrecedence(ConfigurationValue v) {
+            return false;
+          }
 
-    if (key.endsWith(".numbers"))
-      return "1,5,3,7";
-
-    throw new ConfigurationNotFoundException(key);
+          @Override
+          public String get() {
+            return "1,5,3,7";
+          }
+        });
   }
 
 }

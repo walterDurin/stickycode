@@ -8,7 +8,7 @@ import javax.inject.Inject;
 
 import net.stickycode.coercion.target.CoercionTargets;
 import net.stickycode.configured.ConfigurationSystem;
-import net.stickycode.stereotype.ConfiguredStrategy;
+import net.stickycode.stereotype.configured.ConfiguredStrategy;
 
 import org.junit.Test;
 
