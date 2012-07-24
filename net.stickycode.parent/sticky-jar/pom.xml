@@ -5,7 +5,7 @@
 	<parent>
 		<artifactId>sticky-root</artifactId>
 		<groupId>net.stickycode.parent</groupId>
-		<version>1.25</version>
+		<version>1.29</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
@@ -14,7 +14,7 @@
 	<version>1.24-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>sticky-jar</name>
+	<name>sticky-jar-1</name>
 	<description>The definition of a StickyCode jar project</description>
 	<inceptionYear>2010</inceptionYear>
 	<url>http://www.StickyCode.net/parent/sticky-jar/</url>
