@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>net.stickycode.parent</groupId>
 		<artifactId>sticky-jar</artifactId>
-		<version>1.21</version>
+		<version>1.24</version>
 	</parent>
 
 	<artifactId>sticky-war</artifactId>
@@ -30,7 +30,7 @@
 		</profile>
 	</profiles>
 
-	<name>sticky-war</name>
+	<name>sticky-war-1</name>
 	<description>The definition of StickyCode war projects</description>
 	<inceptionYear>2009</inceptionYear>
 	<url>http://www.StickyCode.net/parent/sticky-war/</url>
