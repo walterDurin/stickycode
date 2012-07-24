@@ -4,17 +4,17 @@
 	<parent>
 		<groupId>net.stickycode.parent</groupId>
 		<artifactId>sticky-jar</artifactId>
-		<version>1.21</version>
+		<version>1.24</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>net.stickycode.configured</groupId>
 	<artifactId>sticky-configured-guice3</artifactId>
-	<version>2.4-SNAPSHOT</version>
+	<version>3.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>sticky-configured-guice3</name>
-	<description>Taking the configuration out of applications, using the same principles that underly dependency injection and IOC</description>
+	<name>sticky-configured-guice3-3</name>
+	<description>Taking the configuration out of applications when using Guice, using the same principles that underly dependency injection and IOC</description>
 	<inceptionYear>2010</inceptionYear>
 	<url>http://www.StickyCode.net/configured/sticky-configured-guice3/</url>
 
@@ -28,26 +28,26 @@
 		<dependency>
 			<groupId>net.stickycode.configured</groupId>
 			<artifactId>sticky-configured-tck</artifactId>
-			<version>[4.2,5)</version>
+			<version>[5,6)</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>net.stickycode.composite</groupId>
-			<artifactId>sticky-composite-logging-deploy</artifactId>
-			<version>[1.4,2)</version>
+			<groupId>net.stickycode.configuration</groupId>
+			<artifactId>sticky-configuration</artifactId>
+			<version>[1,2)</version>
 			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>net.stickycode.configured</groupId>
 			<artifactId>sticky-configured</artifactId>
-			<version>[4.5,5)</version>
+			<version>[5,6)</version>
 		</dependency>
 
 		<dependency>
 			<groupId>net.stickycode.bootstrap</groupId>
 			<artifactId>sticky-bootstrap-guice3</artifactId>
-			<version>[1.1,2)</version>
+			<version>[2,3)</version>
 		</dependency>
 	</dependencies>
 </project>
