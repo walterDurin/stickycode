@@ -6,7 +6,7 @@
 
 	<groupId>net.stickycode.parent</groupId>
 	<artifactId>sticky-root</artifactId>
-	<version>1.27-SNAPSHOT</version>
+	<version>1.28-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>sticky-root</name>
@@ -112,7 +112,7 @@
 						<remoteTagging>false</remoteTagging>
 						<suppressCommitBeforeTag>true</suppressCommitBeforeTag>
 
-						<scmCommentPrefix>Releasing ${project.artifactId} at ${project.version} to tag @{project.version}, </scmCommentPrefix>
+						<scmCommentPrefix>Releasing ${project.artifactId} at ${project.version} to tag @{version}, </scmCommentPrefix>
 					</configuration>
 				</plugin>
 				<plugin>
