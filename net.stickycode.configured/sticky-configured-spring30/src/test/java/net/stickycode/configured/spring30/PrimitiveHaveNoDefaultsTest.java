@@ -13,7 +13,6 @@
 package net.stickycode.configured.spring30;
 
 import net.stickycode.configured.AbstractPrimitiveConfiguratedTest;
-import net.stickycode.configured.ConfigurationSource;
 import net.stickycode.stereotype.StickyComponent;
 import net.stickycode.stereotype.StickyPlugin;
 
@@ -24,7 +23,7 @@ import org.springframework.core.type.filter.AnnotationTypeFilter;
 public class PrimitiveHaveNoDefaultsTest
     extends AbstractPrimitiveConfiguratedTest {
 
-  protected void configure(Object instance, ConfigurationSource configurationSource) {
+  protected void configure(Object instance) {
     GenericApplicationContext c = new GenericApplicationContext();
 
     ClassPathBeanDefinitionScanner scanner = new ClassPathBeanDefinitionScanner(c, false);

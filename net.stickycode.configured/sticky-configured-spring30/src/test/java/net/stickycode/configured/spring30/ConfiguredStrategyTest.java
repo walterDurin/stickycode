@@ -1,13 +1,10 @@
 package net.stickycode.configured.spring30;
 
-import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
-import org.springframework.context.support.GenericApplicationContext;
-import org.springframework.core.type.filter.AnnotationTypeFilter;
-
+import net.stickycode.bootstrap.spring3.StickySpringBootstrap;
 import net.stickycode.configured.strategy.AbstractConfiguredStrategyTest;
 import net.stickycode.configured.strategy.ConfiguredStrategyCoercion;
-import net.stickycode.stereotype.StickyComponent;
-import net.stickycode.stereotype.StickyPlugin;
+
+import org.springframework.context.support.GenericApplicationContext;
 
 public class ConfiguredStrategyTest
     extends AbstractConfiguredStrategyTest
@@ -20,16 +17,13 @@ public class ConfiguredStrategyTest
     c.getAutowireCapableBeanFactory().autowireBean(this);
     c.getAutowireCapableBeanFactory().autowireBean(instance);
 
-    system.configure();
+    system.start();
   }
 
   private GenericApplicationContext createContext() {
     GenericApplicationContext c = new GenericApplicationContext();
 
-    ClassPathBeanDefinitionScanner scanner = new ClassPathBeanDefinitionScanner(c, false);
-    scanner.addIncludeFilter(new AnnotationTypeFilter(StickyComponent.class));
-    scanner.addIncludeFilter(new AnnotationTypeFilter(StickyPlugin.class));
-    scanner.scan("net.stickycode");
+    new StickySpringBootstrap(c).scan("net.stickycode");
 
     c.getBeanFactory().registerSingleton("yesStrategy", new YesStrategy());
     c.getBeanFactory().registerSingleton("noStrategy", new NoStrategy());
