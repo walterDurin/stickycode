@@ -4,10 +4,7 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
 
-import net.stickycode.coercion.AbstractFailedToCoerceValueException;
-import net.stickycode.coercion.Coercion;
-import net.stickycode.coercion.CoercionTarget;
-import net.stickycode.stereotype.component.StickyExtension;
+import net.stickycode.stereotype.plugin.StickyExtension;
 
 @StickyExtension
 public class InetSocketAddressCoercion
