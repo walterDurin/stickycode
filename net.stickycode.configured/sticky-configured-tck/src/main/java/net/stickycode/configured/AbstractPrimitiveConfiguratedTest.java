@@ -12,15 +12,13 @@
  */
 package net.stickycode.configured;
 
-import javax.inject.Inject;
-
-import org.junit.Test;
-
-import net.stickycode.stereotype.Configured;
-
 import static org.fest.assertions.Assertions.assertThat;
 
-import static org.mockito.Mockito.mock;
+import javax.inject.Inject;
+
+import net.stickycode.stereotype.configured.Configured;
+
+import org.junit.Test;
 
 public abstract class AbstractPrimitiveConfiguratedTest {
 
@@ -39,11 +37,11 @@ public abstract class AbstractPrimitiveConfiguratedTest {
   @Inject
   private ConfigurationSystem system;
 
-  protected abstract void configure(Object target, ConfigurationSource configurationSource);
+  protected abstract void configure(Object target);//, ConfigurationResolutions configurationSource);
 
   @Test(expected = ConfiguredFieldsMustNotBePrimitiveAsDefaultDerivationIsImpossibleException.class)
   public void primitivesHaveNoDefaults() {
-    configure(new PrimitiveTestObject(), mock(ConfigurationSource.class));
+    configure(new PrimitiveTestObject());//, mock(ConfigurationResolutions.class));
     assertThat(system)
         .as("Implementors must inject/wire(this) so that the configuration system is available for configuring")
         .isNotNull();
@@ -51,11 +49,11 @@ public abstract class AbstractPrimitiveConfiguratedTest {
 
   @Test(expected = MissingConfigurationException.class)
   public void notConfiguredThrowsANiceException() {
-    configure(new NotConfiguredTestObject(), mock(ConfigurationSource.class));
+    configure(new NotConfiguredTestObject());//, mock(ConfigurationResolutions.class));
     assertThat(system)
         .as("Implementors must inject/wire(this) so that the configuration system is available for configuring")
         .isNotNull();
-    system.configure();
+    system.start();
   }
 
 }

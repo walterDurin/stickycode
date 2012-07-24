@@ -12,15 +12,15 @@
  */
 package net.stickycode.configured;
 
+import static org.fest.assertions.Assertions.assertThat;
+
 import java.util.List;
 
 import javax.inject.Inject;
 
+import net.stickycode.stereotype.configured.Configured;
+
 import org.junit.Test;
-
-import net.stickycode.stereotype.Configured;
-
-import static org.fest.assertions.Assertions.assertThat;
 
 public abstract class AbstractConfiguredComponentTest {
 
@@ -68,7 +68,7 @@ public abstract class AbstractConfiguredComponentTest {
         .as("Implementors must inject(this) so that the configuration system can be configured")
         .isNotNull();
 
-    system.configure();
+    system.start();
 
     assertThat(instance.bob)
         .as("Injector should have configured a value")
