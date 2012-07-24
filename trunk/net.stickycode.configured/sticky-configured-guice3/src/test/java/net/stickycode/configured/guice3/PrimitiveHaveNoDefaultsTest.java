@@ -12,21 +12,25 @@
  */
 package net.stickycode.configured.guice3;
 
-import java.util.Collections;
-
+import net.stickycode.bootstrap.guice3.StickyModule;
 import net.stickycode.configured.AbstractPrimitiveConfiguratedTest;
-import net.stickycode.configured.ConfigurationSource;
 import net.stickycode.exception.PermanentException;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.Module;
 import com.google.inject.ProvisionException;
+
+import de.devsurf.injection.guice.scanner.PackageFilter;
 
 public class PrimitiveHaveNoDefaultsTest
     extends AbstractPrimitiveConfiguratedTest {
 
-  protected void configure(Object target, ConfigurationSource noConfigurationSource) {
-    Injector injector = Guice.createInjector(new ConfigurationSourceModule(Collections.singletonList(noConfigurationSource)), new ConfiguredModule());
+  protected void configure(Object target) {
+    PackageFilter packageFilter = PackageFilter.create("net.stickycode");
+    Module startup = StickyModule.bootstrapModule(packageFilter);
+    Injector injector = Guice.createInjector(startup)
+        .createChildInjector(StickyModule.applicationModule(packageFilter));
     try {
       injector.injectMembers(target);
       injector.injectMembers(this);

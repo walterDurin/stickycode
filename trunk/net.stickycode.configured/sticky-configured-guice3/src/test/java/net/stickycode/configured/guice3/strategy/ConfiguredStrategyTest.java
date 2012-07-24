@@ -26,7 +26,7 @@ public class ConfiguredStrategyTest
 
     injector.injectMembers(this);
     injector.injectMembers(instance);
-    system.configure();
+    system.start();
   }
 
   @Override

@@ -12,40 +12,39 @@
  */
 package net.stickycode.configured.guice3;
 
-import java.util.Collections;
-
-import org.mockito.Mockito;
+import net.stickycode.bootstrap.guice3.StickyModule;
+import net.stickycode.configured.AbstractConfiguredComponentTest;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
 
-import net.stickycode.configured.AbstractConfiguredComponentTest;
-import net.stickycode.configured.ConfigurationSource;
-
-import static org.mockito.Mockito.when;
+import de.devsurf.injection.guice.scanner.PackageFilter;
 
 public class ConfiguredModuleTest
     extends AbstractConfiguredComponentTest {
 
   @Override
   protected void configure(ConfiguredTestObject instance) {
-    Injector injector = Guice.createInjector(configurationSourceModule(), new ConfiguredModule());
+    PackageFilter packageFilter = PackageFilter.create("net.stickycode");
+    Module startup = StickyModule.bootstrapModule(packageFilter);
+    Injector injector = Guice.createInjector(startup)
+        .createChildInjector(StickyModule.applicationModule(packageFilter));
     injector.injectMembers(instance);
     injector.injectMembers(this);
   }
-
-  private Module configurationSourceModule() {
-    ConfigurationSource configurationSource = Mockito.mock(ConfigurationSource.class);
-    when(configurationSource.hasValue("configuredTestObject.bob")).thenReturn(true);
-    when(configurationSource.hasValue("configuredTestObject.numbers")).thenReturn(true);
-    when(configurationSource.getValue("configuredTestObject.bob")).thenReturn("yay");
-    when(configurationSource.getValue("configuredTestObject.numbers")).thenReturn("1,5,3,7");
-    when(configurationSource.hasValue("inheritedConfiguredTestObject.bob")).thenReturn(true);
-    when(configurationSource.hasValue("inheritedConfiguredTestObject.numbers")).thenReturn(true);
-    when(configurationSource.getValue("inheritedConfiguredTestObject.bob")).thenReturn("yay");
-    when(configurationSource.getValue("inheritedConfiguredTestObject.numbers")).thenReturn("1,5,3,7");
-    return new ConfigurationSourceModule(Collections.singletonList(configurationSource));
-  }
+//
+//  private Module configurationSourceModule() {
+//    ConfigurationSource configurationSource = Mockito.mock(ConfigurationSource.class);
+//    when(configurationSource.hasValue("configuredTestObject.bob")).thenReturn(true);
+//    when(configurationSource.hasValue("configuredTestObject.numbers")).thenReturn(true);
+//    when(configurationSource.getValue("configuredTestObject.bob")).thenReturn("yay");
+//    when(configurationSource.getValue("configuredTestObject.numbers")).thenReturn("1,5,3,7");
+//    when(configurationSource.hasValue("inheritedConfiguredTestObject.bob")).thenReturn(true);
+//    when(configurationSource.hasValue("inheritedConfiguredTestObject.numbers")).thenReturn(true);
+//    when(configurationSource.getValue("inheritedConfiguredTestObject.bob")).thenReturn("yay");
+//    when(configurationSource.getValue("inheritedConfiguredTestObject.numbers")).thenReturn("1,5,3,7");
+//    return new ConfigurationSourceModule(Collections.singletonList(configurationSource));
+//  }
 
 }

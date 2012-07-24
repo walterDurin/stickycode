@@ -15,13 +15,13 @@ package net.stickycode.configured.guice3;
 import javax.inject.Inject;
 
 import net.stickycode.metadata.MetadataResolverRegistry;
-import net.stickycode.stereotype.Configured;
-import net.stickycode.stereotype.ConfiguredComponent;
-import net.stickycode.stereotype.ConfiguredStrategy;
-import net.stickycode.stereotype.PostConfigured;
-import net.stickycode.stereotype.PreConfigured;
 import net.stickycode.stereotype.StickyComponent;
 import net.stickycode.stereotype.StickyFramework;
+import net.stickycode.stereotype.configured.Configured;
+import net.stickycode.stereotype.configured.ConfiguredComponent;
+import net.stickycode.stereotype.configured.ConfiguredStrategy;
+import net.stickycode.stereotype.configured.PostConfigured;
+import net.stickycode.stereotype.configured.PreConfigured;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
