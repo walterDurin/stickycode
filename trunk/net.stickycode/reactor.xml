@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>net.stickycode.parent</groupId>
 		<artifactId>sticky-root</artifactId>
-		<version>1.24</version>
+		<version>1.29</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
@@ -15,15 +15,11 @@
 
 	<name>sticky-reactor</name>
 	<modules>
-		<module>sticky-stereotype</module>
 		<module>sticky-exception</module>
 		<module>sticky-coercion-api</module>
 		<module>sticky-metadata-api</module>
 		<module>sticky-reflector</module>
 		<module>sticky-coercion</module>
 		<module>sticky-metadata-reflective</module>
-		<module>sticky-resource-api</module>
-		<module>sticky-resource</module>
-		<module>sticky-coercion-resource</module>
 	</modules>
 </project>
