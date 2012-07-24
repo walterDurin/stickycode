@@ -34,7 +34,7 @@ public class ConfigurationRefresher
   @Override
   public void onApplicationEvent(ContextRefreshedEvent event) {
     log.info("Configure system on event {}", event);
-    system.configure();
+    system.start();
   }
 
 }
