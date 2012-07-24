@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>net.stickycode.parent</groupId>
 		<artifactId>sticky-root</artifactId>
-		<version>1.24</version>
+		<version>1.25</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
@@ -17,7 +17,7 @@
 	<modules>
 		<module>sticky-composite-logging-api</module>
 		<module>sticky-composite-logging-deploy</module>
-		<module>sticky-composite-spring25</module>
+		<module>sticky-composite-spring3</module>
 		<module>sticky-composite-spring30</module>
 		<module>sticky-composite-unittest</module>
 		<module>sticky-composite-cxf-soap</module>
