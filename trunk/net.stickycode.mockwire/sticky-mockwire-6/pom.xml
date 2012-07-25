@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright (c) 2011 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved. -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<parent>
 		<groupId>net.stickycode.parent</groupId>
 		<artifactId>sticky-jar</artifactId>
-		<version>1.19</version>
+		<version>1.21</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>net.stickycode.mockwire</groupId>
 	<artifactId>sticky-mockwire</artifactId>
-	<version>6.2</version>
+	<version>6.3-SNAPSHOT</version>
 
 	<name>sticky-mockwire</name>
 	<description>A mechnism for using a test class as the manifest for isolating the context of a test. Thereby using the same di mechanism you would expect in production but fully controlled to isolate the variable under test.</description>
@@ -34,17 +34,17 @@
 		<dependency>
 			<groupId>net.stickycode.composite</groupId>
 			<artifactId>sticky-composite-unittest</artifactId>
-			<version>[1.4,2)</version>
+			<version>[1.7,2)</version>
 		</dependency>
 		<dependency>
 			<groupId>net.stickycode.mockwire</groupId>
 			<artifactId>sticky-mockwire-api</artifactId>
-			<version>[5.3,6)</version>
+			<version>[5.5,6)</version>
 		</dependency>
 		<dependency>
 			<groupId>net.stickycode.configured</groupId>
 			<artifactId>sticky-configured</artifactId>
-			<version>[3.1,4)</version>
+			<version>[3.6,4)</version>
 		</dependency>
 	</dependencies>
 </project>
