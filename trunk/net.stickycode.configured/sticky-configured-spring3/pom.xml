@@ -10,7 +10,7 @@
 
 	<groupId>net.stickycode.configured</groupId>
 	<artifactId>sticky-configured-spring3</artifactId>
-	<version>5.2-SNAPSHOT</version>
+	<version>5.3-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>sticky-configured-spring3-5</name>
