@@ -12,14 +12,14 @@
  */
 package net.stickycode.mockwire.contained;
 
+import static org.fest.assertions.Assertions.assertThat;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
-import net.stickycode.stereotype.Configured;
-import net.stickycode.stereotype.PostConfigured;
-import net.stickycode.stereotype.PreConfigured;
-
-import static org.fest.assertions.Assertions.assertThat;
+import net.stickycode.stereotype.configured.Configured;
+import net.stickycode.stereotype.configured.PostConfigured;
+import net.stickycode.stereotype.configured.PreConfigured;
 
 public class BeanWithLifecycle {
   @Configured

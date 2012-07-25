@@ -14,6 +14,7 @@ package net.stickycode.mockwire;
 
 import javax.inject.Inject;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -33,6 +34,12 @@ public class FieldMockingTest {
 
   @Inject
   IsolatedTestManifest context;
+  
+//  FIXME with a proper lifecycle
+//  @Before
+//  public void before() {
+//    assertThat(mockable).isNotNull();
+//  }
 
   @Test
   public void atMock() {

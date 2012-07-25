@@ -14,7 +14,7 @@ package net.stickycode.mockwire;
 
 import java.util.List;
 
-import net.stickycode.configured.ConfigurationSource;
+import net.stickycode.configuration.ConfigurationSource;
 
 
 

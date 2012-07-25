@@ -4,15 +4,15 @@
 	<parent>
 		<groupId>net.stickycode.parent</groupId>
 		<artifactId>sticky-jar</artifactId>
-		<version>1.21</version>
+		<version>1.24</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>net.stickycode.mockwire</groupId>
 	<artifactId>sticky-mockwire-tck</artifactId>
-	<version>7.6-SNAPSHOT</version>
+	<version>8.1-SNAPSHOT</version>
 
-	<name>sticky-mockwire-tck</name>
+	<name>sticky-mockwire-tck-8</name>
 	<description>The test kit to verify mockwire implementors.</description>
 	<inceptionYear>2010</inceptionYear>
 	<url>http://www.StickyCode.net/mockwire/sticky-mockwire-tck</url>
@@ -27,12 +27,12 @@
 		<dependency>
 			<groupId>net.stickycode.mockwire</groupId>
 			<artifactId>sticky-mockwire</artifactId>
-			<version>[7.3,8)</version>
+			<version>[8,9)</version>
 		</dependency>
 		<dependency>
-			<groupId>net.stickycode.composite</groupId>
-			<artifactId>sticky-composite-logging-deploy</artifactId>
-			<version>[1.4,2)</version>
+			<groupId>net.stickycode.configuration</groupId>
+			<artifactId>sticky-configuration</artifactId>
+			<version>1.2</version>
 		</dependency>
 	</dependencies>
 </project>

@@ -19,10 +19,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import net.stickycode.configured.ConfigurationSource;
-import net.stickycode.configured.ConfigurationSystem;
-import net.stickycode.configured.guice3.ConfigurationSourceModule;
+import net.stickycode.bootstrap.StickyBootstrap;
 import net.stickycode.bootstrap.guice3.StickyModule;
+import net.stickycode.configuration.ConfigurationSource;
+import net.stickycode.configured.ConfigurationSystem;
 import net.stickycode.guice3.jsr250.Jsr250Module;
 import net.stickycode.mockwire.IsolatedTestManifest;
 import net.stickycode.mockwire.MissingBeanException;
@@ -143,7 +143,7 @@ public class GuiceIsolatedTestManifest
 
   @Override
   public void configure() {
-    injector.getInstance(ConfigurationSystem.class).configure();
+    injector.getInstance(StickyBootstrap.class).start();
   }
 
   @Override

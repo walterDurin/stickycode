@@ -4,15 +4,15 @@
 	<parent>
 		<groupId>net.stickycode.parent</groupId>
 		<artifactId>sticky-jar</artifactId>
-		<version>1.21</version>
+		<version>1.24</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>net.stickycode.mockwire</groupId>
 	<artifactId>sticky-mockwire-mockito</artifactId>
-	<version>4.4-SNAPSHOT</version>
+	<version>5.1-SNAPSHOT</version>
 
-	<name>sticky-mockwire-mockito</name>
+	<name>sticky-mockwire-mockito-5</name>
 	<description>Mockito mocker implementation for Mockwire, used to provide mocks of services not under test in an isolated context</description>
 	<inceptionYear>2009</inceptionYear>
 	<url>http://www.StickyCode.net/mockwire/sticky-mockwire-mockito</url>
@@ -25,19 +25,14 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>net.stickycode.composite</groupId>
-			<artifactId>sticky-composite-unittest</artifactId>
-			<version>[1.7,2)</version>
-		</dependency>
-		<dependency>
-			<groupId>net.stickycode.composite</groupId>
-			<artifactId>sticky-composite-logging-deploy</artifactId>
-			<version>[1.4,2)</version>
-		</dependency>
-		<dependency>
 			<groupId>net.stickycode.mockwire</groupId>
 			<artifactId>sticky-mockwire-api</artifactId>
-			<version>[6.3,7)</version>
+			<version>[7,8)</version>
+		</dependency>
+		<dependency>
+			<groupId>net.stickycode.composite</groupId>
+			<artifactId>sticky-composite-unittest</artifactId>
+			<version>[2,3)</version>
 		</dependency>
 	</dependencies>
 </project>

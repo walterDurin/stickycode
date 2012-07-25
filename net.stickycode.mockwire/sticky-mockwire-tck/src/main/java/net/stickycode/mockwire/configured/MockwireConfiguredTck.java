@@ -20,8 +20,8 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({
     ConfiguredTest.class,
     InlineConfiguredTest.class,
-    ConfiguredCollectionTest.class,
-    MockwireConfigurationSourceTest.class
+    InlineConfiguredWithNoMockwireConfiguredGivesUserfulErrorTest.class,
+    ConfiguredCollectionTest.class
 })
 public class MockwireConfiguredTck {
 

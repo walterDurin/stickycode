@@ -12,10 +12,23 @@
  */
 package net.stickycode.mockwire.configured;
 
-import net.stickycode.stereotype.configured.Configured;
+import static org.fest.assertions.Assertions.assertThat;
+import net.stickycode.mockwire.MockwireConfigured;
+import net.stickycode.mockwire.UnderTest;
+import net.stickycode.mockwire.junit4.MockwireRunner;
 
-public class ConfiguredObject {
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
-  @Configured
-  String a;
+@RunWith(MockwireRunner.class)
+@MockwireConfigured
+public class InlineConfiguredWithNoMockwireConfiguredGivesUserfulErrorTest {
+
+  @UnderTest("a=inline")
+  ConfiguredObject target;
+  
+  @Test
+  public void inline() {
+    assertThat(target.a).isEqualTo("inline");
+  }
 }
