@@ -28,7 +28,7 @@ public class FieldBlessingTest {
 
 	@Inject
 	IsolatedTestManifest context;
-
+	
 	@Test
 	public void underTest() {
 	  Mockwire.isolate(this);

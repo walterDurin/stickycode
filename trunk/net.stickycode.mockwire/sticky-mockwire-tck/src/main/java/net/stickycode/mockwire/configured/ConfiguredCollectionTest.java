@@ -12,16 +12,16 @@
  */
 package net.stickycode.mockwire.configured;
 
-import java.util.List;
+import static org.fest.assertions.Assertions.assertThat;
 
-import org.junit.Test;
+import java.util.List;
 
 import net.stickycode.mockwire.Mockwire;
 import net.stickycode.mockwire.MockwireConfigured;
 import net.stickycode.mockwire.UnderTest;
-import net.stickycode.stereotype.Configured;
+import net.stickycode.stereotype.configured.Configured;
 
-import static org.fest.assertions.Assertions.assertThat;
+import org.junit.Test;
 
 
 public class ConfiguredCollectionTest {

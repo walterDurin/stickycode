@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>net.stickycode.parent</groupId>
 		<artifactId>sticky-root</artifactId>
-		<version>1.24</version>
+		<version>1.29</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
@@ -19,8 +19,7 @@
 	<module>sticky-mockwire</module>
 	<module>sticky-mockwire-tck</module>
 	<module>sticky-mockwire-mockito</module>
-	<module>sticky-mockwire-spring25</module>
 	<module>sticky-mockwire-guice3</module>
-	<module>sticky-mockwire-spring30</module>
+	<module>sticky-mockwire-spring3</module>
 	</modules>
 </project>

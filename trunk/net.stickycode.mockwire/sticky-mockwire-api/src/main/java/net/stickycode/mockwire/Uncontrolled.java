@@ -18,8 +18,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import net.stickycode.stereotype.Configured;
-
 /**
  * Empirically speaking this marks an object as being uncontrolled in the experiment, its not directly under test but can't be
  * mocked.
