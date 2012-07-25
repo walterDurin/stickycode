@@ -13,7 +13,7 @@
 	<version>5.2-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>sticky-configured-spring30</name>
+	<name>sticky-configured-spring3-5</name>
 	<description>Taking the configuration out of applications, using the same principles that underly dependency injection</description>
 
 	<inceptionYear>2008</inceptionYear>
