@@ -12,6 +12,7 @@ import net.stickycode.mockwire.UnderTestAnnotatedFieldProcessor.MockwireConfigur
 import net.stickycode.mockwire.binder.MockerFactoryLoader;
 import net.stickycode.mockwire.binder.TestManifestFactoryLoader;
 import net.stickycode.mockwire.configured.MockwireConfigurationSource;
+import net.stickycode.mockwire.configured.MockwireConfiguredIsRequiredToTestConfiguredCodeException;
 import net.stickycode.reflector.Reflector;
 
 import org.slf4j.Logger;
@@ -159,10 +160,9 @@ public class MockwireContext
   }
 
   public MockwireConfigurationSource getConfigurationSource() {
-    if (source != null)
-      return source;
+    if (source == null)
+      throw new MockwireConfiguredIsRequiredToTestConfiguredCodeException();
     
-    source = new MockwireConfigurationSource();
     configurationSources = new LinkedList<ConfigurationSource>();
     configurationSources.add(source);
     
