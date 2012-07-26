@@ -16,8 +16,9 @@
 	<name>mockwire-reactor</name>
 
 	<modules>
-		<module>mockwire-spring25</module>
-		<module>mockwire-spring30</module>
+		<module>mockwire-spring3</module>
+		<module>mockwire-spring3-ws</module>
 		<module>mockwire-guice3</module>
+		<module>mockwire-guice3-ws</module>
 	</modules>
 </project>
