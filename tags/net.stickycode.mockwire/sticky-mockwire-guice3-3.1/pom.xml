@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (c) 2010 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved. -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<parent>
+		<groupId>net.stickycode.parent</groupId>
+		<artifactId>sticky-jar</artifactId>
+		<version>1.24</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>net.stickycode.mockwire</groupId>
+	<artifactId>sticky-mockwire-guice3</artifactId>
+	<version>3.1</version>
+
+	<name>sticky-mockwire-guice3-2</name>
+	<description>Implementation of mockwire context management using guice2 as the di container</description>
+	<inceptionYear>2010</inceptionYear>
+	<url>http://www.StickyCode.net/mockwire/sticky-mockwire-api</url>
+
+	<scm>
+		<connection>scm:svn:http://source.stickycode.net/tags/net.stickycode.mockwire/sticky-mockwire-guice3-3.1</connection>
+		<developerConnection>scm:svn:http://source.stickycode.net/tags/net.stickycode.mockwire/sticky-mockwire-guice3-3.1</developerConnection>
+		<url>scm:svn:http://source.stickycode.net/tags/net.stickycode.mockwire/sticky-mockwire-guice3-3.1</url>
+	</scm>
+
+	<dependencies>
+		<dependency>
+			<groupId>net.stickycode.mockwire</groupId>
+			<artifactId>sticky-mockwire-tck</artifactId>
+			<version>[8.1,9)</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.stickycode.mockwire</groupId>
+			<artifactId>sticky-mockwire-mockito</artifactId>
+			<version>[5.1,6)</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.stickycode.composite</groupId>
+			<artifactId>sticky-composite-logging-deploy</artifactId>
+			<version>[2.1,3)</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>net.stickycode.mockwire</groupId>
+			<artifactId>sticky-mockwire</artifactId>
+			<version>[8.1,9)</version>
+		</dependency>
+		<dependency>
+			<groupId>net.stickycode.configured</groupId>
+			<artifactId>sticky-configured-guice3</artifactId>
+			<version>[3.1,4)</version>
+		</dependency>
+		<dependency>
+			<groupId>net.stickycode</groupId>
+			<artifactId>sticky-metadata-reflective</artifactId>
+			<version>[2.2,3)</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+</project>
