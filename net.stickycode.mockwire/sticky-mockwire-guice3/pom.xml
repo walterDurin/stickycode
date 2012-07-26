@@ -10,7 +10,7 @@
 
 	<groupId>net.stickycode.mockwire</groupId>
 	<artifactId>sticky-mockwire-guice3</artifactId>
-	<version>3.1-SNAPSHOT</version>
+	<version>3.2-SNAPSHOT</version>
 
 	<name>sticky-mockwire-guice3-2</name>
 	<description>Implementation of mockwire context management using guice2 as the di container</description>
