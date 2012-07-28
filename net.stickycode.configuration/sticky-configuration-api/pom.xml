@@ -10,7 +10,7 @@
 
 	<groupId>net.stickycode.configuration</groupId>
 	<artifactId>sticky-configuration-api</artifactId>
-	<version>1.4-SNAPSHOT</version>
+	<version>1.5-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>sticky-configuration-api-1</name>
