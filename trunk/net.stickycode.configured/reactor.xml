@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>net.stickycode.parent</groupId>
 		<artifactId>sticky-root</artifactId>
-		<version>1.24</version>
+		<version>1.29</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
@@ -20,9 +20,7 @@
 		<module>sticky-configured</module>
 		<module>sticky-configured-content</module>
 		<module>sticky-configured-tck</module>
-		<module>sticky-configured-spring30</module>
+		<module>sticky-configured-spring3</module>
 		<module>sticky-configured-guice3</module>
-		<module>sticky-configuration-generator-xml</module>
-		<module>sticky-configuration-generator-properties</module>
 	</modules>
 </project>

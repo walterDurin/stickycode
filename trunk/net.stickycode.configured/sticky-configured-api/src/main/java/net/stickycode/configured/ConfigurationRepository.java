@@ -26,6 +26,6 @@ public interface ConfigurationRepository
    *
    * @param configuration The configuration to register
    */
-  void register(Configuration configuration);
+  void register(ConfigurationAttribute configuration);
 
 }

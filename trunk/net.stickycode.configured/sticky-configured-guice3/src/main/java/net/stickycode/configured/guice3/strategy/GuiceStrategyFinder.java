@@ -7,7 +7,6 @@ import java.util.Set;
 
 import javax.inject.Inject;
 
-import net.stickycode.configured.ConfigurationKeyBuilder;
 import net.stickycode.configured.strategy.StrategyFinder;
 import net.stickycode.configured.strategy.StrategyNotFoundException;
 import net.stickycode.stereotype.StickyComponent;
@@ -25,9 +24,6 @@ public class GuiceStrategyFinder
   @Inject
   Injector injector;
   
-  @Inject
-  ConfigurationKeyBuilder builder;
-
   @SuppressWarnings({ "rawtypes", "unchecked" })
   @Override
   public Object findWithName(Class contract, String name) throws StrategyNotFoundException {

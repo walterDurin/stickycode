@@ -13,7 +13,7 @@
 	<version>2.2-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>sticky-configured-content</name>
+	<name>sticky-configured-content-2</name>
 	<description>Taking the configuration of Content out of applications, using the same principles that underly dependency injection</description>
 	<inceptionYear>2008</inceptionYear>
 	<url>http://www.StickyCode.net/configured/sticky-configured-content/</url>
