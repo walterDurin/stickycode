@@ -1,6 +1,6 @@
 package net.stickycode.configuration;
 
-public interface ConfigurationResolver {
+public interface ConfigurationTargetResolver {
 
   void resolve(ConfigurationTarget configuration);
   
