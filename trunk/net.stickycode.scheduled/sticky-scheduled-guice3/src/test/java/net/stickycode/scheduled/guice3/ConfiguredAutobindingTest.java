@@ -13,19 +13,17 @@
 package net.stickycode.scheduled.guice3;
 
 import static de.devsurf.injection.guice.scanner.PackageFilter.create;
-import static org.mockito.Mockito.when;
-
-import java.util.Collections;
-
 import net.stickycode.bootstrap.guice3.StickyModule;
-import net.stickycode.configured.ConfigurationSource;
-import net.stickycode.configured.guice3.ConfigurationSourceModule;
+import net.stickycode.configuration.ConfigurationKey;
+import net.stickycode.configuration.ConfigurationSource;
+import net.stickycode.configuration.ConfigurationValue;
+import net.stickycode.configuration.ResolvedConfiguration;
 
-import org.mockito.Mockito;
-
+import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
+import com.google.inject.multibindings.Multibinder;
 
 public class ConfiguredAutobindingTest
     extends AbstractScheduledComponentTest {
@@ -43,10 +41,34 @@ public class ConfiguredAutobindingTest
   }
 
   private Module configurationSourceModule() {
-    ConfigurationSource configurationSource = Mockito.mock(ConfigurationSource.class);
-    when(configurationSource.hasValue("scheduleTestObject.runIt.schedule")).thenReturn(true);
-    when(configurationSource.getValue("scheduleTestObject.runIt.schedule")).thenReturn("every 2 seconds");
-    return new ConfigurationSourceModule(Collections.singletonList(configurationSource));
+    return new AbstractModule() {
+
+      @Override
+      protected void configure() {
+        ConfigurationSource configurationSource = new ConfigurationSource() {
+
+          @Override
+          public void apply(ConfigurationKey key, ResolvedConfiguration values) {
+            if (key.join(".").equals("scheduleTestObject.runIt.schedule"))
+              values.add(new ConfigurationValue() {
+
+                @Override
+                public boolean hasPrecedence(ConfigurationValue v) {
+                  return false;
+                }
+
+                @Override
+                public String get() {
+                  return "every 2 seconds";
+                }
+              });
+          }
+        };
+
+        Multibinder<ConfigurationSource> sources = Multibinder.newSetBinder(binder(), ConfigurationSource.class);
+        sources.addBinding().toInstance(configurationSource);
+      }
+    };
   }
 
 }

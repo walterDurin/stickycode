@@ -41,9 +41,9 @@ public abstract class AbstractScheduledComponentTest {
         .as("Implementors must inject(this) so that the configuration system can be configured")
         .isNotNull();
 
-    system.configure();
+    system.start();
 
-    assertThat(configurations).hasSize(1);
+    assertThat(configurations).hasSize(2);
     Configuration c = configurations.iterator().next();
     assertThat(c).hasSize(1);
     
