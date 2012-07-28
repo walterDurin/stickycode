@@ -86,6 +86,8 @@ public interface ConfigurationAttribute
   
   void recurse(ConfigurationMetadataProcessor processor);
 
+  boolean requiresResolution();
+  
   ResolvedConfiguration getResolution();
 
   Object getTarget();
