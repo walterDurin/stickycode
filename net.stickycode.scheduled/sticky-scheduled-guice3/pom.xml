@@ -10,10 +10,10 @@
 
 	<groupId>net.stickycode.scheduled</groupId>
 	<artifactId>sticky-scheduled-guice3</artifactId>
-	<version>1.4-SNAPSHOT</version>
+	<version>2.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>sticky-scheduled-guice3</name>
+	<name>sticky-scheduled-guice3-2</name>
 	<description>Taking the scheduling out of applications, using the same principles that underly dependency injection and IOC</description>
 	<inceptionYear>2008</inceptionYear>
 	<url>http://www.StickyCode.net/scheduled/sticky-scheduled-guice3/</url>
@@ -26,22 +26,22 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>net.stickycode.composite</groupId>
-			<artifactId>sticky-composite-logging-deploy</artifactId>
-			<version>[1.4,2)</version>
+			<groupId>net.stickycode</groupId>
+			<artifactId>sticky-testutils</artifactId>
+			<version>[1.7,2)</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>net.stickycode.composite</groupId>
-			<artifactId>sticky-composite-unittest</artifactId>
-			<version>[1.7,2)</version>
+			<groupId>net.stickycode</groupId>
+			<artifactId>sticky-metadata-reflective</artifactId>
+			<version>[2,3)</version>
 			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>net.stickycode.scheduled</groupId>
 			<artifactId>sticky-scheduled</artifactId>
-			<version>[2.3,3)</version>
+			<version>[3,4)</version>
 		</dependency>
 		<dependency>
 			<groupId>net.stickycode</groupId>
@@ -51,13 +51,12 @@
 		<dependency>
 			<groupId>net.stickycode.configured</groupId>
 			<artifactId>sticky-configured-guice3</artifactId>
-			<version>[2.3,3)</version>
+			<version>[3,4)</version>
 		</dependency>
 		<dependency>
-			<groupId>net.stickycode</groupId>
-			<artifactId>sticky-metadata-reflective</artifactId>
-			<version>[1.4,2)</version>
-			<scope>test</scope>
+			<groupId>net.stickycode.configuration</groupId>
+			<artifactId>sticky-configuration</artifactId>
+			<version>[1.2,2)</version>
 		</dependency>
 	</dependencies>
 </project>
