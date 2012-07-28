@@ -16,13 +16,11 @@ import net.stickycode.coercion.Coercion;
 import net.stickycode.coercion.CoercionFinder;
 import net.stickycode.coercion.Coercions;
 import net.stickycode.coercion.PatternCoercion;
-import net.stickycode.configured.ConfigurationKeyBuilder;
 import net.stickycode.configured.ConfigurationListener;
 import net.stickycode.configured.ConfigurationRepository;
 import net.stickycode.configured.ConfigurationSystem;
 import net.stickycode.configured.ConfiguredConfigurationListener;
 import net.stickycode.configured.InlineConfigurationRepository;
-import net.stickycode.configured.SimpleNameDotFieldConfigurationKeyBuilder;
 import net.stickycode.configured.finder.BeanFinder;
 import net.stickycode.configured.guice3.finder.GuiceBeanFinder;
 import net.stickycode.metadata.MetadataResolverRegistry;
@@ -45,7 +43,6 @@ public class ConfiguredModule
     configurationListener.addBinding().to(ConfiguredConfigurationListener.class);
 
     bind(ConfiguredInjector.class).in(Singleton.class);
-    bind(ConfigurationKeyBuilder.class).to(SimpleNameDotFieldConfigurationKeyBuilder.class).in(Singleton.class);
     bind(ConfigurationRepository.class).to(InlineConfigurationRepository.class).in(Singleton.class);
     bind(MetadataResolverRegistry.class).to(ReflectiveMetadataResolverRegistry.class);
     bind(BeanFinder.class).to(GuiceBeanFinder.class);

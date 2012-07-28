@@ -1,9 +1,9 @@
 package net.stickycode.configured.content;
 
-import net.stickycode.configured.ConfigurationKeyElement;
+import net.stickycode.configuration.ConfigurationKey;
 
 public interface LocalisedElement
-    extends Iterable<LocalisedAttribute>, ConfigurationKeyElement {
+    extends Iterable<LocalisedAttribute>, ConfigurationKey {
 
   /**
    * The key uniquely identifying the content
