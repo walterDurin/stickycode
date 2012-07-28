@@ -1,7 +1,7 @@
 package net.stickycode.configured.content;
 
 import net.stickycode.configured.ConfigurationKeyElement;
-import net.stickycode.stereotype.ui.Content;
+import net.stickycode.stereotype.content.Content;
 
 public interface LocalisedAttribute
     extends ConfigurationKeyElement {
