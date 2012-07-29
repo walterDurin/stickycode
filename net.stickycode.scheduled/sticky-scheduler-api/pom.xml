@@ -24,13 +24,6 @@
 		<url>http://code.google.com/p/stickycode/source/browse/#svn/trunk/net.stickycode.scheduled/sticky-scheduler-api</url>
 	</scm>
 
-	<dependencies>
-		<dependency>
-			<groupId>net.stickycode</groupId>
-			<artifactId>sticky-stereotype</artifactId>
-			<version>[1.16,2)</version>
-		</dependency>
-	</dependencies>
 	<!--
 	<build>
 		<plugins>
