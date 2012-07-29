@@ -11,7 +11,7 @@
 
 	<groupId>net.stickycode.servlet</groupId>
 	<artifactId>sticky-servlet-guice3-jersey</artifactId>
-	<version>1.2-SNAPSHOT</version>
+	<version>1.3-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<dependencies>
@@ -26,12 +26,12 @@
 		<dependency>
 			<groupId>net.stickycode.bootstrap</groupId>
 			<artifactId>sticky-bootstrap-api</artifactId>
-			<version>[1,2)</version>
+			<version>[1.4,2)</version>
 		</dependency>
 		<dependency>
 			<groupId>net.stickycode.servlet</groupId>
 			<artifactId>sticky-servlet-guice3</artifactId>
-			<version>[1.1,2)</version>
+			<version>[1.2,2)</version>
 		</dependency>
 		<dependency>
 			<groupId>net.stickycode.stereotype</groupId>
