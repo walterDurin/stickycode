@@ -1,4 +1,4 @@
-package net.stickycode.heartbeat;
+package net.stickycode.heartbeat.pulse;
 
 import java.lang.reflect.Method;
 
