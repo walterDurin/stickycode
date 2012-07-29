@@ -6,5 +6,5 @@ public interface Heartbeat {
   boolean isAlive();
 
   String getLabel();
-
+  
 }
