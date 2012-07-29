@@ -17,8 +17,7 @@
 	<modules>
 		<module>sticky-scheduled-api</module>
 		<module>sticky-scheduled</module>
-		<module>sticky-scheduled-spring30</module>
-		<module>sticky-scheduled-spring25</module>
+		<module>sticky-scheduled-spring3</module>
 		<module>sticky-scheduled-guice3</module>
 		<module>sticky-scheduler-api</module>
 		<module>sticky-scheduler-single</module>
