@@ -10,7 +10,7 @@
 
 	<groupId>net.stickycode.mockwire</groupId>
 	<artifactId>sticky-mockwire-tck</artifactId>
-	<version>8.2-SNAPSHOT</version>
+	<version>8.3-SNAPSHOT</version>
 
 	<name>sticky-mockwire-tck-8</name>
 	<description>The test kit to verify mockwire implementors.</description>
@@ -32,7 +32,7 @@
 		<dependency>
 			<groupId>net.stickycode.configuration</groupId>
 			<artifactId>sticky-configuration</artifactId>
-			<version>[1,2)</version>
+			<version>[1.4,2)</version>
 		</dependency>
 	</dependencies>
 </project>
