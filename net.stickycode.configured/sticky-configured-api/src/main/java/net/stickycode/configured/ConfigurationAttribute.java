@@ -14,7 +14,6 @@ package net.stickycode.configured;
 
 import net.stickycode.bootstrap.ComponentContainer;
 import net.stickycode.coercion.CoercionFinder;
-import net.stickycode.coercion.CoercionTarget;
 import net.stickycode.configuration.ConfigurationTarget;
 import net.stickycode.configuration.ResolvedConfiguration;
 
