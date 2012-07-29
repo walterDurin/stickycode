@@ -122,10 +122,6 @@ public class StickyGuiceContextListener
     system.shutdown();
   }
 
-//  void shutdown(Injector injector) {
-//    Jsr250Module.preDestroy(log, injector);
-//  }
-
   protected ServletModule servletModule(final Set<StickyGuicePlugin> plugins) {
     return new ServletModule() {
       @Override
