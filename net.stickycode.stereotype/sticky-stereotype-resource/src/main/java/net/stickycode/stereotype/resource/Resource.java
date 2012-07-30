@@ -1,6 +1,5 @@
-package net.stickycode.resource.stereotype;
+package net.stickycode.stereotype.resource;
 
-import net.stickycode.stereotype.ConfiguredComponent;
 
 /**
  * Interface used to mark of point where an external resource should be injected.
