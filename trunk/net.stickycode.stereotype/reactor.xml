@@ -20,5 +20,6 @@
 		<module>sticky-stereotype-scheduled</module>
 		<module>sticky-stereotype-heartbeat</module>
 		<module>sticky-stereotype-content</module>
+		<module>sticky-stereotype-resource</module>
 	</modules>
 </project>
