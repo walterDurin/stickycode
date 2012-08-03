@@ -1,8 +1,5 @@
 package net.stickycode.resource;
 
-import java.io.InputStream;
-import java.io.OutputStream;
-
 import net.stickycode.coercion.CoercionTarget;
 
 /**
@@ -13,12 +10,12 @@ public interface ResourceCodec<T> {
   /**
    * Load a T from a stream using the given type information
    */
-  T load(InputStream source, CoercionTarget targetType);
+  T load(ResourceConnection source, CoercionTarget targetType);
 
   /**
    * Store a T to the stream using the given type information
    */
-  void store(CoercionTarget sourceType, T resource, OutputStream target);
+  void store(CoercionTarget sourceType, T resource, ResourceConnection target);
 
   /**
    * @return true if this codec is applicable for the given type.
