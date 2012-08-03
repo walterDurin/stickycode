@@ -1,16 +1,14 @@
 package net.stickycode.resource.codec;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.Reader;
-import java.nio.charset.Charset;
 
 import net.stickycode.coercion.CoercionTarget;
 import net.stickycode.resource.ResourceCodec;
-import net.stickycode.stereotype.Configured;
-import net.stickycode.stereotype.component.StickyExtension;
+import net.stickycode.resource.ResourceConnection;
+import net.stickycode.stereotype.configured.Configured;
+import net.stickycode.stereotype.plugin.StickyExtension;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,35 +23,22 @@ public class StringResourceCodec
   private Integer bufferSize = 2048;
 
   @Override
-  public String load(InputStream in, CoercionTarget target) {
-    return asString(in);
+  public String load(ResourceConnection connection, CoercionTarget target) {
+    try {
+      return loadResourceFully(connection);
+    }
+    catch (IOException e) {
+      throw new ResourceDecodingFailureException(e, target.getType(), this);
+    }
   }
 
   @Override
-  public void store(CoercionTarget sourceType, String resource, OutputStream out) {
+  public void store(CoercionTarget sourceType, String resource, ResourceConnection connection) {
     throw new UnsupportedOperationException("Not implemented");
   }
 
-  public String asString(InputStream is) {
-    try {
-      return loadResourceFully(is);
-    }
-    catch (IOException e) {
-      throw new RuntimeException(e);
-    }
-    finally {
-      try {
-        is.close();
-      }
-      catch (IOException e) {
-        log.error("Failed to close resource stream for '{}' caused by {}", e.getMessage());
-        log.debug("Stack trace of resource '{}' close failure", e);
-      }
-    }
-  }
-
-  private String loadResourceFully(InputStream is) throws IOException {
-    Reader reader = new InputStreamReader(is, Charset.forName("UTF-8"));
+  private String loadResourceFully(ResourceConnection connection) throws IOException {
+    Reader reader = new InputStreamReader(connection.getInputStream(), connection.getCharacterSet());
 
     char[] buffer = new char[bufferSize];
     int count = reader.read(buffer);

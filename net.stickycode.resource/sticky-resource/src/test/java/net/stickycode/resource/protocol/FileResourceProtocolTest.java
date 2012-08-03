@@ -39,13 +39,13 @@ public class FileResourceProtocolTest {
   @Test(expected = ResourceNotFoundException.class)
   public void notExists() {
     when(location.getPath()).thenReturn("src/test/resources/nonexistant");
-    protocol.getInputStream(location);
+    protocol.createConnection(location).getInputStream();
   }
 
   @Test
   public void readable() throws IOException {
     when(location.getPath()).thenReturn("src/test/resources/sampleStream.txt");
-    InputStream in = protocol.getInputStream(location);
+    InputStream in = protocol.createConnection(location).getInputStream();
     BufferedReader reader = new BufferedReader(new InputStreamReader(in));
     assertThat(reader.readLine()).isEqualTo("sample text in a file");
     in.close();
@@ -55,13 +55,13 @@ public class FileResourceProtocolTest {
   public void writable() throws IOException {
     File file = File.createTempFile("sampleStream", ".txt");
     when(location.getPath()).thenReturn(file.getAbsolutePath());
-    OutputStream out = protocol.getOutputStream(location);
+    OutputStream out = protocol.createConnection(location).getOutputStream();
     BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
     String message = "written to resource location " + file.getAbsolutePath();
     writer.write(message);
     writer.close();
 
-    InputStream in = protocol.getInputStream(location);
+    InputStream in = protocol.createConnection(location).getInputStream();
     BufferedReader reader = new BufferedReader(new InputStreamReader(in));
     assertThat(reader.readLine()).isEqualTo(message);
     in.close();
@@ -70,7 +70,7 @@ public class FileResourceProtocolTest {
   @Test(expected = ResourcePathNotFoundForWriteException.class)
   public void notWritable() throws IOException {
     when(location.getPath()).thenReturn("/some/random/path/file.txt");
-    OutputStream out = protocol.getOutputStream(location);
+    OutputStream out = protocol.createConnection(location).getOutputStream();
     BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
     String message = "should never go anywhere";
     writer.write(message);
