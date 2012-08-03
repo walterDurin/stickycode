@@ -18,7 +18,6 @@ import net.stickycode.metadata.MetadataResolverRegistry;
 import net.stickycode.stereotype.StickyComponent;
 import net.stickycode.stereotype.StickyFramework;
 import net.stickycode.stereotype.configured.Configured;
-import net.stickycode.stereotype.configured.ConfiguredComponent;
 import net.stickycode.stereotype.configured.ConfiguredStrategy;
 import net.stickycode.stereotype.configured.PostConfigured;
 import net.stickycode.stereotype.configured.PreConfigured;
@@ -57,9 +56,6 @@ public class ConfiguredTypeListener
 
   private boolean typeIsConfigured(Class<?> type) {
     if (metdataResolverRegistry == null)
-      return false;
-
-    if (metdataResolverRegistry.is(type).metaAnnotatedWith(ConfiguredComponent.class))
       return false;
 
     if (metdataResolverRegistry
