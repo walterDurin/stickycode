@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (c) 2011 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved. -->
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<parent>
+		<groupId>net.stickycode.parent</groupId>
+		<artifactId>sticky-jar</artifactId>
+		<version>1.24</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>net.stickycode.configured</groupId>
+	<artifactId>sticky-configured-api</artifactId>
+	<version>4.5</version>
+	<packaging>jar</packaging>
+
+	<name>sticky-configured-api-4</name>
+	<description>Taking the configuration out of applications, using the same principles that underly dependency injection</description>
+	<inceptionYear>2008</inceptionYear>
+	<url>http://www.StickyCode.net/configured/sticky-configured-api/</url>
+
+	<scm>
+		<connection>scm:svn:http://source.stickycode.net/tags/net.stickycode.configured/sticky-configured-api-4.5</connection>
+		<developerConnection>scm:svn:http://source.stickycode.net/tags/net.stickycode.configured/sticky-configured-api-4.5</developerConnection>
+		<url>scm:svn:http://source.stickycode.net/tags/net.stickycode.configured/sticky-configured-api-4.5</url>
+	</scm>
+
+	<dependencies>
+		<dependency>
+			<groupId>net.stickycode</groupId>
+			<artifactId>sticky-coercion-api</artifactId>
+			<version>[3.9,4)</version>
+		</dependency>
+		<dependency>
+			<groupId>net.stickycode.stereotype</groupId>
+			<artifactId>sticky-stereotype-configured</artifactId>
+			<version>[2.2,3)</version>
+		</dependency>
+		<dependency>
+			<groupId>net.stickycode.configuration</groupId>
+			<artifactId>sticky-configuration-api</artifactId>
+			<version>[1.4,2)</version>
+		</dependency>
+		<dependency>
+			<groupId>net.stickycode.bootstrap</groupId>
+			<artifactId>sticky-bootstrap-api</artifactId>
+			<version>[1.5,2)</version>
+		</dependency>
+	</dependencies>
+</project>
