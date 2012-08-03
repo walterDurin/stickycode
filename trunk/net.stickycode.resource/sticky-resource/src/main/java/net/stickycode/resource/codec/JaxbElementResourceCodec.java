@@ -1,8 +1,6 @@
 package net.stickycode.resource.codec;
 
 import java.beans.Introspector;
-import java.io.InputStream;
-import java.io.OutputStream;
 
 import javax.inject.Inject;
 import javax.xml.bind.JAXBElement;
@@ -15,7 +13,8 @@ import javax.xml.transform.stream.StreamSource;
 
 import net.stickycode.coercion.CoercionTarget;
 import net.stickycode.resource.ResourceCodec;
-import net.stickycode.stereotype.component.StickyExtension;
+import net.stickycode.resource.ResourceConnection;
+import net.stickycode.stereotype.plugin.StickyExtension;
 import net.stickycode.xml.jaxb.JaxbFactory;
 
 @StickyExtension
@@ -23,10 +22,10 @@ public class JaxbElementResourceCodec<T>
     implements ResourceCodec<T> {
 
   @Inject
-    private JaxbFactory jaxbFactory;
+  private JaxbFactory jaxbFactory;
 
   @Override
-  public void store(CoercionTarget sourceType, T resource, OutputStream outputStream) {
+  public void store(CoercionTarget sourceType, T resource, ResourceConnection connection) {
     Class<?> type = sourceType.getType();
     XmlType annotation = type.getAnnotation(XmlType.class);
     try {
@@ -37,7 +36,7 @@ public class JaxbElementResourceCodec<T>
       @SuppressWarnings({ "unchecked", "rawtypes" })
       JAXBElement element = new JAXBElement(name, type, resource);
       Marshaller m = jaxbFactory.createMarshaller(sourceType);
-      m.marshal(element, outputStream);
+      m.marshal(element, connection.getOutputStream());
     }
     catch (JAXBException e) {
       throw new ResourceEncodingFailureException(e, type, this);
@@ -62,12 +61,12 @@ public class JaxbElementResourceCodec<T>
   }
 
   @Override
-  public T load(InputStream source, CoercionTarget resourceTarget) {
+  public T load(ResourceConnection connection, CoercionTarget resourceTarget) {
     @SuppressWarnings("unchecked")
     Class<T> type = (Class<T>) resourceTarget.getType();
     try {
       Unmarshaller u = jaxbFactory.createUnmarshaller(resourceTarget);
-      return u.unmarshal(new StreamSource(source), type).getValue();
+      return u.unmarshal(new StreamSource(connection.getInputStream()), type).getValue();
     }
     catch (JAXBException e) {
       throw new ResourceDecodingFailureException(e, type, this);
@@ -78,7 +77,7 @@ public class JaxbElementResourceCodec<T>
   public boolean isApplicableTo(CoercionTarget type) {
     if (type.getType().isAnnotationPresent(XmlType.class))
       return true;
-    
+
     if (type.getType().isAssignableFrom(JAXBElement.class))
       return true;
 

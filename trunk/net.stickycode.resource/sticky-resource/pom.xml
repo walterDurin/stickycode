@@ -10,10 +10,10 @@
 
 	<groupId>net.stickycode.resource</groupId>
 	<artifactId>sticky-resource</artifactId>
-	<version>2.4-SNAPSHOT</version>
+	<version>3.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>sticky-resource</name>
+	<name>sticky-resource-3</name>
 	<description>A clean resource implementation</description>
 	<url>http://www.StickyCode.net/sticky-resource/</url>
 
@@ -27,37 +27,36 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>net.stickycode.composite</groupId>
-			<artifactId>sticky-composite-unittest</artifactId>
+			<groupId>net.stickycode</groupId>
+			<artifactId>sticky-testutils</artifactId>
 			<version>[1.7,2)</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>net.stickycode.composite</groupId>
-			<artifactId>sticky-composite-logging-deploy</artifactId>
-			<version>[1.5,2)</version>
 			<scope>test</scope>
 		</dependency>
 
 		<dependency>
-			<groupId>net.stickycode.resource</groupId>
-			<artifactId>sticky-resource-stereotype</artifactId>
-			<version>[1.4,2)</version>
+			<groupId>net.stickycode.stereotype</groupId>
+			<artifactId>sticky-stereotype-resource</artifactId>
+			<version>[2,3)</version>
+		</dependency>
+		<dependency>
+			<groupId>net.stickycode.stereotype</groupId>
+			<artifactId>sticky-stereotype-configured</artifactId>
+			<version>[2,3)</version>
 		</dependency>
 		<dependency>
 			<groupId>net.stickycode.composite</groupId>
 			<artifactId>sticky-composite-logging-api</artifactId>
-			<version>[1.4,2)</version>
+			<version>[2,3)</version>
 		</dependency>
 		<dependency>
 			<groupId>net.stickycode.resource</groupId>
 			<artifactId>sticky-resource-api</artifactId>
-			<version>[2.4,3)</version>
+			<version>[3,4)</version>
 		</dependency>
 		<dependency>
 			<groupId>net.stickycode.composite</groupId>
 			<artifactId>sticky-composite-jaxb22</artifactId>
-			<version>[1.1,2)</version>
+			<version>[2,3)</version>
 		</dependency>
 	</dependencies>
 </project>

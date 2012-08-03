@@ -1,23 +1,22 @@
 package net.stickycode.resource.codec;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.Properties;
 
 import net.stickycode.coercion.CoercionTarget;
 import net.stickycode.resource.ResourceCodec;
-import net.stickycode.stereotype.component.StickyExtension;
+import net.stickycode.resource.ResourceConnection;
+import net.stickycode.stereotype.plugin.StickyExtension;
 
 @StickyExtension
 public class PropertiesResourceCodec
     implements ResourceCodec<Properties> {
 
   @Override
-  public Properties load(InputStream input, CoercionTarget targetType) {
+  public Properties load(ResourceConnection input, CoercionTarget targetType) {
     try {
       Properties p = new Properties();
-      p.load(input);
+      p.load(input.getInputStream());
       return p;
     }
     catch (IOException e) {
@@ -26,9 +25,9 @@ public class PropertiesResourceCodec
   }
 
   @Override
-  public void store(CoercionTarget sourceType, Properties resource, OutputStream outputStream) {
+  public void store(CoercionTarget sourceType, Properties resource, ResourceConnection connection) {
     try {
-      resource.store(outputStream, getClass().getName());
+      resource.store(connection.getOutputStream(), getClass().getName());
     }
     catch (IOException e) {
       throw new RuntimeException(e);
