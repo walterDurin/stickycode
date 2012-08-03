@@ -104,8 +104,9 @@ public class StickyBootstrap {
       try {
         system.start();
       }
-      catch (Exception e) {
+      catch (RuntimeException e) {
         log.error("failed to start {}", system, e);
+        throw e;
       }
     }
   }
@@ -115,8 +116,9 @@ public class StickyBootstrap {
       try {
         system.pause();
       }
-      catch (Exception e) {
+      catch (RuntimeException e) {
         log.error("failed to pause {}", system, e);
+        throw e;
       }
     }
   }
@@ -126,8 +128,9 @@ public class StickyBootstrap {
       try {
         system.unpause();
       }
-      catch (Exception e) {
+      catch (RuntimeException e) {
         log.error("failed to unpause {}", system, e);
+        throw e;
       }
     }
   }
@@ -137,8 +140,9 @@ public class StickyBootstrap {
       try {
         system.shutdown();
       }
-      catch (Exception e) {
+      catch (RuntimeException e) {
         log.error("failed to stop {}", system, e);
+        throw e;
       }
     }
   }
