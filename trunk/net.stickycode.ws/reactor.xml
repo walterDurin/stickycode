@@ -18,6 +18,6 @@
 		<module>sticky-ws-cxf</module>
 		<module>sticky-ws-testutils</module>
 		<module>sticky-ws-cxf-guice3</module>
-		<module>sticky-ws-cxf-spring30</module>
+		<module>sticky-ws-cxf-spring3</module>
 	</modules>
 </project>

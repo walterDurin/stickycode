@@ -4,16 +4,16 @@
 	<parent>
 		<groupId>net.stickycode.parent</groupId>
 		<artifactId>sticky-jar</artifactId>
-		<version>1.21</version>
+		<version>1.22</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>net.stickycode.ws</groupId>
 	<artifactId>sticky-ws-cxf-guice3</artifactId>
-	<version>2.3-SNAPSHOT</version>
+	<version>3.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>sticky-ws-cxf-guice3</name>
+	<name>sticky-ws-cxf-guice3-3</name>
 	<url>http://www.StickyCode.net/ws/sticky-ws-cxf-guice3/</url>
 	<inceptionYear>2011</inceptionYear>
 
@@ -35,7 +35,7 @@
 		<dependency>
 			<groupId>net.stickycode.configured</groupId>
 			<artifactId>sticky-configured-guice3</artifactId>
-			<version>[2.3,3)</version>
+			<version>[3,4)</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.inject.extensions</groupId>
@@ -45,12 +45,12 @@
 		<dependency>
 			<groupId>net.stickycode.composite</groupId>
 			<artifactId>sticky-composite-cxf-soap-http</artifactId>
-			<version>[1.1,2)</version>
+			<version>[2,3)</version>
 		</dependency>
 		<dependency>
 			<groupId>net.stickycode.ws</groupId>
 			<artifactId>sticky-ws-cxf</artifactId>
-			<version>[3.2,4)</version>
+			<version>[4,5)</version>
 		</dependency>
 	</dependencies>
 </project>
