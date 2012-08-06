@@ -1,8 +1,8 @@
 package net.stickycode.resource.protocol.http;
 
-import org.apache.http.impl.client.DefaultHttpClient;
-
 import net.stickycode.stereotype.StickyComponent;
+
+import org.apache.http.impl.client.DefaultHttpClient;
 
 @StickyComponent
 public class HttpClientComponent

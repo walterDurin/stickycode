@@ -6,7 +6,10 @@ package net.stickycode.resource;
  */
 public interface ResourceProtocol {
 
-  <T> ResourceConnection<T> createConnection(ResourceLocation resourceLocation)
+  ResourceInput createInput(ResourceLocation resourceLocation)
+      throws ResourceNotFoundException;
+  
+  ResourceOutput createOutput(ResourceLocation resourceLocation)
       throws ResourceNotFoundException;
 
   boolean canResolve(String protocol);

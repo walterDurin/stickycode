@@ -83,20 +83,20 @@ public class JaxbElementResourceCodecTest {
 
   @SuppressWarnings("unchecked")
   private <T> T load(Class<T> type, InputStream in) {
-    return (T) codec.load(new TestResourceConnection(in, null), CoercionTargets.find(type));
+    return (T) codec.load(CoercionTargets.find(type), in, charset);
   }
 
   @SuppressWarnings("unchecked")
   private <T> T cycle(T bean, Class<T> type) {
     ByteArrayOutputStream out = new ByteArrayOutputStream();
     CoercionTarget target = CoercionTargets.find(type);
-    codec.store(target, bean, new TestResourceConnection(null, out));
+    codec.store(target, bean, out, charset);
     try {
       System.out.println(out.toString("UTF-8"));
     }
     catch (UnsupportedEncodingException e) {
       throw new RuntimeException(e);
     }
-    return (T) codec.load(new TestResourceConnection(new ByteArrayInputStream(out.toByteArray())), target);
+    return (T) codec.load(target, new ByteArrayInputStream(out.toByteArray()), charset);
   }
 }

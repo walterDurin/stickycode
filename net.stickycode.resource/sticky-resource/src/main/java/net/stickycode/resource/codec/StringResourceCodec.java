@@ -1,44 +1,47 @@
 package net.stickycode.resource.codec;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.Reader;
+import java.nio.charset.Charset;
 
 import net.stickycode.coercion.CoercionTarget;
 import net.stickycode.resource.ResourceCodec;
-import net.stickycode.resource.ResourceConnection;
 import net.stickycode.stereotype.configured.Configured;
 import net.stickycode.stereotype.plugin.StickyExtension;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @StickyExtension
 public class StringResourceCodec
     implements ResourceCodec<String> {
 
-  private Logger log = LoggerFactory.getLogger(getClass());
-
   @Configured
   private Integer bufferSize = 2048;
 
   @Override
-  public String load(ResourceConnection connection, CoercionTarget target) {
+  public String load(CoercionTarget resourceTarget, InputStream input, Charset characterSet) {
     try {
-      return loadResourceFully(connection);
+      return loadResourceFully(input, characterSet);
     }
     catch (IOException e) {
-      throw new ResourceDecodingFailureException(e, target.getType(), this);
+      throw new ResourceDecodingFailureException(e, resourceTarget.getType(), this);
     }
   }
 
   @Override
-  public void store(CoercionTarget sourceType, String resource, ResourceConnection connection) {
-    throw new UnsupportedOperationException("Not implemented");
+  public void store(CoercionTarget sourceType, String resource, OutputStream output, Charset characterSet) {
+    try {
+      output.write(resource.getBytes(characterSet));
+    }
+    catch (IOException e) {
+      throw new RuntimeException(e);
+    }
   }
 
-  private String loadResourceFully(ResourceConnection connection) throws IOException {
-    Reader reader = new InputStreamReader(connection.getInputStream(), connection.getCharacterSet());
+  private String loadResourceFully(InputStream input, Charset characterSet)
+      throws IOException {
+    Reader reader = new InputStreamReader(input, characterSet);
 
     char[] buffer = new char[bufferSize];
     int count = reader.read(buffer);
