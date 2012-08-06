@@ -1,6 +1,9 @@
 package net.stickycode.resource.codec;
 
 import java.beans.Introspector;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.charset.Charset;
 
 import javax.inject.Inject;
 import javax.xml.bind.JAXBElement;
@@ -13,7 +16,6 @@ import javax.xml.transform.stream.StreamSource;
 
 import net.stickycode.coercion.CoercionTarget;
 import net.stickycode.resource.ResourceCodec;
-import net.stickycode.resource.ResourceConnection;
 import net.stickycode.stereotype.plugin.StickyExtension;
 import net.stickycode.xml.jaxb.JaxbFactory;
 
@@ -25,7 +27,7 @@ public class JaxbElementResourceCodec<T>
   private JaxbFactory jaxbFactory;
 
   @Override
-  public void store(CoercionTarget sourceType, T resource, ResourceConnection connection) {
+  public void store(CoercionTarget sourceType, T resource, OutputStream output, Charset characterSet) {
     Class<?> type = sourceType.getType();
     XmlType annotation = type.getAnnotation(XmlType.class);
     try {
@@ -36,7 +38,7 @@ public class JaxbElementResourceCodec<T>
       @SuppressWarnings({ "unchecked", "rawtypes" })
       JAXBElement element = new JAXBElement(name, type, resource);
       Marshaller m = jaxbFactory.createMarshaller(sourceType);
-      m.marshal(element, connection.getOutputStream());
+      m.marshal(element, output);
     }
     catch (JAXBException e) {
       throw new ResourceEncodingFailureException(e, type, this);
@@ -61,12 +63,12 @@ public class JaxbElementResourceCodec<T>
   }
 
   @Override
-  public T load(ResourceConnection connection, CoercionTarget resourceTarget) {
+  public T load(CoercionTarget resourceTarget, InputStream input, Charset characterSet) {
     @SuppressWarnings("unchecked")
     Class<T> type = (Class<T>) resourceTarget.getType();
     try {
       Unmarshaller u = jaxbFactory.createUnmarshaller(resourceTarget);
-      return u.unmarshal(new StreamSource(connection.getInputStream()), type).getValue();
+      return u.unmarshal(new StreamSource(input), type).getValue();
     }
     catch (JAXBException e) {
       throw new ResourceDecodingFailureException(e, type, this);

@@ -5,21 +5,23 @@ import static org.mockito.Mockito.when;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.nio.charset.Charset;
 
 import net.stickycode.mockwire.Controlled;
 import net.stickycode.mockwire.Uncontrolled;
 import net.stickycode.mockwire.UnderTest;
 import net.stickycode.mockwire.junit4.MockwireRunner;
+import net.stickycode.resource.ResourceInput;
 import net.stickycode.resource.ResourceLocation;
 import net.stickycode.resource.ResourceNotFoundException;
+import net.stickycode.resource.ResourceOutput;
 import net.stickycode.resource.ResourcePathNotFoundForWriteException;
 import net.stickycode.resource.ResourceResolutionFailedException;
+import net.stickycode.resource.codec.StringResourceCodec;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,7 +34,7 @@ public class HttpResourceProtocolTest {
 
   @UnderTest
   HttpResourceProtocol protocol;
-  
+
   @Uncontrolled
   HttpClientComponent component;
 
@@ -51,48 +53,29 @@ public class HttpResourceProtocolTest {
 
   @Test(expected = ResourceResolutionFailedException.class)
   public void notExists() {
-    when(location.getPath()).thenReturn("xyu.sdfa.doesnotexistoiasdpf");
-    protocol.getInputStream(location);
+    when(location.getPath()).thenReturn("xyu.sdfa.localhost");
+    protocol.createInput(location).load(null, null, Charset.forName("UTF-8"));
   }
 
   @Test(expected = ResourceNotFoundException.class)
   public void notFound() throws IOException {
     when(location.getPath()).thenReturn("localhost/not/here.html");
-    InputStream in = protocol.getInputStream(location);
+    protocol.createInput(location).load(null, null, Charset.forName("UTF-8"));
   }
-  
+
   @Test
   public void readable() throws IOException {
     when(location.getPath()).thenReturn("www.redengine.co.nz/index.html");
-    InputStream in = protocol.getInputStream(location);
-    BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-    assertThat(reader.readLine()).isEqualTo("sample text in a http");
-    in.close();
-  }
-
-  @Test
-  public void writable() throws IOException {
-    File http = File.createTempFile("sampleStream", ".txt");
-    when(location.getPath()).thenReturn("http://" + http.getAbsolutePath());
-    OutputStream out = protocol.getOutputStream(location);
-    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
-    String message = "written to resource location " + http.getAbsolutePath();
-    writer.write(message);
-    writer.close();
-
-    InputStream in = protocol.getInputStream(location);
-    BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-    assertThat(reader.readLine()).isEqualTo(message);
+    ResourceInput in = protocol.createInput(location);
+    String value = in.load(null, new StringResourceCodec(), Charset.forName("UTF-8"));
+    assertThat(value).contains("DOCTYPE");
     in.close();
   }
 
   @Test(expected = ResourcePathNotFoundForWriteException.class)
   public void notWritable() throws IOException {
-    when(location.getPath()).thenReturn("http:///some/random/path/http.txt");
-    OutputStream out = protocol.getOutputStream(location);
-    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
-    String message = "should never go anywhere";
-    writer.write(message);
-    writer.close();
+    when(location.getPath()).thenReturn("nosuchdomain.nothere/random/path/http.txt");
+    ResourceOutput out = protocol.createOutput(location);
+    out.store("should never go anywhere", null, new StringResourceCodec());
   }
 }

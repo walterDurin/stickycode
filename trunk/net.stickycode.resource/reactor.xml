@@ -15,7 +15,6 @@
 
 	<name>sticky-resource-reactor</name>
 	<modules>
-		<module>sticky-resource-stereotype</module>
 		<module>sticky-resource-api</module>
 		<module>sticky-resource</module>
 		<module>sticky-resource-coercion</module>
