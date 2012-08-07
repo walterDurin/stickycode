@@ -1,10 +1,11 @@
-package net.stickycode.configured.spring30.finder;
+package net.stickycode.configured.spring3.finder;
 
 import java.beans.Introspector;
 
 import net.stickycode.configured.finder.AbstractBeanFinderTest;
 import net.stickycode.configured.finder.BeanFinder;
 import net.stickycode.configured.finder.TooMany;
+import net.stickycode.configured.spring3.finder.SpringBeanFinder;
 import net.stickycode.stereotype.StickyComponent;
 import net.stickycode.stereotype.StickyPlugin;
 
