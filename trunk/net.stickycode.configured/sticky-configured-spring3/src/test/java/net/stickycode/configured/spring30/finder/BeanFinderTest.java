@@ -5,7 +5,6 @@ import java.beans.Introspector;
 import net.stickycode.configured.finder.AbstractBeanFinderTest;
 import net.stickycode.configured.finder.BeanFinder;
 import net.stickycode.configured.finder.TooMany;
-import net.stickycode.configured.spring30.ConfigurationRefresher;
 import net.stickycode.stereotype.StickyComponent;
 import net.stickycode.stereotype.StickyPlugin;
 
@@ -17,7 +16,6 @@ import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
 import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.core.type.filter.AnnotationTypeFilter;
-import org.springframework.core.type.filter.AssignableTypeFilter;
 
 public class BeanFinderTest
     extends AbstractBeanFinderTest {
@@ -44,7 +42,6 @@ public class BeanFinderTest
     scanner.setIncludeAnnotationConfig(true);
     scanner.addIncludeFilter(new AnnotationTypeFilter(StickyComponent.class));
     scanner.addIncludeFilter(new AnnotationTypeFilter(StickyPlugin.class));
-    scanner.addExcludeFilter(new AssignableTypeFilter(ConfigurationRefresher.class));
     return scanner;
   }
 
