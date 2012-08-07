@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright (c) 2010 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved. -->
+<!-- Copyright (c) 2012 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved. -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<parent>
 		<groupId>net.stickycode.parent</groupId>
@@ -34,13 +34,6 @@
 			<artifactId>sticky-mockwire-guice3</artifactId>
 			<version>[3,4)</version>
 		</dependency>
-<!--
-		<dependency>
-			<groupId>net.stickycode.mockwire</groupId>
-			<artifactId>sticky-mockwire</artifactId>
-			<version>[8,9)</version>
-		</dependency>
--->
 		<dependency>
 			<groupId>net.stickycode.mockwire</groupId>
 			<artifactId>sticky-mockwire-mockito</artifactId>
