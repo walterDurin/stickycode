@@ -1,4 +1,4 @@
-package net.stickycode.configured.spring30;
+package net.stickycode.configured.spring3;
 
 import net.stickycode.bootstrap.spring3.StickySpringBootstrap;
 import net.stickycode.configured.strategy.AbstractConfiguredStrategyTest;

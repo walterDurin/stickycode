@@ -1,4 +1,4 @@
-package net.stickycode.configured.spring30;
+package net.stickycode.configured.spring3;
 
 import java.util.Map;
 
