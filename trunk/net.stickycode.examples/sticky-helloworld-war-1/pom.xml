@@ -15,7 +15,7 @@
 	<packaging>jar</packaging>
 
 	<properties>
-		<deployment.id>46</deployment.id>
+		<sticky-deployment-id>46</sticky-deployment-id>
 	</properties>
 
 	<name>sticky-example-war</name>
