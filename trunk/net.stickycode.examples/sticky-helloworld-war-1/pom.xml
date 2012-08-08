@@ -6,12 +6,12 @@
 	<parent>
 		<groupId>net.stickycode.parent</groupId>
 		<artifactId>sticky-war</artifactId>
-		<version>1.3</version>
+		<version>1.14</version>
 	</parent>
 
 	<groupId>net.stickycode.examples</groupId>
 	<artifactId>sticky-helloworld-war</artifactId>
-	<version>1.2</version>
+	<version>1.3-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<properties>
@@ -32,8 +32,4 @@
 		</plugins>
 	</build>
 
-  <scm>
-    <connection>scm:svn:https://stickycode.googlecode.com/svn/tags/net.stickycode.examples/sticky-helloworld-war-1.2</connection>
-    <developerConnection>scm:svn:https://stickycode.googlecode.com/svn/tags/net.stickycode.examples/sticky-helloworld-war-1.2</developerConnection>
-  </scm>
 </project>
