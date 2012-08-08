@@ -12,7 +12,7 @@
 	<groupId>net.stickycode.examples</groupId>
 	<artifactId>sticky-helloworld-war</artifactId>
 	<version>1.3-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<properties>
 		<sticky-deployment-id>46</sticky-deployment-id>
@@ -20,16 +20,4 @@
 
 	<name>sticky-example-war</name>
 	<description>A very simple webapp for testing things that need webapps</description>
-	<build>
-		<plugins>
-			<plugin>
-				<artifactId>maven-war-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.mortbay.jetty</groupId>
-				<artifactId>maven-jetty-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
-
 </project>
