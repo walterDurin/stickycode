@@ -15,7 +15,7 @@
 	<packaging>jar</packaging>
 
 	<properties>
-		<jetty.stopport>2346</jetty.stopport>
+		<deployment.id>46</deployment.id>
 	</properties>
 
 	<name>sticky-example-war</name>
