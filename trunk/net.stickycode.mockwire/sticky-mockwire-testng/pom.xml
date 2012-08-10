@@ -10,7 +10,7 @@
 
 	<groupId>net.stickycode.mockwire</groupId>
 	<artifactId>sticky-mockwire-testng</artifactId>
-	<version>1.1-SNAPSHOT</version>
+	<version>1.2-SNAPSHOT</version>
 
 	<name>sticky-mockwire-testng-5</name>
 	<description>Mockito mocker implementation for Mockwire, used to provide mocks of services not under test in an isolated context</description>
@@ -27,7 +27,7 @@
 		<dependency>
 			<groupId>net.stickycode.mockwire</groupId>
 			<artifactId>sticky-mockwire</artifactId>
-			<version>[8,9)</version>
+			<version>[8.3,9)</version>
 		</dependency>
 
 		<dependency>
@@ -38,13 +38,13 @@
 		<dependency>
 			<groupId>net.stickycode.mockwire</groupId>
 			<artifactId>sticky-mockwire-spring3</artifactId>
-			<version>[8,9)</version>
+			<version>[8.2,9)</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>net.stickycode.mockwire</groupId>
 			<artifactId>sticky-mockwire-mockito</artifactId>
-			<version>[5,6)</version>
+			<version>[5.1,6)</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
