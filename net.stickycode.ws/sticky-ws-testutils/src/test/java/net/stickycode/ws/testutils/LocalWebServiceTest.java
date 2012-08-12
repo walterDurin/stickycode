@@ -5,7 +5,7 @@ import net.stickycode.mockwire.MockwireConfigured;
 import net.stickycode.mockwire.MockwireContainment;
 import net.stickycode.mockwire.Uncontrolled;
 import net.stickycode.mockwire.junit4.MockwireRunner;
-import net.stickycode.stereotype.Configured;
+import net.stickycode.stereotype.configured.Configured;
 import net.stickycode.ws.testutils.v1.Example;
 
 import org.apache.cxf.Bus;

@@ -7,7 +7,7 @@ import net.stickycode.coercion.AbstractNoDefaultCoercion;
 import net.stickycode.coercion.CoercionTarget;
 import net.stickycode.coercion.ws.WebServiceCoercion;
 import net.stickycode.configured.finder.BeanFinder;
-import net.stickycode.stereotype.component.StickyExtension;
+import net.stickycode.stereotype.plugin.StickyExtension;
 import net.stickycode.ws.cxf.WebServiceNamingStrategy;
 
 @StickyExtension
