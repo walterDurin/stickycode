@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (c) 2011 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved. -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<parent>
+		<groupId>net.stickycode.parent</groupId>
+		<artifactId>sticky-jar</artifactId>
+		<version>1.24</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>net.stickycode.scheduled</groupId>
+	<artifactId>sticky-scheduled</artifactId>
+	<version>3.3</version>
+	<packaging>jar</packaging>
+
+	<name>sticky-scheduled-3</name>
+	<description>Taking the configuration out of applications, using the same principles that underly dependency injection</description>
+
+	<inceptionYear>2008</inceptionYear>
+	<dependencies>
+		<dependency>
+			<groupId>net.stickycode</groupId>
+			<artifactId>sticky-testutils</artifactId>
+			<version>[1.11,2)</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>net.stickycode.scheduled</groupId>
+			<artifactId>sticky-scheduled-api</artifactId>
+			<version>[3.1,4)</version>
+		</dependency>
+		<dependency>
+			<groupId>net.stickycode.configured</groupId>
+			<artifactId>sticky-configured</artifactId>
+			<version>[5.4,6)</version>
+		</dependency>
+		<dependency>
+			<groupId>net.stickycode</groupId>
+			<artifactId>sticky-reflector</artifactId>
+			<version>[1.10,2)</version>
+		</dependency>
+	</dependencies>
+
+  <scm>
+    <connection>scm:svn:http://source.stickycode.net/tags/net.stickycode.scheduled/sticky-scheduled-3.3</connection>
+    <developerConnection>scm:svn:http://source.stickycode.net/tags/net.stickycode.scheduled/sticky-scheduled-3.3</developerConnection>
+    <url>scm:svn:http://source.stickycode.net/tags/net.stickycode.scheduled/sticky-scheduled-3.3</url>
+  </scm>
+</project>
