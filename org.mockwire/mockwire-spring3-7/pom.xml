@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>net.stickycode.parent</groupId>
 		<artifactId>sticky-jar</artifactId>
-		<version>1.22</version>
+		<version>1.24</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
@@ -14,14 +14,14 @@
 	<packaging>jar</packaging>
 
 	<name>mockwire-spring3-7</name>
-	<description>Isolation and definition of test contexts using Spring 3.0 and Mockito</description>
+	<description>Isolation and definition of test contexts using Spring 3.1 and Mockito</description>
 	<inceptionYear>2010</inceptionYear>
 	<url>http://www.StickyCode.net/mockwire/mockwire-spring30</url>
 
 	<scm>
-		<connection>scm:svn:http://stickycode.googlecode.com/svn/trunk/org.mockwire/mockwire-spring30</connection>
-		<developerConnection>scm:svn:https://stickycode.googlecode.com/svn/trunk/org.mockwire/mockwire-spring30</developerConnection>
-		<url>http://code.google.com/p/stickycode/source/browse/#svn/trunk/org.mockwire/mockwire-spring30</url>
+		<connection>scm:svn:http://stickycode.googlecode.com/svn/trunk/org.mockwire/mockwire-spring3</connection>
+		<developerConnection>scm:svn:https://stickycode.googlecode.com/svn/trunk/org.mockwire/mockwire-spring3</developerConnection>
+		<url>http://code.google.com/p/stickycode/source/browse/#svn/trunk/org.mockwire/mockwire-spring3</url>
 	</scm>
 
 	<dependencies>
