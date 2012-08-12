@@ -9,7 +9,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>net.stickycode.ws</groupId>
-	<artifactId>sticky-ws-cxf-spring30</artifactId>
+	<artifactId>sticky-ws-cxf-spring3</artifactId>
 	<version>3.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
