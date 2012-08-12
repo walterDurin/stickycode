@@ -19,16 +19,17 @@
 	<inceptionYear>2009</inceptionYear>
 
 	<scm>
-		<connection>scm:svn:http://stickycode.googlecode.com/svn/trunk/net.stickycode.ws/sticky-ws-cxf-spring30</connection>
-		<developerConnection>scm:svn:https://stickycode.googlecode.com/svn/trunk/net.stickycode.ws/sticky-ws-cxf-spring30</developerConnection>
-		<url>http://code.google.com/p/stickycode/source/browse/#svn/trunk/net.stickycode.ws/sticky-ws-cxf-spring30</url>
+		<connection>scm:svn:http://stickycode.googlecode.com/svn/trunk/net.stickycode.ws/sticky-ws-cxf-spring3</connection>
+		<developerConnection>scm:svn:https://stickycode.googlecode.com/svn/trunk/net.stickycode.ws/sticky-ws-cxf-spring3</developerConnection>
+		<url>http://code.google.com/p/stickycode/source/browse/#svn/trunk/net.stickycode.ws/sticky-ws-cxf-spring3</url>
 	</scm>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.mockwire</groupId>
-			<artifactId>mockwire-spring30</artifactId>
-			<version>[7,8)</version>
+			<artifactId>mockwire-spring3</artifactId>
+			<version>[7.1,8)</version>
+
 			<scope>test</scope>
 			<exclusions>
 				<exclusion>
@@ -72,8 +73,8 @@
 		</dependency>
 		<dependency>
 			<groupId>net.stickycode.composite</groupId>
-			<artifactId>sticky-composite-spring30</artifactId>
-			<version>[2,3)</version>
+			<artifactId>sticky-composite-spring3</artifactId>
+			<version>[1,2)</version>
 		</dependency>
 		<dependency>
 			<groupId>net.stickycode.composite</groupId>

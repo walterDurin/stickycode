@@ -1,4 +1,4 @@
-package net.stickycode.component.cxf.spring30;
+package net.stickycode.component.cxf.spring3;
 
 import javax.inject.Inject;
 import javax.jws.WebService;
