@@ -25,8 +25,7 @@ import javax.xml.ws.Service;
 
 import net.stickycode.coercion.AbstractNoDefaultCoercion;
 import net.stickycode.coercion.CoercionTarget;
-import net.stickycode.coercion.ResolvedValue;
-import net.stickycode.stereotype.component.StickyExtension;
+import net.stickycode.stereotype.plugin.StickyExtension;
 
 @StickyExtension
 public class WebServiceCoercion
