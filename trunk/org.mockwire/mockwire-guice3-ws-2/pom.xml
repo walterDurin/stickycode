@@ -10,7 +10,7 @@
 
 	<groupId>org.mockwire</groupId>
 	<artifactId>mockwire-guice3-ws</artifactId>
-	<version>2.1-SNAPSHOT</version>
+	<version>2.2-SNAPSHOT</version>
 
 	<name>mockwire-guice3-ws-2</name>
 	<description>Isolation and definition of test contexts using Guice 3, Mockito and CXF</description>
