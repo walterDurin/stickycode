@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (c) 2010 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved. -->
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<parent>
+		<groupId>net.stickycode.parent</groupId>
+		<artifactId>sticky-jar</artifactId>
+		<version>1.24</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.mockwire</groupId>
+	<artifactId>mockwire-spring3</artifactId>
+	<version>7.2</version>
+	<packaging>jar</packaging>
+
+	<name>mockwire-spring3-7</name>
+	<description>Isolation and definition of test contexts using Spring 3.1 and Mockito</description>
+	<inceptionYear>2010</inceptionYear>
+	<url>http://www.StickyCode.net/mockwire/mockwire-spring30</url>
+
+	<scm>
+		<connection>scm:svn:http://source.stickycode.net/tags/org.mockwire/mockwire-spring3-7.2</connection>
+		<developerConnection>scm:svn:http://source.stickycode.net/tags/org.mockwire/mockwire-spring3-7.2</developerConnection>
+		<url>scm:svn:http://source.stickycode.net/tags/org.mockwire/mockwire-spring3-7.2</url>
+	</scm>
+
+	<dependencies>
+		<dependency>
+			<groupId>net.stickycode.composite</groupId>
+			<artifactId>sticky-composite-logging-deploy</artifactId>
+			<version>[2.1,3)</version>
+		</dependency>
+		<dependency>
+			<groupId>net.stickycode.mockwire</groupId>
+			<artifactId>sticky-mockwire-spring3</artifactId>
+			<version>[8.2,9)</version>
+		</dependency>
+		<dependency>
+			<groupId>net.stickycode.mockwire</groupId>
+			<artifactId>sticky-mockwire-mockito</artifactId>
+			<version>[5.1,6)</version>
+		</dependency>
+	</dependencies>
+</project>
