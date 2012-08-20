@@ -12,12 +12,12 @@ public class StickySpringBootstrap {
   private GenericApplicationContext context;
 
   public StickySpringBootstrap(GenericApplicationContext context) {
-    super();
     this.context = context;
   }
 
   public void scan(String... paths) {
     ClassPathBeanDefinitionScanner scanner = new ClassPathBeanDefinitionScanner(context, false);
+    scanner.setScopeMetadataResolver(new StickyScopeMetadataResolver());
     scanner.addIncludeFilter(new AnnotationTypeFilter(StickyComponent.class));
     scanner.addIncludeFilter(new AnnotationTypeFilter(StickyPlugin.class));
     scanner.scan(paths);
