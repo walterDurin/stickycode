@@ -142,14 +142,19 @@ public class StickyBoundsMojo
     if (nodes.size() == 0)
       throw new RuntimeException("Got none but was expected one matching dependency " + artifact.getArtifactId());
 
-    if (nodes.size() > 1)
-      throw new RuntimeException("Expected one matching dependency " + nodes);
+    for (int i = 0; i < nodes.size(); i++) {
+      Node node = nodes.get(i);
+      ParentNode dependency = node.getParent();
+      Nodes classifier = dependency.query("mvn:classifier", context);
+      if (classifier.size() != 0)
+        if (!classifier.get(0).getValue().equals(artifact.getClassifier()))
+          return;
 
-    ParentNode dependency = nodes.get(0).getParent();
-    Node version = dependency.query("mvn:version", context).get(0);
-    Element newRange = new Element("version", "http://maven.apache.org/POM/4.0.0");
-    newRange.appendChild(newVersion);
-    dependency.replaceChild(version, newRange);
+      Node version = dependency.query("mvn:version", context).get(0);
+      Element newRange = new Element("version", "http://maven.apache.org/POM/4.0.0");
+      newRange.appendChild(newVersion);
+      dependency.replaceChild(version, newRange);
+    }
   }
 
   private String dependencyPath(String artifactId) {

@@ -2,9 +2,11 @@ package net.stickycode.plugin.bounds;
 
 import static org.fest.assertions.Assertions.assertThat;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 import nu.xom.Builder;
 import nu.xom.Document;
@@ -22,7 +24,8 @@ import org.sonatype.aether.util.artifact.DefaultArtifact;
 public class StickyBoundsMojoIntegrationTest {
 
   @Test
-  public void update() throws ValidityException, ParsingException, IOException {
+  public void update()
+      throws ValidityException, ParsingException, IOException {
     Document pom = new Builder().build(new File(new File("src/it/reflector"), "pom.xml"));
     Artifact artifact = new DefaultArtifact(
         "net.stickycode",
@@ -43,7 +46,52 @@ public class StickyBoundsMojoIntegrationTest {
   }
 
   @Test
-  public void writeNamespacesUnchanged() throws ValidityException, ParsingException, IOException {
+  public void updateWithClassifier()
+      throws ValidityException, ParsingException, IOException {
+    Document pom = new Builder().build(new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("classifiers.xml"))));
+    Artifact artifact = new DefaultArtifact(
+        "net.stickycode",
+        "sticky-coercion",
+        "jar",
+        "",
+        "[2.1,4)");
+    
+    new StickyBoundsMojo().update(pom, artifact, "[2.6,3)");
+    XPathContext context = new XPathContext("mvn", "http://maven.apache.org/POM/4.0.0");
+    
+    Nodes versions = pom.query("//mvn:version", context);
+    assertThat(versions.size()).isEqualTo(4);
+    Nodes nodes = pom.query("//mvn:version[text()='[2.6,3)']", context);
+    assertThat(nodes.size()).isEqualTo(1);
+    Node node = nodes.get(0);
+    assertThat(node.getValue()).isEqualTo("[2.6,3)");
+  }
+  
+  @Test
+  public void updateTheClassifier()
+      throws ValidityException, ParsingException, IOException {
+    Document pom = new Builder().build(new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("classifiers.xml"))));
+    Artifact artifact = new DefaultArtifact(
+        "net.stickycode",
+        "sticky-coercion",
+        "jar",
+        "test-jar",
+        "[2.1,4)");
+
+    new StickyBoundsMojo().update(pom, artifact, "[2.6,3)");
+    XPathContext context = new XPathContext("mvn", "http://maven.apache.org/POM/4.0.0");
+
+    Nodes versions = pom.query("//mvn:version", context);
+    assertThat(versions.size()).isEqualTo(4);
+    Nodes nodes = pom.query("//mvn:version[text()='[2.6,3)']", context);
+    assertThat(nodes.size()).isEqualTo(1);
+    Node node = nodes.get(0);
+    assertThat(node.getValue()).isEqualTo("[2.6,3)");
+  }
+
+  @Test
+  public void writeNamespacesUnchanged()
+      throws ValidityException, ParsingException, IOException {
     Document pom = new Builder().build(new File(new File("src/it/reflector"), "pom.xml"));
     Serializer s = new StickySerializer(new FileOutputStream(new File("target/tmp.xml")), "UTF-8");
     s.write(pom);

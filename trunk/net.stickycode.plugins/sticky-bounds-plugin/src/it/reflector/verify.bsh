@@ -11,10 +11,8 @@ if (!pomFile.exists())
 
 String pom = FileUtils.fileRead( pomFile, "UTF-8" ).trim();
 
-if (pom.contains(">[3.6,4)<"))
+if (pom.contains(">[2.7,3)<"))
 	return true;
 	
-System.err.println("Expected version to be [3.6,4)");
+System.err.println("Expected version to be [2.7,3)");
 return false;
-//String value = FileUtils.read(new File(basedir, "pom.xml"), "UTF-8").contains("[1.5,2)");
-//return value.contains("1.5");
