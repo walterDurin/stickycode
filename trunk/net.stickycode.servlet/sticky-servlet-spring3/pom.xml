@@ -14,8 +14,7 @@
 	<packaging>jar</packaging>
 
 	<name>sticky-servlet-spring3-1</name>
-	<description>Class, Field and Method metadata used to remove boilerplate code for construction, configuration, scheduling, 
-monitoring, management and more</description>
+	<description>Class, Field and Method metadata used to remove boilerplate code for construction, configuration, scheduling, monitoring, management and more</description>
 	<url>http://www.StickyCode.net/ws/sticky-servlet-spring3/</url>
 	<inceptionYear>2009</inceptionYear>
 
@@ -26,12 +25,62 @@ monitoring, management and more</description>
 	</scm>
 
 	<dependencies>
+		<dependency>
+			<groupId>net.stickycode.composite</groupId>
+			<artifactId>sticky-composite-logging-api</artifactId>
+			<version>[2.1,3)</version>
+		</dependency>
 
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>[3.0.1]</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>[3.1.2.RELEASE]</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>spring-beans</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>spring-context</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>spring-asm</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>spring-core</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>[3.1.2.RELEASE]</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>spring-context</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>spring-core</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>spring-beans</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
@@ -41,18 +90,41 @@ monitoring, management and more</description>
 					<artifactId>commons-logging</artifactId>
 					<groupId>commons-logging</groupId>
 				</exclusion>
+				<exclusion>
+					<artifactId>spring-web</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>spring-core</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>spring-asm</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>spring-beans</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>spring-context</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>spring-context-support</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>spring-aop</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>spring-expression</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
 			</exclusions>
 		</dependency>
-		<dependency>
-			<groupId>net.stickycode.composite</groupId>
-			<artifactId>sticky-composite-logging-api</artifactId>
-			<version>[2.1,3)</version>
-		</dependency>
-		<dependency>
-			<groupId>net.stickycode.bootstrap</groupId>
-			<artifactId>sticky-bootstrap-api</artifactId>
-			<version>[1.5,2)</version>
-		</dependency>
+		
 		<dependency>
 			<groupId>net.stickycode.bootstrap</groupId>
 			<artifactId>sticky-bootstrap-spring3</artifactId>
