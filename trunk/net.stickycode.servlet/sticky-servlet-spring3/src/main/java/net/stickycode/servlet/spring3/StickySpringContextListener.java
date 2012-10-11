@@ -15,6 +15,7 @@ package net.stickycode.servlet.spring3;
 import javax.inject.Inject;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
+import javax.servlet.annotation.WebListener;
 
 import net.stickycode.bootstrap.StickyBootstrap;
 import net.stickycode.bootstrap.spring3.StickySpringBootstrap;
@@ -26,6 +27,7 @@ import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.GenericWebApplicationContext;
 
+@WebListener
 public class StickySpringContextListener
     extends ContextLoaderListener {
 
