@@ -89,12 +89,16 @@ public class WebServiceCoercion
     }
   }
 
-  private String deriveServiceName(WebService annotation, Class<?> webServiceClass) {
+  String deriveServiceName(WebService annotation, Class<?> webServiceClass) {
     String serviceName = annotation.serviceName();
-    if (serviceName.length() == 0)
-      return webServiceClass.getSimpleName() + "Service";
+    
+    if (serviceName.length() > 0)
+      return serviceName;
+    
+    if (annotation.name().length() > 0)
+      return annotation.name();
 
-    return serviceName;
+    return webServiceClass.getSimpleName() + "Service";
   }
 
   private String deriveNamespace(Class<?> type, WebService annotation) {
