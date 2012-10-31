@@ -6,6 +6,7 @@ import net.stickycode.stereotype.StickyPlugin;
 import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
 import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.core.type.filter.AnnotationTypeFilter;
+import org.springframework.stereotype.Component;
 
 public class StickySpringBootstrap {
 
@@ -20,6 +21,7 @@ public class StickySpringBootstrap {
     scanner.setScopeMetadataResolver(new StickyScopeMetadataResolver());
     scanner.addIncludeFilter(new AnnotationTypeFilter(StickyComponent.class));
     scanner.addIncludeFilter(new AnnotationTypeFilter(StickyPlugin.class));
+    scanner.addIncludeFilter(new AnnotationTypeFilter(Component.class));
     scanner.scan(paths);
   }
 
