@@ -18,7 +18,7 @@ public class LookupValues
   }
 
   public void add(ConfigurationValue value) {
-    // add the elements in order or precedence
+    // add the elements in order of precedence
     ListIterator<ConfigurationValue> i = values.listIterator();
     while (i.hasNext()) {
       ConfigurationValue v = i.next();
