@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (c) 2011 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved. -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<parent>
+		<groupId>net.stickycode.parent</groupId>
+		<artifactId>sticky-parent-root7</artifactId>
+		<version>1.2</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>net.stickycode.parent</groupId>
+	<artifactId>sticky-jar7</artifactId>
+	<version>1.1</version>
+	<packaging>pom</packaging>
+
+	<name>sticky-jar7-1</name>
+	<description>The definition of a StickyCode jar project</description>
+	<inceptionYear>2010</inceptionYear>
+	<url>http://www.StickyCode.net/parent/sticky-jar/</url>
+
+	<scm>
+		<connection>scm:svn:http://source.stickycode.net/tags/net.stickycode.parent/sticky-jar7-1.1</connection>
+		<developerConnection>scm:svn:http://source.stickycode.net/tags/net.stickycode.parent/sticky-jar7-1.1</developerConnection>
+		<url>scm:svn:http://source.stickycode.net/tags/net.stickycode.parent/sticky-jar7-1.1</url>
+	</scm>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>2.6</version>
+					<configuration>
+						<encoding>UTF-8</encoding>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.0</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-source-plugin</artifactId>
+					<version>2.2.1</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>2.13</version>
+					<configuration>
+						<encoding>UTF-8</encoding>
+						<failIfNoTests>false</failIfNoTests>
+						<includes>
+							<include>**/*Test.java</include>
+						</includes>
+						<excludes>
+							<exclude>**/*$*</exclude>
+							<exclude>**/*IntegrationTest.java</exclude>
+							<exclude>**/*ComponentTest.java</exclude>
+							<exclude>**/*FunctionalTest.java</exclude>
+						</excludes>
+						<systemPropertyVariables>
+							<buildDirectory>${project.build.directory}</buildDirectory>
+						</systemPropertyVariables>
+					</configuration>
+					<executions>
+						<execution>
+							<id>run-component-tests</id>
+							<phase>test</phase>
+							<goals>
+								<goal>test</goal>
+							</goals>
+							<configuration>
+								<includes>
+									<include>**/*ComponentTest.java</include>
+								</includes>
+								<excludes>
+									<exclude>**/*$*</exclude><!-- Exclude inner classes -->
+								</excludes>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-failsafe-plugin</artifactId>
+					<version>2.13</version>
+					<configuration>
+						<encoding>UTF-8</encoding>
+						<failIfNoTests>false</failIfNoTests>
+						<includes>
+							<include>**/*FunctionalTest.java</include>
+							<include>**/*IntegrationTest.java</include>
+						</includes>
+						<systemPropertyVariables>
+							<buildDirectory>${project.build.directory}</buildDirectory>
+						</systemPropertyVariables>
+					</configuration>
+
+					<executions>
+						<execution>
+							<id>run-integration-tests</id>
+							<goals>
+								<goal>integration-test</goal>
+							</goals>
+						</execution>
+						<execution>
+							<id>verify-functional-tests</id>
+							<goals>
+								<goal>verify</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>2.4</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-javadoc-plugin</artifactId>
+					<version>2.9</version>
+				</plugin>
+				<!--
+					Write out the dependency tree and list to the jar when we build such that we can see the point in time state of the
+					dependencies. Ideally we would have slighty more determinable dependencies but that would trade off flexibility
+				-->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<version>2.6</version>
+					<executions>
+						<execution>
+							<id>generate-dep-list</id>
+							<!--
+								Although these could be considered generated resources they are not used within the project they only make sense in the
+								final package, hence package phase.
+								And you don't want to regenerate these files for every goal called
+							-->
+							<phase>prepare-package</phase>
+							<goals>
+								<goal>list</goal>
+							</goals>
+							<configuration>
+								<outputFile>${project.build.outputDirectory}/META-INF/maven/${project.groupId}/${project.artifactId}/dependency.list</outputFile>
+							</configuration>
+						</execution>
+						<execution>
+							<id>generate-dep-tree</id>
+							<!--
+								Although these could be considered generated resources they are not used within the project they only make sense in the
+								final package, hence package phase.
+								And you don't want to regenerate these files for every goal called
+							-->
+							<phase>prepare-package</phase>
+							<goals>
+								<goal>tree</goal>
+							</goals>
+							<configuration>
+								<outputFile>${project.build.outputDirectory}/META-INF/maven/${project.groupId}/${project.artifactId}/dependency.tree</outputFile>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+			</plugin>
+		</plugins>
+
+	</build>
+</project>
