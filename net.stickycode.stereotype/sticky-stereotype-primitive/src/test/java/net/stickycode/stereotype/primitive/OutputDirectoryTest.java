@@ -1,5 +1,7 @@
 package net.stickycode.stereotype.primitive;
 
+import java.io.File;
+
 import org.junit.Test;
 
 public class OutputDirectoryTest {
@@ -32,6 +34,12 @@ public class OutputDirectoryTest {
   @Test(expected = OutputDirectoryCannotBeAFileException.class)
   public void cannotBeAfile() {
     new OutputDirectory("/bin/bash");
+  }
+  
+  @Test
+  public void needToCreate() {
+    File directory = new OutputDirectory("/tmp/" + System.currentTimeMillis()).getDirectory();
+    directory.delete();
   }
 
 }
