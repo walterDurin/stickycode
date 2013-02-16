@@ -4,17 +4,17 @@
 
 	<parent>
 		<groupId>net.stickycode.parent</groupId>
-		<artifactId>sticky-jar</artifactId>
-		<version>1.24</version>
+		<artifactId>sticky-parent-jar7</artifactId>
+		<version>1.2</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>net.stickycode</groupId>
 	<artifactId>sticky-coercion-api</artifactId>
-	<version>3.10-SNAPSHOT</version>
+	<version>4.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>sticky-coercion-api-3</name>
+	<name>sticky-coercion-api-4</name>
 	<description>A simple coercion library api for defining strings to object conversion</description>
 	<inceptionYear>2003</inceptionYear>
 	<url>http://www.StickyCode.net/sticky-coercion-api/</url>
@@ -29,20 +29,20 @@
 		<dependency>
 			<groupId>net.stickycode</groupId>
 			<artifactId>sticky-testutils</artifactId>
-			<version>[1.11,2)</version>
+			<version>[1,2)</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>net.stickycode</groupId>
 			<artifactId>sticky-reflector</artifactId>
-			<version>[1.10,2)</version>
+			<version>[2,3)</version>
 			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>net.stickycode</groupId>
 			<artifactId>sticky-exception</artifactId>
-			<version>[1.7,2)</version>
+			<version>[2,3)</version>
 		</dependency>
 	</dependencies>
 <!--
