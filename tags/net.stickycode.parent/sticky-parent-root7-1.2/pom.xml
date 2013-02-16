@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (c) 2011 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved. -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>net.stickycode.parent</groupId>
+	<artifactId>sticky-parent-root7</artifactId>
+	<version>1.2</version>
+	<packaging>pom</packaging>
+
+	<name>sticky-parent-root7-1</name>
+	<description>Define the distribution management and general plugins used in all StickyCode projects</description>
+	<inceptionYear>2010</inceptionYear>
+	<url>http://www.StickyCode.net/parent/sticky-root/</url>
+
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<distributionManagement>
+		<repository>
+			<uniqueVersion>false</uniqueVersion>
+			<name>Sticky Releases</name>
+			<id>sticky-releases</id>
+			<url>http://releases.stickycode.net</url>
+		</repository>
+		<snapshotRepository>
+			<uniqueVersion>true</uniqueVersion>
+			<name>Sticky Snapshots</name>
+			<id>sticky-snapshots</id>
+			<url>http://snapshots.stickycode.net</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<scm>
+		<connection>scm:svn:http://stickycode.googlecode.com/svn/tags/net.stickycode.parent/sticky-parent-root7-1.2</connection>
+		<developerConnection>scm:svn:http://source.stickycode.net/tags/net.stickycode.parent/sticky-parent-root7-1.2
+		</developerConnection>
+		<url>http://code.google.com/p/stickycode/source/browse/#svn/tags/net.stickycode.parent/sticky-parent-root7-1.2</url>
+	</scm>
+
+	<organization>
+		<name>RedEngine Ltd</name>
+		<url>http://www.RedEngine.co.nz/</url>
+	</organization>
+
+	<developers>
+		<developer>
+			<email>michael@StickyCode.net</email>
+			<id>michael@StickyCode.net</id>
+			<name>Michael McCallum</name>
+			<roles>
+				<role>founder</role>
+				<role>architect</role>
+				<role>developer</role>
+			</roles>
+			<organization>Red Engine Ltd</organization>
+			<organizationUrl>http://www.RedEngine.co.nz</organizationUrl>
+			<timezone>+12</timezone>
+		</developer>
+		<developer>
+			<email>arwen@RedEngine.co.nz</email>
+			<id>arwen</id>
+			<name>Arwen Kencalo</name>
+			<roles>
+				<role>founder</role>
+				<role>designer</role>
+			</roles>
+			<organization>Red Engine Ltd</organization>
+			<organizationUrl>http://www.RedEngine.co.nz</organizationUrl>
+			<timezone>+12</timezone>
+		</developer>
+	</developers>
+
+	<prerequisites>
+		<maven>3.0.4</maven>
+	</prerequisites>
+
+	<build>
+		<directory>${output.basedir}/${target.dir}</directory>
+		<outputDirectory>${output.basedir}/${target.dir}/classes</outputDirectory>
+		<testOutputDirectory>${output.basedir}/${target.dir}/test-classes</testOutputDirectory>
+
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>net.stickycode.plugins</groupId>
+					<artifactId>sticky-bounds-plugin</artifactId>
+					<version>1.10</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-eclipse-plugin</artifactId>
+					<version>2.9</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>2.4</version>
+					<configuration>
+						<tagBase>${sticky.source.url}/tags/${project.groupId}</tagBase>
+						<preparationGoals>sticky-bounds:update enforcer:enforce clean verify</preparationGoals>
+						<goals>enforcer:enforce deploy</goals>
+
+						<!-- Remote tagging is just a dumb idea it violates the whole point
+							of tagging a known quantity -->
+						<remoteTagging>false</remoteTagging>
+						<suppressCommitBeforeTag>true</suppressCommitBeforeTag>
+
+						<scmCommentPrefix>Releasing ${project.artifactId} at ${project.version} … </scmCommentPrefix>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.0</version>
+					<configuration>
+						<encoding>UTF-8</encoding>
+						<source>1.7</source>
+						<target>1.7</target>
+						<testSource>1.7</testSource>
+						<testTarget>1.7</testTarget>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<version>2.6</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-install-plugin</artifactId>
+					<version>2.4</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-source-plugin</artifactId>
+					<version>2.2.1</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>3.2</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-javadoc-plugin</artifactId>
+					<version>2.9</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>2.7</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-clean-plugin</artifactId>
+					<version>2.5</version>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-enforcer-plugin</artifactId>
+					<version>1.2</version>
+					<!-- Invocation is defined by the release plugin goal set hence no executions -->
+					<configuration>
+						<rules>
+							<requireReleaseDeps>
+								<message>No SNAPSHOTs allowed in depedency tree or parents allowed when releasing!</message>
+								<failWhenParentIsSnapshot>true</failWhenParentIsSnapshot>
+								<searchTransitive>true</searchTransitive>
+							</requireReleaseDeps>
+
+							<!-- Don't allow accidental inclusion of commons logging or log4j -->
+							<bannedDependencies>
+								<message>Please ensure you exclude all dependencies on logging implementations</message>
+								<excludes>
+									<exclude>commons-logging</exclude>
+									<exclude>commons-logging-api</exclude>
+									<exclude>log4j:log4j</exclude>
+								</excludes>
+							</bannedDependencies>
+						</rules>
+
+						<fail>true</fail>
+					</configuration>
+
+				</plugin>
+
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>versions-maven-plugin</artifactId>
+					<version>2.0</version>
+					<configuration>
+						<generateBackupPoms>false</generateBackupPoms>
+					</configuration>
+				</plugin>
+
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<properties>
+		<!-- Because UTF-8 is nice but not everywhere, it causes problems with different editors and windows editors in particular wanting to put BOM's in when UTF-8 should NOT have them. -->
+		<!-- Appropriate encodings for other characters can be used that will be rendered properly at the UI layer. e.g. #&x123; for the dagger character in an html source file will be rendered fine in the browser. -->
+		<project.build.sourceEncoding>US-ASCII</project.build.sourceEncoding>
+		<target.dir>target</target.dir>
+		<output.basedir>${basedir}</output.basedir>
+		<sticky.source.url>http://source.stickycode.net</sticky.source.url>
+	</properties>
+
+	<profiles>
+		<profile>
+			<!-- Make sure eclipse outputs to a different directory otherwise the builders will clash with command line. -->
+			<id>running-in-eclipse</id>
+			<activation>
+				<property>
+					<name>m2e.version</name>
+				</property>
+			</activation>
+			<properties>
+				<target.dir>target-eclipse</target.dir>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>using-ramdisk</id>
+			<properties>
+				<output.basedir>${ramdisk.path}/${project.groupId}/${project.artifactId}</output.basedir>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>sign-release-artifacts</id>
+			<activation>
+				<property>
+					<name>performRelease</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>1.4</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
+			<id>promote-to-central</id>
+			<distributionManagement>
+				<repository>
+					<uniqueVersion>false</uniqueVersion>
+					<name>Sonatype Oss Staging</name>
+					<id>sonatype-nexus-staging</id>
+					<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+				</repository>
+				<snapshotRepository>
+					<uniqueVersion>true</uniqueVersion>
+					<name>Sonatype Oss Snapshots</name>
+					<id>sonatype-nexus-snapshots</id>
+					<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+				</snapshotRepository>
+			</distributionManagement>
+		</profile>
+	</profiles>
+
+</project>
