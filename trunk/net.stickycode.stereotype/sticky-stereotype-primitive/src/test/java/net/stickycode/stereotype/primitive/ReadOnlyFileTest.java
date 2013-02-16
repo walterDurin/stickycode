@@ -1,5 +1,7 @@
 package net.stickycode.stereotype.primitive;
 
+import static org.fest.assertions.Assertions.assertThat;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -37,6 +39,14 @@ public class ReadOnlyFileTest {
     finally {
       file.delete();
     }
+  }
+
+  @Test
+  public void works() {
+    File file = new ReadOnlyFile("/bin/bash").getReadOnlyFile();
+    assertThat(file).exists();
+    assertThat(file.canRead()).isTrue();
+    assertThat(file.isFile()).isTrue();
   }
 
 }

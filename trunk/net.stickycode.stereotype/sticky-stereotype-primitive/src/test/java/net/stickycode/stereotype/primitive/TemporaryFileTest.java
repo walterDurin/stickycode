@@ -32,6 +32,15 @@ public class TemporaryFileTest {
     assertThat(file.getName()).startsWith("blah");
     assertThat(file.getName()).endsWith(".pmt");
   }
+  
+  @Test
+  public void existsNoSuffix() {
+    File file = new TemporaryFile("blah").getTemporaryFile();
+    assertThat(file).exists();
+    assertThat(file.canWrite()).isTrue();
+    assertThat(file.getName()).startsWith("blah");
+    assertThat(file.getName()).endsWith(".tmp");
+  }
 
   @Test(expected=TemporaryFileCreationFailedException.class)
   public void failure() {
@@ -43,4 +52,5 @@ public class TemporaryFileTest {
       }
     };
   }
+  
 }
