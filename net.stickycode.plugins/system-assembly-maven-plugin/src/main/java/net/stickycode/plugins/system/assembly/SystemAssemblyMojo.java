@@ -45,7 +45,9 @@ import org.codehaus.plexus.archiver.tar.TarInputStream;
 import org.sonatype.aether.RepositorySystemSession;
 import org.sonatype.aether.repository.RemoteRepository;
 
-@Mojo(name = "freeze", requiresDependencyResolution = ResolutionScope.RUNTIME, defaultPhase = LifecyclePhase.PACKAGE)
+@Mojo(name = "freeze",
+    requiresDependencyResolution = ResolutionScope.RUNTIME,
+    defaultPhase = LifecyclePhase.PACKAGE)
 public class SystemAssemblyMojo
     extends AbstractMojo {
 
@@ -92,9 +94,6 @@ public class SystemAssemblyMojo
   @Parameter(defaultValue = "deb")
   private String type;
 
-  @Parameter(defaultValue = "${project.build.directory}/delivery/Packages")
-  private File packages;
-
   /**
    * The archive configuration to use.
    * See <a href="http://maven.apache.org/shared/maven-archiver/index.html">Maven Archiver Reference</a>.
@@ -109,7 +108,9 @@ public class SystemAssemblyMojo
   public void execute()
       throws MojoExecutionException, MojoFailureException {
     try {
-      copyDebians(getOutputDirectory());
+      File outputDirectory = getOutputDirectory();
+      outputDirectory.mkdirs();
+      copyDebians(outputDirectory);
     }
     catch (ArchiverException e) {
       throw new RuntimeException(e);
@@ -136,7 +137,7 @@ public class SystemAssemblyMojo
 
   OutputStream createPackagesStream()
       throws IOException {
-    return new BufferedOutputStream(new FileOutputStream(packages));
+    return new BufferedOutputStream(new FileOutputStream(new File(getOutputDirectory(), "Packages")));
   }
 
   protected void copyDebians(OutputStream writer, File destination)
@@ -157,7 +158,7 @@ public class SystemAssemblyMojo
         MessageDigest md5 = MessageDigest.getInstance("MD5");
         MessageDigest sha1 = MessageDigest.getInstance("SHA1");
         MessageDigest sha256 = MessageDigest.getInstance("SHA-256");
-        
+
         int read = input.read(buffer);
         while (read != -1) {
           md5.update(buffer, 0, read);
@@ -165,7 +166,7 @@ public class SystemAssemblyMojo
           sha256.update(buffer, 0, read);
           read = input.read(buffer);
         }
-        
+
         writer.write("MD5Sum: ".getBytes());
         writer.write(hex(md5));
         writer.write("\n".getBytes());
