@@ -1,0 +1,8 @@
+Package: ${project.name}
+Version: ${project.version}
+Section: examples
+Priority: optional
+Architecture: all
+Maintainer: michael@redengine.co.nz
+Description: ${project.description}
+Distribution: sticky

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (c) 2012 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved. -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<parent>
+		<groupId>net.stickycode.parent</groupId>
+		<artifactId>sticky-jar</artifactId>
+		<version>1.24</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>net.stickycode.examples</groupId>
+	<artifactId>sticky-debian-one</artifactId>
+	<version>1.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>sticky-debian-one</name>
+	<description>A very simple debian package</description>
+
+	<inceptionYear>2013</inceptionYear>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>jdeb</artifactId>
+				<groupId>org.vafer</groupId>
+				<version>1.0</version>
+				<configuration>
+					<controlDir>${project.build.directory}/deb/control</controlDir>
+					<!-- <deb>${project.build.directory}/${project.name}-${project.version}.deb</deb> -->
+					<dataSet>
+						<data>
+							<type>directory</type>
+							<src>${project.build.directory}/deb/resources</src>
+							<mapper>
+								<type>perm</type>
+								<dirmode>750</dirmode>
+								<filemode>640</filemode>
+							</mapper>
+						</data>
+					</dataSet>
+				</configuration>
+
+				<executions>
+					<execution>
+						<goals>
+							<goal>jdeb</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+				<executions>
+					<execution>
+						<id>copy-debian-resources</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<filters>
+							</filters>
+							<outputDirectory>${basedir}/target/deb</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/deb</directory>
+									<filtering>true</filtering>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+
+		</plugins>
+	</build>
+
+</project>
