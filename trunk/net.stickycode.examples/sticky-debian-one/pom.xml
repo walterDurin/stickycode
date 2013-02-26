@@ -10,7 +10,7 @@
 
 	<groupId>net.stickycode.examples</groupId>
 	<artifactId>sticky-debian-one</artifactId>
-	<version>1.1-SNAPSHOT</version>
+	<version>1.2-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>sticky-debian-one</name>
@@ -78,5 +78,4 @@
 
 		</plugins>
 	</build>
-
 </project>
