@@ -22,20 +22,28 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>net.stickycode.mockwire</groupId>
-	<artifactId>sticky-mockwire</artifactId>
-	<version>3.1</version>
+	<artifactId>sticky-mockwire-spring25</artifactId>
+	<version>4.3</version>
 	<packaging>jar</packaging>
 
-	<name>sticky-mockwire-3</name>
-	<description>A mechnism for using a test class as the manifest for isolating the context of a test. Thereby using the same di mechanism you would expect in production but fully controlled to isolate the variable under test.</description>
+	<name>sticky-mockwire-spring25-4</name>
 
+	<description>Implementation of mockwire context management using Spring 2.5 as the di container</description>
 	<inceptionYear>2009</inceptionYear>
 	<dependencies>
 		<dependency>
-			<groupId>net.stickycode.composite</groupId>
-			<artifactId>sticky-composite-unittest</artifactId>
+			<groupId>net.stickycode.mockwire</groupId>
+			<artifactId>sticky-mockwire-api</artifactId>
+			<version>[4.1,5)</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.stickycode</groupId>
+			<artifactId>sticky-stereotype</artifactId>
 			<version>[1,2)</version>
 			<type>jar</type>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>net.stickycode.composite</groupId>
@@ -45,11 +53,18 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>net.stickycode.mockwire</groupId>
-			<artifactId>sticky-mockwire-api</artifactId>
-			<version>[3,4)</version>
+			<groupId>net.stickycode.configured</groupId>
+			<artifactId>sticky-configured-spring25</artifactId>
+			<version>[1,2)</version>
 			<type>jar</type>
 			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.stickycode.mockwire</groupId>
+			<artifactId>sticky-mockwire-tck</artifactId>
+			<version>[4,5)</version>
+			<type>jar</type>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>net.stickycode.mockwire</groupId>
@@ -59,22 +74,8 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>net.stickycode.mockwire</groupId>
-			<artifactId>sticky-mockwire-spring30</artifactId>
-			<version>[3,4)</version>
-			<type>jar</type>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>net.stickycode</groupId>
-			<artifactId>sticky-reflector</artifactId>
-			<version>[1,2)</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>net.stickycode.configured</groupId>
-			<artifactId>sticky-configured</artifactId>
+			<groupId>net.stickycode.component</groupId>
+			<artifactId>sticky-component-spring25</artifactId>
 			<version>[1,2)</version>
 			<type>jar</type>
 			<scope>compile</scope>
@@ -82,7 +83,7 @@
 	</dependencies>
 
   <scm>
-    <connection>scm:svn:https://stickycode.googlecode.com/svn/tags/net.stickycode.mockwire/sticky-mockwire-3.1</connection>
-    <developerConnection>scm:svn:https://stickycode.googlecode.com/svn/tags/net.stickycode.mockwire/sticky-mockwire-3.1</developerConnection>
+    <connection>scm:svn:https://stickycode.googlecode.com/svn/tags/net.stickycode.mockwire/sticky-mockwire-spring25-4.3</connection>
+    <developerConnection>scm:svn:https://stickycode.googlecode.com/svn/tags/net.stickycode.mockwire/sticky-mockwire-spring25-4.3</developerConnection>
   </scm>
 </project>

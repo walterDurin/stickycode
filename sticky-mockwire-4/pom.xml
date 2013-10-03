@@ -23,10 +23,10 @@
 
 	<groupId>net.stickycode.mockwire</groupId>
 	<artifactId>sticky-mockwire</artifactId>
-	<version>3.1</version>
+	<version>4.3</version>
 	<packaging>jar</packaging>
 
-	<name>sticky-mockwire-3</name>
+	<name>sticky-mockwire-4</name>
 	<description>A mechnism for using a test class as the manifest for isolating the context of a test. Thereby using the same di mechanism you would expect in production but fully controlled to isolate the variable under test.</description>
 
 	<inceptionYear>2009</inceptionYear>
@@ -34,7 +34,7 @@
 		<dependency>
 			<groupId>net.stickycode.composite</groupId>
 			<artifactId>sticky-composite-unittest</artifactId>
-			<version>[1,2)</version>
+			<version>[1.4,2)</version>
 			<type>jar</type>
 		</dependency>
 		<dependency>
@@ -47,23 +47,9 @@
 		<dependency>
 			<groupId>net.stickycode.mockwire</groupId>
 			<artifactId>sticky-mockwire-api</artifactId>
-			<version>[3,4)</version>
+			<version>[4,5)</version>
 			<type>jar</type>
 			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>net.stickycode.mockwire</groupId>
-			<artifactId>sticky-mockwire-mockito</artifactId>
-			<version>[2,3)</version>
-			<type>jar</type>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>net.stickycode.mockwire</groupId>
-			<artifactId>sticky-mockwire-spring30</artifactId>
-			<version>[3,4)</version>
-			<type>jar</type>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>net.stickycode</groupId>
@@ -82,7 +68,7 @@
 	</dependencies>
 
   <scm>
-    <connection>scm:svn:https://stickycode.googlecode.com/svn/tags/net.stickycode.mockwire/sticky-mockwire-3.1</connection>
-    <developerConnection>scm:svn:https://stickycode.googlecode.com/svn/tags/net.stickycode.mockwire/sticky-mockwire-3.1</developerConnection>
+    <connection>scm:svn:https://stickycode.googlecode.com/svn/tags/net.stickycode.mockwire/sticky-mockwire-4.3</connection>
+    <developerConnection>scm:svn:https://stickycode.googlecode.com/svn/tags/net.stickycode.mockwire/sticky-mockwire-4.3</developerConnection>
   </scm>
 </project>

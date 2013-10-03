@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (c) 2013 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved. -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<parent>
+		<groupId>net.stickycode.parent</groupId>
+		<artifactId>sticky-root</artifactId>
+		<version>1.29</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>net.stickycode.mockwire</groupId>
+	<artifactId>sticky-regression</artifactId>
+	<version>0</version>
+	<packaging>pom</packaging>
+
+	<name>${project.artifactId}</name>
+	<modules>
+<!--                <module>sticky-mockwire-3</module> -->
+                <module>sticky-mockwire-4</module>
+                <module>sticky-mockwire-7</module>
+<!--                <module>sticky-mockwire-api-2</module> -->
+                <module>sticky-mockwire-api-3</module>
+                <module>sticky-mockwire-api-4</module>
+                <module>sticky-mockwire-api-5</module>
+                <module>sticky-mockwire-guice3-0</module>
+                <module>sticky-mockwire-guice3-1</module>
+                <module>sticky-mockwire-mockito-4</module>
+                <module>sticky-mockwire-spring25-3</module>
+                <module>sticky-mockwire-spring25-4</module>
+                <module>sticky-mockwire-spring30-6</module>
+                <module>sticky-mockwire-tck-5</module>
+                <module>sticky-mockwire-tck-6</module>
+                <module>sticky-mockwire-tck-7</module>
+	</modules>
+</project>
