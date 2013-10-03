@@ -22,28 +22,15 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>net.stickycode.mockwire</groupId>
-	<artifactId>sticky-mockwire</artifactId>
+	<artifactId>sticky-mockwire-spring25</artifactId>
 	<version>3.1</version>
 	<packaging>jar</packaging>
 
-	<name>sticky-mockwire-3</name>
-	<description>A mechnism for using a test class as the manifest for isolating the context of a test. Thereby using the same di mechanism you would expect in production but fully controlled to isolate the variable under test.</description>
+	<name>sticky-mockwire-spring25-3</name>
 
+	<description>Implementation of mockwire context management using Spring 2.5 as the di container</description>
 	<inceptionYear>2009</inceptionYear>
 	<dependencies>
-		<dependency>
-			<groupId>net.stickycode.composite</groupId>
-			<artifactId>sticky-composite-unittest</artifactId>
-			<version>[1,2)</version>
-			<type>jar</type>
-		</dependency>
-		<dependency>
-			<groupId>net.stickycode.composite</groupId>
-			<artifactId>sticky-composite-logging-deploy</artifactId>
-			<version>[1,2)</version>
-			<type>jar</type>
-			<scope>test</scope>
-		</dependency>
 		<dependency>
 			<groupId>net.stickycode.mockwire</groupId>
 			<artifactId>sticky-mockwire-api</artifactId>
@@ -52,29 +39,29 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>net.stickycode.mockwire</groupId>
-			<artifactId>sticky-mockwire-mockito</artifactId>
-			<version>[2,3)</version>
-			<type>jar</type>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>net.stickycode.mockwire</groupId>
-			<artifactId>sticky-mockwire-spring30</artifactId>
-			<version>[3,4)</version>
-			<type>jar</type>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
 			<groupId>net.stickycode</groupId>
-			<artifactId>sticky-reflector</artifactId>
+			<artifactId>sticky-stereotype</artifactId>
 			<version>[1,2)</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
+			<groupId>net.stickycode.composite</groupId>
+			<artifactId>sticky-composite-unittest</artifactId>
+			<version>[1,2)</version>
+			<type>jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.stickycode.composite</groupId>
+			<artifactId>sticky-composite-logging-deploy</artifactId>
+			<version>1.1</version>
+			<type>jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
 			<groupId>net.stickycode.configured</groupId>
-			<artifactId>sticky-configured</artifactId>
+			<artifactId>sticky-configured-spring25</artifactId>
 			<version>[1,2)</version>
 			<type>jar</type>
 			<scope>compile</scope>
@@ -82,7 +69,7 @@
 	</dependencies>
 
   <scm>
-    <connection>scm:svn:https://stickycode.googlecode.com/svn/tags/net.stickycode.mockwire/sticky-mockwire-3.1</connection>
-    <developerConnection>scm:svn:https://stickycode.googlecode.com/svn/tags/net.stickycode.mockwire/sticky-mockwire-3.1</developerConnection>
+    <connection>scm:svn:https://stickycode.googlecode.com/svn/tags/net.stickycode.mockwire/sticky-mockwire-spring25-3.1</connection>
+    <developerConnection>scm:svn:https://stickycode.googlecode.com/svn/tags/net.stickycode.mockwire/sticky-mockwire-spring25-3.1</developerConnection>
   </scm>
 </project>

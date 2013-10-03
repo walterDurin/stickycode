@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (c) 2011 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved. -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<parent>
+		<groupId>net.stickycode.parent</groupId>
+		<artifactId>sticky-jar</artifactId>
+		<version>1.19</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>net.stickycode.mockwire</groupId>
+	<artifactId>sticky-mockwire-api</artifactId>
+	<version>5.5</version>
+
+	<name>sticky-mockwire-api-5</name>
+	<description>Metadata and interfaces for providing a mechnism for using a test class as the manifest for isolating the context of a test. Thereby using the same di mechanism you would expect in production but fully controlled to isolate the variable under test.</description>
+	<inceptionYear>2009</inceptionYear>
+	<url>http://www.StickyCode.net/mockwire/sticky-mockwire-api</url>
+
+	<scm>
+		<connection>scm:svn:http://stickycode.googlecode.com/svn/tags/net.stickycode.mockwire/sticky-mockwire-api-5.5</connection>
+		<developerConnection>scm:svn:https://stickycode.googlecode.com/svn/tags/net.stickycode.mockwire/sticky-mockwire-api-5.5</developerConnection>
+		<url>http://code.google.com/p/stickycode/source/browse/#svn/tags/net.stickycode.mockwire/sticky-mockwire-api-5.5</url>
+	</scm>
+
+	<dependencies>
+		<dependency>
+			<groupId>net.stickycode</groupId>
+			<artifactId>sticky-stereotype</artifactId>
+			<version>[1.5,2)</version>
+		</dependency>
+		<dependency>
+			<groupId>net.stickycode.configured</groupId>
+			<artifactId>sticky-configured-api</artifactId>
+			<version>[2.2,3)</version>
+		</dependency>
+	</dependencies>
+</project>

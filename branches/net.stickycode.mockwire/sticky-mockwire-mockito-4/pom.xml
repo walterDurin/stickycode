@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (c) 2010 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved. -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<parent>
+		<groupId>net.stickycode.parent</groupId>
+		<artifactId>sticky-jar</artifactId>
+		<version>1.20</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>net.stickycode.mockwire</groupId>
+	<artifactId>sticky-mockwire-mockito</artifactId>
+	<version>4.3</version>
+
+	<name>sticky-mockwire-mockito-4</name>
+	<description>Mockito mocker implementation for Mockwire, used to provide mocks of services not under test in an isolated context</description>
+	<inceptionYear>2009</inceptionYear>
+	<url>http://www.StickyCode.net/mockwire/sticky-mockwire-mockito</url>
+
+	<scm>
+		<connection>scm:svn:http://source.stickycode.net/tags/net.stickycode.mockwire/sticky-mockwire-mockito-4.3</connection>
+		<developerConnection>scm:svn:http://source.stickycode.net/tags/net.stickycode.mockwire/sticky-mockwire-mockito-4.3</developerConnection>
+		<url>scm:svn:http://source.stickycode.net/tags/net.stickycode.mockwire/sticky-mockwire-mockito-4.3</url>
+	</scm>
+
+	<dependencies>
+		<dependency>
+			<groupId>net.stickycode.composite</groupId>
+			<artifactId>sticky-composite-unittest</artifactId>
+			<version>[1.7,2)</version>
+		</dependency>
+		<dependency>
+			<groupId>net.stickycode.composite</groupId>
+			<artifactId>sticky-composite-logging-deploy</artifactId>
+			<version>[1.4,2)</version>
+		</dependency>
+		<dependency>
+			<groupId>net.stickycode.mockwire</groupId>
+			<artifactId>sticky-mockwire-api</artifactId>
+			<version>[6.3,7)</version>
+		</dependency>
+	</dependencies>
+</project>
