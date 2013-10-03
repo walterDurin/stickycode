@@ -1,0 +1,8 @@
+activeProfiles=running-in-eclipse
+eclipse.preferences.version=1
+fullBuildGoals=validate
+includeModules=false
+resolveWorkspaceProjects=true
+resourceFilterGoals=validate
+skipCompilerPlugin=true
+version=1

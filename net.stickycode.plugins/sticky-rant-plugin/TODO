@@ -1,9 +1,0 @@
-goals
-
-error - defect
-add - request
-fix - defect to fix
-complete - request to feature
-changes - report of changes since last release of this project
-notes - report of changes since last release of this project and all transitions
-
