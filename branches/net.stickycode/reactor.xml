@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (c) 2013 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved. -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<parent>
+		<groupId>net.stickycode.parent</groupId>
+		<artifactId>sticky-root</artifactId>
+		<version>1.29</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>net.stickycode</groupId>
+	<artifactId>sticky-reactor</artifactId>
+	<version>0</version>
+	<packaging>pom</packaging>
+
+	<name>sticky-reactor</name>
+	<modules>
+                <module>sticky-coercion-1</module>
+                <module>sticky-coercion-2</module>
+                <module>sticky-coercion-3</module>
+                <module>sticky-coercion-4</module>
+                <module>sticky-coercion-api-2</module>
+                <module>sticky-coercion-api-3</module>
+                <module>sticky-exception-1</module>
+                <module>sticky-metadata-api-1</module>
+                <module>sticky-metadata-reflective-1</module>
+                <module>sticky-reflector-1</module>
+                <module>sticky-resource-1</module>
+                <module>sticky-resource-api-1</module>
+	</modules>
+</project>

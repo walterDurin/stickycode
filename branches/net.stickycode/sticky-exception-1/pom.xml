@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (c) 2010 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved. -->
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<parent>
+		<groupId>net.stickycode.parent</groupId>
+		<artifactId>sticky-jar</artifactId>
+		<version>1.21</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>net.stickycode</groupId>
+	<artifactId>sticky-exception</artifactId>
+	<version>1.7</version>
+	<packaging>jar</packaging>
+
+	<name>sticky-exception-1</name>
+	<description>A clean exception base class(s) with a signature closer to slf4j, so that messages can be as nicely descriptive</description>
+	<inceptionYear>2009</inceptionYear>
+	<url>http://www.StickyCode.net/sticky-exception/</url>
+
+	<scm>
+		<connection>scm:svn:http://source.stickycode.net/tags/net.stickycode/sticky-exception-1.7</connection>
+		<developerConnection>scm:svn:http://source.stickycode.net/tags/net.stickycode/sticky-exception-1.7</developerConnection>
+		<url>scm:svn:http://source.stickycode.net/tags/net.stickycode/sticky-exception-1.7</url>
+	</scm>
+
+	<dependencies>
+		<dependency>
+			<groupId>net.stickycode.composite</groupId>
+			<artifactId>sticky-composite-unittest</artifactId>
+			<version>[1.7,2)</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+</project>
