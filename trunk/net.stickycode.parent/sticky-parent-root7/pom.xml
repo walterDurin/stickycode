@@ -7,7 +7,7 @@
 
 	<groupId>net.stickycode.parent</groupId>
 	<artifactId>sticky-parent-root7</artifactId>
-	<version>1.5-SNAPSHOT</version>
+	<version>1.6-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>sticky-parent-root7-1</name>
