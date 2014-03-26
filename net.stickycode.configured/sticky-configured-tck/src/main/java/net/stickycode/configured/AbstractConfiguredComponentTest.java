@@ -82,7 +82,7 @@ public abstract class AbstractConfiguredComponentTest {
 
     assertThat(configurations).hasSize(1);
     Configuration c = configurations.iterator().next();
-    assertThat(c).hasSize(2);
+    assertThat(c).hasSize(3);
   }
 
 }
