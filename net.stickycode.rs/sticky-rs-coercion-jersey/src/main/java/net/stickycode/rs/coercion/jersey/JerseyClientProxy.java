@@ -1,18 +1,14 @@
 package net.stickycode.rs.coercion.jersey;
 
-import java.lang.annotation.Annotation;
-import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
-import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.HEAD;
+import javax.ws.rs.OPTIONS;
 import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
+import javax.ws.rs.PUT;
 import javax.ws.rs.core.Response.Status.Family;
 
 import net.stickycode.stereotype.failure.FailureClassification;
@@ -27,6 +23,7 @@ import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.WebResource.Builder;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
+import com.sun.jersey.api.client.filter.LoggingFilter;
 
 public class JerseyClientProxy
     implements InvocationHandler {
@@ -41,6 +38,9 @@ public class JerseyClientProxy
     ClientConfig configuration = new DefaultClientConfig();
     configuration.getClasses().add(JacksonJsonProvider.class);
     this.client = Client.create(configuration);
+    this.client.setConnectTimeout(1000);
+    this.client.setReadTimeout(10000);
+    this.client.addFilter(new LoggingFilter());
     this.baseUrl = baseUrl;
     this.log = LoggerFactory.getLogger(type);
   }
@@ -48,86 +48,37 @@ public class JerseyClientProxy
   @Override
   public Object invoke(Object proxy, Method method, Object[] args)
       throws Throwable {
-    String outgoing = deriveOutgoingMediaType(method.getAnnotation(Consumes.class));
-    String incoming = deriveIncomingMediaType(method.getAnnotation(Produces.class));
 
-    WebResource path = client.resource(baseUrl);
+    RequestMetadata request = new RequestMetadata(method, args);
 
-    path = resolveTemplate(path, method.getDeclaringClass(), method, args);
-    path = resolveTemplate(path, method, method, args);
+    WebResource resource = client
+        .resource(baseUrl)
+        .path(request.getOperationPath());
 
-    Builder target = path.accept(incoming).type(outgoing);
+    log.info("url {}", resource.getURI());
 
-    log.info("url {}", path.getURI());
+    Builder target = resource
+        .accept(request.getIngoingMediaType())
+        .type(request.getOutgoingMediaType());
 
-    if (method.isAnnotationPresent(GET.class)) {
-      ClientResponse response = target.get(ClientResponse.class);
-      if (Family.SUCCESSFUL.equals(response.getClientResponseStatus().getFamily()))
+    ClientResponse response = call(target, request);
+
+    if (Family.SUCCESSFUL.equals(response.getClientResponseStatus().getFamily()))
+      if (void.class.isAssignableFrom(method.getReturnType()))
+        return null;
+      else
         return response.getEntity(method.getReturnType());
 
-      FailureClassification classification = new FailureClassificationMapper().resolveClassification(response.getStatus());
-      throw new FailureMetadata(method.getExceptionTypes()).resolve(classification);
-    }
-
-    if (method.isAnnotationPresent(POST.class)) {
-      ClientResponse response = target.post(ClientResponse.class, args[args.length - 1]);
-      if (Family.SUCCESSFUL.equals(response.getClientResponseStatus().getFamily()))
-        return response.getEntity(method.getReturnType());
-
-      FailureClassification classification = new FailureClassificationMapper().resolveClassification(response.getStatus());
-      throw new FailureMetadata(method.getExceptionTypes()).resolve(classification);
-    }
-    
-    if (method.isAnnotationPresent(DELETE.class)) {
-      ClientResponse response = target.delete(ClientResponse.class);
-      if (Family.SUCCESSFUL.equals(response.getClientResponseStatus().getFamily()))
-        if (void.class.isAssignableFrom(method.getReturnType()))
-          return null;
-        else
-          return response.getEntity(method.getReturnType());
-      
-      FailureClassification classification = new FailureClassificationMapper().resolveClassification(response.getStatus());
-      throw new FailureMetadata(method.getExceptionTypes()).resolve(classification);
-    }
-
-    throw new UnsupportedOperationException("Operation " + method.getName() + " not supported");
+    FailureClassification classification = new FailureClassificationMapper().resolveClassification(response.getStatus());
+    // XXX need to validate the X-Failure-Code header
+    throw new FailureMetadata(method.getExceptionTypes()).resolve(classification);
   }
 
-  private String deriveIncomingMediaType(Produces annotation) {
-    if (annotation == null)
-      return MediaType.APPLICATION_JSON;
+  private ClientResponse call(Builder target, RequestMetadata request) {
+    if (request.hasPayload())
+      return target.method(request.getMethod(), ClientResponse.class, request.getPayload());
 
-    return annotation.value()[0];
-  }
-
-  private String deriveOutgoingMediaType(Consumes annotation) {
-    if (annotation == null)
-      return MediaType.APPLICATION_JSON;
-
-    return annotation.value()[0];
-  }
-
-  private WebResource resolveTemplate(WebResource url, AnnotatedElement element, Method method, Object[] args) {
-    Path annotation = element.getAnnotation(Path.class);
-    if (annotation == null)
-      return url;
-
-    String path = annotation.value();
-    Annotation[][] parameterAnnotations = method.getParameterAnnotations();
-    for (int i = 0; i < parameterAnnotations.length; i++) {
-      for (Annotation a : parameterAnnotations[i]) {
-        if (a instanceof PathParam) {
-          String propertyName = ((PathParam) a).value();
-          path = resolveValue(path, propertyName, args[i]);
-        }
-      }
-    }
-
-    return url.path(path);
-  }
-
-  private String resolveValue(String path, String propertyName, Object object) {
-    return path.replaceAll("\\{" + propertyName + "\\}", object.toString());
+    return target.method(request.getMethod(), ClientResponse.class);
   }
 
 }
