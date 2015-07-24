@@ -1,0 +1,34 @@
+path=(~/sticky4j/bin $path)
+
+export FIGNORE=.svn
+
+# General project commands
+alias mvncv='mvn clean verify'
+alias mvncvi='mvn -Pwebapp-interactive clean verify'
+alias mvnvi='mvn -Pwebapp-interactive verify'
+alias mvqvi='mvn -Pwebapp-interactive verify -Dmaven.test.skip=true'
+alias mvnhth='mvn -f head-to-head.xml clean verify'
+alias mvnhthi='mvn -f head-to-head.xml -Pwebapp-interactive clean verify'
+alias mvnrcv='mvn -f reactor.xml clean verify'
+
+# Release commands
+alias mvntag='mvn -B validate release:prepare'
+alias mvnup='mvn release:perform'
+alias mvnrel='mvntag && mvnup'
+
+# Project information commands
+alias mvndep='mvn dependency:resolve'
+alias mvnrdep='mvn -f reactor.xml dependency:resolve'
+alias mvnsrc='mvn dependency:sources'
+alias mvntree='mvn dependency:tree'
+alias mvnpom='mvn help:effective-pom'
+alias mvnset='mvn help:effective-settings'
+
+# Project definition update commands
+alias mvnpar='mvn versions:update-parent'
+alias mvnplu='mvn versions:display-plugin-updates'
+alias mvnver='mvn sticky-bounds:update'
+alias mvnrver='mvn sticky-bounds:update -f reactor.xml'
+alias mvnrpar='mvn -f reactor.xml versions:update-parent'
+
+
