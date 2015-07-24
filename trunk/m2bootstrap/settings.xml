@@ -1,4 +1,7 @@
 <settings>
+
+  <localRepository>${user.home}/sticky4j/m2/repository</localRepository>
+
   <servers>
   	<server>
   		<id>nexus</id>
