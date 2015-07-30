@@ -100,7 +100,7 @@
 					<version>2.5.2</version>
 					<configuration>
 						<tagBase>${sticky.source.url}/tags/${project.groupId}</tagBase>
-						<preparationGoals>sticky-bounds:update enforcer:enforce clean verify</preparationGoals>
+						<preparationGoals>bounds:update enforcer:enforce clean verify</preparationGoals>
 						<goals>enforcer:enforce deploy</goals>
 
 						<!-- Remote tagging is just a dumb idea it violates the whole point 
