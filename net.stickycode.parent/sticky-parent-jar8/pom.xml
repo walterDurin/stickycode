@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright (c) 2011 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved. -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<parent>
 		<groupId>net.stickycode.parent</groupId>
-		<artifactId>sticky-parent-root7</artifactId>
-		<version>1.5</version>
+		<artifactId>sticky-parent-distribution8</artifactId>
+		<version>1.1</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>net.stickycode.parent</groupId>
-	<artifactId>sticky-parent-jar7</artifactId>
-	<version>1.4-SNAPSHOT</version>
+	<artifactId>sticky-parent-jar8</artifactId>
+	<version>1.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>sticky-parent-jar7-1</name>
+	<name>sticky-parent-jar8-1</name>
 	<description>The definition of a StickyCode jar project</description>
 	<inceptionYear>2010</inceptionYear>
 	<url>http://www.StickyCode.net/parent/sticky-jar/</url>
 
 	<scm>
-		<connection>scm:svn:http://stickycode.googlecode.com/svn/trunk/net.stickycode.parent/sticky-jar</connection>
-		<developerConnection>scm:svn:https://stickycode.googlecode.com/svn/trunk/net.stickycode.parent/sticky-jar</developerConnection>
-		<url>http://code.google.com/p/stickycode/source/browse/#svn/trunk/net.stickycode.parent/sticky-jar</url>
+		<connection>scm:svn:http://stickycode.googlecode.com/svn/trunk/net.stickycode.parent/@{project.artifactId}</connection>
+		<developerConnection>scm:svn:https://stickycode.googlecode.com/svn/trunk/net.stickycode.parent/@{project.artifactId}</developerConnection>
+		<url>http://code.google.com/p/stickycode/source/browse/#svn/trunk/net.stickycode.parent/@{project.artifactId}</url>
 	</scm>
 
 	<build>
@@ -31,7 +32,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-resources-plugin</artifactId>
-					<version>2.6</version>
+					<version>2.7</version>
 					<configuration>
 						<encoding>UTF-8</encoding>
 					</configuration>
@@ -39,16 +40,16 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.1</version>
+					<version>3.3</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-source-plugin</artifactId>
-					<version>2.2.1</version>
+					<version>2.4</version>
 				</plugin>
 				<plugin>
 					<artifactId>maven-surefire-plugin</artifactId>
-					<version>2.16</version>
+					<version>2.18.1</version>
 					<configuration>
 						<encoding>UTF-8</encoding>
 						<failIfNoTests>false</failIfNoTests>
@@ -87,7 +88,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-failsafe-plugin</artifactId>
-					<version>2.16</version>
+					<version>2.18.1</version>
 					<configuration>
 						<encoding>UTF-8</encoding>
 						<failIfNoTests>false</failIfNoTests>
@@ -119,12 +120,12 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-jar-plugin</artifactId>
-					<version>2.4</version>
+					<version>2.6</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-javadoc-plugin</artifactId>
-					<version>2.9.1</version>
+					<version>2.10.3</version>
 				</plugin>
 				<!--
 					Write out the dependency tree and list to the jar when we build such that we can see the point in time state of the
@@ -133,7 +134,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-dependency-plugin</artifactId>
-					<version>2.8</version>
+					<version>2.10</version>
 					<executions>
 						<execution>
 							<id>generate-dep-list</id>
