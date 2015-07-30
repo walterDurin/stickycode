@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright (c) 2011 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved. -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<parent>
 		<groupId>net.stickycode.parent</groupId>
@@ -21,9 +20,9 @@
 	<url>http://www.StickyCode.net/parent/sticky-jar/</url>
 
 	<scm>
-		<connection>scm:svn:http://stickycode.googlecode.com/svn/trunk/net.stickycode.parent/@{project.artifactId}</connection>
-		<developerConnection>scm:svn:https://stickycode.googlecode.com/svn/trunk/net.stickycode.parent/@{project.artifactId}</developerConnection>
-		<url>http://code.google.com/p/stickycode/source/browse/#svn/trunk/net.stickycode.parent/@{project.artifactId}</url>
+		<connection>scm:svn:http://source.stickycode.net/tags/net.stickycode.parent/sticky-parent-jar8</connection>
+		<developerConnection>scm:svn:http://source.stickycode.net/tags/net.stickycode.parent/sticky-parent-jar8</developerConnection>
+		<url>scm:svn:http://source.stickycode.net/tags/net.stickycode.parent/sticky-parent-jar8</url>
 	</scm>
 
 	<build>
