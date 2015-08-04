@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright (c) 2010 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved. -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<parent>
 		<groupId>net.stickycode.parent</groupId>
-		<artifactId>sticky-jar</artifactId>
-		<version>1.23</version>
+		<artifactId>sticky-parent-jar8</artifactId>
+		<version>1.1</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>net.stickycode.composite</groupId>
 	<artifactId>sticky-composite-unittest</artifactId>
-	<version>2.2-SNAPSHOT</version>
+	<version>3.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>sticky-composite-unittest-2</name>
+	<name>sticky-composite-unittest-3</name>
 	<description>Composition of artifacts used for Unit testing of Sticky projects</description>
 	<url>http://www.StickyCode.net/composite/sticky-composite-unittest</url>
 	<inceptionYear>2007</inceptionYear>
@@ -28,7 +29,34 @@
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
-			<version>[1.9.0]</version>
+			<version>[2.0.31-beta]</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>byte-buddy</artifactId>
+					<groupId>net.bytebuddy</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>objenesis</artifactId>
+					<groupId>org.objenesis</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<artifactId>byte-buddy</artifactId>
+			<groupId>net.bytebuddy</groupId>
+			<version>[0.6.14]</version>
+		</dependency>
+		<dependency>
+			<artifactId>objenesis</artifactId>
+			<groupId>org.objenesis</groupId>
+			<version>[2.1]</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit-dep</artifactId>
+			<version>[4.11]</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>hamcrest-core</artifactId>
@@ -36,15 +64,43 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit-dep</artifactId>
-			<version>[4.10]</version>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>[6.9.6]</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>guice</artifactId>
+					<groupId>com.google.inject</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>ant</artifactId>
+					<groupId>org.apache.ant</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>snakeyaml</artifactId>
+					<groupId>org.yaml</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>jcommander</artifactId>
+					<groupId>com.beust</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>bsh</artifactId>
+					<groupId>org.beanshell</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>junit</artifactId>
+					<groupId>junit</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
-			<groupId>org.easytesting</groupId>
-			<artifactId>fest-assert</artifactId>
-			<version>[1.4]</version>
+			<groupId>org.assertj</groupId>
+			<artifactId>assertj-core</artifactId>
+			<version>[3.1.0]</version>
 		</dependency>
+
 	</dependencies>
 </project>
