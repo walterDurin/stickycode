@@ -18,8 +18,13 @@
 		<module>sticky-composite-logging-api</module>
 		<module>sticky-composite-logging-deploy</module>
 		<module>sticky-composite-spring3</module>
+		<module>sticky-composite-spring4</module>
 		<module>sticky-composite-spring30</module>
 		<module>sticky-composite-unittest</module>
+		<module>sticky-composite-jersey-spring</module>
+		<module>sticky-composite-jaxb22</module>
+		<module>sticky-composite-guice3</module>
+		<module>sticky-composite-guice4</module>
 		<module>sticky-composite-cxf-soap</module>
 		<module>sticky-composite-cxf-soap-unittest</module>
 		<module>sticky-composite-cxf-soap-http</module>
