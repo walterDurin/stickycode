@@ -10,7 +10,7 @@
 
 	<groupId>net.stickycode</groupId>
 	<artifactId>sticky-coercion-ws</artifactId>
-	<version>5.1-SNAPSHOT</version>
+	<version>5.2-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>sticky-coercion-ws-4</name>
@@ -28,14 +28,14 @@
 		<dependency>
 			<groupId>net.stickycode</groupId>
 			<artifactId>sticky-testutils</artifactId>
-			<version>[2,3)</version>
+			<version>[2.2,3)</version>
 			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>net.stickycode</groupId>
 			<artifactId>sticky-coercion</artifactId>
-			<version>[6,7)</version>
+			<version>[6.1,7)</version>
 		</dependency>
 	</dependencies>
 </project>
