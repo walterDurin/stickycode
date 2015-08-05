@@ -7,38 +7,38 @@ import java.lang.reflect.Method;
 import net.stickycode.stereotype.StickyFramework;
 
 /**
- * 
+ *
  * <pre>
  * Inject
  * MetadataResolverRegisty usingMetadata;
- * 
+ *
  * ...
- * 
+ *
  * Field field = findField();
  * if (withMetadata.is(field).metaAnnotatedWith(Configured.class)
  *   doSomethingWithAnnotatedField(field);
- *   
+ *
  * ...
- * 
+ *
  * Method method = fieldMethod();
  * if (usingMetadata.is(method).metaAnnotatedWith(Scheduled.class)
  *   doSomethingWithAnnotatedMethod(method);
- * 
+ *
  * ...
- * 
- * Class<?> type = findType();
+ *
+ * Class&lt;?&gt; type = findType();
  * if (usingMetadata.is(type).annotatedWith(StickRepository.class)
  *   doSomethingWithAnnoatedType(type);
- *   
+ *
  * ...
- * 
- * Class<?> type = findType();
+ *
+ * Class&lt;?&gt; type = findType();
  * if (usingMetadata.does(type).haveAnyFieldsAnnotatedWith(Configured.class, ConfiguredStrategy.class)
  *   doSomethingWithTypeWithAnnotedElements();
- *   
+ *
  * ...
- * 
- * Class<?> type = findType();
+ *
+ * Class&lt;?&gt; type = findType();
  * if (usingMetadata.does(type).haveAnyMethodsAnnotatedWith(Scheduled.class, Pulse.class)
  *   doSomethingWithTypeWithAnnotedElements();
  * </pre>
