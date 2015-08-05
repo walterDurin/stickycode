@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (c) 2010 RedEngine Ltd, http://www.redengine.co.nz. All rights reserved. -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<parent>
+		<groupId>net.stickycode.parent</groupId>
+		<artifactId>sticky-parent-jar8</artifactId>
+		<version>1.3</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>net.stickycode.parent</groupId>
+	<artifactId>sticky-parent-api8</artifactId>
+	<version>1.3</version>
+	<packaging>pom</packaging>
+
+	<name>sticky-parent-api8-1</name>
+	<description>The definition of StickyCode api projects</description>
+	<inceptionYear>2010</inceptionYear>
+	<url>http://www.StickyCode.net/parent/sticky-api/</url>
+
+	<scm>
+		<connection>scm:svn:http://source.stickycode.net/tags/net.stickycode.parent/sticky-parent-api8-1.3</connection>
+		<developerConnection>scm:svn:http://source.stickycode.net/tags/net.stickycode.parent/sticky-parent-api8-1.3</developerConnection>
+		<url>scm:svn:http://source.stickycode.net/tags/net.stickycode.parent/sticky-parent-api8-1.3</url>
+	</scm>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>clirr-maven-plugin</artifactId>
+				<version>2.6.1</version>
+				<executions>
+					<execution>
+						<id>api-check</id>
+						<phase>test</phase>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+
+	</build>
+</project>
