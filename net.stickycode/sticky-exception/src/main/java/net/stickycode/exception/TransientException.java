@@ -28,8 +28,8 @@ import net.stickycode.exception.resolver.ParameterResolver;
  * Best to just write good tests and document transient exceptions.
  * </p>
  *
- * @see Clean Code : Robert C Martin
- * @see http://www.javapractices.com/topic/TopicAction.do?Id=129
+ * @see "Clean Code : Robert C Martin"
+ * @see <a href="http://www.javapractices.com/topic/TopicAction.do?Id=129">Checked versus unchecked exceptions</a>
  */
 @SuppressWarnings("serial")
 public class TransientException

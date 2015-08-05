@@ -23,15 +23,12 @@ public class ParameterResolver {
 
   /**
    * Resolve all the placeholders <code>{}</code> in the message to the given arguments
-   * 
+   *
    * <pre>
    * resolve("Hi {}", "bob").equals("Hi bob");
    * resolve("Hi {} and {}, "bob", "alice").equals("Hi bob and alice");
    * </pre>
-   * 
-   * <pre>
-   * </pre>
-   * 
+   *
    * @param message The message with placeholders
    * @param arguments The arguments to put in the placeholders
    * @throws InvalidParameterException If there is not a placeholder for every argument
