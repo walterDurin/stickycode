@@ -20,7 +20,7 @@ import net.stickycode.exception.PermanentException;
 public class CoercionNotFoundException
     extends PermanentException {
 
-  public CoercionNotFoundException(CoercionTarget target, Collection<Coercion> coercions) {
+  public CoercionNotFoundException(CoercionTarget target, @SuppressWarnings("rawtypes") Collection<Coercion> coercions) {
     super("A coercion was not found for {} in these coercions {}", target, coercions);
   }
 }

@@ -18,7 +18,7 @@ import net.stickycode.exception.BlankParameterException;
 import net.stickycode.exception.InvalidParameterException;
 import net.stickycode.exception.NullParameterException;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 
 public class QuotedParameterResolverTest {

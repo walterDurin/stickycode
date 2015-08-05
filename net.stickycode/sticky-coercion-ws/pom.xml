@@ -3,14 +3,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<parent>
 		<groupId>net.stickycode.parent</groupId>
-		<artifactId>sticky-jar</artifactId>
-		<version>1.24</version>
+		<artifactId>sticky-parent-jar8</artifactId>
+		<version>1.3</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>net.stickycode</groupId>
 	<artifactId>sticky-coercion-ws</artifactId>
-	<version>4.4-SNAPSHOT</version>
+	<version>5.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>sticky-coercion-ws-4</name>
@@ -28,14 +28,14 @@
 		<dependency>
 			<groupId>net.stickycode</groupId>
 			<artifactId>sticky-testutils</artifactId>
-			<version>[1.11,2)</version>
+			<version>[2,3)</version>
 			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>net.stickycode</groupId>
 			<artifactId>sticky-coercion</artifactId>
-			<version>[5.4,6)</version>
+			<version>[6,7)</version>
 		</dependency>
 	</dependencies>
 </project>

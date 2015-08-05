@@ -21,6 +21,7 @@ public abstract class AnnotatedFieldProcessor
 
   private Class<? extends Annotation>[] annotationClasses;
 
+  @SafeVarargs
   public AnnotatedFieldProcessor(Class<? extends Annotation>... annotation) {
     this.annotationClasses = annotation;
   }

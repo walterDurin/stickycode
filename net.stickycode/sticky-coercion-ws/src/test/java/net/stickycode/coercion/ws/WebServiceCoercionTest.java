@@ -12,7 +12,7 @@
  */
 package net.stickycode.coercion.ws;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import javax.jws.WebService;
 import javax.xml.ws.Endpoint;
@@ -73,6 +73,23 @@ public class WebServiceCoercionTest {
     try {
       TestWs coerced = (TestWs) new WebServiceCoercion()
           .coerce(CoercionTargets.find(TestWs.class), WS_URL);
+      assertThat(coerced).isNotNull();
+      assertThat(coerced.giveMe()).isEqualTo("1");
+      assertThat(coerced.giveMe()).isEqualTo("2");
+      assertThat(implementor.counter).isEqualTo(2);
+    }
+    finally {
+      endpoint.stop();
+    }
+  }
+  
+  @Test
+  public void coerceWithTrailingConfiguration() {
+    WhatTestWs implementor = new WhatTestWs();
+    Endpoint endpoint = Endpoint.publish(WS_URL, implementor);
+    try {
+      TestWs coerced = (TestWs) new WebServiceCoercion()
+      .coerce(CoercionTargets.find(TestWs.class), WS_URL + "?WSDL");
       assertThat(coerced).isNotNull();
       assertThat(coerced.giveMe()).isEqualTo("1");
       assertThat(coerced.giveMe()).isEqualTo("2");
