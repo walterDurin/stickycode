@@ -11,7 +11,7 @@
 
 	<groupId>net.stickycode</groupId>
 	<artifactId>sticky-exception</artifactId>
-	<version>3.1-SNAPSHOT</version>
+	<version>3.2-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>sticky-exception-3</name>
@@ -29,7 +29,7 @@
 		<dependency>
 			<groupId>net.stickycode.composite</groupId>
 			<artifactId>sticky-composite-unittest</artifactId>
-			<version>[3,4)</version>
+			<version>[3.4,4)</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
