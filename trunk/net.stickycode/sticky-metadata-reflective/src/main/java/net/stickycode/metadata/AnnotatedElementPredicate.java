@@ -14,6 +14,7 @@ public class AnnotatedElementPredicate
 
   private Class<? extends Annotation>[] annotations;
 
+  @SafeVarargs
   public AnnotatedElementPredicate(Class<? extends Annotation>... annotations) {
     this.annotations = annotations;
   }
@@ -32,7 +33,7 @@ public class AnnotatedElementPredicate
   public boolean apply(Field field) {
     return isAnnotated(field);
   }
-  
+
   public boolean apply(AnnotatedElement element) {
     return isAnnotated(element);
   }

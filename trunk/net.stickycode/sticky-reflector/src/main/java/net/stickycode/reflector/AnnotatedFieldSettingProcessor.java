@@ -20,6 +20,7 @@ public class AnnotatedFieldSettingProcessor
 
   private final ValueSource values;
 
+  @SafeVarargs
   public AnnotatedFieldSettingProcessor(
       ValueSource values,
       Class<? extends Annotation>... annotation) {

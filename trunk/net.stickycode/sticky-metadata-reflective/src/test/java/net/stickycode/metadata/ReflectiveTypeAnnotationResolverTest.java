@@ -1,6 +1,6 @@
 package net.stickycode.metadata;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import net.stickycode.stereotype.StickyComponent;
 import net.stickycode.stereotype.StickyFramework;
 import net.stickycode.stereotype.StickyPlugin;

@@ -82,6 +82,9 @@ public class WebServiceCoercion
       return null; 
     
     try {
+      if (value.contains("?WSDL"))
+        return new URL(value);
+      
       return new URL(value + "?WSDL");
     }
     catch (MalformedURLException e) {

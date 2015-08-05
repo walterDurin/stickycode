@@ -21,6 +21,7 @@ public abstract class AnnotatedMethodProcessor
 
   private Class<? extends Annotation>[] annotation;
 
+  @SafeVarargs
   public AnnotatedMethodProcessor(Class<? extends Annotation>... annotation) {
     this.annotation = annotation;
   }

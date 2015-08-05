@@ -1,6 +1,6 @@
 package net.stickycode.coercion;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.lang.reflect.Field;
 import java.util.List;
@@ -21,14 +21,19 @@ public class EqualityTest {
   public static class PlainOld {
   }
 
+  @SuppressWarnings("unused")
   private PlainOld[] plainOldArray;
 
+  @SuppressWarnings("unused")
   private PlainOld plainOldField;
 
+  @SuppressWarnings("unused")
   private List<PlainOld> plainOldList;
 
+  @SuppressWarnings("unused")
   private Map<Integer, PlainOld> plainOldMap;
 
+  @SuppressWarnings("unused")
   private List<PlainOld>[] plainOldLists;
 
   @Test
