@@ -1,0 +1,1 @@
+replace the static method invocations with wrapper objects such that the handling of various error conditions can be overridden
