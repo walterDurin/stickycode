@@ -9,19 +9,19 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>net.stickycode.bootstrap</groupId>
-	<artifactId>sticky-bootstrap-spring3</artifactId>
-	<version>2.1-SNAPSHOT</version>
+	<artifactId>sticky-bootstrap-spring4</artifactId>
+	<version>1.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>sticky-bootstrap-spring3-2</name>
+	<name>sticky-bootstrap-spring4-2</name>
 	<description>Bootstrap support for guice that will scan the given packages and contruct an injector for it</description>
 	<inceptionYear>2012</inceptionYear>
 	<url>http://www.StickyCode.net/bootstrap/sticky-bootstrap-spring3/</url>
 
 	<scm>
-		<connection>scm:svn:http://stickycode.googlecode.com/svn/trunk/net.stickycode.bootstrap/sticky-bootstrap-spring3</connection>
-		<developerConnection>scm:svn:https://stickycode.googlecode.com/svn/trunk/net.stickycode.bootstrap/sticky-bootstrap-spring3</developerConnection>
-		<url>http://code.google.com/p/stickycode/source/browse/#svn/trunk/net.stickycode.bootstrap/sticky-bootstrap-spring3</url>
+		<connection>scm:svn:http://stickycode.googlecode.com/svn/trunk/net.stickycode.bootstrap/sticky-bootstrap-spring4</connection>
+		<developerConnection>scm:svn:https://stickycode.googlecode.com/svn/trunk/net.stickycode.bootstrap/sticky-bootstrap-spring4</developerConnection>
+		<url>http://code.google.com/p/stickycode/source/browse/#svn/trunk/net.stickycode.bootstrap/sticky-bootstrap-spring4</url>
 	</scm>
 
 	<dependencies>
@@ -34,7 +34,7 @@
 		<dependency>
 			<groupId>net.stickycode.stereotype</groupId>
 			<artifactId>sticky-stereotype-configured</artifactId>
-			<version>[2.2,3)</version>
+			<version>[3,4)</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -44,13 +44,11 @@
 			<version>[3,4)</version>
 		</dependency>
 
-		<!--
 		<dependency>
 			<groupId>net.stickycode.composite</groupId>
-			<artifactId>sticky-composite-spring3</artifactId>
+			<artifactId>sticky-composite-spring4</artifactId>
 			<version>[1,7)</version>
 		</dependency>
-		-->
 
 		<dependency>
 			<groupId>net.stickycode</groupId>
