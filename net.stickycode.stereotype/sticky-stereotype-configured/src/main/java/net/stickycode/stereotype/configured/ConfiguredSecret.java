@@ -2,7 +2,7 @@ package net.stickycode.stereotype.configured;
 
 /**
  * <p>
- * A configurable type that will give a a decrypted secret on demand.
+ * A configurable type that will give a decrypted secret on demand.
  * </p>
  */
 public interface ConfiguredSecret {
