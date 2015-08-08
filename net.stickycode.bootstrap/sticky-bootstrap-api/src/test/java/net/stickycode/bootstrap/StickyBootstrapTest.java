@@ -1,6 +1,6 @@
 package net.stickycode.bootstrap;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 
