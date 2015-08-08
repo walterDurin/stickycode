@@ -27,6 +27,12 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>net.stickycode.bootstrap</groupId>
+			<artifactId>sticky-bootstrap-api</artifactId>
+			<version>[2,3)</version>
+		</dependency>
+
+		<dependency>
 			<groupId>net.stickycode</groupId>
 			<artifactId>sticky-testutils</artifactId>
 			<version>[2.2,3)</version>
