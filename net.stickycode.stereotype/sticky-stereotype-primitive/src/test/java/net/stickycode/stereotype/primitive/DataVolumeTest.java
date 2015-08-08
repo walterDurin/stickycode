@@ -1,6 +1,6 @@
 package net.stickycode.stereotype.primitive;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Test;
 
@@ -84,7 +84,7 @@ public class DataVolumeTest {
     assertThat(new DataVolume("10Kbit").getValueInBytes()).isEqualTo(binary(10, 1) / 8);
     assertThat(new DataVolume("10Kbyte").getValueInBytes()).isEqualTo(binary(10, 1));
   }
-  
+
   @Test
   public void petaBytes() {
     assertThat(new DataVolume("0p").getValueInBytes()).isEqualTo(0);
