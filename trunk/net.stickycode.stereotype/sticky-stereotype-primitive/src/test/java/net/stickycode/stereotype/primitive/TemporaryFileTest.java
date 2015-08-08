@@ -1,6 +1,6 @@
 package net.stickycode.stereotype.primitive;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.File;
 import java.io.IOException;
@@ -32,7 +32,7 @@ public class TemporaryFileTest {
     assertThat(file.getName()).startsWith("blah");
     assertThat(file.getName()).endsWith(".pmt");
   }
-  
+
   @Test
   public void existsNoSuffix() {
     File file = new TemporaryFile("blah").getTemporaryFile();
@@ -42,9 +42,10 @@ public class TemporaryFileTest {
     assertThat(file.getName()).endsWith(".tmp");
   }
 
-  @Test(expected=TemporaryFileCreationFailedException.class)
+  @Test(expected = TemporaryFileCreationFailedException.class)
   public void failure() {
     new TemporaryFile("fail.ed") {
+
       @Override
       File create(String prefix, String suffix)
           throws IOException {
@@ -52,5 +53,5 @@ public class TemporaryFileTest {
       }
     };
   }
-  
+
 }
