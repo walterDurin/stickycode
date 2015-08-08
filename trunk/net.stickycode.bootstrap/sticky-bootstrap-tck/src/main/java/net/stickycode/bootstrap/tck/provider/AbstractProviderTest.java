@@ -11,7 +11,6 @@ import net.stickycode.bootstrap.tck.component.StandardComponent;
 
 public abstract class AbstractProviderTest {
 
-
   @Inject
   Provider<StandardComponent> componentProvider;
 
@@ -20,4 +19,5 @@ public abstract class AbstractProviderTest {
     assertThat(componentProvider).isNotNull();
     assertThat(componentProvider.get()).isSameAs(componentProvider.get());
   }
+
 }
