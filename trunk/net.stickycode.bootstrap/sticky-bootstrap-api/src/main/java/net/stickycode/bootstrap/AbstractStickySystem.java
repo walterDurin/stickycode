@@ -1,15 +1,16 @@
 package net.stickycode.bootstrap;
 
-public abstract class AbstractStickySystem implements StickySystem {
+public abstract class AbstractStickySystem
+    implements StickySystem {
 
   @Override
   public String toString() {
     return getLabel();
   }
-  
+
   @Override
   public abstract String getLabel();
-  
+
   @Override
   public Package getPackage() {
     return getClass().getPackage();
@@ -24,7 +25,7 @@ public abstract class AbstractStickySystem implements StickySystem {
 
   /**
    * Complete any existing activities but reject any new activities.
-   * 
+   *
    * e.g. stop scheduled jobs
    */
   @Override

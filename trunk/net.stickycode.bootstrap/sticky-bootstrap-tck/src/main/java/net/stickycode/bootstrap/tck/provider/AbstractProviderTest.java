@@ -11,23 +11,9 @@ import net.stickycode.bootstrap.tck.component.StandardComponent;
 
 public abstract class AbstractProviderTest {
 
-  @Inject
-  Something something;
-
-  @Inject
-  Provider<Something> somethingProvider;
 
   @Inject
   Provider<StandardComponent> componentProvider;
-
-  @Test
-  public void ensureProvidersReturnDifferentValues() {
-    // even though the provider has not scope its the same at each injection point
-    // seems counter intuitive, I would expect a provider to be singleton scoped
-    // in order to be the same at all injection points
-    assertThat(somethingProvider.get()).isNotSameAs(somethingProvider.get());
-    assertThat(something).isNotSameAs(somethingProvider.get());
-  }
 
   @Test
   public void ensureStandardComponentProvidersReturnSingletonsAsExpected() {
