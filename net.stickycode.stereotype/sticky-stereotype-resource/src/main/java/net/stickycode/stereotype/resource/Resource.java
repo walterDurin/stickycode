@@ -1,16 +1,16 @@
 package net.stickycode.stereotype.resource;
 
-
 /**
  * Interface used to mark of point where an external resource should be injected.
- * 
+ *
  * <pre>
+ *
  * &#064;Configured
- * private Resource<String> helpText;
- * 
+ * private Resource&lt;String&gt; helpText;
+ *
  * &#064;Configured
- * private Resource<Properties> decodeMappings;
- * 
+ * private Resource&lt;Properties&gt; decodeMappings;
+ *
  * </pre>
  */
 public interface Resource<T> {
@@ -18,7 +18,7 @@ public interface Resource<T> {
   /**
    * Return the current value of the resource, depending on the nature of the resource
    * this could be a fixed value or change on every call.
-   * 
+   *
    * <h2>e.g.</h2>
    * <ul>
    * <li>A string from the classpath might be fixed for the lifetime of the application.</li>
@@ -26,7 +26,7 @@ public interface Resource<T> {
    * </ul>
    */
   T get();
-  
+
   /**
    * Update the underlying resource with the new value
    */
