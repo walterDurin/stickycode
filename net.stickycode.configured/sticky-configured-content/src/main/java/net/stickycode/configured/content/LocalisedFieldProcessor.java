@@ -3,8 +3,8 @@ package net.stickycode.configured.content;
 import java.lang.reflect.Field;
 
 import net.stickycode.reflector.FieldProcessor;
-import net.stickycode.stereotype.ui.ConfiguredContent;
-import net.stickycode.stereotype.ui.Content;
+import net.stickycode.stereotype.content.ConfiguredContent;
+import net.stickycode.stereotype.content.Content;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

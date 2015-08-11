@@ -1,6 +1,6 @@
 package net.stickycode.configured.content;
 
-import net.stickycode.stereotype.ui.Content;
+import net.stickycode.stereotype.content.Content;
 
 public class FixedContent
     implements Content {

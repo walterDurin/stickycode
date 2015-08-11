@@ -3,7 +3,7 @@ package net.stickycode.configured.content;
 import java.lang.reflect.Field;
 
 import net.stickycode.reflector.Fields;
-import net.stickycode.stereotype.ui.Content;
+import net.stickycode.stereotype.content.Content;
 
 public class LocalisedStringField
     implements LocalisedAttribute {

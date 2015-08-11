@@ -17,7 +17,7 @@ import static org.mockito.Mockito.verify;
 
 import java.lang.reflect.Field;
 
-import net.stickycode.stereotype.ui.Content;
+import net.stickycode.stereotype.content.Content;
 
 import org.junit.Rule;
 import org.junit.Test;

@@ -16,10 +16,12 @@
 	<name>sticky-reactor</name>
 	<modules>
 		<module>sticky-configured-api</module>
-		<module>sticky-configured-content-api</module>
+	<!--	<module>sticky-configured-content-api</module> -->
 		<module>sticky-configured</module>
-		<module>sticky-configured-content</module>
+	<!--	<module>sticky-configured-content</module>-->
 		<module>sticky-configured-tck</module>
+		<module>sticky-configured-spring4</module>
+		<module>sticky-configured-guice4</module>
 		<module>sticky-configured-spring3</module>
 		<module>sticky-configured-guice3</module>
 	</modules>
