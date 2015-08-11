@@ -5,7 +5,7 @@ import javax.inject.Inject;
 import net.stickycode.configured.ConfigurationKeyBuilder;
 import net.stickycode.configured.ConfigurationListener;
 import net.stickycode.stereotype.StickyPlugin;
-import net.stickycode.stereotype.ui.Content;
+import net.stickycode.stereotype.content.Content;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

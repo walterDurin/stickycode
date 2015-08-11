@@ -12,11 +12,11 @@
  */
 package net.stickycode.configured.content;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.lang.reflect.Field;
 
-import net.stickycode.stereotype.ui.Content;
+import net.stickycode.stereotype.content.Content;
 
 import org.junit.Rule;
 import org.junit.Test;

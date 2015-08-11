@@ -3,7 +3,7 @@ package net.stickycode.configured.content;
 import java.lang.reflect.Field;
 
 import net.stickycode.exception.PermanentException;
-import net.stickycode.stereotype.ui.Content;
+import net.stickycode.stereotype.content.Content;
 
 @SuppressWarnings("serial")
 public class LocalisedFieldIsNotStringOrContentException

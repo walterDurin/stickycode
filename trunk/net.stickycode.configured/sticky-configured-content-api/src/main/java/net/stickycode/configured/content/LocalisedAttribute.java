@@ -1,10 +1,10 @@
 package net.stickycode.configured.content;
 
-import net.stickycode.configuration.ConfigurationKey;
+import net.stickycode.configuration.ConfigurationTarget;
 import net.stickycode.stereotype.content.Content;
 
 public interface LocalisedAttribute
-    extends ConfigurationKey {
+    extends ConfigurationTarget {
 
   void setValue(String value);
 

@@ -1,9 +1,12 @@
 package net.stickycode.configured.content;
 
 import java.lang.reflect.Field;
+import java.util.List;
 
+import net.stickycode.coercion.CoercionTarget;
+import net.stickycode.configuration.ResolvedConfiguration;
 import net.stickycode.reflector.Fields;
-import net.stickycode.stereotype.ui.Content;
+import net.stickycode.stereotype.content.Content;
 
 public class LocalisedContentField
     implements LocalisedAttribute {
@@ -41,6 +44,20 @@ public class LocalisedContentField
   public String getValue() {
     Content value = Fields.get(bean, field);
     return value.get();
+  }
+
+  @Override
+  public void resolvedWith(ResolvedConfiguration resolved) {
+  }
+
+  @Override
+  public CoercionTarget getCoercionTarget() {
+    return null;
+  }
+
+  @Override
+  public List<String> join(String delimeter) {
+    return null;
   }
 
 }

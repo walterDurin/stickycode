@@ -12,22 +12,8 @@ public class FakeConfigurationSource
 
   @Override
   public void apply(ConfigurationKey key, ResolvedConfiguration values) {
-    String joined = key.join(".");
-    if (joined.endsWith("bob"))
-      values.add(new ConfigurationValue() {
-
-        @Override
-        public boolean hasPrecedence(ConfigurationValue v) {
-          return false;
-        }
-
-        @Override
-        public String get() {
-          return "yay";
-        }
-      });
-    else
-      if (joined.endsWith("numbers"))
+    for (String joined : key.join("."))
+      if (joined.endsWith("bob"))
         values.add(new ConfigurationValue() {
 
           @Override
@@ -37,9 +23,23 @@ public class FakeConfigurationSource
 
           @Override
           public String get() {
-            return "1,5,3,7";
+            return "yay";
           }
         });
+      else
+        if (joined.endsWith("numbers"))
+          values.add(new ConfigurationValue() {
+
+            @Override
+            public boolean hasPrecedence(ConfigurationValue v) {
+              return false;
+            }
+
+            @Override
+            public String get() {
+              return "1,5,3,7";
+            }
+          });
   }
 
 }

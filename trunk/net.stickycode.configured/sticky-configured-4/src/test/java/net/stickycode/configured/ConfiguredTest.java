@@ -19,7 +19,7 @@ import org.junit.Test;
 
 import net.stickycode.stereotype.Configured;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ConfiguredTest {
 
