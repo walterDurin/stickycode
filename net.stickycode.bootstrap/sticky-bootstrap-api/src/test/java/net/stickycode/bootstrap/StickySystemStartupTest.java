@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-public class StickyBootstrapTest {
+public class StickySystemStartupTest {
 
   private StickySystem base = new SystemStub("base");
 
@@ -87,12 +87,12 @@ public class StickyBootstrapTest {
   }
 
   private List<StickySystem> ordered(StickySystem... base2) {
-    StickyBootstrap bootstrap = new StickyBootstrap(new ArraySet<StickySystem>(base2));
+    StickySystemStartup bootstrap = new StickySystemStartup(new ArraySet<StickySystem>(base2));
     return bootstrap.startOrder();
   }
 
   private List<StickySystem> shutdownOrder(StickySystem... base2) {
-    StickyBootstrap bootstrap = new StickyBootstrap(new ArraySet<StickySystem>(base2));
+    StickySystemStartup bootstrap = new StickySystemStartup(new ArraySet<StickySystem>(base2));
     return bootstrap.shutdownOrder();
   }
 }

@@ -21,14 +21,14 @@ import org.slf4j.LoggerFactory;
  * {@link StickySystem}.
  */
 @StickyComponent
-public class StickyBootstrap {
+public class StickySystemStartup {
 
   private Logger log = LoggerFactory.getLogger(getClass());
 
   private List<StickySystem> systems;
 
   @Inject
-  public StickyBootstrap(Set<StickySystem> subsystems) {
+  public StickySystemStartup(Set<StickySystem> subsystems) {
     this.systems = orderByDependency(subsystems);
     log.info("bootstrap order {}", systems);
   }
@@ -52,7 +52,7 @@ public class StickyBootstrap {
    * <li>if there are no deps then the current head is in the correct place</li>
    * <li>repeat for next element</li>
    * </ol>
-   * 
+   *
    * A form of selection sort, the sets will always be small so efficiency is not a big deal over the simplicity.
    */
   private void sort(LinkedList<StickySystem> order) {
