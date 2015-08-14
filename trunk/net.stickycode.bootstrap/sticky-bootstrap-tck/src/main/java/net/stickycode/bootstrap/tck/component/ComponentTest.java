@@ -29,6 +29,12 @@ public class ComponentTest {
   @Inject
   UpTheTop upTop;
 
+  @Inject
+  DomainBean domainBean;
+
+  @Inject
+  DomainBean domainBean2;
+
   @Test
   public void implementationAndContractAreTheSameInstance() {
     assertThat(implementation).isSameAs(contract);
@@ -38,6 +44,7 @@ public class ComponentTest {
   @Test
   public void componentsScannedAreInjected() {
     assertThat(component).isSameAs(component2);
+    assertThat(domainBean).isNotSameAs(domainBean2);
   }
 
   @Before
