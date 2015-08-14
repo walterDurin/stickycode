@@ -3,15 +3,18 @@ package net.stickycode.bootstrap;
 import java.util.Iterator;
 import java.util.ServiceLoader;
 
-public interface StickyBootstrap
-    extends ComponentContainer {
+public interface StickyBootstrap {
 
-  static void crank(Object target, String... packages) {
-    crank().scan(packages).inject(target);
+  static StickyBootstrap crank(Object target, String... packages) {
+    StickyBootstrap crank = crank();
+    if (packages != null && packages.length > 0)
+      return crank.scan(packages).inject(target);
+
+    return crank.inject(target);
   }
 
-  static void crank(Object target, Class<?> base) {
-    crank().scan(base.getPackage().getName()).inject(target);
+  static StickyBootstrap crank(Object target, Class<?> base) {
+    return crank().scan(base.getPackage().getName()).inject(target);
   }
 
   static StickyBootstrap crank() {
@@ -29,4 +32,7 @@ public interface StickyBootstrap
 
   StickyBootstrap scan(String... packages);
 
+  StickyBootstrap inject(Object value);
+
+  public <T> T find(Class<T> type);
 }
