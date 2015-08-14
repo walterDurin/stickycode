@@ -13,7 +13,7 @@ public interface StickySystem {
 
   /**
    * Complete any existing activities but reject any new activities.
-   * 
+   *
    * e.g. stop scheduled jobs
    */
   void pause();
