@@ -10,10 +10,10 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
  */
-package net.stickycode.bootstrap.guice3;
+package net.stickycode.bootstrap.guice4;
 
-import static net.stickycode.bootstrap.guice3.StickyModule.bootstrapModule;
-import static net.stickycode.bootstrap.guice3.StickyModule.keyBuilderModule;
+import static net.stickycode.bootstrap.guice4.StickyModule.bootstrapModule;
+import static net.stickycode.bootstrap.guice4.StickyModule.keyBuilderModule;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -52,4 +52,5 @@ public class StickyGuice {
     return injector
         .createChildInjector(StickyModule.applicationModule(createFilters(packages)));
   }
+
 }
