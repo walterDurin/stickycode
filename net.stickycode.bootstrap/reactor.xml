@@ -19,5 +19,7 @@
 		<module>sticky-bootstrap-tck</module>
 		<module>sticky-bootstrap-guice4</module>
 		<module>sticky-bootstrap-spring4</module>
+		<module>sticky-bootstrap-guice3</module>
+		<module>sticky-bootstrap-spring3</module>
 	</modules>
 </project>
