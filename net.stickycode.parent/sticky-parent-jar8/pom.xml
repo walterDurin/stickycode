@@ -75,6 +75,7 @@
 							<configuration>
 								<includes>
 									<include>**/*ComponentTest.java</include>
+									<include>**/*Tck.java</include>
 								</includes>
 								<excludes>
 									<exclude>**/*$*</exclude><!-- Exclude inner classes -->
