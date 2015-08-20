@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.junit.Before;
 import org.junit.Test;
 
+import net.stickycode.bootstrap.ComponentContainer;
 import net.stickycode.bootstrap.StickyBootstrap;
 
 public class ComponentTest {
@@ -34,6 +35,9 @@ public class ComponentTest {
 
   @Inject
   DomainBean domainBean2;
+
+  @Inject
+  ComponentContainer container;
 
   @Test
   public void implementationAndContractAreTheSameInstance() {
