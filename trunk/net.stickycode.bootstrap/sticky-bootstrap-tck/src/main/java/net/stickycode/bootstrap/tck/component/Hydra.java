@@ -1,10 +1,16 @@
 package net.stickycode.bootstrap.tck.component;
 
+import javax.inject.Inject;
+
+import net.stickycode.bootstrap.ComponentContainer;
 import net.stickycode.stereotype.StickyComponent;
 
 @StickyComponent
 public class Hydra
     implements OneUp {
+
+  @Inject
+  ComponentContainer injector;
 
 }
 
