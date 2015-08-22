@@ -22,25 +22,26 @@ import java.lang.annotation.Target;
  * <p>
  * Used to mark a field to be invoked on a schedule
  * </p>
- * 
+ *
  * <p>
  * The schedule is NOT defined on the method or annotation but in the configuration system of the context, this separation is
  * important
  * </p>
- * 
+ *
  * <p>
  * I would argue you can very rarely define the schedule of something when writing the code, scheduling is always environmental.
  * </p>
- * 
+ *
  * <p>
  * For example if I have a scheduled method that were to periodically synchronized two systems,
- * 
+ *
  * <ul>
  * <li>in a production environment this would most likely happen once a day</li>
  * <li>in a quality assurance testing suitable it should run far more regularly to be useful to testers and acceptors.</li>
  * <li>in development its is often desirable for these processes to not run or only run once</li>
  * </ul>
- * 
+ *
+ * <p>
  * In order to ensure consistency across environments the schedule should always be defined by the environment, never by the code.
  * </p>
  */
@@ -50,8 +51,8 @@ import java.lang.annotation.Target;
 public @interface Scheduled {
 
   /**
-   * Describe the scheduling such that when this message is presented to the user they can configure it
-   * appropriately
+   * @return Describe the scheduling such that when this message is presented to the user they can configure it
+   * appropriately.
    */
   String value() default "";
 }
