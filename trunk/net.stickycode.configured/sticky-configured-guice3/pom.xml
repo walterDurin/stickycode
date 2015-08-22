@@ -3,17 +3,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<parent>
 		<groupId>net.stickycode.parent</groupId>
-		<artifactId>sticky-jar</artifactId>
-		<version>1.24</version>
+		<artifactId>sticky-parent-jar8</artifactId>
+		<version>1.4</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>net.stickycode.configured</groupId>
 	<artifactId>sticky-configured-guice3</artifactId>
-	<version>3.5-SNAPSHOT</version>
+	<version>4.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>sticky-configured-guice3-3</name>
+	<name>sticky-configured-guice3-4</name>
 	<description>Taking the configuration out of applications when using Guice, using the same principles that underly dependency injection and IOC</description>
 	<inceptionYear>2010</inceptionYear>
 	<url>http://www.StickyCode.net/configured/sticky-configured-guice3/</url>
@@ -47,7 +47,7 @@
 		<dependency>
 			<groupId>net.stickycode.bootstrap</groupId>
 			<artifactId>sticky-bootstrap-guice3</artifactId>
-			<version>[3,4)</version>
+			<version>[4,5)</version>
 		</dependency>
 	</dependencies>
 </project>

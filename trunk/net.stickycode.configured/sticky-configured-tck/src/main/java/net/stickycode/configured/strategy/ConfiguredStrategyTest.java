@@ -1,47 +1,39 @@
 package net.stickycode.configured.strategy;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.StrictAssertions.assertThat;
 
 import java.lang.reflect.Field;
+import java.util.Set;
 
 import javax.inject.Inject;
 
+import org.junit.Test;
+
+import net.stickycode.bootstrap.StickyBootstrap;
 import net.stickycode.coercion.target.CoercionTargets;
 import net.stickycode.configured.ConfigurationSystem;
 import net.stickycode.stereotype.configured.ConfiguredStrategy;
 
-import org.junit.Test;
-
-public abstract class AbstractConfiguredStrategyTest {
+public class ConfiguredStrategyTest {
 
   public static interface Strategy {
-  
+
     String algorithm();
   }
 
-  protected abstract void configure(WithStrategy instance);
-  protected abstract void configure(ConfiguredStrategyCoercion instance);
-
-  public static class YesStrategy
-      implements Strategy {
-  
-    @Override
-    public String algorithm() {
-      return "yes";
-    }
+  protected void configure(WithStrategy instance) {
+    StickyBootstrap.crank(this, getClass()).inject(instance);
+    system.start();
   }
 
-  public static class NoStrategy
-      implements Strategy {
-  
-    @Override
-    public String algorithm() {
-      return "no";
-    }
+  protected void configure(ConfiguredStrategyCoercion instance) {
+    StickyBootstrap.crank(this, getClass()).inject(instance);
+    system.start();
   }
 
   public static class WithStrategy {
-    
+
     @ConfiguredStrategy
     Strategy strategy;
   }
@@ -49,9 +41,8 @@ public abstract class AbstractConfiguredStrategyTest {
   @Inject
   protected ConfigurationSystem system;
 
-  public AbstractConfiguredStrategyTest() {
-    super();
-  }
+  @Inject
+  private Set<Strategy> strategies;
 
   @Test
   public void applicable() throws SecurityException, NoSuchFieldException {
@@ -66,15 +57,17 @@ public abstract class AbstractConfiguredStrategyTest {
     WithStrategy instance = new WithStrategy();
     System.setProperty("withStrategy.strategy", "yesStrategy");
     configure(instance);
+    assertThat(strategies).isNotEmpty();
     assertThat(instance.strategy).isNotNull();
     assertThat(instance.strategy.algorithm()).isEqualTo("yes");
   }
-  
+
   @Test
   public void no() {
     WithStrategy instance = new WithStrategy();
     System.setProperty("withStrategy.strategy", "noStrategy");
     configure(instance);
+    assertThat(strategies).isNotEmpty();
     assertThat(instance.strategy).isNotNull();
     assertThat(instance.strategy.algorithm()).isEqualTo("no");
   }

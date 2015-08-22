@@ -1,8 +1,8 @@
 package net.stickycode.configured.finder;
 
-import net.stickycode.stereotype.StickyComponent;
+import net.stickycode.stereotype.StickyDomain;
 
-@StickyComponent
+@StickyDomain
 public class Bean {
 
 }
