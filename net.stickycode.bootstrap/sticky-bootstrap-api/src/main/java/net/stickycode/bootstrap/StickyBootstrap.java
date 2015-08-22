@@ -14,7 +14,7 @@ public interface StickyBootstrap {
   }
 
   static StickyBootstrap crank(Object target, Class<?> base) {
-    return crank().scan(base.getPackage().getName()).inject(target);
+    return crank().scan("net.stickycode", base.getPackage().getName()).inject(target);
   }
 
   static StickyBootstrap crank() {
