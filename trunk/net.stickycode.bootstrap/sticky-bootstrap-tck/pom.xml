@@ -10,7 +10,7 @@
 
 	<groupId>net.stickycode.bootstrap</groupId>
 	<artifactId>sticky-bootstrap-tck</artifactId>
-	<version>1.7-SNAPSHOT</version>
+	<version>1.8-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>sticky-bootstrap-tck-1</name>
