@@ -18,11 +18,12 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import net.stickycode.bootstrap.StickyBootstrap;
 import net.stickycode.stereotype.configured.Configured;
 
 import org.junit.Test;
 
-public abstract class AbstractConfiguredComponentTest {
+public class ConfiguredComponentTest {
 
   public class ConfiguredTestObject {
 
@@ -32,16 +33,10 @@ public abstract class AbstractConfiguredComponentTest {
     @Configured
     List<Integer> numbers;
   }
-  
+
   public class InheritedConfiguredTestObject extends ConfiguredTestObject {
-    
-  }
 
-  public AbstractConfiguredComponentTest() {
-    super();
   }
-
-  protected abstract void configure(ConfiguredTestObject instance);
 
   @Inject
   ConfigurationRepository configurations;
@@ -54,7 +49,7 @@ public abstract class AbstractConfiguredComponentTest {
     ConfiguredTestObject instance = new ConfiguredTestObject();
     verify(instance);
   }
-  
+
   @Test
   public void configuredInheritance() {
     ConfiguredTestObject instance = new InheritedConfiguredTestObject();
@@ -62,7 +57,7 @@ public abstract class AbstractConfiguredComponentTest {
   }
 
   private void verify(ConfiguredTestObject instance) {
-    configure(instance);
+    StickyBootstrap.crank(this, getClass()).inject(instance);
 
     assertThat(system)
         .as("Implementors must inject(this) so that the configuration system can be configured")

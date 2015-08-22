@@ -5,17 +5,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 import javax.inject.Inject;
 
 import net.stickycode.bootstrap.StickyBootstrap;
+import net.stickycode.bootstrap.StickySystemStartup;
 
 import org.junit.Test;
 
-public abstract class AbstractJustPostConfiguredTest {
+public class JustPostConfiguredTest {
 
   @Inject
-  private StickyBootstrap bootstrap;
-
-  public AbstractJustPostConfiguredTest() {
-    super();
-  }
+  private StickySystemStartup bootstrap;
 
   @Test
   public void isRegistered() {
@@ -25,6 +22,8 @@ public abstract class AbstractJustPostConfiguredTest {
     assertThat(target.isPostConfigured()).isTrue();
   }
 
-  abstract protected void configured(Object target);
+  protected void configured(Object target) {
+    StickyBootstrap.crank(this, getClass()).inject(target);
+  }
 
 }

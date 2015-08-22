@@ -16,11 +16,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import javax.inject.Inject;
 
+import net.stickycode.bootstrap.StickyBootstrap;
 import net.stickycode.stereotype.configured.Configured;
 
 import org.junit.Test;
 
-public abstract class AbstractPrimitiveConfiguratedTest {
+public class PrimitiveConfiguratedTest {
 
   public class NotConfiguredTestObject {
 
@@ -37,7 +38,9 @@ public abstract class AbstractPrimitiveConfiguratedTest {
   @Inject
   private ConfigurationSystem system;
 
-  protected abstract void configure(Object target);//, ConfigurationResolutions configurationSource);
+  protected void configure(Object target) {
+    StickyBootstrap.crank(this, getClass()).inject(target);
+  }
 
   @Test(expected = ConfiguredFieldsMustNotBePrimitiveAsDefaultDerivationIsImpossibleException.class)
   public void primitivesHaveNoDefaults() {
