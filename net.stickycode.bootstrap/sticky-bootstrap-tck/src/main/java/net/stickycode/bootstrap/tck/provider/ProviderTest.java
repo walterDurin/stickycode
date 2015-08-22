@@ -9,12 +9,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import net.stickycode.bootstrap.StickyBootstrap;
-import net.stickycode.bootstrap.tck.component.StandardComponent;
 
 public class ProviderTest {
 
   @Inject
-  Provider<StandardComponent> componentProvider;
+  Provider<SomethingProvider> componentProvider;
 
   @Test
   public void ensureStandardComponentProvidersReturnSingletonsAsExpected() {
