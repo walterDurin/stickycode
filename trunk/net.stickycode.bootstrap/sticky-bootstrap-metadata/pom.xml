@@ -34,6 +34,12 @@
 			<version>[2.2,3)</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>net.stickycode.stereotype</groupId>
+			<artifactId>sticky-stereotype-examples</artifactId>
+			<version>[1,2)</version>
+			<scope>test</scope>
+		</dependency>
 
 		<dependency>
 			<groupId>org.ow2.asm</groupId>
@@ -42,9 +48,15 @@
 		</dependency>
 
 		<dependency>
-			<groupId>net.stickycode.stereotype</groupId>
-			<artifactId>sticky-stereotype-component</artifactId>
+			<groupId>net.stickycode.composite</groupId>
+			<artifactId>sticky-composite-logging-api</artifactId>
 			<version>[3,4)</version>
+		</dependency>
+
+		<dependency>
+			<groupId>net.stickycode.stereotype</groupId>
+			<artifactId>sticky-stereotype-failure</artifactId>
+			<version>[2,3)</version>
 		</dependency>
 	</dependencies>
 

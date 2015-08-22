@@ -28,11 +28,27 @@ public class ScanTest {
 
 
   @Test
-  public void simpleClasspath() {
+  public void simpleFromFolder() {
     ComponentRegister register = scan(new PackageFilter("net.stickycode.bootstrap.metadata.simple"));
     assertThat(register).hasSize(1);
     assertThat(register).contains(new ComponentDefinition().withName("net/stickycode/bootstrap/metadata/simple/Simple"));
   }
+
+  @Test
+  public void basicFromClasspath() {
+    ComponentRegister register = scan(new PackageFilter("net.stickycode.stereotype.examples"));
+    assertThat(register).hasSize(1);
+    assertThat(register).contains(new ComponentDefinition().withName("net/stickycode/stereotype/examples/BasicComponent"));
+  }
+
+  @Test
+  public void realiase() {
+    ComponentRegister register = scan(new PackageFilter("net.stickycode.stereotype.examples"));
+    assertThat(register).hasSize(1);
+    assertThat(register).contains(new ComponentDefinition().withName("net/stickycode/stereotype/examples/BasicComponent"));
+    register.realise();
+  }
+
 
   private ComponentRegister scan(PackageFilter filter) {
     ComponentRegister register = new ComponentRegister();

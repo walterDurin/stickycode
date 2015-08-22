@@ -48,7 +48,7 @@ public class ComponentDefinition {
   }
 
   public ComponentDefinition withName(String string) {
-    this.name = string;
+    this.name = string.replaceAll("/", ".");
     return this;
   }
 
