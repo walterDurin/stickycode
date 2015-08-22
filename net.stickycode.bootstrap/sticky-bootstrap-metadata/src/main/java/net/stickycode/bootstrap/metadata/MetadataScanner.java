@@ -44,6 +44,8 @@ public class MetadataScanner {
       }
       loader = loader.getParent();
     }
+    log.debug(System.getProperty("java.class.path"));
+
     this.classpath = classpath;
     log.debug("scanning {}", classpath);
   }

@@ -33,7 +33,7 @@ public class DirectoryUrlProcessor
   @Override
   public void process() {
     try {
-      log.debug("scanning directory:{}", baseDirectory.toString());
+      log.debug("scanning directory: {}", baseDirectory.toString());
       processPath(baseDirectory);
     }
     catch (IOException e) {
@@ -52,6 +52,7 @@ public class DirectoryUrlProcessor
 
       @Override
       public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+        log.debug(file.toString());
         if (filter.includes(path.relativize(file))) {
           processClass(Files.newInputStream(file, StandardOpenOption.READ));
         }
