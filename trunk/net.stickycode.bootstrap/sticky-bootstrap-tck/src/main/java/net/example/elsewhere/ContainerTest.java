@@ -7,7 +7,6 @@ import org.junit.Test;
 
 import net.stickycode.bootstrap.ComponentContainer;
 import net.stickycode.bootstrap.StickyBootstrap;
-import net.stickycode.bootstrap.tck.SomeSystem;
 
 public class ContainerTest {
 
@@ -21,7 +20,7 @@ public class ContainerTest {
 
   @Test
   public void container() {
-    container.find(SomeSystem.class);
+    container.find(ComponentContainer.class);
   }
 
   @Test
