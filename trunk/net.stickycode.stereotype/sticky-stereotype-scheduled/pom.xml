@@ -12,7 +12,7 @@
 
 	<groupId>net.stickycode.stereotype</groupId>
 	<artifactId>sticky-stereotype-scheduled</artifactId>
-	<version>3.2-SNAPSHOT</version>
+	<version>3.3-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>sticky-stereotype-scheduled-3</name>
